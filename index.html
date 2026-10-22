@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Tienda</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f7f7f7; color: #222; padding: 16px; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    h1 { font-size: 1.4rem; }
+    #btn-carrito { background: #222; color: #fff; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+    .card { background: #fff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.06); display: flex; flex-direction: column; }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; background: #eee; margin-bottom: 8px; }
+    .card h3 { font-size: 0.95rem; margin-bottom: 4px; }
+    .card .precio { font-weight: 700; color: #0a7d32; margin-bottom: 8px; }
+    .card select { width: 100%; padding: 6px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.85rem; }
+    .card button { margin-top: auto; background: #0a7d32; color: #fff; border: none; padding: 8px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .card button:disabled { background: #aaa; cursor: not-allowed; }
+    #carrito-panel { position: fixed; top: 0; right: -100%; width: 100%; max-width: 360px; height: 100%; background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,.15); padding: 20px; transition: right .3s; display: flex; flex-direction: column; z-index: 100; }
+    #carrito-panel.abierto { right: 0; }
+    #carrito-panel h2 { font-size: 1.2rem; margin-bottom: 12px; }
+    #lista-carrito { flex: 1; overflow-y: auto; margin-bottom: 12px; }
+    .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+    .item-carrito .info { flex: 1; }
+    .item-carrito .variante { font-size: 0.8rem; color: #666; }
+    .item-carrito button { background: #e53935; color: #fff; border: none; border-radius: 4px; padding: 2px 8px; cursor: pointer; margin-left: 8px; }
+    #total-carrito { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    #btn-whatsapp { background: #25D366; color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; }
+    #btn-cerrar { background: none; border: none; font-size: 1.2rem; cursor: pointer; align-self: flex-end; margin-bottom: 8px; }
+    #carrito-vacio { color: #888; font-size: 0.9rem; }
+    .fondo-oscuro { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 99; }
+    .fondo-oscuro.activo { display: block; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛍️ Mi Tienda</h1>
+    <button id="btn-carrito">Carrito (<span id="contador">0</span>)</button>
+  </header>
+
+  <div id="grid-productos" class="grid">
+    <p>Cargando productos...</p>
+  </div>
+
+  <div class="fondo-oscuro" id="fondo"></div>
+  <div id="carrito-panel">
+    <button id="btn-cerrar">✕</button>
+    <h2>Tu pedido</h2>
+    <div id="lista-carrito"></div>
+    <div id="total-carrito"></div>
+    <button id="btn-whatsapp">Enviar pedido por WhatsApp</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvXt57T8ZU_wyobPHIOoGK1jtDoj6I_rk",
+      authDomain: "mi-tienda-d662e.firebaseapp.com",
+      projectId: "mi-tienda-d662e",
+      storageBucket: "mi-tienda-d662e.firebasestorage.app",
+      messagingSenderId: "1064352151520",
+      appId: "1:1064352151520:web:08502a4a82dc02e7cc9d85",
+      measurementId: "G-02ZHKLXCS7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 👇 ACÁ PONÉ TU NÚMERO REAL 👇
+    const WHATSAPP_NUMERO = "5491123456789"; 
+
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const grid = document.getElementById("grid-productos");
+    const coleccionProductos = collection(db, "productos");
+
+    try {
+      const snapshot = await getDocs(coleccionProductos);
+      if (snapshot.empty) {
+        grid.innerHTML = "<p>No hay productos cargados todavía.</p>";
+      } else {
+        grid.innerHTML = "";
+        snapshot.forEach(doc => {
+          const p = doc.data();
+          if (p.stock === false) return;
+
+          const card = document.createElement("div");
+          card.className = "card";
+
+          let selectVariantes = "";
+          if (p.variantes && p.variantes.length > 0) {
+            selectVariantes = `<select id="variante-${doc.id}">
+              ${p.variantes.map(v => `<option value="${v}">${v}</option>`).join("")}
+            </select>`;
+          }
+
+          card.innerHTML = `
+            <img src="${p.imagen || 'https://via.placeholder.com/300'}" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <div class="precio">$${p.precio ? p.precio.toLocaleString("es-AR") : '0'}</div>
+            ${selectVariantes}
+            <button data-id="${doc.id}">Añadir al carrito</button>
+          `;
+
+          const btn = card.querySelector("button");
+          btn.addEventListener("click", () => {
+            const select = card.querySelector("select");
+            const varianteElegida = select ? select.value : null;
+            agregarAlCarrito({
+              id: doc.id,
+              nombre: p.nombre,
+              precio: p.precio,
+              variante: varianteElegida
+            });
+          });
+
+          grid.appendChild(card);
+        });
+      }
+    } catch (e) {
+      console.error(e);
+      grid.innerHTML = "<p>Error al cargar productos. Revisá la consola.</p>";
+    }
+
+    function agregarAlCarrito(prod) {
+      const existente = carrito.find(i => i.id === prod.id && i.variante === prod.variante);
+      if (existente) {
+        existente.cantidad += 1;
+      } else {
+        carrito.push({ ...prod, cantidad: 1 });
+      }
+      guardarCarrito();
+    }
+
+    function guardarCarrito() {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      renderCarrito();
+    }
+
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      guardarCarrito();
+    }
+
+    function renderCarrito() {
+      const lista = document.getElementById("lista-carrito");
+      const totalEl = document.getElementById("total-carrito");
+      const contador = document.getElementById("contador");
+
+      contador.textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
+
+      if (carrito.length === 0) {
+        lista.innerHTML = '<p id="carrito-vacio">El carrito está vacío.</p>';
+        totalEl.textContent = "";
+        return;
+      }
+
+      lista.innerHTML = "";
+      let total = 0;
+      carrito.forEach((item, index) => {
+        total += item.precio * item.cantidad;
+        const div = document.createElement("div");
+        div.className = "item-carrito";
+        div.innerHTML = `
+          <div class="info">
+            <strong>${item.nombre}</strong> × ${item.cantidad}
+            ${item.variante ? `<div class="variante">${item.variante}</div>` : ""}
+          </div>
+          <button data-index="${index}">✕</button>
+        `;
+        div.querySelector("button").addEventListener("click", () => eliminarDelCarrito(index));
+        lista.appendChild(div);
+      });
+
+      totalEl.textContent = `Total: $${total.toLocaleString("es-AR")}`;
+    }
+
+    document.getElementById("btn-whatsapp").addEventListener("click", () => {
+      if (carrito.length === 0) return alert("El carrito está vacío.");
+
+      let mensaje = "Hola! Quiero hacer este pedido:%0A%0A";
+      let total = 0;
+      carrito.forEach(item => {
+        total += item.precio * item.cantidad;
+        mensaje += `• ${item.cantidad}x ${item.nombre}`;
+        if (item.variante) mensaje += ` (${item.variante})`;
+        mensaje += ` — $${(item.precio * item.cantidad).toLocaleString("es-AR")}%0A`;
+      });
+      mensaje += `%0A*Total: $${total.toLocaleString("es-AR")}*%0A%0A`;
+      mensaje += "Te paso el comprobante de la transferencia. ¡Gracias!";
+
+      window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensaje}`, "_blank");
+    });
+
+    const panel = document.getElementById("carrito-panel");
+    const fondo = document.getElementById("fondo");
+    function toggleCarrito(abrir) {
+      panel.classList.toggle("abierto", abrir);
+      fondo.classList.toggle("activo", abrir);
+    }
+    document.getElementById("btn-carrito").addEventListener("click", () => toggleCarrito(true));
+    document.getElementById("btn-cerrar").addEventListener("click", () => toggleCarrito(false));
+    fondo.addEventListener("click", () => toggleCarrito(false));
+
+    renderCarrito();
+  </script>
+</body>
+    </html>
