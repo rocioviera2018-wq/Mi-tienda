@@ -3,60 +3,375 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Tienda</title>
+  <title>Rocio Distribuciones</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; background: #f7f7f7; color: #222; padding: 16px; }
+    :root {
+      --primary: #0f172a; 
+      --accent: #25D366; 
+      --bg: #f8fafc; 
+      --card-bg: #ffffff;
+      --text: #334155;
+    }
     
-    /* Estilos del encabezado y logo */
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 40px; }
+    
+    /* Header */
+    header { 
+      background: var(--card-bg); padding: 16px 20px; display: flex; 
+      justify-content: space-between; align-items: center; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 50;
+    }
     .logo-container { display: flex; align-items: center; gap: 10px; }
-    .logo-container img { height: 40px; width: auto; object-fit: contain; border-radius: 4px; }
-    .logo-container h1 { font-size: 1.3rem; margin: 0; }
+    .logo-text { font-size: 1.15rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+    .logo-text span { color: var(--accent); }
     
-    /* Estilos de la descripción */
-    .descripcion-tienda { background: #fff; padding: 16px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,.06); font-size: 0.95rem; line-height: 1.4; color: #444; }
-    
-    /* Estilos del catálogo */
-    .titulo-seccion { font-size: 1.2rem; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #0a7d32; display: inline-block; }
+    #btn-carrito { 
+      background: var(--primary); color: #fff; border: none; padding: 10px 16px; 
+      border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; 
+    }
 
-    #btn-carrito { background: #222; color: #fff; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
-    .card { background: #fff; border-radius: 12px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.06); display: flex; flex-direction: column; }
-    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; background: #eee; margin-bottom: 8px; }
-    .card h3 { font-size: 0.95rem; margin-bottom: 4px; }
-    .card .precio { font-weight: 700; color: #0a7d32; margin-bottom: 8px; }
-    .card select { width: 100%; padding: 6px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.85rem; }
-    .card button { margin-top: auto; background: #0a7d32; color: #fff; border: none; padding: 8px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1e293b, #0f172a); color: white;
+      padding: 30px 20px; text-align: center;
+    }
+    .hero h2 { font-size: 1.4rem; margin-bottom: 10px; font-weight: 800; }
+    .hero p { font-size: 0.95rem; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+
+    /* Navegación de Categorías */
+    .categorias-wrapper {
+      background: var(--card-bg);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      padding: 15px 0;
+      position: sticky;
+      top: 65px; /* Queda justo debajo del header */
+      z-index: 40;
+    }
+    .categorias-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 0 20px;
+      scrollbar-width: none; /* Firefox */
+    }
+    .categorias-scroll::-webkit-scrollbar { display: none; } /* Chrome/Safari */
     
-    /* Carrito lateral */
-    #carrito-panel { position: fixed; top: 0; right: -100%; width: 100%; max-width: 360px; height: 100%; background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,.15); padding: 20px; transition: right .3s; display: flex; flex-direction: column; z-index: 100; }
+    .cat-btn {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-width: 85px; padding: 10px; border-radius: 12px; border: 2px solid transparent;
+      background: #f1f5f9; color: var(--text); cursor: pointer; transition: all 0.2s;
+      font-weight: 600; font-size: 0.75rem; text-align: center; gap: 6px; white-space: nowrap;
+    }
+    .cat-btn:hover { background: #e2e8f0; }
+    .cat-btn.activo { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
+    .cat-icon { font-size: 1.5rem; }
+
+    /* Catálogo */
+    .catalogo-container { padding: 24px 20px; max-width: 1200px; margin: 0 auto; }
+    .catalogo-title { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; text-align: center; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+    .card { 
+      background: var(--card-bg); border-radius: 16px; padding: 12px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; 
+      transition: transform 0.2s; 
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #eee; margin-bottom: 10px; }
+    .card h3 { font-size: 0.95rem; font-weight: 600; color: var(--primary); margin-bottom: 4px; line-height: 1.2; }
+    .card .categoria-tag { font-size: 0.7rem; color: #64748b; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .card .precio { font-size: 1.05rem; font-weight: 800; color: #0a7d32; margin-bottom: 10px; }
+    .card select { width: 100%; padding: 6px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.8rem; }
+    .card button { 
+      margin-top: auto; background: var(--primary); color: #fff; border: none; 
+      padding: 8px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; 
+    }
+    .card button:hover { background: #1e293b; }
+
+    /* Carrito Lateral */
+    #carrito-panel { 
+      position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100%; 
+      background: var(--card-bg); box-shadow: -4px 0 30px rgba(0,0,0,0.15); 
+      padding: 24px; transition: right 0.3s; display: flex; flex-direction: column; z-index: 100; 
+    }
     #carrito-panel.abierto { right: 0; }
-    #carrito-panel h2 { font-size: 1.2rem; margin-bottom: 12px; }
-    #lista-carrito { flex: 1; overflow-y: auto; margin-bottom: 12px; }
-    .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-    .item-carrito .info { flex: 1; }
-    .item-carrito .variante { font-size: 0.8rem; color: #666; }
-    .item-carrito button { background: #e53935; color: #fff; border: none; border-radius: 4px; padding: 2px 8px; cursor: pointer; margin-left: 8px; }
-    #total-carrito { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
-    #btn-whatsapp { background: #25D366; color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; }
-    #btn-cerrar { background: none; border: none; font-size: 1.2rem; cursor: pointer; align-self: flex-end; margin-bottom: 8px; }
-    #carrito-vacio { color: #888; font-size: 0.9rem; }
-    .fondo-oscuro { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 99; }
+    #carrito-panel h2 { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; }
+    #lista-carrito { flex: 1; overflow-y: auto; margin-bottom: 20px; }
+    .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+    .item-carrito strong { color: var(--primary); }
+    .item-carrito button { background: #fee2e2; color: #ef4444; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; }
+    
+    #total-carrito { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 16px; text-align: right; }
+    #btn-whatsapp { 
+      background: var(--accent); color: #fff; border: none; padding: 16px; 
+      border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; 
+      width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px;
+    }
+    #btn-cerrar { background: #f1f5f9; border: none; font-size: 1.2rem; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; align-self: flex-end; margin-bottom: 10px; color: #64748b; }
+    #carrito-vacio { color: #94a3b8; font-size: 1rem; text-align: center; margin-top: 40px; }
+    .fondo-oscuro { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); z-index: 99; }
     .fondo-oscuro.activo { display: block; }
+
+    /* Botón Flotante WhatsApp */
+    .whatsapp-float {
+      position: fixed; bottom: 24px; right: 24px; background-color: var(--accent); color: #fff;
+      border-radius: 50px; padding: 16px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none;
+    }
   </style>
 </head>
 <body>
 
   <header>
     <div class="logo-container">
-      <!-- 👇 ACÁ VA TU LOGO. Por ahora puse uno de ejemplo. Después podés cambiar el link 👇 -->
-      <img src="https://ui-avatars.com/api/?name=Mi+Tienda&background=0a7d32&color=fff&rounded=true" alt="Logo">
-      <h1>Mi Tienda</h1>
+      <div class="logo-text">Rocio <span>distribuciones</span></div>
     </div>
     <button id="btn-carrito">Carrito (<span id="contador">0</span>)</button>
   </header>
 
-  <!-- 👇 ACÁ VA LA DESCRIPCIÓN DE TU TIENDA 👇 -->
-  <section class="descripcion-tienda">
-    <p><strong>¡Bienvenidos a Mi Tienda!</strong> Encontrá los mejores productos de bazar y mucho más. H
+  <section class="hero">
+    <h2>Bienvenidos a Rocio Distribuciones</h2>
+    <p>Hacé tu pedido por la web y coordinamos el envío por WhatsApp en menos de 72 horas.</p>
+  </section>
+
+  <!-- BARRA DE CATEGORÍAS -->
+  <div class="categorias-wrapper">
+    <div class="categorias-scroll" id="categorias-container">
+      <!-- Los botones se generan con JavaScript -->
+    </div>
+  </div>
+
+  <!-- CATÁLOGO -->
+  <main class="catalogo-container">
+    <h2 class="catalogo-title" id="titulo-categoria">Todos los productos</h2>
+    <div id="grid-productos" class="grid">
+      <p>Cargando productos...</p>
+    </div>
+  </main>
+
+  <!-- CARRITO -->
+  <div class="fondo-oscuro" id="fondo"></div>
+  <div id="carrito-panel">
+    <button id="btn-cerrar">✕</button>
+    <h2>Tu pedido</h2>
+    <div id="lista-carrito"></div>
+    <div id="total-carrito"></div>
+    <button id="btn-whatsapp">
+      Enviar pedido por WhatsApp
+    </button>
+  </div>
+
+  <a href="https://wa.me/5493755223737?text=Hola!%20Estoy%20en%20la%20tienda%20y%20quiero%20hacer%20una%20consulta." target="_blank" class="whatsapp-float">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+  </a>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvXt57T8ZU_wyobPHIOoGK1jtDoj6I_rk",
+      authDomain: "mi-tienda-d662e.firebaseapp.com",
+      projectId: "mi-tienda-d662e",
+      storageBucket: "mi-tienda-d662e.firebasestorage.app",
+      messagingSenderId: "1064352151520",
+      appId: "1:1064352151520:web:08502a4a82dc02e7cc9d85",
+      measurementId: "G-02ZHKLXCS7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const WHATSAPP_NUMERO = "5493755223737"; 
+
+    // Lista de categorías con sus iconos
+    const categoriasList = [
+      { nombre: "Todos", icono: "🛍️" },
+      { nombre: "Bazar", icono: "🏠" },
+      { nombre: "Accesorios y Tecnología", icono: "🎧" },
+      { nombre: "Electrodomésticos", icono: "🔌" },
+      { nombre: "Repuestos de motos", icono: "🏍️" },
+      { nombre: "Camping", icono: "⛺" },
+      { nombre: "Ferretería", icono: "🛠️" },
+      { nombre: "Blanquería", icono: "🛏️" }
+    ];
+
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let productosGlobal = []; // Acá guardamos todos los productos de Firebase
+    let categoriaActual = "Todos";
+
+    const grid = document.getElementById("grid-productos");
+    const categoriasContainer = document.getElementById("categorias-container");
+    const tituloCategoria = document.getElementById("titulo-categoria");
+
+    // 1. Cargar Productos
+    const cargarProductos = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "productos"));
+        productosGlobal = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.stock !== false) {
+            productosGlobal.push({ id: doc.id, ...data });
+          }
+        });
+        
+        renderCategorias();
+        renderProductos();
+      } catch (error) {
+        console.error("Error:", error);
+        grid.innerHTML = "<p>Error al cargar los productos.</p>";
+      }
+    };
+
+    // 2. Dibujar botones de categorías
+    const renderCategorias = () => {
+      categoriasContainer.innerHTML = "";
+      categoriasList.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.className = `cat-btn ${categoriaActual === cat.nombre ? 'activo' : ''}`;
+        btn.innerHTML = `<span class="cat-icon">${cat.icono}</span> ${cat.nombre}`;
+        btn.onclick = () => {
+          categoriaActual = cat.nombre;
+          renderCategorias(); // Actualizar estilos
+          renderProductos(); // Filtrar productos
+        };
+        categoriasContainer.appendChild(btn);
+      });
+    };
+
+    // 3. Dibujar productos filtrados
+    const renderProductos = () => {
+      grid.innerHTML = "";
+      tituloCategoria.textContent = categoriaActual === "Todos" ? "Todos los productos" : `Categoría: ${categoriaActual}`;
+
+      // Filtrar
+      const productosFiltrados = categoriaActual === "Todos" 
+        ? productosGlobal 
+        : productosGlobal.filter(p => p.categoria === categoriaActual);
+
+      if (productosFiltrados.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#64748b;">No hay productos en esta categoría todavía.</p>`;
+        return;
+      }
+
+      productosFiltrados.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        let selectVariantes = "";
+        if (p.variantes && p.variantes.length > 0) {
+          selectVariantes = `<select id="variante-${p.id}">
+            ${p.variantes.map(v => `<option value="${v}">${v}</option>`).join("")}
+          </select>`;
+        }
+
+        card.innerHTML = `
+          <img src="${p.imagen || 'https://via.placeholder.com/300'}" alt="${p.nombre}">
+          <div class="categoria-tag">${p.categoria || 'General'}</div>
+          <h3>${p.nombre}</h3>
+          <div class="precio">$${p.precio ? p.precio.toLocaleString("es-AR") : '0'}</div>
+          ${selectVariantes}
+          <button>Añadir al carrito</button>
+        `;
+
+        card.querySelector("button").addEventListener("click", () => {
+          const select = card.querySelector("select");
+          const varianteElegida = select ? select.value : null;
+          agregarAlCarrito({
+            id: p.id,
+            nombre: p.nombre,
+            precio: p.precio,
+            variante: varianteElegida
+          });
+        });
+
+        grid.appendChild(card);
+      });
+    };
+
+    // LOGICA DEL CARRITO (Igual que antes)
+    function agregarAlCarrito(prod) {
+      const existente = carrito.find(i => i.id === prod.id && i.variante === prod.variante);
+      if (existente) existente.cantidad += 1;
+      else carrito.push({ ...prod, cantidad: 1 });
+      guardarCarrito();
+    }
+
+    function guardarCarrito() {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      renderCarrito();
+    }
+
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      guardarCarrito();
+    }
+
+    function renderCarrito() {
+      const lista = document.getElementById("lista-carrito");
+      const totalEl = document.getElementById("total-carrito");
+      const contador = document.getElementById("contador");
+
+      contador.textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
+
+      if (carrito.length === 0) {
+        lista.innerHTML = '<p id="carrito-vacio">El carrito está vacío.</p>';
+        totalEl.textContent = "";
+        return;
+      }
+
+      lista.innerHTML = "";
+      let total = 0;
+      carrito.forEach((item, index) => {
+        total += item.precio * item.cantidad;
+        const div = document.createElement("div");
+        div.className = "item-carrito";
+        div.innerHTML = `
+          <div class="info">
+            <strong>${item.nombre}</strong> × ${item.cantidad}
+            ${item.variante ? `<div style="font-size:0.8rem; color:#64748b;">${item.variante}</div>` : ""}
+          </div>
+          <button data-index="${index}">✕</button>
+        `;
+        div.querySelector("button").addEventListener("click", () => eliminarDelCarrito(index));
+        lista.appendChild(div);
+      });
+
+      totalEl.textContent = `Total: $${total.toLocaleString("es-AR")}`;
+    }
+
+    document.getElementById("btn-whatsapp").addEventListener("click", () => {
+      if (carrito.length === 0) return alert("El carrito está vacío.");
+
+      let mensaje = "Hola! Quiero confirmar este pedido:%0A%0A";
+      let total = 0;
+      carrito.forEach(item => {
+        total += item.precio * item.cantidad;
+        mensaje += `• ${item.cantidad}x ${item.nombre}`;
+        if (item.variante) mensaje += ` (${item.variante})`;
+        mensaje += ` — $${(item.precio * item.cantidad).toLocaleString("es-AR")}%0A`;
+      });
+      mensaje += `%0A*Total: $${total.toLocaleString("es-AR")}*%0A%0A`;
+      mensaje += "Quedo a la espera de los datos para transferir. ¡Gracias!";
+
+      window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensaje}`, "_blank");
+    });
+
+    const panel = document.getElementById("carrito-panel");
+    const fondo = document.getElementById("fondo");
+    const toggleCarrito = (abrir) => {
+      panel.classList.toggle("abierto", abrir);
+      fondo.classList.toggle("activo", abrir);
+    };
+    document.getElementById("btn-carrito").addEventListener("click", () => toggleCarrito(true));
+    document.getElementById("btn-cerrar").addEventListener("click", () => toggleCarrito(false));
+    fondo.addEventListener("click", () => toggleCarrito(false));
+
+    // Iniciar
+    cargarProductos();
+    renderCarrito();
+  </script>
+</body>
+</html>
