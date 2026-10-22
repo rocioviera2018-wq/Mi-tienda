@@ -66,6 +66,9 @@
     /* Catálogo */
     .catalogo-container { padding: 24px 20px; max-width: 1200px; margin: 0 auto; flex: 1; width: 100%; }
     .catalogo-title { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; text-align: center; }
+    .seccion-cat { margin-bottom: 36px; scroll-margin-top: 150px; }
+    .seccion-titulo { font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
+    .seccion-titulo small { font-weight: 600; color: #94a3b8; font-size: 0.75rem; margin-left: auto; }
     
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
     .card { 
@@ -74,12 +77,20 @@
       transition: transform 0.2s; 
     }
     .card:hover { transform: translateY(-4px); }
-    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #eee; margin-bottom: 10px; }
+    .galeria { position: relative; margin-bottom: 10px; }
+    .galeria img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #eee; display: block; }
+    .g-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; border: none; background: rgba(15,23,42,0.55); color: #fff; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; margin: 0; }
+    .g-prev { left: 6px; } .g-next { right: 6px; }
+    .g-count { position: absolute; bottom: 6px; right: 6px; background: rgba(15,23,42,0.6); color: #fff; font-size: 0.65rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
     .card h3 { font-size: 0.95rem; font-weight: 600; color: var(--primary); margin-bottom: 4px; line-height: 1.2; }
+    .card .desc { font-size: 0.78rem; color: #64748b; margin-bottom: 6px; line-height: 1.3; }
+    .card details { font-size: 0.75rem; color: #475569; margin-bottom: 8px; }
+    .card details summary { cursor: pointer; color: #1d4ed8; font-weight: 600; }
+    .card details ul { margin: 6px 0 0 16px; line-height: 1.4; }
     .card .categoria-tag { font-size: 0.7rem; color: #64748b; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
     .card .precio { font-size: 1.05rem; font-weight: 800; color: #0a7d32; margin-bottom: 10px; }
     .card select { width: 100%; padding: 6px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.8rem; }
-    .card button { 
+    .card button.agregar { 
       margin-top: auto; background: var(--primary); color: #fff; border: none; 
       padding: 8px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; 
     }
@@ -174,7 +185,7 @@
 
   <main class="catalogo-container">
     <h2 class="catalogo-title" id="titulo-categoria">Todos los productos</h2>
-    <div id="grid-productos" class="grid">
+    <div id="grid-productos">
       <p>Cargando productos...</p>
     </div>
   </main>
@@ -223,64 +234,46 @@
     <i class="fa-brands fa-whatsapp" style="font-size: 1.8rem;"></i>
   </a>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+  <script>
+    const WHATSAPP_NUMERO = "5493755223737";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBvXt57T8ZU_wyobPHIOoGK1jtDoj6I_rk",
-      authDomain: "mi-tienda-d662e.firebaseapp.com",
-      projectId: "mi-tienda-d662e",
-      storageBucket: "mi-tienda-d662e.firebasestorage.app",
-      messagingSenderId: "1064352151520",
-      appId: "1:1064352151520:web:08502a4a82dc02e7cc9d85",
-      measurementId: "G-02ZHKLXCS7"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const WHATSAPP_NUMERO = "5493755223737"; 
+    /* ============================================================
+       CATÁLOGO (precios en pesos, ya con +80% aplicado)
+       Para ocultar un producto: ponele  stock:false
+       Las fotos están en la carpeta  img/
+       ============================================================ */
+    const PRODUCTOS = [{"id":"p001","nombre":"Charge 3 JBL","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":28800,"imagenes":["img/p001-1.jpg","img/p001-2.jpg"]},{"id":"p002","nombre":"Cubiertos","descripcion":"24 Piezas","detalle":[],"categoria":"Bazar","precio":31700,"imagenes":["img/p002-1.jpg","img/p002-2.jpg"]},{"id":"p003","nombre":"Boombox 6 Mini","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":52200,"imagenes":["img/p003-1.jpg"]},{"id":"p004","nombre":"Box 3 Mini LED","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":52200,"imagenes":["img/p004-1.jpg"]},{"id":"p005","nombre":"Nebulizadores Portatil","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":13300,"imagenes":["img/p005-1.jpg","img/p005-2.jpg","img/p005-3.jpg","img/p005-4.jpg","img/p005-5.jpg","img/p005-6.jpg","img/p005-7.jpg","img/p005-8.jpg"]},{"id":"p006","nombre":"Nebulizador Euromax","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":74900,"imagenes":["img/p006-1.jpg","img/p006-2.jpg"]},{"id":"p007","nombre":"Contador de Billetes","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":95400,"imagenes":["img/p007-1.jpg"]},{"id":"p008","nombre":"Contador de Billetes","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":158400,"imagenes":["img/p008-1.jpg"]},{"id":"p009","nombre":"Soporte de TV Waer","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":23400,"imagenes":["img/p009-1.jpg"]},{"id":"p010","nombre":"Soporte de TV","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":86400,"imagenes":["img/p010-1.jpg"]},{"id":"p011","nombre":"Pochoclera Ackiliss","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":35100,"imagenes":["img/p011-1.jpg"]},{"id":"p012","nombre":"Cubierto Plateado","descripcion":"24 Piezas","detalle":[],"categoria":"Bazar","precio":31700,"imagenes":["img/p012-1.jpg"]},{"id":"p013","nombre":"Combo: Termo + mate + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":45000,"imagenes":["img/p013-1.jpg","img/p013-2.jpg"]},{"id":"p014","nombre":"Combo: Termo + mate + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":50400,"imagenes":["img/p014-1.jpg","img/p014-2.jpg","img/p014-3.jpg"]},{"id":"p015","nombre":"Combo: Termo + mate + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":46100,"imagenes":["img/p015-1.jpg","img/p015-2.jpg","img/p015-3.jpg"]},{"id":"p016","nombre":"Combo: Termo 1 Litros + Mate 160ml + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":41800,"imagenes":["img/p016-1.jpg","img/p016-2.jpg","img/p016-3.jpg","img/p016-4.jpg","img/p016-5.jpg"]},{"id":"p017","nombre":"Combo: Termo 1.2 Litros + Mate 160ml + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":44600,"imagenes":["img/p017-1.jpg","img/p017-2.jpg"]},{"id":"p018","nombre":"Combo: Termo 1 Litros + Mate 160ml + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":40500,"imagenes":["img/p018-1.jpg"]},{"id":"p019","nombre":"Combo: Termo 1 Litros + Mate 160ml + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":37800,"imagenes":["img/p019-1.jpg"]},{"id":"p020","nombre":"Combo: Termo 1.2 Litros + Mate 160ml + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":38900,"imagenes":["img/p020-1.jpg","img/p020-2.jpg","img/p020-3.jpg","img/p020-4.jpg","img/p020-5.jpg","img/p020-6.jpg","img/p020-7.jpg"]},{"id":"p021","nombre":"Combo: Termo 1 Litros + Mate Tapa + Jarra Eléctrica","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":37800,"imagenes":["img/p021-1.jpg","img/p021-2.jpg","img/p021-3.jpg"]},{"id":"p022","nombre":"Autocebante 2 en 1","descripcion":"Capacidad: 750ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":20700,"imagenes":["img/p022-1.jpg","img/p022-2.jpg","img/p022-3.jpg","img/p022-4.jpg","img/p022-5.jpg"]},{"id":"p023","nombre":"Hoppys + Autocebante","descripcion":"Capacidad: 750ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":18900,"imagenes":["img/p023-1.jpg","img/p023-2.jpg","img/p023-3.jpg","img/p023-4.jpg","img/p023-5.jpg"]},{"id":"p024","nombre":"Hoppys + Autocebante","descripcion":"Capacidad: 500ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":16000,"imagenes":["img/p024-1.jpg","img/p024-2.jpg","img/p024-3.jpg","img/p024-4.jpg"]},{"id":"p025","nombre":"Autocebante 1 Litros","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":17300,"imagenes":["img/p025-1.jpg","img/p025-2.jpg","img/p025-3.jpg","img/p025-4.jpg","img/p025-5.jpg","img/p025-6.jpg"]},{"id":"p026","nombre":"Autocebante 750ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":16200,"imagenes":["img/p026-1.jpg","img/p026-2.jpg","img/p026-3.jpg","img/p026-4.jpg","img/p026-5.jpg","img/p026-6.jpg","img/p026-7.jpg"]},{"id":"p027","nombre":"Autocebante 500ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":11700,"imagenes":["img/p027-1.jpg","img/p027-2.jpg","img/p027-3.jpg","img/p027-4.jpg","img/p027-5.jpg"]},{"id":"p028","nombre":"Hoppys","descripcion":"Capacidad: 600ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":9700,"imagenes":["img/p028-1.jpg","img/p028-2.jpg","img/p028-3.jpg","img/p028-4.jpg","img/p028-5.jpg","img/p028-6.jpg","img/p028-7.jpg","img/p028-8.jpg"]},{"id":"p029","nombre":"Hoppys","descripcion":"Capacidad: 800ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":10800,"imagenes":["img/p029-1.jpg","img/p029-2.jpg","img/p029-3.jpg","img/p029-4.jpg","img/p029-5.jpg","img/p029-6.jpg","img/p029-7.jpg","img/p029-8.jpg"]},{"id":"p030","nombre":"Hoppys","descripcion":"Capacidad: 1 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":13500,"imagenes":["img/p030-1.jpg","img/p030-2.jpg","img/p030-3.jpg","img/p030-4.jpg","img/p030-5.jpg","img/p030-6.jpg","img/p030-7.jpg","img/p030-8.jpg"]},{"id":"p031","nombre":"Hoppys con Pico","descripcion":"Capacidad: 650ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p031-1.jpg","img/p031-2.jpg","img/p031-3.jpg","img/p031-4.jpg","img/p031-5.jpg","img/p031-6.jpg","img/p031-7.jpg","img/p031-8.jpg"]},{"id":"p032","nombre":"Hoppys 800ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":17300,"imagenes":["img/p032-1.jpg","img/p032-2.jpg","img/p032-3.jpg","img/p032-4.jpg","img/p032-5.jpg","img/p032-6.jpg","img/p032-7.jpg"]},{"id":"p033","nombre":"Hoppys a Rosca","descripcion":"Capacidad: 1 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":13700,"imagenes":["img/p033-1.jpg","img/p033-2.jpg","img/p033-3.jpg","img/p033-4.jpg","img/p033-5.jpg","img/p033-6.jpg"]},{"id":"p034","nombre":"Hoppys Doble Pico","descripcion":"Capacidad: 1 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":20200,"imagenes":["img/p034-1.jpg","img/p034-2.jpg","img/p034-3.jpg","img/p034-4.jpg","img/p034-5.jpg","img/p034-6.jpg","img/p034-7.jpg"]},{"id":"p035","nombre":"Hoppys","descripcion":"Capacidad: 600ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p035-1.jpg","img/p035-2.jpg","img/p035-3.jpg","img/p035-4.jpg","img/p035-5.jpg","img/p035-6.jpg","img/p035-7.jpg"]},{"id":"p036","nombre":"Hoppys con Pico","descripcion":"Capacidad: 1 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":21600,"imagenes":["img/p036-1.jpg","img/p036-2.jpg","img/p036-3.jpg","img/p036-4.jpg","img/p036-5.jpg"]},{"id":"p037","nombre":"Termito 650ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":16200,"imagenes":["img/p037-1.jpg","img/p037-2.jpg","img/p037-3.jpg"]},{"id":"p038","nombre":"Termito 600ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":16200,"imagenes":["img/p038-1.jpg","img/p038-2.jpg","img/p038-3.jpg","img/p038-4.jpg","img/p038-5.jpg","img/p038-6.jpg","img/p038-7.jpg"]},{"id":"p039","nombre":"Termito 800ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":17300,"imagenes":["img/p039-1.jpg","img/p039-2.jpg","img/p039-3.jpg","img/p039-4.jpg","img/p039-5.jpg","img/p039-6.jpg","img/p039-7.jpg"]},{"id":"p040","nombre":"Jarra 2 Litros","descripcion":"Mate 140ml · Bombilla","detalle":[],"categoria":"Termos, Mates y Vasos","precio":30600,"imagenes":["img/p040-1.jpg","img/p040-2.jpg","img/p040-3.jpg","img/p040-4.jpg","img/p040-5.jpg","img/p040-6.jpg","img/p040-7.jpg"]},{"id":"p041","nombre":"Jarra 1.9 Litros","descripcion":"Mate 140ml · Bombilla","detalle":[],"categoria":"Termos, Mates y Vasos","precio":28800,"imagenes":["img/p041-1.jpg","img/p041-2.jpg"]},{"id":"p042","nombre":"Jarra 2 Litros","descripcion":"Mate 140ml · Bombilla","detalle":[],"categoria":"Termos, Mates y Vasos","precio":35100,"imagenes":["img/p042-1.jpg","img/p042-2.jpg","img/p042-3.jpg","img/p042-4.jpg"]},{"id":"p043","nombre":"Sifón","descripcion":"Capacidad: 2.5 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":37800,"imagenes":["img/p043-1.jpg","img/p043-2.jpg"]},{"id":"p044","nombre":"Sifón 2.5 Litros","descripcion":"Mate 160ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":43200,"imagenes":["img/p044-1.jpg"]},{"id":"p045","nombre":"Galones","descripcion":"Capacidad: 1.9 Litros · Mate 160ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":33300,"imagenes":["img/p045-1.jpg","img/p045-2.jpg","img/p045-3.jpg"]},{"id":"p046","nombre":"Galones","descripcion":"Capacidad: 1.9 Litros · Mate 160ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":35100,"imagenes":["img/p046-1.jpg","img/p046-2.jpg","img/p046-3.jpg","img/p046-4.jpg","img/p046-5.jpg"]},{"id":"p047","nombre":"Termolar","descripcion":"Con Parlante · 2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":40500,"imagenes":["img/p047-1.jpg","img/p047-2.jpg","img/p047-3.jpg","img/p047-4.jpg","img/p047-5.jpg","img/p047-6.jpg"]},{"id":"p048","nombre":"Galones","descripcion":"Capacidad: 1.5 Litros · Mate 160ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":28800,"imagenes":["img/p048-1.jpg","img/p048-2.jpg","img/p048-3.jpg","img/p048-4.jpg","img/p048-5.jpg","img/p048-6.jpg","img/p048-7.jpg","img/p048-8.jpg"]},{"id":"p049","nombre":"Vasos Shop","descripcion":"Capacidad: 709ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p049-1.jpg","img/p049-2.jpg","img/p049-3.jpg","img/p049-4.jpg","img/p049-5.jpg","img/p049-6.jpg","img/p049-7.jpg","img/p049-8.jpg"]},{"id":"p050","nombre":"Cervecero 502ml","descripcion":"3 Sellos","detalle":[],"categoria":"Termos, Mates y Vasos","precio":7200,"imagenes":["img/p050-1.jpg","img/p050-2.jpg","img/p050-3.jpg","img/p050-4.jpg","img/p050-5.jpg","img/p050-6.jpg","img/p050-7.jpg","img/p050-8.jpg"]},{"id":"p051","nombre":"Cervecero con Parlante","descripcion":"Capacidad: 475ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":12600,"imagenes":["img/p051-1.jpg","img/p051-2.jpg","img/p051-3.jpg","img/p051-4.jpg","img/p051-5.jpg","img/p051-6.jpg","img/p051-7.jpg","img/p051-8.jpg"]},{"id":"p052","nombre":"Vasos 1.2 Litros","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":16200,"imagenes":["img/p052-1.jpg","img/p052-2.jpg"]},{"id":"p053","nombre":"Vasos","descripcion":"Capacidad: 1.2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p053-1.jpg","img/p053-2.jpg","img/p053-3.jpg","img/p053-4.jpg","img/p053-5.jpg","img/p053-6.jpg","img/p053-7.jpg","img/p053-8.jpg"]},{"id":"p054","nombre":"Vasos","descripcion":"Capacidad: 1.2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":17300,"imagenes":["img/p054-1.jpg","img/p054-2.jpg","img/p054-3.jpg","img/p054-4.jpg","img/p054-5.jpg","img/p054-6.jpg","img/p054-7.jpg","img/p054-8.jpg"]},{"id":"p055","nombre":"Vasos pico fijo","descripcion":"Capacidad: 1.2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":20700,"imagenes":["img/p055-1.jpg","img/p055-2.jpg","img/p055-3.jpg","img/p055-4.jpg","img/p055-5.jpg","img/p055-6.jpg","img/p055-7.jpg"]},{"id":"p056","nombre":"Juegos de Tramontina","descripcion":"7 Piezas","detalle":[],"categoria":"Bazar","precio":86400,"imagenes":["img/p056-1.jpg","img/p056-2.jpg","img/p056-3.jpg"]},{"id":"p057","nombre":"Juegos de Tramontina","descripcion":"7 Piezas","detalle":[],"categoria":"Bazar","precio":100800,"imagenes":["img/p057-1.jpg","img/p057-2.jpg","img/p057-3.jpg","img/p057-4.jpg","img/p057-5.jpg","img/p057-6.jpg","img/p057-7.jpg","img/p057-8.jpg"]},{"id":"p058","nombre":"Set Tramontina","descripcion":"25 Piezas","detalle":[],"categoria":"Bazar","precio":28800,"imagenes":["img/p058-1.jpg","img/p058-2.jpg","img/p058-3.jpg","img/p058-4.jpg"]},{"id":"p059","nombre":"Budinera Tramontina","descripcion":"","detalle":[],"categoria":"Bazar","precio":18900,"imagenes":["img/p059-1.jpg","img/p059-2.jpg"]},{"id":"p060","nombre":"Molde Tramontina","descripcion":"","detalle":[],"categoria":"Bazar","precio":17500,"imagenes":["img/p060-1.jpg","img/p060-2.jpg"]},{"id":"p061","nombre":"Sarten Tramontina","descripcion":"24cm","detalle":[],"categoria":"Bazar","precio":17300,"imagenes":["img/p061-1.jpg"]},{"id":"p062","nombre":"Sarten Tramontina","descripcion":"27cm","detalle":[],"categoria":"Bazar","precio":20200,"imagenes":["img/p062-1.jpg"]},{"id":"p063","nombre":"Juego de Cubiertos","descripcion":"Tramontina · 24 Piezas","detalle":[],"categoria":"Bazar","precio":17300,"imagenes":["img/p063-1.jpg","img/p063-2.jpg","img/p063-3.jpg"]},{"id":"p064","nombre":"Juego de Cubiertos","descripcion":"Tramontina · 30 Piezas","detalle":[],"categoria":"Bazar","precio":23000,"imagenes":["img/p064-1.jpg","img/p064-2.jpg","img/p064-3.jpg","img/p064-4.jpg"]},{"id":"p065","nombre":"Juego Tramontina","descripcion":"12 Piezas","detalle":[],"categoria":"Bazar","precio":9400,"imagenes":["img/p065-1.jpg","img/p065-2.jpg","img/p065-3.jpg"]},{"id":"p066","nombre":"Jarra Eléctrica","descripcion":"Capacidad: 2.5 Litros · 1500watts","detalle":[],"categoria":"Electrodomésticos","precio":34600,"imagenes":["img/p066-1.jpg","img/p066-2.jpg","img/p066-3.jpg","img/p066-4.jpg","img/p066-5.jpg","img/p066-6.jpg"]},{"id":"p067","nombre":"Jarra Eléctrica","descripcion":"Con Corte · Capacidad: 2 Litros","detalle":[],"categoria":"Electrodomésticos","precio":18900,"imagenes":["img/p067-1.jpg","img/p067-2.jpg"]},{"id":"p068","nombre":"Jarra Eléctrica","descripcion":"Capacidad: 2 Litros","detalle":[],"categoria":"Electrodomésticos","precio":16200,"imagenes":["img/p068-1.jpg","img/p068-2.jpg"]},{"id":"p069","nombre":"Licuadoras","descripcion":"Capacidad: 1.5 Litros","detalle":[],"categoria":"Electrodomésticos","precio":26100,"imagenes":["img/p069-1.jpg","img/p069-2.jpg"]},{"id":"p070","nombre":"Cafetero Digital","descripcion":"Capacidad: 700ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":18900,"imagenes":["img/p070-1.jpg","img/p070-2.jpg","img/p070-3.jpg","img/p070-4.jpg"]},{"id":"p071","nombre":"Cafetero Digital","descripcion":"Capacidad: 500ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":17300,"imagenes":["img/p071-1.jpg"]},{"id":"p072","nombre":"Cafetero","descripcion":"Capacidad: 500ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p072-1.jpg","img/p072-2.jpg","img/p072-3.jpg","img/p072-4.jpg","img/p072-5.jpg","img/p072-6.jpg"]},{"id":"p073","nombre":"Cafetero","descripcion":"Capacidad: 500ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":13100,"imagenes":["img/p073-1.jpg","img/p073-2.jpg","img/p073-3.jpg"]},{"id":"p074","nombre":"Cafetero Digital","descripcion":"Capacidad: 500ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p074-1.jpg","img/p074-2.jpg","img/p074-3.jpg","img/p074-4.jpg"]},{"id":"p075","nombre":"Termo Doble Tapa","descripcion":"Capacidad: 1 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":18900,"imagenes":["img/p075-1.jpg","img/p075-2.jpg","img/p075-3.jpg","img/p075-4.jpg","img/p075-5.jpg","img/p075-6.jpg"]},{"id":"p076","nombre":"Termo 3 Sellos","descripcion":"Capacidad: 1.2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":18900,"imagenes":["img/p076-1.jpg","img/p076-2.jpg","img/p076-3.jpg","img/p076-4.jpg","img/p076-5.jpg","img/p076-6.jpg","img/p076-7.jpg","img/p076-8.jpg"]},{"id":"p077","nombre":"Termo 3 Sellos","descripcion":"Capacidad: 1.2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":20200,"imagenes":["img/p077-1.jpg"]},{"id":"p078","nombre":"Termo 1 Litros","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":18900,"imagenes":["img/p078-1.jpg","img/p078-2.jpg","img/p078-3.jpg","img/p078-4.jpg"]},{"id":"p079","nombre":"Termo 1 Litros","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p079-1.jpg","img/p079-2.jpg"]},{"id":"p080","nombre":"Termo 1 Litros","descripcion":"Incluye Cuchara","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p080-1.jpg"]},{"id":"p081","nombre":"Termo System","descripcion":"1 Litros · 4 Sellos","detalle":[],"categoria":"Termos, Mates y Vasos","precio":26100,"imagenes":["img/p081-1.jpg","img/p081-2.jpg","img/p081-3.jpg","img/p081-4.jpg","img/p081-5.jpg","img/p081-6.jpg","img/p081-7.jpg"]},{"id":"p082","nombre":"Termo System","descripcion":"1 Litros · 3 Sellos","detalle":[],"categoria":"Termos, Mates y Vasos","precio":20700,"imagenes":["img/p082-1.jpg","img/p082-2.jpg","img/p082-3.jpg"]},{"id":"p083","nombre":"Termo System","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":24300,"imagenes":["img/p083-1.jpg","img/p083-2.jpg"]},{"id":"p084","nombre":"Termo 750ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":24300,"imagenes":["img/p084-1.jpg","img/p084-2.jpg","img/p084-3.jpg","img/p084-4.jpg"]},{"id":"p085","nombre":"Termo 1 Litros","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":21600,"imagenes":["img/p085-1.jpg","img/p085-2.jpg","img/p085-3.jpg","img/p085-4.jpg"]},{"id":"p086","nombre":"Combo: Termo 1 Litros + Mate + bombilla","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":21600,"imagenes":["img/p086-1.jpg"]},{"id":"p087","nombre":"Combo","descripcion":"","detalle":["TERMO 1.2 LITROS","MATE 160ML","BOMBILLA","YERBERO"],"categoria":"Termos, Mates y Vasos","precio":35100,"imagenes":["img/p087-1.jpg","img/p087-2.jpg","img/p087-3.jpg"]},{"id":"p088","nombre":"Combo: Termo 1.2 Litros + Mate + bombilla + Yerbero + azucarero","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":49500,"imagenes":["img/p088-1.jpg","img/p088-2.jpg","img/p088-3.jpg","img/p088-4.jpg","img/p088-5.jpg","img/p088-6.jpg","img/p088-7.jpg"]},
+{"id":"p089","nombre":"Combo: Termo 1 Litros + Mate + bombilla","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":28800,"imagenes":["img/p089-1.jpg","img/p089-2.jpg","img/p089-3.jpg","img/p089-4.jpg"]},{"id":"p090","nombre":"Combo: Termo 1 Litros + Mate + yerbero","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":35100,"imagenes":["img/p090-1.jpg","img/p090-2.jpg","img/p090-3.jpg","img/p090-4.jpg","img/p090-5.jpg","img/p090-6.jpg"]},{"id":"p091","nombre":"Combo: Termo 1.2 Litros + Mate 160ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":23400,"imagenes":["img/p091-1.jpg","img/p091-2.jpg","img/p091-3.jpg","img/p091-4.jpg","img/p091-5.jpg","img/p091-6.jpg","img/p091-7.jpg","img/p091-8.jpg"]},{"id":"p092","nombre":"Secarropas Bionica","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":63700,"imagenes":["img/p092-1.jpg","img/p092-2.jpg"]},{"id":"p093","nombre":"Escurridor de Plato","descripcion":"","detalle":[],"categoria":"Bazar","precio":26100,"imagenes":["img/p093-1.jpg","img/p093-2.jpg"]},{"id":"p094","nombre":"Picador de Verdura","descripcion":"14 en 1","detalle":[],"categoria":"Bazar","precio":21600,"imagenes":["img/p094-1.jpg","img/p094-2.jpg","img/p094-3.jpg","img/p094-4.jpg","img/p094-5.jpg","img/p094-6.jpg"]},{"id":"p095","nombre":"Moldes para Torta","descripcion":"3 Piezas","detalle":[],"categoria":"Bazar","precio":18900,"imagenes":["img/p095-1.jpg","img/p095-2.jpg","img/p095-3.jpg","img/p095-4.jpg"]},{"id":"p096","nombre":"Licuadora Portatil","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":16200,"imagenes":["img/p096-1.jpg","img/p096-2.jpg","img/p096-3.jpg","img/p096-4.jpg","img/p096-5.jpg"]},{"id":"p097","nombre":"Molde para Hot Cakes — 12 Cavidades","descripcion":"","detalle":["12 porciones a la vez: Prepara varios hot cakes de una sola vez, ahorrando tiempo en tu cocina","Antiadherente: Se desprende fácilmente, sin pegar y súper fácil de limpiar","Material resistente: Duradero y apto para horno","Formas perfectas: Todos tus hot cakes quedan del mismo tamaño y redonditos","Ideal para desayunos, meriendas y más","¡Tu aliado para desayunos ricos y rápidos con toda la familia!"],"categoria":"Bazar","precio":9000,"imagenes":["img/p097-1.jpg"]},{"id":"p098","nombre":"Molde para Hot Cakes — 6 Cavidades","descripcion":"","detalle":["6 porciones a la vez: Prepara 6 hot cakes perfectos en una sola cocción","Superficie antiadherente: No se pega, ¡se desprende con facilidad!","Fácil de limpiar: Solo pasa un paño y listo","Material resistente y duradero: Ideal para uso diario","Tamaño uniforme: Todos tus hot cakes quedan igual de bonitos","Ahorra tiempo: Desayunos rápidos y deliciosos para toda la familia","¡Imprescindible en tu cocina!"],"categoria":"Bazar","precio":5400,"imagenes":["img/p098-1.jpg"]},{"id":"p099","nombre":"Marcadores Doble Punta de 24 Piezas","descripcion":"","detalle":[],"categoria":"Librería","precio":7200,"imagenes":["img/p099-1.jpg"]},{"id":"p100","nombre":"Marcadores Doble Punta","descripcion":"De 36 Piezas","detalle":[],"categoria":"Librería","precio":11700,"imagenes":["img/p100-1.jpg","img/p100-2.jpg"]},{"id":"p101","nombre":"Marcadores Doble Punta","descripcion":"De 48 Piezas","detalle":[],"categoria":"Librería","precio":14400,"imagenes":["img/p101-1.jpg"]},{"id":"p102","nombre":"Marcadores Doble Punta","descripcion":"De 60 Piezas","detalle":[],"categoria":"Librería","precio":17300,"imagenes":["img/p102-1.jpg","img/p102-2.jpg"]},{"id":"p103","nombre":"Marcadores Doble Punta","descripcion":"De 80 Piezas","detalle":[],"categoria":"Librería","precio":23400,"imagenes":["img/p103-1.jpg"]},{"id":"p104","nombre":"Marcadores Doble Punta","descripcion":"De 120 Piezas","detalle":[],"categoria":"Librería","precio":34600,"imagenes":["img/p104-1.jpg"]},{"id":"p105","nombre":"Donut Maker RL150810 (máquina de hacer donas)","descripcion":"","detalle":["Tamaño de placa para fabricación de donas 200 mm.","Carcasa de bakelite negra original.","Control del termostato.","Recubrimiento antiadherente.","Luces indicadoras.","Voltaje: 220 - 240 V.","Frecuencia: 50/60 Hz.","Potencia: 1000 W.","Color: negro."],"categoria":"Electrodomésticos","precio":43200,"imagenes":["img/p105-1.jpg"]},{"id":"p106","nombre":"Picador de Alimentos RL150966","descripcion":"","detalle":["2 velocidades.","Voltaje: 220-240 V.","Frecuencia: 50/60 Hz.","Potencia: 300 W.","Color: Plata."],"categoria":"Electrodomésticos","precio":63400,"imagenes":["img/p106-1.jpg","img/p106-2.jpg"]},{"id":"p107","nombre":"Hoppys 650ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":17300,"imagenes":["img/p107-1.jpg","img/p107-2.jpg","img/p107-3.jpg","img/p107-4.jpg","img/p107-5.jpg","img/p107-6.jpg","img/p107-7.jpg"]},{"id":"p108","nombre":"Hoppys 600ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":13500,"imagenes":["img/p108-1.jpg","img/p108-2.jpg","img/p108-3.jpg","img/p108-4.jpg","img/p108-5.jpg"]},{"id":"p109","nombre":"Hoppys 800ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":15800,"imagenes":["img/p109-1.jpg","img/p109-2.jpg","img/p109-3.jpg","img/p109-4.jpg","img/p109-5.jpg","img/p109-6.jpg"]},{"id":"p110","nombre":"Cafetero 360ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":10100,"imagenes":["img/p110-1.jpg","img/p110-2.jpg","img/p110-3.jpg","img/p110-4.jpg","img/p110-5.jpg","img/p110-6.jpg","img/p110-7.jpg","img/p110-8.jpg"]},{"id":"p111","nombre":"Vaso Térmico","descripcion":"Capacidad: 350ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":8600,"imagenes":["img/p111-1.jpg","img/p111-2.jpg"]},{"id":"p112","nombre":"Plancha Moliax","descripcion":"1200 Watts","detalle":[],"categoria":"Electrodomésticos","precio":20700,"imagenes":["img/p112-1.jpg"]},{"id":"p113","nombre":"Plancha a Vapor (RL150508)","descripcion":"","detalle":["Voltaje 220V-50HZ.","Potencia: 1200W","Vapor vertical.","Función autolimpieza.","Tanque de agua transparente.","Cable giratorio.","Control de vapor ajustable.","Dial de control de temperatura.","Luz indicadora.","Indicador de nivel de agua.","Termostato incorporado.","Protección contra sobrecalentamiento."],"categoria":"Electrodomésticos","precio":31700,"imagenes":["img/p113-1.jpg","img/p113-2.jpg"]},{"id":"p114","nombre":"Plancha Ocean","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":37800,"imagenes":["img/p114-1.jpg"]},{"id":"p115","nombre":"Plancha Ocean","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":43200,"imagenes":["img/p115-1.jpg"]},{"id":"p116","nombre":"Plancha a Vapor","descripcion":"","detalle":[],"categoria":"Electrodomésticos","precio":24500,"imagenes":["img/p116-1.jpg"]},{"id":"p117","nombre":"Cremas Karsell","descripcion":"500ml","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":17300,"imagenes":["img/p117-1.jpg","img/p117-2.jpg","img/p117-3.jpg","img/p117-4.jpg"]},{"id":"p118","nombre":"Aceite Karsell","descripcion":"50ml","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":20700,"imagenes":["img/p118-1.jpg","img/p118-2.jpg","img/p118-3.jpg","img/p118-4.jpg"]},{"id":"p119","nombre":"Crema 100ml + shampoo 70ml + acondicionador 70ml","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":24300,"imagenes":["img/p119-1.jpg"]},{"id":"p120","nombre":"Kit Cremas Karsell + aceite","descripcion":"2 en 1","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":45900,"imagenes":["img/p120-1.jpg","img/p120-2.jpg"]},{"id":"p121","nombre":"Shampoo Karsell","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":20700,"imagenes":["img/p121-1.jpg"]},{"id":"p122","nombre":"Combo 1 Litros + Mate 160ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":23400,"imagenes":["img/p122-1.jpg","img/p122-2.jpg","img/p122-3.jpg","img/p122-4.jpg","img/p122-5.jpg","img/p122-6.jpg"]},{"id":"p123","nombre":"Juegos de Taper","descripcion":"","detalle":[],"categoria":"Bazar","precio":20700,"imagenes":["img/p123-1.jpg","img/p123-2.jpg"]},{"id":"p124","nombre":"Juego de Taza","descripcion":"6 Taza · 6 Platitos","detalle":[],"categoria":"Bazar","precio":24500,"imagenes":["img/p124-1.jpg","img/p124-2.jpg","img/p124-3.jpg","img/p124-4.jpg"]},{"id":"p125","nombre":"Juego de Taza","descripcion":"6 Taza · 6 Platitos","detalle":[],"categoria":"Bazar","precio":26100,"imagenes":["img/p125-1.jpg"]},{"id":"p126","nombre":"Cartel para Precios","descripcion":"Paquete de 10 Unidades","detalle":[],"categoria":"Librería","precio":2500,"imagenes":["img/p126-1.jpg","img/p126-2.jpg"]},{"id":"p127","nombre":"Platos Playos","descripcion":"Paquete de 4 Unidades","detalle":[],"categoria":"Bazar","precio":25200,"imagenes":["img/p127-1.jpg"]},{"id":"p128","nombre":"Platos Playos","descripcion":"","detalle":[],"categoria":"Bazar","precio":4900,"imagenes":["img/p128-1.jpg"]},{"id":"p129","nombre":"Combo: Termo 1.3 Litros","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":28800,"imagenes":["img/p129-1.jpg","img/p129-2.jpg","img/p129-3.jpg","img/p129-4.jpg","img/p129-5.jpg","img/p129-6.jpg","img/p129-7.jpg","img/p129-8.jpg"]},{"id":"p130","nombre":"Mantel Navideño","descripcion":"2 Metros x 1.50","detalle":[],"categoria":"Blanquería","precio":9900,"imagenes":["img/p130-1.jpg","img/p130-2.jpg","img/p130-3.jpg","img/p130-4.jpg","img/p130-5.jpg","img/p130-6.jpg","img/p130-7.jpg","img/p130-8.jpg"]},{"id":"p131","nombre":"Hoppys Infantil","descripcion":"Capacidad: 500ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p131-1.jpg","img/p131-2.jpg","img/p131-3.jpg","img/p131-4.jpg","img/p131-5.jpg","img/p131-6.jpg"]},{"id":"p132","nombre":"Mantel Navideño","descripcion":"2,5 Metros x 1.50","detalle":[],"categoria":"Blanquería","precio":13500,"imagenes":["img/p132-1.jpg","img/p132-2.jpg","img/p132-3.jpg","img/p132-4.jpg","img/p132-5.jpg","img/p132-6.jpg","img/p132-7.jpg"]},{"id":"p133","nombre":"Combo: Termo 1 Litros + 3 Sellos + Mate 160ml","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":24500,"imagenes":["img/p133-1.jpg","img/p133-2.jpg","img/p133-3.jpg","img/p133-4.jpg","img/p133-5.jpg","img/p133-6.jpg","img/p133-7.jpg"]},{"id":"p134","nombre":"Reloj","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":35100,"imagenes":["img/p134-1.jpg","img/p134-2.jpg","img/p134-3.jpg","img/p134-4.jpg"]},{"id":"p135","nombre":"Auriculares","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":24300,"imagenes":["img/p135-1.jpg","img/p135-2.jpg","img/p135-3.jpg","img/p135-4.jpg"]},{"id":"p136","nombre":"Auricular Airdots","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":13000,"imagenes":["img/p136-1.jpg","img/p136-2.jpg","img/p136-3.jpg","img/p136-4.jpg"]},{"id":"p137","nombre":"Auricular Redmi","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":11700,"imagenes":["img/p137-1.jpg","img/p137-2.jpg","img/p137-3.jpg","img/p137-4.jpg"]},{"id":"p138","nombre":"Auricular JBL","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":28800,"imagenes":["img/p138-1.jpg","img/p138-2.jpg","img/p138-3.jpg","img/p138-4.jpg"]},{"id":"p139","nombre":"Auricular Infantil","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":28800,"imagenes":["img/p139-1.jpg","img/p139-2.jpg"]},{"id":"p140","nombre":"Auricular Infantil","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":16200,"imagenes":["img/p140-1.jpg","img/p140-2.jpg","img/p140-3.jpg","img/p140-4.jpg","img/p140-5.jpg"]},{"id":"p141","nombre":"Soporte para celular","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":7200,"imagenes":["img/p141-1.jpg","img/p141-2.jpg","img/p141-3.jpg","img/p141-4.jpg","img/p141-5.jpg","img/p141-6.jpg"]},{"id":"p142","nombre":"Lentes con Cámara","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":158400,"imagenes":["img/p142-1.jpg","img/p142-2.jpg"]},{"id":"p143","nombre":"Cargador iPhone 14 Pro Max","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":10100,"imagenes":["img/p143-1.jpg","img/p143-2.jpg","img/p143-3.jpg"]},{"id":"p144","nombre":"Cabezal iPhone 16 Pro Max","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":6500,"imagenes":["img/p144-1.jpg","img/p144-2.jpg","img/p144-3.jpg"]},{"id":"p145","nombre":"Cargador iPhone 13 Pro Max","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":10100,"imagenes":["img/p145-1.jpg","img/p145-2.jpg"]},{"id":"p146","nombre":"Cargador Tipo C","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":13000,"imagenes":["img/p146-1.jpg","img/p146-2.jpg","img/p146-3.jpg"]},{"id":"p147","nombre":"Cable Tipo C a C","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":5800,"imagenes":["img/p147-1.jpg","img/p147-2.jpg","img/p147-3.jpg"]},{"id":"p148","nombre":"Soporte Kit Studio","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":17300,"imagenes":["img/p148-1.jpg","img/p148-2.jpg"]},{"id":"p149","nombre":"Drone Quadricóptero — Serie LEN","descripcion":"","detalle":["Alcance: hasta 100 metros aprox.","Mantenimiento de Altitud — se mantiene estable solo","Despegue con un clic","Aterrizaje con un clic","Grabación HD"],"categoria":"Accesorios y Tecnología","precio":43200,"imagenes":["img/p149-1.jpg"]},{"id":"p150","nombre":"Charge 4 JBL","descripcion":"","detalle":[],"categoria":"Accesorios y Tecnología","precio":37800,"imagenes":["img/p150-1.jpg","img/p150-2.jpg","img/p150-3.jpg","img/p150-4.jpg","img/p150-5.jpg","img/p150-6.jpg","img/p150-7.jpg"]},{"id":"p151","nombre":"Parlante JBL","descripcion":"Réplica exacta","detalle":[],"categoria":"Accesorios y Tecnología","precio":66600,"imagenes":["img/p151-1.jpg","img/p151-2.jpg"]},{"id":"p152","nombre":"Planchita","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":18900,"imagenes":["img/p152-1.jpg","img/p152-2.jpg"]},{"id":"p153","nombre":"Planchita + seca pelo","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":40500,"imagenes":["img/p153-1.jpg"]},{"id":"p154","nombre":"Planchita + seca pelo","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":38900,"imagenes":["img/p154-1.jpg"]},{"id":"p155","nombre":"Corta Pelo Bionica","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":23400,"imagenes":["img/p155-1.jpg"]},{"id":"p156","nombre":"Corta Pelo 3 en 1","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":18900,"imagenes":["img/p156-1.jpg","img/p156-2.jpg","img/p156-3.jpg","img/p156-4.jpg","img/p156-5.jpg"]},{"id":"p157","nombre":"Waer profesional","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":34600,"imagenes":["img/p157-1.jpg"]},{"id":"p158","nombre":"Patillera Waer","descripcion":"","detalle":[],"categoria":"Belleza y Cuidado Personal","precio":10100,"imagenes":["img/p158-1.jpg"]},{"id":"p159","nombre":"Focos Cámara Espía (vigilancia a WiFi)","descripcion":"","detalle":["Grabación en 360° (ojo de pez)","Entrada de Tarjetas de memoria hasta los 64 Gb (un aproximado de 30 dias de grabación continúa)","Función de micrófono (grabación de audio)","Función de bocina (puedes mandar áudios a la cámara y este lo reproduce en directo)","Incluye: porta foco, manual y tornillos (para instalación)"],"categoria":"Accesorios y Tecnología","precio":27400,"imagenes":["img/p159-1.jpg","img/p159-2.jpg"]},{"id":"p160","nombre":"Cámaras Doble","descripcion":"","detalle":["Modelo impermeable para uso Exterior","Visión de camara: 360°","Resolución FHD: (mayor calidad de imagen)","Alarma de detección de movimiento","Seguimiento inteligente (sigue al sujeto que se mueve)","Visión nocturna: no pierdas los detalles de noche","Función de intercomunicador de dos vías","App: iCSee (Android e iOS)"],"categoria":"Accesorios y Tecnología","precio":52200,"imagenes":["img/p160-1.jpg","img/p160-2.jpg","img/p160-3.jpg","img/p160-4.jpg","img/p160-5.jpg","img/p160-6.jpg"]},{"id":"p161","nombre":"Cámaras","descripcion":"","detalle":["Modelo impermeable para uso Exterior","Visión de camara: 360°","Resolución FHD: (mayor calidad de imagen)","Alarma de detección de movimiento","Seguimiento inteligente (sigue al sujeto que se mueve)","Visión nocturna: no pierdas los detalles de noche","Función de intercomunicador de dos vías","App: iCSee (Android e iOS)"],"categoria":"Accesorios y Tecnología","precio":46800,"imagenes":["img/p161-1.jpg","img/p161-2.jpg","img/p161-3.jpg","img/p161-4.jpg","img/p161-5.jpg"]},{"id":"p162","nombre":"Cámaras Doble con Sirena","descripcion":"","detalle":["Modelo impermeable para uso Exterior","Visión de camara: 360°","Resolución FHD: (mayor calidad de imagen)","Alarma de detección de movimiento","Seguimiento inteligente (sigue al sujeto que se mueve)","Visión nocturna: no pierdas los detalles de noche","Función de intercomunicador de dos vías","App: iCSee (Android e iOS)"],"categoria":"Accesorios y Tecnología","precio":66600,"imagenes":["img/p162-1.jpg","img/p162-2.jpg","img/p162-3.jpg"]},{"id":"p163","nombre":"Cámaras Doble con Sirena","descripcion":"","detalle":["Modelo impermeable para uso Exterior","Visión de camara: 360°","Resolución FHD: (mayor calidad de imagen)","Alarma de detección de movimiento","Seguimiento inteligente (sigue al sujeto que se mueve)","Visión nocturna: no pierdas los detalles de noche","Función de intercomunicador de dos vías","App: iCSee (Android e iOS)"],"categoria":"Accesorios y Tecnología","precio":72000,"imagenes":["img/p163-1.jpg","img/p163-2.jpg","img/p163-3.jpg","img/p163-4.jpg","img/p163-5.jpg","img/p163-6.jpg"]},{"id":"p164","nombre":"Cámaras Triple","descripcion":"","detalle":["Modelo impermeable para uso Exterior","Visión de camara: 360°","Resolución FHD: (mayor calidad de imagen)","Alarma de detección de movimiento","Seguimiento inteligente (sigue al sujeto que se mueve)","Visión nocturna: no pierdas los detalles de noche","Función de intercomunicador de dos vías","App: iCSee (Android e iOS)"],"categoria":"Accesorios y Tecnología","precio":115200,"imagenes":["img/p164-1.jpg","img/p164-2.jpg","img/p164-3.jpg","img/p164-4.jpg"]},{"id":"p165","nombre":"Cámaras Doble con Panel Solar","descripcion":"","detalle":["Modelo impermeable para uso Exterior","Visión de camara: 360°","Resolución FHD: (mayor calidad de imagen)","Alarma de detección de movimiento","Seguimiento inteligente (sigue al sujeto que se mueve)","Visión nocturna: no pierdas los detalles de noche","Función de intercomunicador de dos vías","App: iCSee (Android e iOS)"],"categoria":"Accesorios y Tecnología","precio":158400,"imagenes":["img/p165-1.jpg","img/p165-2.jpg","img/p165-3.jpg","img/p165-4.jpg"]},{"id":"p166","nombre":"Proyector Smart KEEN X10 Plus 4K con 2 Controles Inalámbricos","descripcion":"","detalle":["¡Convertí cualquier pared en una pantalla gigante y disfrutá de tus películas, series y videojuegos favoritos desde la comodidad de tu hogar!","Resolución compatible con 4K","Sistema Android integrado","Conexión WiFi y Bluetooth","Pantalla de hasta 130”","Altavoz incorporado","Incluye 2 controles inalámbricos para juegos","Control remoto incluido","Ideal para cine en casa, videojuegos, fútbol y presentaciones"],"categoria":"Accesorios y Tecnología","precio":115200,"imagenes":["img/p166-1.jpg"]},{"id":"p167","nombre":"Vasos","descripcion":"Capacidad: 900ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":13000,"imagenes":["img/p167-1.jpg","img/p167-2.jpg","img/p167-3.jpg","img/p167-4.jpg","img/p167-5.jpg","img/p167-6.jpg"]},{"id":"p168","nombre":"Vaso Doble Pico","descripcion":"Capacidad: 900ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":14400,"imagenes":["img/p168-1.jpg","img/p168-2.jpg","img/p168-3.jpg","img/p168-4.jpg","img/p168-5.jpg","img/p168-6.jpg","img/p168-7.jpg","img/p168-8.jpg"]},{"id":"p169","nombre":"Vasos","descripcion":"Capacidad: 1.2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":13000,"imagenes":["img/p169-1.jpg"]},{"id":"p170","nombre":"Vasos","descripcion":"Capacidad: 1.2 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":18900,"imagenes":["img/p170-1.jpg","img/p170-2.jpg","img/p170-3.jpg"]},{"id":"p171","nombre":"Autocebante 2 en 1","descripcion":"Capacidad: 750ml","detalle":[],"categoria":"Termos, Mates y Vasos","precio":19100,"imagenes":["img/p171-1.jpg","img/p171-2.jpg","img/p171-3.jpg","img/p171-4.jpg","img/p171-5.jpg","img/p171-6.jpg"]},{"id":"p172","nombre":"Sifón 1.6 Litros","descripcion":"Mate 150ml · Bombilla","detalle":[],"categoria":"Termos, Mates y Vasos","precio":37800,"imagenes":["img/p172-1.jpg","img/p172-2.jpg","img/p172-3.jpg"]},{"id":"p173","nombre":"Galones","descripcion":"Capacidad: 1.5 Litros","detalle":[],"categoria":"Termos, Mates y Vasos","precio":28800,"imagenes":["img/p173-1.jpg","img/p173-2.jpg","img/p173-3.jpg","img/p173-4.jpg"]},{"id":"p174","nombre":"Hoppys 1 Litros","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":17300,"imagenes":["img/p174-1.jpg"]},{"id":"p175","nombre":"Kit Yerbero","descripcion":"","detalle":[],"categoria":"Termos, Mates y Vasos","precio":13100,"imagenes":["img/p175-1.jpg","img/p175-2.jpg","img/p175-3.jpg","img/p175-4.jpg","img/p175-5.jpg","img/p175-6.jpg","img/p175-7.jpg","img/p175-8.jpg"]}];
 
     const categoriasList = [
       { nombre: "Todos", icono: "fa-box-open" },
-      { nombre: "Bazar", icono: "fa-store" },
+      { nombre: "Termos, Mates y Vasos", icono: "fa-mug-hot" },
       { nombre: "Accesorios y Tecnología", icono: "fa-headphones" },
       { nombre: "Electrodomésticos", icono: "fa-plug" },
-      { nombre: "Repuestos de motos", icono: "fa-motorcycle" },
+      { nombre: "Bazar", icono: "fa-store" },
+      { nombre: "Belleza y Cuidado Personal", icono: "fa-spa" },
+      { nombre: "Librería", icono: "fa-pen" },
+      { nombre: "Blanquería", icono: "fa-bed" },
       { nombre: "Camping", icono: "fa-campground" },
       { nombre: "Ferretería", icono: "fa-screwdriver-wrench" },
-      { nombre: "Blanquería", icono: "fa-bed" }
+      { nombre: "Repuestos de motos", icono: "fa-motorcycle" }
     ];
 
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    let productosGlobal = [];
+    let productosGlobal = PRODUCTOS.filter(p => p.stock !== false);
     let categoriaActual = "Todos";
 
     const grid = document.getElementById("grid-productos");
     const categoriasContainer = document.getElementById("categorias-container");
     const tituloCategoria = document.getElementById("titulo-categoria");
     const modalPago = document.getElementById("modal-pago");
-
-    const cargarProductos = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "productos"));
-        productosGlobal = [];
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          if (data.stock !== false) productosGlobal.push({ id: doc.id, ...data });
-        });
-        
-        renderCategorias();
-        renderProductos();
-      } catch (error) {
-        console.error("Error:", error);
-        grid.innerHTML = "<p>Error al cargar los productos.</p>";
-      }
-    };
+    const fmt = n => n.toLocaleString("es-AR");
 
     const renderCategorias = () => {
       categoriasContainer.innerHTML = "";
       categoriasList.forEach(cat => {
+        // solo muestra categorías que tengan productos
+        if (cat.nombre !== "Todos" && !productosGlobal.some(p => p.categoria === cat.nombre)) return;
         const btn = document.createElement("button");
         btn.className = `cat-btn ${categoriaActual === cat.nombre ? 'activo' : ''}`;
         btn.innerHTML = `<i class="fa-solid ${cat.icono} cat-icon"></i> ${cat.nombre}`;
@@ -288,57 +281,80 @@
           categoriaActual = cat.nombre;
           renderCategorias();
           renderProductos();
+          window.scrollTo({ top: 0, behavior: "smooth" });
         };
         categoriasContainer.appendChild(btn);
       });
     };
 
-    const renderProductos = () => {
-      grid.innerHTML = "";
-      tituloCategoria.textContent = categoriaActual === "Todos" ? "Todos los productos" : `Categoría: ${categoriaActual}`;
+    const crearCard = (p) => {
+      const card = document.createElement("div");
+      card.className = "card";
 
-      const productosFiltrados = categoriaActual === "Todos" 
-        ? productosGlobal 
-        : productosGlobal.filter(p => p.categoria === categoriaActual);
+      const imgs = (p.imagenes && p.imagenes.length) ? p.imagenes : ["https://via.placeholder.com/300"];
+      let idx = 0;
+      const detalle = (p.detalle && p.detalle.length)
+        ? `<details><summary>Ver características</summary><ul>${p.detalle.map(d => `<li>${d}</li>`).join("")}</ul></details>` : "";
+      const variantes = (p.variantes && p.variantes.length)
+        ? `<select>${p.variantes.map(v => `<option value="${v}">${v}</option>`).join("")}</select>` : "";
 
-      if (productosFiltrados.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#64748b;">No hay productos en esta categoría todavía.</p>`;
-        return;
+      card.innerHTML = `
+        <div class="galeria">
+          <img src="${imgs[0]}" alt="${p.nombre}" loading="lazy">
+          ${imgs.length > 1 ? `<button class="g-btn g-prev" aria-label="Anterior">&#10094;</button><button class="g-btn g-next" aria-label="Siguiente">&#10095;</button><span class="g-count">1/${imgs.length}</span>` : ""}
+        </div>
+        <h3>${p.nombre}</h3>
+        ${p.descripcion ? `<div class="desc">${p.descripcion}</div>` : ""}
+        ${detalle}
+        <div class="precio">$${fmt(p.precio)}</div>
+        ${variantes}
+        <button class="agregar">Añadir al carrito</button>
+      `;
+
+      if (imgs.length > 1) {
+        const img = card.querySelector(".galeria img");
+        const cont = card.querySelector(".g-count");
+        const mover = d => { idx = (idx + d + imgs.length) % imgs.length; img.src = imgs[idx]; cont.textContent = `${idx + 1}/${imgs.length}`; };
+        card.querySelector(".g-prev").addEventListener("click", () => mover(-1));
+        card.querySelector(".g-next").addEventListener("click", () => mover(1));
       }
 
-      productosFiltrados.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        let selectVariantes = "";
-        if (p.variantes && p.variantes.length > 0) {
-          selectVariantes = `<select id="variante-${p.id}">
-            ${p.variantes.map(v => `<option value="${v}">${v}</option>`).join("")}
-          </select>`;
-        }
-
-        card.innerHTML = `
-          <img src="${p.imagen || 'https://via.placeholder.com/300'}" alt="${p.nombre}">
-          <div class="categoria-tag">${p.categoria || 'General'}</div>
-          <h3>${p.nombre}</h3>
-          <div class="precio">$${p.precio ? p.precio.toLocaleString("es-AR") : '0'}</div>
-          ${selectVariantes}
-          <button>Añadir al carrito</button>
-        `;
-
-        card.querySelector("button").addEventListener("click", () => {
-          const select = card.querySelector("select");
-          const varianteElegida = select ? select.value : null;
-          agregarAlCarrito({
-            id: p.id,
-            nombre: p.nombre,
-            precio: p.precio,
-            variante: varianteElegida
-          });
+      card.querySelector(".agregar").addEventListener("click", () => {
+        const select = card.querySelector("select");
+        agregarAlCarrito({
+          id: p.id,
+          nombre: p.nombre + (p.descripcion ? ` (${p.descripcion})` : ""),
+          precio: p.precio,
+          variante: select ? select.value : null
         });
-
-        grid.appendChild(card);
       });
+      return card;
+    };
+
+    const renderProductos = () => {
+      grid.innerHTML = "";
+      tituloCategoria.textContent = categoriaActual === "Todos" ? "Todos los productos" : categoriaActual;
+
+      // categorías a mostrar (en el orden de categoriasList), cada una con su sección
+      const cats = categoriasList
+        .map(c => c.nombre)
+        .filter(n => n !== "Todos" && (categoriaActual === "Todos" || categoriaActual === n));
+
+      let hay = false;
+      cats.forEach(nombre => {
+        const lista = productosGlobal.filter(p => p.categoria === nombre);
+        if (!lista.length) return;
+        hay = true;
+        const sec = document.createElement("section");
+        sec.className = "seccion-cat";
+        const icono = categoriasList.find(c => c.nombre === nombre).icono;
+        sec.innerHTML = `<h3 class="seccion-titulo"><i class="fa-solid ${icono}"></i> ${nombre} <small>${lista.length} productos</small></h3><div class="grid"></div>`;
+        const g = sec.querySelector(".grid");
+        lista.forEach(p => g.appendChild(crearCard(p)));
+        grid.appendChild(sec);
+      });
+
+      if (!hay) grid.innerHTML = `<p style="text-align:center; color:#64748b;">No hay productos en esta categoría todavía.</p>`;
     };
 
     function agregarAlCarrito(prod) {
@@ -388,7 +404,7 @@
         lista.appendChild(div);
       });
 
-      totalEl.textContent = `Total: $${total.toLocaleString("es-AR")}`;
+      totalEl.textContent = `Total: $${fmt(total)}`;
     }
 
     document.getElementById("btn-checkout").addEventListener("click", () => {
@@ -407,9 +423,9 @@
         total += item.precio * item.cantidad;
         mensaje += `• ${item.cantidad}x ${item.nombre}`;
         if (item.variante) mensaje += ` (${item.variante})`;
-        mensaje += ` — $${(item.precio * item.cantidad).toLocaleString("es-AR")}%0A`;
+        mensaje += ` — $${fmt(item.precio * item.cantidad)}%0A`;
       });
-      mensaje += `%0A*Total: $${total.toLocaleString("es-AR")}*%0A%0A`;
+      mensaje += `%0A*Total: $${fmt(total)}*%0A%0A`;
       mensaje += "Ya realicé la transferencia al alias mundo95. *Adjunto el comprobante acá abajo* 👇";
 
       window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensaje}`, "_blank");
@@ -426,7 +442,8 @@
     document.getElementById("btn-cerrar").addEventListener("click", () => toggleCarrito(false));
     fondo.addEventListener("click", () => toggleCarrito(false));
 
-    cargarProductos();
+    renderCategorias();
+    renderProductos();
     renderCarrito();
   </script>
 </body>
