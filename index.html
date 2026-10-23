@@ -1,257 +1,434 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tecno Tech Oberá | Catálogo</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --primary: #0f172a; --accent: #25D366; --bg: #f8fafc; --card: #fff; --text: #334155; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
-    header { background: var(--card); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.05); position: sticky; top: 0; z-index: 50; }
-    .logo { font-weight: 800; font-size: 18px; color: var(--primary); }
-    .logo span { color: var(--accent); }
-    #btn-carrito { background: var(--primary); color: #fff; border: none; padding: 10px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: .2s; }
-    #btn-carrito:hover { background: #1e293b; }
-    .hero { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 28px 20px; text-align: center; }
-    .hero h2 { font-weight: 800; margin-bottom: 6px; font-size: 1.3rem; }
-    .hero p { font-size: .9rem; opacity: .9; }
-    .cat-wrap { background: var(--card); padding: 12px 0; position: sticky; top: 58px; z-index: 40; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
-    .cat-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 20px; scrollbar-width: none; }
-    .cat-scroll::-webkit-scrollbar { display: none; }
-    .cat-btn { border: 2px solid transparent; background: #f1f5f9; padding: 10px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; white-space: nowrap; cursor: pointer; display: flex; gap: 6px; align-items: center; color: var(--text); transition: .2s; }
-    .cat-btn.activo { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
-    .container { max-width: 1200px; margin: auto; width: 100%; padding: 20px; flex: 1; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-    .card { background: var(--card); border-radius: 16px; padding: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.04); display: flex; flex-direction: column; transition: transform .2s; }
-    .card:hover { transform: translateY(-4px); }
-    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #f1f5f9; cursor: zoom-in; }
-    .card h3 { font-size: 13px; font-weight: 600; margin: 8px 0 4px; color: var(--primary); line-height: 1.2; }
-    .card .desc { font-size: 11px; color: #64748b; margin-bottom: 6px; }
-    .precio { color: #0a7d32; font-weight: 800; font-size: 15px; margin-bottom: 10px; margin-top: auto; }
-    .card button.agregar { background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: .2s; }
-    .card button.agregar:hover { background: #1e293b; }
-    footer { background: var(--primary); color: #fff; text-align: center; padding: 24px; margin-top: 30px; font-size: .9rem; }
-    #panel { position: fixed; right: -100%; top: 0; width: 380px; max-width: 100%; height: 100%; background: #fff; padding: 20px; transition: .3s; z-index: 100; display: flex; flex-direction: column; box-shadow: -5px 0 20px rgba(0,0,0,.2); }
-    #panel.abierto { right: 0; }
-    #fondo { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: none; z-index: 99; }
-    #fondo.activo { display: block; }
-    .item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; gap: 8px; }
-    .item .nom { font-size: 13px; font-weight: 600; flex: 1; }
-    .qty { display: flex; align-items: center; gap: 6px; }
-    .qty button { border: none; background: #f1f5f9; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-weight: 700; }
-    .qty button.del { background: #fee2e2; color: #ef4444; }
-    #modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
-    .modal-box { background: #fff; padding: 22px; border-radius: 16px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
-    #visor { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 300; padding: 16px; }
-    #visor img { max-width: 100%; max-height: 100%; border-radius: 10px; }
-    .wa-float { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; z-index: 90; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.2); transition: .2s; }
-    .wa-float:hover { transform: scale(1.1); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tecno Tech Oberá | Catálogo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --primary:#0f172a; --accent:#25D366; --bg:#f8fafc; --card:#fff; --text:#334155; }
+  * { box-sizing:border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
+  body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+  header { background:var(--card); padding:14px 20px; display:flex; justify-content:space-between; align-items:center;
+           box-shadow:0 2px 10px rgba(0,0,0,.05); position:sticky; top:0; z-index:50; }
+  .logo { font-weight:800; font-size:18px; color:var(--primary); }
+  .logo span { color:var(--accent); }
+  #btn-carrito { background:var(--primary); color:#fff; border:none; padding:10px 16px; border-radius:20px;
+                 font-weight:600; cursor:pointer; transition:.2s; }
+  #btn-carrito:hover { background:#1e293b; }
+
+  .hero { background:linear-gradient(135deg,#1e293b,#0f172a); color:#fff; padding:28px 20px; text-align:center; }
+  .hero h2 { font-weight:800; margin-bottom:6px; font-size:1.3rem; }
+  .hero p { font-size:.9rem; opacity:.9; }
+
+  .cat-wrap { background:var(--card); padding:12px 0; position:sticky; top:58px; z-index:40;
+              box-shadow:0 2px 8px rgba(0,0,0,.04); }
+  .cat-scroll { display:flex; gap:10px; overflow-x:auto; padding:0 20px; scrollbar-width:none; }
+  .cat-scroll::-webkit-scrollbar { display:none; }
+  .cat-btn { border:2px solid transparent; background:#f1f5f9; padding:10px 14px; border-radius:20px;
+             font-weight:600; font-size:13px; white-space:nowrap; cursor:pointer;
+             display:flex; gap:6px; align-items:center; color:var(--text); transition:.2s; }
+  .cat-btn.activo { background:#eff6ff; border-color:#3b82f6; color:#1d4ed8; }
+  .cat-btn .count { background:#cbd5e1; color:#0f172a; border-radius:10px; padding:1px 7px; font-size:11px; }
+  .cat-btn.activo .count { background:#3b82f6; color:#fff; }
+
+  .container { max-width:1200px; margin:auto; width:100%; padding:20px; flex:1; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:14px; }
+  .card { background:var(--card); border-radius:16px; padding:10px; box-shadow:0 4px 15px rgba(0,0,0,.04);
+          display:flex; flex-direction:column; transition:transform .2s; }
+  .card:hover { transform:translateY(-4px); }
+  .card img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px;
+              background:#f1f5f9; cursor:zoom-in; }
+  .card h3 { font-size:13px; font-weight:600; margin:8px 0 4px; color:var(--primary); line-height:1.2; }
+  .card .desc { font-size:11px; color:#64748b; margin-bottom:6px; }
+  .precio { color:#0a7d32; font-weight:800; font-size:15px; margin-bottom:10px; margin-top:auto; }
+  .card button.agregar { background:var(--primary); color:#fff; border:none; padding:8px;
+                         border-radius:8px; font-weight:600; cursor:pointer; transition:.2s; }
+  .card button.agregar:hover { background:#1e293b; }
+
+  footer { background:var(--primary); color:#fff; text-align:center; padding:24px; margin-top:30px; font-size:.9rem; }
+
+  #panel { position:fixed; right:-100%; top:0; width:380px; max-width:100%; height:100%;
+           background:#fff; padding:20px; transition:.3s; z-index:100; display:flex; flex-direction:column;
+           box-shadow:-5px 0 20px rgba(0,0,0,.2); }
+  #panel.abierto { right:0; }
+  #fondo { position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; z-index:99; }
+  #fondo.activo { display:block; }
+
+  .item { display:flex; justify-content:space-between; align-items:center; padding:10px 0;
+          border-bottom:1px solid #eee; gap:8px; }
+  .item .nom { font-size:13px; font-weight:600; flex:1; }
+  .qty { display:flex; align-items:center; gap:6px; }
+  .qty button { border:none; background:#f1f5f9; width:26px; height:26px; border-radius:6px;
+                cursor:pointer; font-weight:700; }
+  .qty button.del { background:#fee2e2; color:#ef4444; }
+
+  #modal { position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center;
+           justify-content:center; z-index:200; padding:20px; }
+  .modal-box { background:#fff; padding:22px; border-radius:16px; max-width:400px; width:100%;
+               text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.2); }
+
+  #visor { position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center;
+           justify-content:center; z-index:300; padding:16px; cursor:zoom-out; }
+  #visor img { max-width:100%; max-height:100%; border-radius:10px; }
+
+  .wa-float { position:fixed; bottom:20px; right:20px; background:var(--accent); color:#fff;
+              width:56px; height:56px; border-radius:50%; display:flex; align-items:center;
+              justify-content:center; font-size:26px; z-index:90; text-decoration:none;
+              box-shadow:0 4px 12px rgba(0,0,0,.2); transition:.2s; }
+  .wa-float:hover { transform:scale(1.1); }
+
+  .empty { text-align:center; color:#94a3b8; padding:40px 0; font-size:14px; }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">Tecno Tech <span>Oberá</span></div>
-    <button id="btn-carrito"><i class="fa-solid fa-bag-shopping"></i> Carrito (<span id="contador">0</span>)</button>
-  </header>
 
-  <div class="hero">
-    <h2>Catálogo Tecno Tech Oberá</h2>
-    <p>Hacé tu pedido, transferí a alias <b>mundo95</b> y enviá comprobante por WhatsApp</p>
-  </div>
+<header>
+  <div class="logo">Tecno Tech <span>Oberá</span></div>
+  <button id="btn-carrito"><i class="fa-solid fa-bag-shopping"></i> Carrito (<span id="contador">0</span>)</button>
+</header>
 
-  <div class="cat-wrap"><div class="cat-scroll" id="cats"></div></div>
+<div class="hero">
+  <h2>Catálogo Tecno Tech Oberá</h2>
+  <p>Hacé tu pedido, transferí al alias <b>mundo95</b> y enviá comprobante por WhatsApp</p>
+</div>
 
-  <main class="container">
-    <h2 id="titulo" style="font-size:16px;font-weight:800;margin-bottom:14px"></h2>
-    <div class="grid" id="grid"></div>
-  </main>
+<div class="cat-wrap"><div class="cat-scroll" id="cats"></div></div>
 
-  <footer><p>Av. Italia 1459, Oberá - 3755 223737 - Envíos en 72hs</p></footer>
+<main class="container">
+  <h2 id="titulo" style="font-size:16px;font-weight:800;margin-bottom:14px"></h2>
+  <div class="grid" id="grid"></div>
+</main>
 
-  <div id="fondo"></div>
-  <div id="panel">
-    <button id="cerrar-panel" style="align-self:flex-end;border:none;background:#f1f5f9;width:32px;height:32px;border-radius:50%;cursor:pointer">✕</button>
-    <h3 style="margin:10px 0;color:var(--primary)">Tu pedido</h3>
-    <div id="lista" style="flex:1;overflow:auto"></div>
-    <div id="total" style="font-weight:800;text-align:right;margin:12px 0;font-size:18px"></div>
-    <button id="btn-checkout" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;cursor:pointer">Confirmar pedido</button>
-  </div>
+<footer><p>Av. Italia 1459, Oberá - 3755 223737 - Envíos en 72hs</p></footer>
 
-  <div id="modal">
-    <div class="modal-box">
-      <h3 style="color:var(--primary)">¡Casi listo!</h3>
-      <p style="margin:10px 0;font-size:14px;color:#64748b">Transferí a los siguientes datos:</p>
-      <div style="background:#f8fafc;border:1px dashed #cbd5e1;padding:12px;border-radius:8px;text-align:left">
-        <div style="font-weight:800;font-size:16px;color:var(--primary)">Alias: mundo95</div>
-        <div style="font-size:14px;color:#334155">Matias Gonzalo Lepori</div>
-        <div style="font-size:12px;color:#64748b;margin-top:4px">Mercado Pago</div>
-      </div>
-      <p style="font-size:12px;color:#64748b;margin-top:12px">Luego abrí WhatsApp y adjuntá tu comprobante.</p>
-      <button id="btn-wa" style="background:#25D366;color:#fff;border:none;padding:12px;border-radius:8px;width:100%;margin-top:14px;font-weight:700;cursor:pointer"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</button>
-      <button id="btn-cerrar-modal" style="background:none;border:none;color:#888;margin-top:10px;text-decoration:underline;cursor:pointer">Cancelar</button>
+<div id="fondo"></div>
+<div id="panel">
+  <button id="cerrar-panel" style="align-self:flex-end;border:none;background:#f1f5f9;
+          width:32px;height:32px;border-radius:50%;cursor:pointer">✕</button>
+  <h3 style="margin:10px 0;color:var(--primary)">Tu pedido</h3>
+  <div id="lista" style="flex:1;overflow:auto"></div>
+  <div id="total" style="font-weight:800;text-align:right;margin:12px 0;font-size:18px"></div>
+  <button id="btn-checkout" style="background:#25D366;color:#fff;border:none;padding:14px;
+          border-radius:10px;font-weight:700;cursor:pointer">Confirmar pedido</button>
+</div>
+
+<div id="modal">
+  <div class="modal-box">
+    <h3 style="color:var(--primary)">¡Casi listo!</h3>
+    <p style="margin:10px 0;font-size:14px;color:#64748b">Transferí a los siguientes datos:</p>
+    <div style="background:#f8fafc;border:1px dashed #cbd5e1;padding:12px;border-radius:8px;text-align:left">
+      <div style="font-weight:800;font-size:16px;color:var(--primary)">Alias: mundo95</div>
+      <div style="font-size:14px;color:#334155">Matias Gonzalo Lepori</div>
+      <div style="font-size:12px;color:#64748b;margin-top:4px">Mercado Pago</div>
     </div>
+    <p style="font-size:12px;color:#64748b;margin-top:12px">Luego abrí WhatsApp y adjuntá tu comprobante.</p>
+    <button id="btn-wa" style="background:#25D366;color:#fff;border:none;padding:12px;
+            border-radius:8px;width:100%;margin-top:14px;font-weight:700;cursor:pointer">
+      <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp
+    </button>
+    <button id="btn-cerrar-modal" style="background:none;border:none;color:#888;
+            margin-top:10px;text-decoration:underline;cursor:pointer">Cancelar</button>
   </div>
+</div>
 
-  <div id="visor"><img alt=""></div>
+<div id="visor"><img alt="Vista previa"></div>
 
-  <a class="wa-float" href="https://wa.me/5493755223737" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+<a class="wa-float" href="https://wa.me/5493755223737" target="_blank" rel="noopener">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
 
-  <script>
+<script>
+/* ===================== PRODUCTOS ===================== */
 const PRODUCTOS = [
-  {"id": "cf01", "nombre": "Autosebante 2 en 1 · 750 ml", "desc": "Termo con bombilla y tapa metálica", "precio": 20700, "categoria": "Termos y Botellas"},
-  {"id": "cf02", "nombre": "Termo Hoppy 600 ml", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 9720, "categoria": "Termos y Botellas"},
-  {"id": "cf03", "nombre": "Termo Hoppy 800 ml", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 10800, "categoria": "Termos y Botellas"},
-  {"id": "cf04", "nombre": "Termo Hoppy 1 litro", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 13500, "categoria": "Termos y Botellas"},
-  {"id": "cf05", "nombre": "Termo Coffee 600 ml", "desc": "Con tapa y pico vertedor. Varios colores", "precio": 14400, "categoria": "Termos y Botellas"},
-  {"id": "cf06", "nombre": "Termo 650 ml con manija", "desc": "Acero inoxidable. Varios colores", "precio": 17280, "categoria": "Termos y Botellas"},
-  {"id": "cf07", "nombre": "Termo Hoppy 600 ml Premium", "desc": "Mantiene frío y calor. Libre de BPA", "precio": 13500, "categoria": "Termos y Botellas"},
-  {"id": "cf08", "nombre": "Termo Hoppy 800 ml Premium", "desc": "Mantiene frío y calor. Libre de BPA", "precio": 15840, "categoria": "Termos y Botellas"},
-  {"id": "cf09", "nombre": "Termo Hoppy doble pico · 1 litro", "desc": "Tapa sellada con pico práctico", "precio": 20160, "categoria": "Termos y Botellas"},
-  {"id": "cf10", "nombre": "Termo Hoppy a rosca · 1 litro", "desc": "Botella térmica, frío hasta 24 hs", "precio": 13680, "categoria": "Termos y Botellas"},
-  {"id": "cf11", "nombre": "Termo Hoppy 1 litro con manija", "desc": "Tapa con pico, antiderrames", "precio": 17280, "categoria": "Termos y Botellas"},
-  {"id": "cf12", "nombre": "Termo Hoppy con pico · 1 litro", "desc": "Frío 11 hs · calor 7 hs", "precio": 21600, "categoria": "Termos y Botellas"},
-  {"id": "cf13", "nombre": "Kit yerbero", "desc": "Kit para mate, 4 en 1", "precio": 13140, "categoria": "Mates y Yerberos"},
-  {"id": "cf14", "nombre": "Linterna con herramienta", "desc": "Práctica y útil", "precio": 26100, "categoria": "Linternas e Iluminación"},
-  {"id": "cf15", "nombre": "Linterna minera", "desc": "Incluye 2 baterías, cargadores 12V y 220V; regulable y movible", "precio": 16200, "categoria": "Linternas e Iluminación"},
-  {"id": "cf16", "nombre": "Linterna de 2 elementos", "desc": "Material reforzado. No incluye pilas", "precio": 14400, "categoria": "Linternas e Iluminación"},
-  {"id": "cf17", "nombre": "Linterna Cafini L701B", "desc": "Recargable 220V", "precio": 6840, "categoria": "Linternas e Iluminación"},
-  {"id": "cf18", "nombre": "Linterna PM 8108", "desc": "Recargable 220V", "precio": 6120, "categoria": "Linternas e Iluminación"},
-  {"id": "cf19", "nombre": "Linterna mini L3355B", "desc": "Zoom, recargable USB, 3 funciones", "precio": 5760, "categoria": "Linternas e Iluminación"},
-  {"id": "cf20", "nombre": "Cargador inteligente", "precio": 40500, "categoria": "Ferretería y Accesorios"},
-  {"id": "cf21", "nombre": "Kit compresor VCP – 5 juegos", "desc": "Pulverizadora, infladora con manómetro, soplado, boquilla aguja y manguera espiral 5 m", "precio": 69300, "categoria": "Herramientas Eléctricas"},
-  {"id": "cf22", "nombre": "Pistola de calor VCP", "desc": "2000 W; 50–600 °C; incluye boquillas y accesorios", "precio": 57600, "categoria": "Herramientas Eléctricas"},
-  {"id": "cf23", "nombre": "Taladro eléctrico VCP", "desc": "710 W; mandril 13 mm; velocidad variable", "precio": 91800, "categoria": "Herramientas Eléctricas"},
-  {"id": "cf24", "nombre": "Rotomartillo VCP 20V", "desc": "Brushless, SDS Plus, 4 funciones; batería y cargador incluidos", "precio": 279000, "categoria": "Herramientas Eléctricas"},
-  {"id": "cf25", "nombre": "Hidrolavadora VCP", "desc": "1200 W; 55 BAR; 4,5 L/min", "precio": 156600, "categoria": "Herramientas Eléctricas"},
-  {"id": "cf26", "nombre": "Llave térmica VCP", "desc": "Tamaños 20A y 32A", "precio": 5760, "categoria": "Ferretería y Accesorios"},
-  {"id": "cf27", "nombre": "Lija 3M", "desc": "Pack de 50 hojas; lija al agua", "precio": 45900, "categoria": "Ferretería y Accesorios"},
-  {"id": "cf28", "nombre": "Balanza gramera digital", "desc": "Incluye pila", "precio": 9900, "categoria": "Balanzas"},
-  {"id": "cf29", "nombre": "Balanza digital portátil", "desc": "Capacidad 0–50 kg; precisión de 5 g hasta 10 kg y 10 g de 10 a 50 kg", "precio": 9900, "categoria": "Balanzas"},
-  {"id": "cf30", "nombre": "Balanza", "desc": "Capacidad 200 kg; incluye 2 pilas AAA", "precio": 28800, "categoria": "Balanzas"},
-  {"id": "cf31", "nombre": "Balanza", "desc": "Capacidad 300 kg; incluye 3 pilas AA", "precio": 46800, "categoria": "Balanzas"},
-  {"id": "cf32", "nombre": "Balanza digital recargable", "desc": "Capacidad 1000 kg; incluye gancho, mosquetón y cargador", "precio": 115200, "categoria": "Balanzas"},
-  {"id": "cf33", "nombre": "Amoladora Lusqtoff", "desc": "720 W; disco 115 mm; 11.000 RPM; accesorios incluidos", "precio": 91800, "categoria": "Herramientas Eléctricas"},
-  {"id": "cf34", "nombre": "Sierra caladora Lusqtoff", "desc": "Herramienta completa", "precio": 109800, "categoria": "Herramientas Eléctricas"},
-  {"id": "cf35", "nombre": "Foco de emergencia", "desc": "40 W", "precio": 16200, "categoria": "Linternas e Iluminación"},
-  {"id": "cf36", "nombre": "Balanza", "desc": "Capacidad 10 kg", "precio": 9900, "categoria": "Balanzas"},
-  {"id": "cf37", "nombre": "Atornillador inalámbrico", "desc": "48V; mandril inox hasta 13 mm; guante de regalo", "precio": 118800, "categoria": "Herramientas Eléctricas"}
+  { id:"cf01", nombre:"Autosebante 2 en 1 · 750 ml", desc:"Termo con bombilla y tapa metálica", precio:20700, categoria:"Termos y Botellas" },
+  { id:"cf02", nombre:"Termo Hoppy 600 ml", desc:"Acero inoxidable, con pico. Varios colores", precio:9720, categoria:"Termos y Botellas" },
+  { id:"cf03", nombre:"Termo Hoppy 800 ml", desc:"Acero inoxidable, con pico. Varios colores", precio:10800, categoria:"Termos y Botellas" },
+  { id:"cf04", nombre:"Termo Hoppy 1 litro", desc:"Acero inoxidable, con pico. Varios colores", precio:13500, categoria:"Termos y Botellas" },
+  { id:"cf05", nombre:"Termo Coffee 600 ml", desc:"Con tapa y pico vertedor. Varios colores", precio:14400, categoria:"Termos y Botellas" },
+  { id:"cf06", nombre:"Termo 650 ml con manija", desc:"Acero inoxidable. Varios colores", precio:17280, categoria:"Termos y Botellas" },
+  { id:"cf07", nombre:"Termo Hoppy 600 ml Premium", desc:"Mantiene frío y calor. Libre de BPA", precio:13500, categoria:"Termos y Botellas" },
+  { id:"cf08", nombre:"Termo Hoppy 800 ml Premium", desc:"Mantiene frío y calor. Libre de BPA", precio:15840, categoria:"Termos y Botellas" },
+  { id:"cf09", nombre:"Termo Hoppy doble pico · 1 litro", desc:"Tapa sellada con pico práctico", precio:20160, categoria:"Termos y Botellas" },
+  { id:"cf10", nombre:"Termo Hoppy a rosca · 1 litro", desc:"Botella térmica, frío hasta 24 hs", precio:13680, categoria:"Termos y Botellas" },
+  { id:"cf11", nombre:"Termo Hoppy 1 litro con manija", desc:"Tapa con pico, antiderrames", precio:17280, categoria:"Termos y Botellas" },
+  { id:"cf12", nombre:"Termo Hoppy con pico · 1 litro", desc:"Frío 11 hs · calor 7 hs", precio:21600, categoria:"Termos y Botellas" },
+  { id:"cf13", nombre:"Kit yerbero", desc:"Kit para mate, 4 en 1", precio:13140, categoria:"Mates y Yerberos" },
+  { id:"cf14", nombre:"Linterna con herramienta", desc:"Práctica y útil", precio:26100, categoria:"Linternas e Iluminación" },
+  { id:"cf15", nombre:"Linterna minera", desc:"Incluye 2 baterías, cargadores 12V y 220V; regulable y movible", precio:16200, categoria:"Linternas e Iluminación" },
+  { id:"cf16", nombre:"Linterna de 2 elementos", desc:"Material reforzado. No incluye pilas", precio:14400, categoria:"Linternas e Iluminación" },
+  { id:"cf17", nombre:"Linterna Cafini L701B", desc:"Recargable 220V", precio:6840, categoria:"Linternas e Iluminación" },
+  { id:"cf18", nombre:"Linterna PM 8108", desc:"Recargable 220V", precio:6120, categoria:"Linternas e Iluminación" },
+  { id:"cf19", nombre:"Linterna mini L3355B", desc:"Zoom, recargable USB, 3 funciones", precio:5760, categoria:"Linternas e Iluminación" },
+  { id:"cf20", nombre:"Cargador inteligente", precio:40500, categoria:"Ferretería y Accesorios" },
+  { id:"cf21", nombre:"Kit compresor VCP – 5 juegos", desc:"Pulverizadora, infladora con manómetro, soplado, boquilla aguja y manguera espiral 5 m", precio:69300, categoria:"Herramientas Eléctricas" },
+  { id:"cf22", nombre:"Pistola de calor VCP", desc:"2000 W; 50–600 °C; incluye boquillas y accesorios", precio:57600, categoria:"Herramientas Eléctricas" },
+  { id:"cf23", nombre:"Taladro eléctrico VCP", desc:"710 W; mandril 13 mm; velocidad variable", precio:91800, categoria:"Herramientas Eléctricas" },
+  { id:"cf24", nombre:"Rotomartillo VCP 20V", desc:"Brushless, SDS Plus, 4 funciones; batería y cargador incluidos", precio:279000, categoria:"Herramientas Eléctricas" },
+  { id:"cf25", nombre:"Hidrolavadora VCP", desc:"1200 W; 55 BAR; 4,5 L/min", precio:156600, categoria:"Herramientas Eléctricas" },
+  { id:"cf26", nombre:"Llave térmica VCP", desc:"Tamaños 20A y 32A", precio:5760, categoria:"Ferretería y Accesorios" },
+  { id:"cf27", nombre:"Lija 3M", desc:"Pack de 50 hojas; lija al agua", precio:45900, categoria:"Ferretería y Accesorios" },
+  { id:"cf28", nombre:"Balanza gramera digital", desc:"Incluye pila", precio:9900, categoria:"Balanzas" },
+  { id:"cf29", nombre:"Balanza digital portátil", desc:"Capacidad 0–50 kg; precisión de 5 g hasta 10 kg y 10 g de 10 a 50 kg", precio:9900, categoria:"Balanzas" },
+  { id:"cf30", nombre:"Balanza", desc:"Capacidad 200 kg; incluye 2 pilas AAA", precio:28800, categoria:"Balanzas" },
+  { id:"cf31", nombre:"Balanza", desc:"Capacidad 300 kg; incluye 3 pilas AA", precio:46800, categoria:"Balanzas" },
+  { id:"cf32", nombre:"Balanza digital recargable", desc:"Capacidad 1000 kg; incluye gancho, mosquetón y cargador", precio:115200, categoria:"Balanzas" },
+  { id:"cf33", nombre:"Amoladora Lusqtoff", desc:"720 W; disco 115 mm; 11.000 RPM; accesorios incluidos", precio:91800, categoria:"Herramientas Eléctricas" },
+  { id:"cf34", nombre:"Sierra caladora Lusqtoff", desc:"Herramienta completa", precio:109800, categoria:"Herramientas Eléctricas" },
+  { id:"cf35", nombre:"Foco de emergencia", desc:"40 W", precio:16200, categoria:"Linternas e Iluminación" },
+  { id:"cf36", nombre:"Balanza", desc:"Capacidad 10 kg", precio:9900, categoria:"Balanzas" },
+  { id:"cf37", nombre:"Atornillador inalámbrico", desc:"48V; mandril inox hasta 13 mm; guante de regalo", precio:118800, categoria:"Herramientas Eléctricas" }
 ];
 
-    const WHATSAPP = "5493755223737";
-    const fallback = t => `https://placehold.co/400x400/f1f5f9/0f172a?text=${encodeURIComponent(t.substring(0,20))}`;
+/* ===================== IMÁGENES (rutas externas) ===================== */
+/* Carpeta img/ junto al index.html. Fallback automático a placeholder si falta. */
+const IMAGENES = {
+  cf01:"img/cf01.jpg", cf02:"img/cf02.jpg", cf03:"img/cf03.jpg", cf04:"img/cf04.jpg",
+  cf05:"img/cf05.jpg", cf06:"img/cf06.jpg", cf07:"img/cf07.jpg", cf08:"img/cf08.jpg",
+  cf09:"img/cf09.jpg", cf10:"img/cf10.jpg", cf11:"img/cf11.jpg", cf12:"img/cf12.jpg",
+  cf13:"img/cf13.jpg", cf14:"img/cf14.jpg", cf15:"img/cf15.jpg", cf16:"img/cf16.jpg",
+  cf17:"img/cf17.jpg", cf18:"img/cf18.jpg", cf19:"img/cf19.jpg", cf20:"img/cf20.jpg",
+  cf21:"img/cf21.jpg", cf22:"img/cf22.jpg", cf23:"img/cf23.jpg", cf24:"img/cf24.jpg",
+  cf25:"img/cf25.jpg", cf26:"img/cf26.jpg", cf27:"img/cf27.jpg", cf28:"img/cf28.jpg",
+  cf29:"img/cf29.jpg", cf30:"img/cf30.jpg", cf31:"img/cf31.jpg", cf32:"img/cf32.jpg",
+  cf33:"img/cf33.jpg", cf34:"img/cf34.jpg", cf35:"img/cf35.jpg", cf36:"img/cf36.jpg",
+  cf37:"img/cf37.jpg"
+};
 
-    const CATS = ["Todos", ...new Set(PRODUCTOS.map(p => p.categoria))];
-    const ICONOS = {"Termos y Botellas":"fa-mug-hot","Mates y Yerberos":"fa-leaf","Linternas e Iluminación":"fa-lightbulb","Herramientas Eléctricas":"fa-screwdriver-wrench","Balanzas":"fa-weight-scale","Ferretería y Accesorios":"fa-toolbox"};
+const PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">' +
+  '<rect width="300" height="300" fill="#f1f5f9"/>' +
+  '<text x="150" y="150" fill="#94a3b8" font-family="Inter,Arial" font-size="16" ' +
+  'text-anchor="middle" dominant-baseline="middle">Sin imagen</text></svg>'
+);
 
-    let carrito = [];
-    try { carrito = JSON.parse(localStorage.getItem("carrito_fabian") || "[]"); } catch(e) {}
-    let catAct = "Todos";
+/* ===================== UTILIDADES ===================== */
+const $ = (sel) => document.querySelector(sel);
+const fmt = (n) => "$" + Number(n).toLocaleString("es-AR");
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, m => ({
+  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+}[m]));
 
-    const grid = document.getElementById("grid");
-    const catBar = document.getElementById("cats");
-    const titulo = document.getElementById("titulo");
-    const fmt = n => n.toLocaleString("es-AR");
-    const guardar = () => { try { localStorage.setItem("carrito_fabian", JSON.stringify(carrito)); } catch(e) {} };
+/* ===================== ESTADO ===================== */
+const STORAGE_KEY = "carrito_tecno_v1";
+let carrito = {};
+try { carrito = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {}; }
+catch(e){ carrito = {}; }
+let categoriaActual = "Todos";
 
-    function renderCats() {
-      catBar.innerHTML = "";
-      CATS.forEach(c => {
-        if (c !== "Todos" && !PRODUCTOS.some(p => p.categoria === c)) return;
-        const b = document.createElement("button");
-        b.className = "cat-btn" + (catAct === c ? " activo" : "");
-        b.innerHTML = `<i class="fa-solid ${ICONOS[c] || "fa-box"}"></i> ${c}`;
-        b.onclick = () => { catAct = c; renderCats(); render(); };
-        catBar.appendChild(b);
-      });
-    }
+/* ===================== CATEGORÍAS ===================== */
+function categoriasUnicas() {
+  const set = new Set(PRODUCTOS.map(p => p.categoria));
+  return ["Todos", ...set];
+}
 
-    const visor = document.getElementById("visor");
-    visor.onclick = () => visor.style.display = "none";
+function conteoPorCategoria(cat) {
+  return cat === "Todos" ? PRODUCTOS.length
+       : PRODUCTOS.filter(p => p.categoria === cat).length;
+}
 
-    function render() {
-      grid.innerHTML = "";
-      const lista = PRODUCTOS.filter(p => catAct === "Todos" || p.categoria === catAct);
-      titulo.textContent = (catAct === "Todos" ? "Todos los productos" : catAct) + ` (${lista.length})`;
-      lista.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="img/${p.id}.jpg" alt="${p.nombre}" loading="lazy">
-          <h3>${p.nombre}</h3>
-          ${p.desc ? `<div class="desc">${p.desc}</div>` : ""}
-          <div class="precio">$${fmt(p.precio)}</div>
-          <button class="agregar">Añadir</button>`;
-        const img = card.querySelector("img");
-        img.onerror = () => { img.onerror = null; img.src = fallback(p.nombre); };
-        img.onclick = () => { visor.querySelector("img").src = img.src; visor.style.display = "flex"; };
-        card.querySelector(".agregar").onclick = () => {
-          const ex = carrito.find(i => i.id === p.id);
-          if (ex) ex.c++; else carrito.push({ id: p.id, c: 1 });
-          guardar(); updateCart();
-        };
-        grid.appendChild(card);
-      });
-    }
+function renderCategorias() {
+  const cont = $("#cats");
+  cont.innerHTML = categoriasUnicas().map(c => `
+    <button class="cat-btn ${c === categoriaActual ? "activo" : ""}" data-cat="${esc(c)}">
+      ${esc(c)}
+      <span class="count">${conteoPorCategoria(c)}</span>
+    </button>
+  `).join("");
 
-    function updateCart() {
-      carrito = carrito.filter(i => PRODUCTOS.some(p => p.id === i.id));
-      document.getElementById("contador").textContent = carrito.reduce((s, i) => s + i.c, 0);
-      const lista = document.getElementById("lista");
-      const totalEl = document.getElementById("total");
-      if (!carrito.length) {
-        lista.innerHTML = "<p style='color:#94a3b8;text-align:center;margin-top:40px'>El carrito está vacío</p>";
-        totalEl.textContent = "";
-        return;
-      }
-      lista.innerHTML = "";
-      let tot = 0;
-      carrito.forEach((it, i) => {
-        const pr = PRODUCTOS.find(x => x.id === it.id);
-        tot += pr.precio * it.c;
-        const d = document.createElement("div");
-        d.className = "item";
-        d.innerHTML = `
-          <div class="nom">${pr.nombre}<br><span style="font-weight:400;color:#64748b">$${fmt(pr.precio * it.c)}</span></div>
-          <div class="qty"><button class="menos">−</button><b>${it.c}</b><button class="mas">+</button><button class="del">✕</button></div>`;
-        d.querySelector(".menos").onclick = () => { if (it.c > 1) it.c--; else carrito.splice(i, 1); guardar(); updateCart(); };
-        d.querySelector(".mas").onclick = () => { it.c++; guardar(); updateCart(); };
-        d.querySelector(".del").onclick = () => { carrito.splice(i, 1); guardar(); updateCart(); };
-        lista.appendChild(d);
-      });
-      totalEl.textContent = `Total: $${fmt(tot)}`;
-    }
+  cont.querySelectorAll(".cat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      categoriaActual = btn.dataset.cat;
+      renderCategorias();
+      renderProductos();
+    });
+  });
+}
 
-    const panel = document.getElementById("panel");
-    const fondo = document.getElementById("fondo");
-    const cerrarPanel = () => { panel.classList.remove("abierto"); fondo.classList.remove("activo"); };
-    document.getElementById("btn-carrito").onclick = () => { panel.classList.add("abierto"); fondo.classList.add("activo"); };
-    document.getElementById("cerrar-panel").onclick = cerrarPanel;
-    fondo.onclick = cerrarPanel;
+/* ===================== PRODUCTOS ===================== */
+function renderProductos() {
+  const grid = $("#grid");
+  const titulo = $("#titulo");
 
-    const modal = document.getElementById("modal");
-    document.getElementById("btn-checkout").onclick = () => {
-      if (!carrito.length) return alert("Agregá productos al carrito primero.");
-      modal.style.display = "flex";
-    };
-    document.getElementById("btn-cerrar-modal").onclick = () => { modal.style.display = "none"; };
+  const filtrados = categoriaActual === "Todos"
+    ? PRODUCTOS
+    : PRODUCTOS.filter(p => p.categoria === categoriaActual);
 
-    document.getElementById("btn-wa").onclick = () => {
-      let msg = "Hola! Quiero confirmar este pedido:\n\n", total = 0;
-      carrito.forEach(it => {
-        const p = PRODUCTOS.find(x => x.id === it.id);
-        total += p.precio * it.c;
-        msg += `• ${it.c}x ${p.nombre} — $${fmt(p.precio * it.c)}\n`;
-      });
-      msg += `\n*Total: $${fmt(total)}*\n\nYa realicé la transferencia al alias mundo95. *Adjunto el comprobante acá abajo* 👇`;
-      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
-      modal.style.display = "none";
-      cerrarPanel();
-    };
+  titulo.textContent = categoriaActual === "Todos"
+    ? `Todos los productos (${filtrados.length})`
+    : `${categoriaActual} (${filtrados.length})`;
 
-    renderCats(); render(); updateCart();
-  </script>
+  if (!filtrados.length) {
+    grid.innerHTML = '<p class="empty" style="grid-column:1/-1">No hay productos en esta categoría.</p>';
+    return;
+  }
+
+  grid.innerHTML = filtrados.map(p => `
+    <div class="card" data-id="${esc(p.id)}">
+      <img src="${esc(IMAGENES[p.id] || PLACEHOLDER)}"
+           alt="${esc(p.nombre)}" loading="lazy"
+           onerror="this.onerror=null;this.src='${PLACEHOLDER}'"
+           data-zoom="${esc(p.id)}">
+      <h3>${esc(p.nombre)}</h3>
+      ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ""}
+      <div class="precio">${fmt(p.precio)}</div>
+      <button class="agregar" data-add="${esc(p.id)}">Agregar al carrito</button>
+    </div>
+  `).join("");
+
+  grid.querySelectorAll("[data-add]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      agregarAlCarrito(btn.dataset.add);
+    });
+  });
+
+  grid.querySelectorAll("[data-zoom]").forEach(img => {
+    img.addEventListener("click", () => abrirVisor(img.dataset.zoom));
+  });
+}
+
+/* ===================== CARRITO ===================== */
+function guardarCarrito() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(carrito));
+  const total = Object.values(carrito).reduce((a,b) => a + b, 0);
+  $("#contador").textContent = total;
+}
+
+function agregarAlCarrito(id) {
+  carrito[id] = (carrito[id] || 0) + 1;
+  guardarCarrito();
+  renderCarrito();
+  abrirPanel();
+}
+
+function renderCarrito() {
+  const lista = $("#lista");
+  const totalDiv = $("#total");
+  const items = Object.entries(carrito).filter(([,q]) => q > 0);
+
+  if (!items.length) {
+    lista.innerHTML = '<p class="empty">Tu carrito está vacío</p>';
+    totalDiv.textContent = "";
+    return;
+  }
+
+  let total = 0;
+  lista.innerHTML = items.map(([id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id === id);
+    if (!p) return "";
+    const sub = p.precio * qty;
+    total += sub;
+    return `
+      <div class="item">
+        <div class="nom">
+          ${esc(p.nombre)}
+          <div style="font-size:12px;color:#64748b;font-weight:400">
+            ${fmt(p.precio)} × ${qty} = ${fmt(sub)}
+          </div>
+        </div>
+        <div class="qty">
+          <button data-menos="${esc(id)}" aria-label="Restar">−</button>
+          <span>${qty}</span>
+          <button data-mas="${esc(id)}" aria-label="Sumar">+</button>
+          <button class="del" data-del="${esc(id)}" aria-label="Eliminar">✕</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  totalDiv.textContent = "Total: " + fmt(total);
+
+  lista.querySelectorAll("[data-mas]").forEach(b =>
+    b.addEventListener("click", () => { carrito[b.dataset.mas]++; guardarCarrito(); renderCarrito(); }));
+  lista.querySelectorAll("[data-menos]").forEach(b =>
+    b.addEventListener("click", () => {
+      carrito[b.dataset.menos]--;
+      if (carrito[b.dataset.menos] <= 0) delete carrito[b.dataset.menos];
+      guardarCarrito(); renderCarrito();
+    }));
+  lista.querySelectorAll("[data-del]").forEach(b =>
+    b.addEventListener("click", () => {
+      delete carrito[b.dataset.del];
+      guardarCarrito(); renderCarrito();
+    }));
+}
+
+/* ===================== PANEL ===================== */
+function abrirPanel() {
+  $("#panel").classList.add("abierto");
+  $("#fondo").classList.add("activo");
+}
+function cerrarPanel() {
+  $("#panel").classList.remove("abierto");
+  $("#fondo").classList.remove("activo");
+}
+
+/* ===================== VISOR ===================== */
+function abrirVisor(id) {
+  const visor = $("#visor");
+  const img = visor.querySelector("img");
+  img.src = IMAGENES[id] || PLACEHOLDER;
+  img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER; };
+  visor.style.display = "flex";
+}
+function cerrarVisor() {
+  $("#visor").style.display = "none";
+}
+
+/* ===================== CHECKOUT / WHATSAPP ===================== */
+function enviarPedidoWhatsApp() {
+  const items = Object.entries(carrito).filter(([,q]) => q > 0);
+  if (!items.length) { alert("El carrito está vacío"); return; }
+
+  let msg = "¡Hola! Quiero confirmar este pedido:\n\n";
+  let total = 0;
+  items.forEach(([id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id === id);
+    if (!p) return;
+    msg += `• ${p.nombre} × ${qty} = ${fmt(p.precio * qty)}\n`;
+    total += p.precio * qty;
+  });
+  msg += `\nTotal: ${fmt(total)}\n\n`;
+  msg += "Envío comprobante de transferencia al alias mundo95.";
+
+  const url = "https://wa.me/5493755223737?text=" + encodeURIComponent(msg);
+  window.open(url, "_blank");
+
+  carrito = {};
+  guardarCarrito();
+  renderCarrito();
+  cerrarPanel();
+  $("#modal").style.display = "none";
+}
+
+/* ===================== INIT ===================== */
+document.addEventListener("DOMContentLoaded", () => {
+  renderCategorias();
+  renderProductos();
+  renderCarrito();
+
+  $("#btn-carrito").addEventListener("click", abrirPanel);
+  $("#cerrar-panel").addEventListener("click", cerrarPanel);
+  $("#fondo").addEventListener("click", cerrarPanel);
+
+  $("#btn-checkout").addEventListener("click", () => {
+    const hayItems = Object.values(carrito).some(q => q > 0);
+    if (!hayItems) { alert("El carrito está vacío"); return; }
+    $("#modal").style.display = "flex";
+  });
+  $("#btn-cerrar-modal").addEventListener("click", () => {
+    $("#modal").style.display = "none";
+  });
+  $("#btn-wa").addEventListener("click", enviarPedidoWhatsApp);
+
+  $("#visor").addEventListener("click", cerrarVisor);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { cerrarVisor(); cerrarPanel(); $("#modal").style.display = "none"; }
+  });
+});
+</script>
 </body>
 </html>
