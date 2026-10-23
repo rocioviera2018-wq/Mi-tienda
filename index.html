@@ -1,46 +1,506 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tecno Tech Oberá</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root{--primary:#0f172a;--accent:#25D366;--bg:#f8fafc}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial}
-body{background:var(--bg);display:flex;flex-direction:column;min-height:100vh}
-header{background:#fff;padding:16px 20px;display:flex;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.05);position:sticky;top:0;z-index:50}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
-.card{background:#fff;border-radius:16px;padding:12px;box-shadow:0 4px 15px rgba(0,0,0,.03);display:flex;flex-direction:column}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#f1f5f9}
-.card .precio{font-weight:800;color:#0a7d32;margin:8px 0}
-.card button{background:var(--primary);color:#fff;border:none;padding:8px;border-radius:8px;cursor:pointer}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecno Tech Oberá | Tienda Oficial</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a; /* Azul muy oscuro tech */
+      --primary-light: #1e293b;
+      --accent: #2563eb; /* Azul brillante para botones */
+      --whatsapp: #25D366;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text: #334155;
+      --text-light: #64748b;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* HEADER ESTILO TECH */
+    header { background: var(--primary); color: white; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; gap: 15px; }
+    
+    .logo { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .logo i { color: var(--accent); }
+    
+    /* BUSCADOR */
+    .search-container { flex: 1; max-width: 500px; position: relative; display: none; }
+    @media(min-width: 768px) { .search-container { display: block; } }
+    .search-container input { width: 100%; padding: 10px 15px 10px 40px; border-radius: 30px; border: none; background: rgba(255,255,255,0.1); color: white; outline: none; transition: 0.3s; font-size: 0.9rem; }
+    .search-container input::placeholder { color: #94a3b8; }
+    .search-container input:focus { background: rgba(255,255,255,0.2); }
+    .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-icon { background: rgba(255,255,255,0.1); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: 0.2s; }
+    .btn-icon:hover { background: var(--accent); }
+    #btn-carrito { background: var(--accent); border-radius: 30px; padding: 0 20px; width: auto; gap: 8px; font-weight: 500; font-size: 0.9rem; }
+    #btn-carrito:hover { background: #1d4ed8; }
+
+    /* HERO SECTION */
+    .hero { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .hero h1 { font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; }
+    .hero p { font-size: 1rem; color: #cbd5e1; max-width: 600px; margin: 0 auto; }
+
+    /* CATEGORÍAS */
+    .categorias-wrapper { background: var(--card-bg); box-shadow: 0 4px 10px rgba(0,0,0,0.03); padding: 15px 0; position: sticky; top: 72px; z-index: 40; }
+    .categorias-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 0 20px; max-width: 1200px; margin: 0 auto; scrollbar-width: none; }
+    .categorias-scroll::-webkit-scrollbar { display: none; }
+    .cat-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 30px; border: 1px solid #e2e8f0; background: white; color: var(--text); cursor: pointer; transition: all 0.2s; font-weight: 500; font-size: 0.85rem; white-space: nowrap; }
+    .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .cat-btn.activo { background: var(--accent); border-color: var(--accent); color: white; }
+
+    /* CATÁLOGO */
+    .catalogo-container { padding: 30px 20px; max-width: 1200px; margin: 0 auto; flex: 1; width: 100%; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    
+    /* TARJETA PRODUCTO ESTILO TECH */
+    .card { background: var(--card-bg); border-radius: 16px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: 0.3s; position: relative; border: 1px solid #f1f5f9; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: #e2e8f0; }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 10px; background: #f8fafc; margin-bottom: 15px; padding: 10px; }
+    .card .tag { font-size: 0.7rem; font-weight: 600; color: var(--accent); text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }
+    .card h3 { font-size: 1rem; font-weight: 600; color: var(--primary); margin-bottom: 5px; line-height: 1.3; }
+    .card .desc { font-size: 0.8rem; color: var(--text-light); margin-bottom: 15px; line-height: 1.4; flex: 1; }
+    .card .precio { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+    .card button.agregar { background: var(--bg); color: var(--primary); border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .card button.agregar:hover { background: var(--accent); color: white; }
+    
+    .btn-del-card { position: absolute; top: 10px; right: 10px; background: #fee2e2; color: #ef4444; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    .btn-del-card:hover { background: #ef4444; color: white; }
+
+    /* FOOTER */
+    footer { background: var(--primary); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
+    .footer-content { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    footer h3 { font-size: 1.2rem; font-weight: 600; }
+    footer p { color: #94a3b8; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+    footer i { color: var(--whatsapp); }
+
+    /* CARRITO LATERAL */
+    #carrito-panel { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh; background: var(--card-bg); box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; z-index: 1000; }
+    #carrito-panel.abierto { right: 0; }
+    .cart-header { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+    .cart-header h2 { font-size: 1.2rem; color: var(--primary); font-weight: 700; }
+    #btn-cerrar { background: #f1f5f9; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; color: var(--text-light); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    #btn-cerrar:hover { background: #e2e8f0; color: var(--primary); }
+    #lista-carrito { flex: 1; overflow-y: auto; padding: 20px; }
+    .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #e2e8f0; }
+    .item-carrito strong { font-size: 0.95rem; color: var(--primary); }
+    .item-carrito .cant { font-size: 0.85rem; color: var(--text-light); background: #f1f5f9; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+    .item-carrito button { background: transparent; color: #ef4444; border: none; cursor: pointer; font-size: 1rem; padding: 5px; }
+    .cart-footer { padding: 20px; border-top: 1px solid #e2e8f0; background: #f8fafc; }
+    #total-carrito { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; display: flex; justify-content: space-between; }
+    #btn-checkout { background: var(--whatsapp); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s; }
+    #btn-checkout:hover { background: #1eb958; }
+    #carrito-vacio { color: var(--text-light); text-align: center; margin-top: 50px; font-size: 0.95rem; }
+
+    /* MODALES (PAGO Y ADMIN) */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.8); backdrop-filter: blur(5px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-content { background: white; border-radius: 20px; padding: 30px; max-width: 450px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+    .modal-content h2 { color: var(--primary); margin-bottom: 20px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .modal-content p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+    
+    .datos-pago { background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; }
+    .datos-pago .alias-box { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 5px; }
+    .datos-pago .titular-box { font-size: 0.9rem; color: var(--text-light); font-weight: 500; }
+    
+    .btn-modal { background: var(--whatsapp); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .btn-cancelar { background: transparent; color: var(--text-light); border: none; font-size: 0.9rem; cursor: pointer; width: 100%; padding: 10px; text-decoration: underline; }
+
+    /* ADMIN FORM */
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    .form-control { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none; transition: 0.2s; font-family: inherit; }
+    .form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+    .form-row { display: flex; gap: 10px; }
+    .form-row .form-group { flex: 1; }
+    .btn-guardar { background: var(--accent); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+
+    .fondo-oscuro { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); z-index: 999; }
+    .fondo-oscuro.activo { display: block; }
+
+    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4); z-index: 900; text-decoration: none; font-size: 2rem; transition: 0.3s; }
+    .whatsapp-float:hover { transform: scale(1.1); background-color: #1eb958; }
+  </style>
 </head>
 <body>
-<header><div style="font-weight:800">Tecno Tech <span style="color:#25D366">Oberá</span></div><button id="btn-carrito">Carrito (<span id="contador">0</span>)</button></header>
-<main style="padding:20px;max-width:1200px;margin:auto;width:100%"><div id="grid" class="grid"></div></main>
-<script>
-// ESTA ES LA CLAVE: ahora tus fotos están en /img/
-const PRODUCTOS = [
-  {id:"p200",nombre:"Termo Stanley 1L Rosa System",precio:38900,imagenes:["img/final_prod_001.jpg"]},
-  {id:"p201",nombre:"Termo Stanley 1L Rojo",precio:38900,imagenes:["img/final_prod_002.jpg"]},
-  {id:"p202",nombre:"Termo Stanley 1L Blanco",precio:38900,imagenes:["img/final_prod_003.jpg"]},
-  {id:"p203",nombre:"Termo Stanley 1L Bordo",precio:38900,imagenes:["img/final_prod_004.jpg"]},
-  {id:"p204",nombre:"Termo Stanley 1L Lila",precio:38900,imagenes:["img/final_prod_005.jpg"]},
-  {id:"p205",nombre:"Vaso Quencher 1.2L Stanley Degradé",precio:43200,imagenes:["img/final_prod_010.jpg"]},
-  {id:"p206",nombre:"Vaso Quencher 1.2L Stanley Rosa/Lila",precio:43200,imagenes:["img/final_prod_011.jpg"]},
-  {id:"p207",nombre:"Kit GOAT 4x1 Stanley Rosa",precio:24500,imagenes:["img/final_prod_015.jpg"]},
-  {id:"p208",nombre:"Set Tramontina New Kolor 25 piezas",precio:28900,imagenes:["img/final_prod_020.jpg"]},
-  {id:"p176",nombre:"PC Gamer i3 + GTX 750 Ti Completa",precio:480000,imagenes:["img/p176-1.jpg"]},
-];
 
-const grid=document.getElementById("grid");
-const fmt=n=>n.toLocaleString("es-AR");
-PRODUCTOS.forEach(p=>{
-  const div=document.createElement("div");div.className="card";
-  div.innerHTML=`<img src="${p.imagenes[0]}" onerror="this.src='https://placehold.co/400?text=${encodeURIComponent(p.nombre)}'"><h3 style="font-size:.9rem;margin-top:8px">${p.nombre}</h3><div class="precio">$${fmt(p.precio)}</div><button onclick="alert('Agregado: ${p.nombre}')">Añadir</button>`;
-  grid.appendChild(div);
-});
-</script>
+  <!-- HEADER -->
+  <header>
+    <div class="top-bar">
+      <div class="logo"><i class="fa-solid fa-bolt"></i> Tecno Tech <span>Oberá</span></div>
+      
+      <div class="search-container">
+        <i class="fa-solid fa-search"></i>
+        <input type="text" id="buscador" placeholder="Buscar productos, marcas...">
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-icon" id="btn-admin" title="Agregar Producto"><i class="fa-solid fa-plus"></i></button>
+        <button class="btn-icon" id="btn-carrito"><i class="fa-solid fa-cart-shopping"></i> Carrito <span id="contador">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Lo mejor en Tecnología y Bazar</h1>
+    <p>Hacé tu pedido, transferí y envianos el comprobante. Envíos en 72 horas.</p>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <div class="categorias-wrapper">
+    <div class="categorias-scroll" id="categorias-container"></div>
+  </div>
+
+  <!-- CATÁLOGO -->
+  <main class="catalogo-container">
+    <div class="grid" id="grid-productos"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <h3>Tecno Tech Oberá</h3>
+      <p><i class="fa-solid fa-location-dot"></i> Av. Italia 1459, Oberá</p>
+      <p><i class="fa-brands fa-whatsapp"></i> 3755 223737</p>
+      <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.5;">&copy; 2024 - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- CARRITO -->
+  <div class="fondo-oscuro" id="fondo"></div>
+  <div id="carrito-panel">
+    <div class="cart-header">
+      <h2>Tu Pedido</h2>
+      <button id="btn-cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="lista-carrito"></div>
+    <div class="cart-footer">
+      <div id="total-carrito"></div>
+      <button id="btn-checkout"><i class="fa-brands fa-whatsapp"></i> Confirmar Pedido</button>
+    </div>
+  </div>
+
+  <!-- MODAL PAGO -->
+  <div class="modal-overlay" id="modal-pago">
+    <div class="modal-content">
+      <h2><i class="fa-solid fa-receipt" style="color: var(--accent);"></i> Datos de Pago</h2>
+      <p>Para confirmar tu pedido, realizá una transferencia con los siguientes datos:</p>
+      <div class="datos-pago">
+        <div class="alias-box">Alias: mundo95</div>
+        <div class="titular-box">Titular: Matias Gonzalo Lepori</div>
+      </div>
+      <p style="font-size: 0.85rem;">Una vez transferido, tocá el botón de abajo. Se abrirá WhatsApp con tu pedido armado y solo tendrás que <strong>adjuntar la foto del comprobante</strong>.</p>
+      <button class="btn-modal" id="btn-confirmar-wa"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</button>
+      <button class="btn-cancelar" id="btn-cerrar-modal-pago">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- MODAL ADMIN -->
+  <div class="modal-overlay" id="modal-admin">
+    <div class="modal-content">
+      <h2><i class="fa-solid fa-box-open" style="color: var(--accent);"></i> Agregar Producto</h2>
+      
+      <div class="form-group">
+        <label>Nombre del producto</label>
+        <input type="text" id="add-nombre" class="form-control" placeholder="Ej: Termo Stanley 1L">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Precio ($)</label>
+          <input type="number" id="add-precio" class="form-control" placeholder="Ej: 38900">
+        </div>
+        <div class="form-group">
+          <label>Categoría</label>
+          <select id="add-categoria" class="form-control">
+            <option value="Termos, Mates y Vasos">Termos y Mates</option>
+            <option value="Accesorios y Tecnología">Tecnología</option>
+            <option value="Electrodomésticos">Electrodomésticos</option>
+            <option value="Bazar">Bazar</option>
+            <option value="Librería">Librería</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Ruta de la Imagen</label>
+        <input type="text" id="add-imagen" class="form-control" placeholder="Ej: img/mi_foto.jpg">
+        <small style="color:var(--text-light); font-size:0.75rem; display:block; margin-top:4px;">Subí la foto a GitHub en la carpeta <b>img</b> y escribí el nombre acá.</small>
+      </div>
+
+      <div class="form-group">
+        <label>Descripción corta (Opcional)</label>
+        <input type="text" id="add-desc" class="form-control" placeholder="Ej: Acero inoxidable - 4 sellos">
+      </div>
+
+      <button class="btn-guardar" id="btn-guardar-prod"><i class="fa-solid fa-floppy-disk"></i> Guardar Producto</button>
+      <button class="btn-cancelar" id="btn-cerrar-modal-admin">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/5493755223737?text=Hola!%20Estoy%20en%20la%20tienda%20y%20quiero%20hacer%20una%20consulta." target="_blank" class="whatsapp-float">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script>
+    const WHATSAPP_NUMERO = "5493755223737";
+    
+    // PRODUCTOS BASE (Los que ya tenías)
+    const PRODUCTOS_BASE = [
+      {id:"p300",nombre:"Termo Stanley 1L Rosa con Mate",descripcion:"4 Sellos - Acero inox",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_001.jpg"]},
+      {id:"p301",nombre:"Termo Stanley 1L Rojo con Mate",descripcion:"4 Sellos - Manija",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_002.jpg"]},
+      {id:"p302",nombre:"Termo Stanley 1L Blanco",descripcion:"4 Sellos",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_003.jpg"]},
+      {id:"p303",nombre:"Termo Stanley 1L Bordo",descripcion:"Con mate negro",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_004.jpg"]},
+      {id:"p304",nombre:"Termo Stanley 1L Lila",descripcion:"4 Sellos",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_005.jpg"]},
+      {id:"p305",nombre:"Combo Termo System 1L x4 colores",descripcion:"4 Sellos - Incluye mate",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_006.jpg"]},
+      {id:"p330",nombre:"Kit Limon Ice 1L Flores Rosas",descripcion:"Termo + Mate + Bombilla + Tapa",precio:45600,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_037.jpg"]},
+      {id:"p331",nombre:"Kit Hello Kitty 1200ml Blanco",descripcion:"Termo + Mate + Bombilla + Yerbero + Azucarero",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_042.jpg"]},
+      {id:"p332",nombre:"Kit Hello Kitty 1200ml Rosa",descripcion:"Termo + Mate + Bombilla + Yerbero + Azucarero",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_043.jpg"]},
+      {id:"p333",nombre:"Kit Stitch Celeste 5 Piezas",descripcion:"Termo + Mate + Yerbero + Azucarero + Bombilla",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_050.jpg"]},
+      {id:"p340",nombre:"Hoppys 650ml Doble Pico Celeste",descripcion:"Acero inox - Con asa",precio:16200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_130.jpg"]},
+      {id:"p341",nombre:"Hoppys 1 Litro Celeste con Flores",descripcion:"Estampado floral - Pico cebador",precio:18900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_145.jpg"]},
+      {id:"p360",nombre:"Picador de Alimentos Bionica 300W",descripcion:"2 velocidades - Acero inox",precio:34600,categoria:"Electrodomésticos",imagenes:["img/img_tecnotech_080.jpg"]},
+      {id:"p361",nombre:"Marcadores Doble Punta Touch 120 Piezas",descripcion:"Estuche + Base",precio:23400,categoria:"Librería",imagenes:["img/img_tecnotech_082.jpg"]},
+      {id:"p176",nombre:"PC Gamer Completa i3 + GTX 750 Ti",descripcion:"8GB RAM + SSD 240GB + Monitor 17 + Kit",precio:480000,categoria:"Accesorios y Tecnología",imagenes:["img/p176-1.jpg"]}
+    ];
+
+    // SISTEMA DE DATOS (Memoria local del celular)
+    let productosCustom = JSON.parse(localStorage.getItem("customProducts")) || [];
+    let productosGlobal = [...PRODUCTOS_BASE, ...productosCustom];
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let categoriaActual = "Todos";
+    let busquedaActual = "";
+
+    // ELEMENTOS DEL DOM
+    const grid = document.getElementById("grid-productos");
+    const categoriasContainer = document.getElementById("categorias-container");
+    const contadorCarrito = document.getElementById("contador");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total-carrito");
+    const buscador = document.getElementById("buscador");
+    
+    const modalPago = document.getElementById("modal-pago");
+    const modalAdmin = document.getElementById("modal-admin");
+    const panelCarrito = document.getElementById("carrito-panel");
+    const fondoOscuro = document.getElementById("fondo");
+
+    const fmt = n => n.toLocaleString("es-AR");
+
+    const categoriasList = [
+      { nombre: "Todos", icono: "fa-box-open" },
+      { nombre: "Termos, Mates y Vasos", icono: "fa-mug-hot" },
+      { nombre: "Accesorios y Tecnología", icono: "fa-headphones" },
+      { nombre: "Electrodomésticos", icono: "fa-plug" },
+      { nombre: "Bazar", icono: "fa-store" },
+      { nombre: "Librería", icono: "fa-pen" }
+    ];
+
+    // RENDERIZAR CATEGORÍAS
+    const renderCategorias = () => {
+      categoriasContainer.innerHTML = "";
+      categoriasList.forEach(cat => {
+        if (cat.nombre !== "Todos" && !productosGlobal.some(p => p.categoria === cat.nombre)) return;
+        const btn = document.createElement("button");
+        btn.className = `cat-btn ${categoriaActual === cat.nombre ? 'activo' : ''}`;
+        btn.innerHTML = `<i class="fa-solid ${cat.icono}"></i> ${cat.nombre}`;
+        btn.onclick = () => { categoriaActual = cat.nombre; busquedaActual = ""; buscador.value = ""; renderCategorias(); renderProductos(); };
+        categoriasContainer.appendChild(btn);
+      });
+    };
+
+    // RENDERIZAR PRODUCTOS
+    const renderProductos = () => {
+      grid.innerHTML = "";
+      
+      let filtrados = categoriaActual === "Todos" ? productosGlobal : productosGlobal.filter(p => p.categoria === categoriaActual);
+      
+      // Filtro de búsqueda
+      if (busquedaActual) {
+        filtrados = filtrados.filter(p => p.nombre.toLowerCase().includes(busquedaActual.toLowerCase()) || (p.descripcion && p.descripcion.toLowerCase().includes(busquedaActual.toLowerCase())));
+      }
+
+      if (filtrados.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding: 40px 0;">No se encontraron productos.</p>`;
+        return;
+      }
+
+      filtrados.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+        
+        // Verificar si es un producto custom para mostrar el botón de borrar
+        const esCustom = productosCustom.some(cp => cp.id === p.id);
+        const btnEliminar = esCustom ? `<button class="btn-del-card" onclick="eliminarProductoCustom('${p.id}')"><i class="fa-solid fa-trash"></i></button>` : "";
+        
+        // Manejo de imagen (si no existe, usa un placeholder)
+        const imgSrc = (p.imagenes && p.imagenes.length) ? p.imagenes[0] : "https://placehold.co/400x400/f1f5f9/64748b?text=Sin+Foto";
+
+        card.innerHTML = `
+          ${btnEliminar}
+          <img src="${imgSrc}" alt="${p.nombre}" loading="lazy" onerror="this.src='https://placehold.co/400x400/f1f5f9/64748b?text=Sin+Foto'">
+          <div class="tag">${p.categoria}</div>
+          <h3>${p.nombre}</h3>
+          ${p.descripcion ? `<div class="desc">${p.descripcion}</div>` : `<div class="desc" style="min-height: 20px;"></div>`}
+          <div class="precio">$${fmt(p.precio)}</div>
+          <button class="agregar"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
+        `;
+
+        card.querySelector(".agregar").addEventListener("click", () => {
+          agregarAlCarrito({ id: p.id, nombre: p.nombre, precio: p.precio });
+        });
+
+        grid.appendChild(card);
+      });
+    };
+
+    // BUSCADOR
+    buscador.addEventListener("input", (e) => {
+      busquedaActual = e.target.value;
+      categoriaActual = "Todos";
+      renderCategorias();
+      renderProductos();
+    });
+
+    // LÓGICA DEL CARRITO
+    function agregarAlCarrito(prod) {
+      const existente = carrito.find(i => i.id === prod.id);
+      if (existente) existente.cantidad += 1;
+      else carrito.push({ ...prod, cantidad: 1 });
+      guardarCarrito();
+    }
+
+    function guardarCarrito() {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      renderCarrito();
+    }
+
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      guardarCarrito();
+    }
+
+    function renderCarrito() {
+      const totalItems = carrito.reduce((s, i) => s + i.cantidad, 0);
+      contadorCarrito.textContent = totalItems;
+
+      if (carrito.length === 0) {
+        listaCarrito.innerHTML = '<p id="carrito-vacio"><i class="fa-solid fa-cart-shopping" style="font-size:2rem; margin-bottom:10px; opacity:0.5;"></i><br>El carrito está vacío.</p>';
+        totalCarrito.innerHTML = "";
+        return;
+      }
+
+      listaCarrito.innerHTML = "";
+      let total = 0;
+      carrito.forEach((item, index) => {
+        total += item.precio * item.cantidad;
+        const div = document.createElement("div");
+        div.className = "item-carrito";
+        div.innerHTML = `
+          <div>
+            <strong>${item.nombre}</strong>
+            <div style="font-size:0.85rem; color:var(--text-light);">$${fmt(item.precio)}</div>
+          </div>
+          <div style="display:flex; align-items:center;">
+            <span class="cant">x${item.cantidad}</span>
+            <button onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        `;
+        listaCarrito.appendChild(div);
+      });
+      totalCarrito.innerHTML = `<span>Total:</span> <span>$${fmt(total)}</span>`;
+    }
+
+    // MODALES Y PANELES
+    const toggleCarrito = (abrir) => {
+      panelCarrito.classList.toggle("abierto", abrir);
+      fondoOscuro.classList.toggle("activo", abrir);
+    };
+
+    document.getElementById("btn-carrito").addEventListener("click", () => toggleCarrito(true));
+    document.getElementById("btn-cerrar").addEventListener("click", () => toggleCarrito(false));
+    fondoOscuro.addEventListener("click", () => toggleCarrito(false));
+
+    document.getElementById("btn-checkout").addEventListener("click", () => {
+      if (carrito.length === 0) return alert("Agregá productos al carrito primero.");
+      modalPago.style.display = "flex";
+    });
+
+    document.getElementById("btn-cerrar-modal-pago").addEventListener("click", () => modalPago.style.display = "none");
+
+    document.getElementById("btn-confirmar-wa").addEventListener("click", () => {
+      let mensaje = "Hola! Quiero confirmar este pedido:%0A%0A";
+      let total = 0;
+      carrito.forEach(item => {
+        total += item.precio * item.cantidad;
+        mensaje += `• ${item.cantidad}x ${item.nombre} — $${fmt(item.precio * item.cantidad)}%0A`;
+      });
+      mensaje += `%0A*Total: $${fmt(total)}*%0A%0AYa realicé la transferencia al alias mundo95. *Adjunto el comprobante acá abajo* 👇`;
+      window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensaje}`, "_blank");
+      modalPago.style.display = "none";
+      toggleCarrito(false);
+    });
+
+    // --- ADMINISTRADOR ---
+    document.getElementById("btn-admin").addEventListener("click", () => modalAdmin.style.display = "flex");
+    document.getElementById("btn-cerrar-modal-admin").addEventListener("click", () => modalAdmin.style.display = "none");
+
+    document.getElementById("btn-guardar-prod").addEventListener("click", () => {
+      const nombre = document.getElementById("add-nombre").value;
+      const precio = parseFloat(document.getElementById("add-precio").value);
+      const categoria = document.getElementById("add-categoria").value;
+      const imagen = document.getElementById("add-imagen").value || "https://placehold.co/400x400/f1f5f9/64748b?text=Sin+Foto";
+      const descripcion = document.getElementById("add-desc").value;
+
+      if (!nombre || !precio) return alert("Completá el nombre y el precio.");
+
+      const nuevoProducto = {
+        id: "custom-" + Date.now(),
+        nombre: nombre,
+        precio: precio,
+        categoria: categoria,
+        descripcion: descripcion,
+        imagenes: [imagen]
+      };
+
+      productosCustom.push(nuevoProducto);
+      localStorage.setItem("customProducts", JSON.stringify(productosCustom));
+      
+      productosGlobal = [...PRODUCTOS_BASE, ...productosCustom];
+      renderCategorias();
+      renderProductos();
+      
+      // Limpiar form
+      document.getElementById("add-nombre").value = "";
+      document.getElementById("add-precio").value = "";
+      document.getElementById("add-imagen").value = "";
+      document.getElementById("add-desc").value = "";
+      
+      modalAdmin.style.display = "none";
+    });
+
+    window.eliminarProductoCustom = (id) => {
+      if(confirm("¿Eliminar este producto?")) {
+        productosCustom = productosCustom.filter(p => p.id !== id);
+        localStorage.setItem("customProducts", JSON.stringify(productosCustom));
+        productosGlobal = [...PRODUCTOS_BASE, ...productosCustom];
+        renderCategorias();
+        renderProductos();
+      }
+    };
+
+    window.eliminarDelCarrito = eliminarDelCarrito;
+
+    // INICIALIZACIÓN
+    renderCategorias();
+    renderProductos();
+    renderCarrito();
+  </script>
 </body>
 </html>
