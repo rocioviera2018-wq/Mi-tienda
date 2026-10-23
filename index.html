@@ -3,82 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tecno Tech Oberá | Tienda Oficial</title>
+  <title>Tecno Tech Oberá | Catálogo</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root { --primary: #0f172a; --accent: #25D366; --bg: #f8fafc; --card: #fff; --text: #334155; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
-    
     header { background: var(--card); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.05); position: sticky; top: 0; z-index: 50; }
     .logo { font-weight: 800; font-size: 18px; color: var(--primary); }
     .logo span { color: var(--accent); }
-    #btn-carrito { background: var(--primary); color: #fff; border: none; padding: 10px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    #btn-carrito { background: var(--primary); color: #fff; border: none; padding: 10px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: .2s; }
     #btn-carrito:hover { background: #1e293b; }
-    
     .hero { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 28px 20px; text-align: center; }
     .hero h2 { font-weight: 800; margin-bottom: 6px; font-size: 1.3rem; }
-    .hero p { font-size: 0.9rem; opacity: 0.9; }
-    
+    .hero p { font-size: .9rem; opacity: .9; }
     .cat-wrap { background: var(--card); padding: 12px 0; position: sticky; top: 58px; z-index: 40; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
     .cat-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 20px; scrollbar-width: none; }
     .cat-scroll::-webkit-scrollbar { display: none; }
-    .cat-btn { border: 2px solid transparent; background: #f1f5f9; padding: 10px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; white-space: nowrap; cursor: pointer; display: flex; gap: 6px; align-items: center; color: var(--text); transition: 0.2s; }
+    .cat-btn { border: 2px solid transparent; background: #f1f5f9; padding: 10px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; white-space: nowrap; cursor: pointer; display: flex; gap: 6px; align-items: center; color: var(--text); transition: .2s; }
     .cat-btn.activo { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
-    
     .container { max-width: 1200px; margin: auto; width: 100%; padding: 20px; flex: 1; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-    
-    .card { background: var(--card); border-radius: 16px; padding: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.04); display: flex; flex-direction: column; transition: transform 0.2s; }
+    .card { background: var(--card); border-radius: 16px; padding: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.04); display: flex; flex-direction: column; transition: transform .2s; }
     .card:hover { transform: translateY(-4px); }
-    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #f1f5f9; }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #f1f5f9; cursor: zoom-in; }
     .card h3 { font-size: 13px; font-weight: 600; margin: 8px 0 4px; color: var(--primary); line-height: 1.2; }
     .card .desc { font-size: 11px; color: #64748b; margin-bottom: 6px; }
-    .precio { color: #0a7d32; font-weight: 800; font-size: 15px; margin-bottom: 10px; }
-    .card button.agregar { margin-top: auto; background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .precio { color: #0a7d32; font-weight: 800; font-size: 15px; margin-bottom: 10px; margin-top: auto; }
+    .card button.agregar { background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: .2s; }
     .card button.agregar:hover { background: #1e293b; }
-    
-    footer { background: var(--primary); color: #fff; text-align: center; padding: 24px; margin-top: 30px; font-size: 0.9rem; }
-    
+    footer { background: var(--primary); color: #fff; text-align: center; padding: 24px; margin-top: 30px; font-size: .9rem; }
     #panel { position: fixed; right: -100%; top: 0; width: 380px; max-width: 100%; height: 100%; background: #fff; padding: 20px; transition: .3s; z-index: 100; display: flex; flex-direction: column; box-shadow: -5px 0 20px rgba(0,0,0,.2); }
     #panel.abierto { right: 0; }
     #fondo { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: none; z-index: 99; }
     #fondo.activo { display: block; }
-    
+    .item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; gap: 8px; }
+    .item .nom { font-size: 13px; font-weight: 600; flex: 1; }
+    .qty { display: flex; align-items: center; gap: 6px; }
+    .qty button { border: none; background: #f1f5f9; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-weight: 700; }
+    .qty button.del { background: #fee2e2; color: #ef4444; }
     #modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
-    .modal-box { background: #fff; padding: 22px; border-radius: 16px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    
-    .wa-float { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; z-index: 90; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.2); transition: 0.2s; }
+    .modal-box { background: #fff; padding: 22px; border-radius: 16px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    #visor { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 300; padding: 16px; }
+    #visor img { max-width: 100%; max-height: 100%; border-radius: 10px; }
+    .wa-float { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; z-index: 90; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.2); transition: .2s; }
     .wa-float:hover { transform: scale(1.1); }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">Tecno Tech <span>Oberá</span></div>
     <button id="btn-carrito"><i class="fa-solid fa-bag-shopping"></i> Carrito (<span id="contador">0</span>)</button>
   </header>
 
   <div class="hero">
-    <h2>Bienvenidos a Tecno Tech Oberá</h2>
+    <h2>Catálogo Tecno Tech Oberá</h2>
     <p>Hacé tu pedido, transferí a alias <b>mundo95</b> y enviá comprobante por WhatsApp</p>
   </div>
 
-  <div class="cat-wrap">
-    <div class="cat-scroll" id="cats"></div>
-  </div>
+  <div class="cat-wrap"><div class="cat-scroll" id="cats"></div></div>
 
   <main class="container">
-    <h2 id="titulo" style="font-size:16px;font-weight:800;margin-bottom:14px">Todos los productos</h2>
+    <h2 id="titulo" style="font-size:16px;font-weight:800;margin-bottom:14px"></h2>
     <div class="grid" id="grid"></div>
   </main>
 
-  <footer>
-    <p>Av. Italia 1459, Oberá - 3755 223737 - Envíos en 72hs</p>
-  </footer>
+  <footer><p>Av. Italia 1459, Oberá - 3755 223737 - Envíos en 72hs</p></footer>
 
-  <!-- PANEL DEL CARRITO -->
   <div id="fondo"></div>
   <div id="panel">
     <button id="cerrar-panel" style="align-self:flex-end;border:none;background:#f1f5f9;width:32px;height:32px;border-radius:50%;cursor:pointer">✕</button>
@@ -88,7 +80,6 @@
     <button id="btn-checkout" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;cursor:pointer">Confirmar pedido</button>
   </div>
 
-  <!-- MODAL DE PAGO -->
   <div id="modal">
     <div class="modal-box">
       <h3 style="color:var(--primary)">¡Casi listo!</h3>
@@ -96,7 +87,7 @@
       <div style="background:#f8fafc;border:1px dashed #cbd5e1;padding:12px;border-radius:8px;text-align:left">
         <div style="font-weight:800;font-size:16px;color:var(--primary)">Alias: mundo95</div>
         <div style="font-size:14px;color:#334155">Matias Gonzalo Lepori</div>
-        <div style="font-size:12px;color:#64748b;margin-top:4px">CVU: 000000310007... (Mercado Pago)</div>
+        <div style="font-size:12px;color:#64748b;margin-top:4px">Mercado Pago</div>
       </div>
       <p style="font-size:12px;color:#64748b;margin-top:12px">Luego abrí WhatsApp y adjuntá tu comprobante.</p>
       <button id="btn-wa" style="background:#25D366;color:#fff;border:none;padding:12px;border-radius:8px;width:100%;margin-top:14px;font-weight:700;cursor:pointer"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</button>
@@ -104,224 +95,163 @@
     </div>
   </div>
 
-  <a class="wa-float" href="https://wa.me/5493755223737" target="_blank">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
+  <div id="visor"><img alt=""></div>
+
+  <a class="wa-float" href="https://wa.me/5493755223737" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
 
   <script>
+const PRODUCTOS = [
+  {"id": "cf01", "nombre": "Autosebante 2 en 1 · 750 ml", "desc": "Termo con bombilla y tapa metálica", "precio": 20700, "categoria": "Termos y Botellas"},
+  {"id": "cf02", "nombre": "Termo Hoppy 600 ml", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 9720, "categoria": "Termos y Botellas"},
+  {"id": "cf03", "nombre": "Termo Hoppy 800 ml", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 10800, "categoria": "Termos y Botellas"},
+  {"id": "cf04", "nombre": "Termo Hoppy 1 litro", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 13500, "categoria": "Termos y Botellas"},
+  {"id": "cf05", "nombre": "Termo Coffee 600 ml", "desc": "Con tapa y pico vertedor. Varios colores", "precio": 14400, "categoria": "Termos y Botellas"},
+  {"id": "cf06", "nombre": "Termo 650 ml con manija", "desc": "Acero inoxidable. Varios colores", "precio": 17280, "categoria": "Termos y Botellas"},
+  {"id": "cf07", "nombre": "Termo Hoppy 600 ml Premium", "desc": "Mantiene frío y calor. Libre de BPA", "precio": 13500, "categoria": "Termos y Botellas"},
+  {"id": "cf08", "nombre": "Termo Hoppy 800 ml Premium", "desc": "Mantiene frío y calor. Libre de BPA", "precio": 15840, "categoria": "Termos y Botellas"},
+  {"id": "cf09", "nombre": "Termo Hoppy doble pico · 1 litro", "desc": "Tapa sellada con pico práctico", "precio": 20160, "categoria": "Termos y Botellas"},
+  {"id": "cf10", "nombre": "Termo Hoppy a rosca · 1 litro", "desc": "Botella térmica, frío hasta 24 hs", "precio": 13680, "categoria": "Termos y Botellas"},
+  {"id": "cf11", "nombre": "Termo Hoppy 1 litro con manija", "desc": "Tapa con pico, antiderrames", "precio": 17280, "categoria": "Termos y Botellas"},
+  {"id": "cf12", "nombre": "Termo Hoppy con pico · 1 litro", "desc": "Frío 11 hs · calor 7 hs", "precio": 21600, "categoria": "Termos y Botellas"},
+  {"id": "cf13", "nombre": "Kit yerbero", "desc": "Kit para mate, 4 en 1", "precio": 13140, "categoria": "Mates y Yerberos"},
+  {"id": "cf14", "nombre": "Linterna con herramienta", "desc": "Práctica y útil", "precio": 26100, "categoria": "Linternas e Iluminación"},
+  {"id": "cf15", "nombre": "Linterna minera", "desc": "Incluye 2 baterías, cargadores 12V y 220V; regulable y movible", "precio": 16200, "categoria": "Linternas e Iluminación"},
+  {"id": "cf16", "nombre": "Linterna de 2 elementos", "desc": "Material reforzado. No incluye pilas", "precio": 14400, "categoria": "Linternas e Iluminación"},
+  {"id": "cf17", "nombre": "Linterna Cafini L701B", "desc": "Recargable 220V", "precio": 6840, "categoria": "Linternas e Iluminación"},
+  {"id": "cf18", "nombre": "Linterna PM 8108", "desc": "Recargable 220V", "precio": 6120, "categoria": "Linternas e Iluminación"},
+  {"id": "cf19", "nombre": "Linterna mini L3355B", "desc": "Zoom, recargable USB, 3 funciones", "precio": 5760, "categoria": "Linternas e Iluminación"},
+  {"id": "cf20", "nombre": "Cargador inteligente", "precio": 40500, "categoria": "Ferretería y Accesorios"},
+  {"id": "cf21", "nombre": "Kit compresor VCP – 5 juegos", "desc": "Pulverizadora, infladora con manómetro, soplado, boquilla aguja y manguera espiral 5 m", "precio": 69300, "categoria": "Herramientas Eléctricas"},
+  {"id": "cf22", "nombre": "Pistola de calor VCP", "desc": "2000 W; 50–600 °C; incluye boquillas y accesorios", "precio": 57600, "categoria": "Herramientas Eléctricas"},
+  {"id": "cf23", "nombre": "Taladro eléctrico VCP", "desc": "710 W; mandril 13 mm; velocidad variable", "precio": 91800, "categoria": "Herramientas Eléctricas"},
+  {"id": "cf24", "nombre": "Rotomartillo VCP 20V", "desc": "Brushless, SDS Plus, 4 funciones; batería y cargador incluidos", "precio": 279000, "categoria": "Herramientas Eléctricas"},
+  {"id": "cf25", "nombre": "Hidrolavadora VCP", "desc": "1200 W; 55 BAR; 4,5 L/min", "precio": 156600, "categoria": "Herramientas Eléctricas"},
+  {"id": "cf26", "nombre": "Llave térmica VCP", "desc": "Tamaños 20A y 32A", "precio": 5760, "categoria": "Ferretería y Accesorios"},
+  {"id": "cf27", "nombre": "Lija 3M", "desc": "Pack de 50 hojas; lija al agua", "precio": 45900, "categoria": "Ferretería y Accesorios"},
+  {"id": "cf28", "nombre": "Balanza gramera digital", "desc": "Incluye pila", "precio": 9900, "categoria": "Balanzas"},
+  {"id": "cf29", "nombre": "Balanza digital portátil", "desc": "Capacidad 0–50 kg; precisión de 5 g hasta 10 kg y 10 g de 10 a 50 kg", "precio": 9900, "categoria": "Balanzas"},
+  {"id": "cf30", "nombre": "Balanza", "desc": "Capacidad 200 kg; incluye 2 pilas AAA", "precio": 28800, "categoria": "Balanzas"},
+  {"id": "cf31", "nombre": "Balanza", "desc": "Capacidad 300 kg; incluye 3 pilas AA", "precio": 46800, "categoria": "Balanzas"},
+  {"id": "cf32", "nombre": "Balanza digital recargable", "desc": "Capacidad 1000 kg; incluye gancho, mosquetón y cargador", "precio": 115200, "categoria": "Balanzas"},
+  {"id": "cf33", "nombre": "Amoladora Lusqtoff", "desc": "720 W; disco 115 mm; 11.000 RPM; accesorios incluidos", "precio": 91800, "categoria": "Herramientas Eléctricas"},
+  {"id": "cf34", "nombre": "Sierra caladora Lusqtoff", "desc": "Herramienta completa", "precio": 109800, "categoria": "Herramientas Eléctricas"},
+  {"id": "cf35", "nombre": "Foco de emergencia", "desc": "40 W", "precio": 16200, "categoria": "Linternas e Iluminación"},
+  {"id": "cf36", "nombre": "Balanza", "desc": "Capacidad 10 kg", "precio": 9900, "categoria": "Balanzas"},
+  {"id": "cf37", "nombre": "Atornillador inalámbrico", "desc": "48V; mandril inox hasta 13 mm; guante de regalo", "precio": 118800, "categoria": "Herramientas Eléctricas"}
+];
+
     const WHATSAPP = "5493755223737";
-    const fallback = (t) => `https://placehold.co/400x400/f1f5f9/0f172a?text=${encodeURIComponent(t.substring(0,20))}`;
+    const fallback = t => `https://placehold.co/400x400/f1f5f9/0f172a?text=${encodeURIComponent(t.substring(0,20))}`;
 
-    // ====== TUS PRODUCTOS ======
-    const PRODUCTOS = [
-      {id:"001",nombre:"Set Tramontina 25 Piezas New Kolor",desc:"Cubiertos acero inox",precio:31700,categoria:"Bazar",imagenes:["img/img_tecnotech_001.jpg"]},
-      {id:"002",nombre:"Set Tramontina 24 Piezas Azul",desc:"Mango polipropileno",precio:28900,categoria:"Bazar",imagenes:["img/img_tecnotech_002.jpg"]},
-      {id:"003",nombre:"Set Tramontina 25 Piezas Lila",desc:"New Kolor",precio:31700,categoria:"Bazar",imagenes:["img/img_tecnotech_003.jpg"]},
-      {id:"004",nombre:"Termo Limon Ice 1L Corazones Blanco",desc:"+ Mate 160ml",precio:37800,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_004.jpg"]},
-      {id:"005",nombre:"Termo Limon Ice 1L Floral Azul",desc:"+ Mate",precio:37800,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_005.jpg"]},
-      {id:"006",nombre:"Termo Limon Ice 1L Lila Flores",desc:"+ Mate",precio:37800,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_006.jpg"]},
-      {id:"007",nombre:"Termo Limon Ice 1L Corazones Rosa",desc:"+ Mate",precio:37800,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_007.jpg"]},
-      {id:"008",nombre:"Termo Limon Ice 1L Flores Rosa",desc:"+ Mate",precio:37800,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_008.jpg"]},
-      {id:"009",nombre:"Termo Limon Ice 1L Beige Flores",desc:"+ Mate",precio:37800,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_009.jpg"]},
-      {id:"010",nombre:"Termo Limon Ice 1L Amarillo Floral",desc:"+ Mate",precio:37800,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_010.jpg"]},
-      {id:"011",nombre:"Kit Limon Ice 4 Piezas - Varios Colores",desc:"Termo + Mate + Bombilla",precio:45600,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_011.jpg"]},
-      {id:"012",nombre:"Shampoo Karseell Maca 500ml + Aceite",desc:"Reparación intensa",precio:34600,categoria:"Belleza y Cuidado Personal",imagenes:["img/img_tecnotech_012.jpg"]},
-      {id:"013",nombre:"Mascarilla Karseell Collagen 500ml",desc:"Maca Power",precio:18900,categoria:"Belleza y Cuidado Personal",imagenes:["img/img_tecnotech_013.jpg"]},
-      {id:"014",nombre:"Kit Karseell Travel Set",desc:"Shampoo + Acondicionador + Mascarilla",precio:28900,categoria:"Belleza y Cuidado Personal",imagenes:["img/img_tecnotech_014.jpg"]},
-      {id:"015",nombre:"Aceite Karseell Maca Essence",desc:"Para puntas",precio:17300,categoria:"Belleza y Cuidado Personal",imagenes:["img/img_tecnotech_015.jpg"]},
-      {id:"016",nombre:"Vaso Quencher 1.2L Degradé Rosa/Blanco",desc:"Con tapa y sorbete",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_016.jpg"]},
-      {id:"017",nombre:"Vaso Quencher 1.2L Rosa Claro",desc:"Degradé",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_017.jpg"]},
-      {id:"018",nombre:"Vaso Quencher 1.2L Rosa Pastel",desc:"Degradé",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_018.jpg"]},
-      {id:"019",nombre:"Vaso Quencher 1.2L Violeta Degradé",desc:"Acero inox",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_019.jpg"]},
-      {id:"020",nombre:"Vaso Quencher 1.2L Negro Degradé",desc:"1.2 Litros",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_020.jpg"]},
-      {id:"021",nombre:"Vaso Quencher 1.2L Lila",desc:"Con asa",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_021.jpg"]},
-      {id:"022",nombre:"Vaso Quencher 1.2L Celeste Degradé",desc:"Frío 24hs",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_022.jpg"]},
-      {id:"023",nombre:"Vaso Quencher 1.2L Verde Agua Degradé",desc:"Con sorbete",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_023.jpg"]},
-      {id:"024",nombre:"Set Quencher x6 Colores",desc:"Foto grupal",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_024.jpg"]},
-      {id:"025",nombre:"Tazas de Cerámica x6",desc:"Naranja / Celeste / Rayas",precio:16200,categoria:"Bazar",imagenes:["img/img_tecnotech_025.jpg"]},
-      {id:"026",nombre:"Set Tazas Cerámica x4",desc:"Con platos",precio:16200,categoria:"Bazar",imagenes:["img/img_tecnotech_026.jpg"]},
-      {id:"027",nombre:"Set Bowls Cerámica 5 Piezas Floral",desc:"Con tapa",precio:23400,categoria:"Bazar",imagenes:["img/img_tecnotech_027.jpg"]},
-      {id:"028",nombre:"Vaso Stanley 350ml Negro",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_028.jpg"]},
-      {id:"029",nombre:"Vaso Stanley 350ml Rojo",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_029.jpg"]},
-      {id:"030",nombre:"Vaso Stanley 350ml Rosa Fuerte",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_030.jpg"]},
-      {id:"031",nombre:"Vaso Stanley 350ml Azul",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_031.jpg"]},
-      {id:"032",nombre:"Vaso Stanley 350ml Naranja",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_032.jpg"]},
-      {id:"033",nombre:"Vaso Stanley 350ml Rosa Claro",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_033.jpg"]},
-      {id:"034",nombre:"Vaso Stanley 350ml Verde",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_034.jpg"]},
-      {id:"035",nombre:"Vaso Stanley 350ml Blanco",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_035.jpg"]},
-      {id:"036",nombre:"Vaso Stanley 350ml Lila Suave",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_036.jpg"]},
-      {id:"037",nombre:"Batería Tramontina 7 Piezas Rosa",desc:"New Turquia Starlon Max",precio:86400,categoria:"Bazar",imagenes:["img/img_tecnotech_037.jpg"]},
-      {id:"038",nombre:"Batería Tramontina 7 Piezas Rosa Video",desc:"Antiadherente",precio:86400,categoria:"Bazar",imagenes:["img/img_tecnotech_038.jpg"]},
-      {id:"039",nombre:"Set Vasos Térmicos Stanley 350ml x8 Colores",desc:"Foto grupal",precio:14400,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_039.jpg"]},
-      {id:"040",nombre:"Vaso Stanley 1.2L Flores Negro",desc:"Estampado floral",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_040.jpg"]},
-      {id:"041",nombre:"Vaso Stanley 1.2L Corazones Blanco",desc:"Con corazones colores",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_041.jpg"]},
-      {id:"042",nombre:"Vaso Stanley 1.2L Floral Negro",desc:"Flores blancas",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_042.jpg"]},
-      {id:"043",nombre:"Vaso Stanley 1.2L Moños Rosa",desc:"Moños",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_043.jpg"]},
-      {id:"044",nombre:"Vaso Stanley 1.2L Flores Lila",desc:"Pico fijo",precio:52200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_044.jpg"]},
-      {id:"045",nombre:"Termo Stanley 1L + Mate OK Fucsia",desc:"Con estrellas",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_045.jpg"]},
-      {id:"046",nombre:"Termo Stanley 1L Leopardo 3 Sellos",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_046.jpg"]},
-      {id:"047",nombre:"Termo Stanley 1L Lila Florcitas",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_047.jpg"]},
-      {id:"048",nombre:"Termo Stanley 1L Rosa Caballitos",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_048.jpg"]},
-      {id:"049",nombre:"Termo Stanley 1L Lila Liso",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_049.jpg"]},
-      {id:"050",nombre:"Termo Stanley 1L Celeste Mariposas",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_050.jpg"]},
-      {id:"051",nombre:"Termo Stanley 1L Blanco Corazones",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_051.jpg"]},
-      {id:"052",nombre:"Termo Stanley 1L Rosa Floral Vintage",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_052.jpg"]},
-      {id:"053",nombre:"Termo Stanley 1L Negro Flores",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_053.jpg"]},
-      {id:"054",nombre:"Termo Stanley 1L Fucsia OK",precio:43200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_054.jpg"]},
-      {id:"055",nombre:"Mantel Navideño Verde 2x1.5m",desc:"Diseño arbolitos",precio:9900,categoria:"Blanquería",imagenes:["img/img_tecnotech_055.jpg"]},
-      {id:"056",nombre:"Mantel Navideño Rojo",desc:"2x1.5m",precio:9900,categoria:"Blanquería",imagenes:["img/img_tecnotech_056.jpg"]},
-      {id:"057",nombre:"Mantel Navideño Verde Flores",desc:"2x1.5m",precio:9900,categoria:"Blanquería",imagenes:["img/img_tecnotech_057.jpg"]},
-      {id:"058",nombre:"Hoppys Infantil 500ml Verde Astronauta",desc:"Con correa + stickers",precio:17300,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_058.jpg"]},
-      {id:"059",nombre:"Hoppys Infantil 500ml Pack x4",desc:"Rosa / Blanco / Azul / Lila",precio:17300,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_059.jpg"]},
-      {id:"060",nombre:"Hoppys Infantil 500ml Azul Astronauta",desc:"500ml",precio:17300,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_060.jpg"]},
-      {id:"061",nombre:"Hoppys Infantil 500ml Azul Marino",desc:"Con stickers",precio:17300,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_061.jpg"]},
-      {id:"062",nombre:"Hoppys Infantil 500ml Rosa",desc:"Astronauta",precio:17300,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_062.jpg"]},
-      {id:"063",nombre:"Hoppys Infantil 500ml Lila",desc:"Astronauta",precio:17300,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_063.jpg"]},
-      {id:"064",nombre:"Hoppys Infantil 500ml Blanco",desc:"Astronauta",precio:17300,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_064.jpg"]},
-      {id:"065",nombre:"Set Termo 1.2L + Mate + Jarra Eléctrica Blanco",desc:"Completo",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_065.jpg"]},
-      {id:"066",nombre:"Set Termo 1.2L + Mate + Jarra Eléctrica Rosa Corazones",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_066.jpg"]},
-      {id:"067",nombre:"Set Termo 1.2L + Mate + Jarra Eléctrica Negro",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_067.jpg"]},
-      {id:"068",nombre:"Set Termo 1.2L + Mate + Jarra Eléctrica Lila",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_068.jpg"]},
-      {id:"069",nombre:"Set Termo 1.2L + Mate + Jarra Rosa",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_069.jpg"]},
-      {id:"070",nombre:"Set Termo 1.2L + Mate + Jarra Azul",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_070.jpg"]},
-      {id:"071",nombre:"Set Termo Blanco + Mate + Jarra + Vaso",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_071.jpg"]},
-      {id:"072",nombre:"Set Termo Rosa + Mate + Jarra + Vaso",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_072.jpg"]},
-      {id:"073",nombre:"Kit GOAT 4x1 Rosa 1200ml",desc:"Termo + Mate 160ml + Yerbero 350ml + Bombilla",precio:24500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_073.jpg"]},
-      {id:"074",nombre:"Kit GOAT 4x1 Negro",desc:"1200ml + 160ml + 350ml",precio:24500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_074.jpg"]},
-      {id:"075",nombre:"Kit GOAT 4x1 Celeste",desc:"1200ml + 160ml + 350ml",precio:24500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_075.jpg"]},
-      {id:"076",nombre:"Kit GOAT 4x1 Fucsia",desc:"1200ml + 160ml + 350ml",precio:24500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_076.jpg"]},
-      {id:"077",nombre:"Set System 1L + Jarra Eléctrica 2L Blanco",desc:"Todo en uno",precio:52000,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_077.jpg"]},
-      {id:"078",nombre:"Set System 1L + Jarra Eléctrica 2L Lila",desc:"Con mate",precio:52000,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_078.jpg"]},
-      {id:"079",nombre:"Set Arra 1L + Jarra + Mate Lila + Vaso",desc:"Calidad y estilo",precio:52000,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_079.jpg"]},
-      {id:"080",nombre:"Set Arra 1L + Jarra + Mate Fucsia",precio:52000,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_080.jpg"]},
-      {id:"081",nombre:"Set Arra 1L + Jarra + Mate Crema",precio:52000,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_081.jpg"]},
-      {id:"082",nombre:"Set Arra 1L + Jarra + Mate Rosa",precio:52000,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_082.jpg"]},
-      {id:"p176",nombre:"PC Gamer Completa i3 + GTX 750 Ti + 8GB + SSD 240GB + Monitor 17",desc:"Lista para usar",precio:480000,categoria:"Accesorios y Tecnología",imagenes:["img/p176-1.jpg","img/img_tecnotech_001.jpg"]}
-    ];
+    const CATS = ["Todos", ...new Set(PRODUCTOS.map(p => p.categoria))];
+    const ICONOS = {"Termos y Botellas":"fa-mug-hot","Mates y Yerberos":"fa-leaf","Linternas e Iluminación":"fa-lightbulb","Herramientas Eléctricas":"fa-screwdriver-wrench","Balanzas":"fa-weight-scale","Ferretería y Accesorios":"fa-toolbox"};
 
-    const CATS = ["Todos","Termos, Mates y Vasos","Bazar","Belleza y Cuidado Personal","Blanquería","Accesorios y Tecnología"];
-    let carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    let carrito = [];
+    try { carrito = JSON.parse(localStorage.getItem("carrito_fabian") || "[]"); } catch(e) {}
     let catAct = "Todos";
-    
+
     const grid = document.getElementById("grid");
     const catBar = document.getElementById("cats");
     const titulo = document.getElementById("titulo");
     const fmt = n => n.toLocaleString("es-AR");
+    const guardar = () => { try { localStorage.setItem("carrito_fabian", JSON.stringify(carrito)); } catch(e) {} };
 
-    // Renderizar categorías
     function renderCats() {
       catBar.innerHTML = "";
       CATS.forEach(c => {
-        if(c !== "Todos" && !PRODUCTOS.some(p => p.categoria === c)) return;
+        if (c !== "Todos" && !PRODUCTOS.some(p => p.categoria === c)) return;
         const b = document.createElement("button");
-        b.className = `cat-btn ${catAct === c ? "activo" : ""}`;
-        let icono = c === "Termos, Mates y Vasos" ? "fa-mug-hot" : c === "Bazar" ? "fa-utensils" : c === "Belleza y Cuidado Personal" ? "fa-spa" : c === "Blanquería" ? "fa-bed" : "fa-box";
-        b.innerHTML = `<i class="fa-solid ${icono}"></i> ${c}`;
+        b.className = "cat-btn" + (catAct === c ? " activo" : "");
+        b.innerHTML = `<i class="fa-solid ${ICONOS[c] || "fa-box"}"></i> ${c}`;
         b.onclick = () => { catAct = c; renderCats(); render(); };
         catBar.appendChild(b);
       });
     }
 
-    // Renderizar productos
+    const visor = document.getElementById("visor");
+    visor.onclick = () => visor.style.display = "none";
+
     function render() {
       grid.innerHTML = "";
-      titulo.textContent = catAct === "Todos" ? `Todos los productos (${PRODUCTOS.length})` : catAct;
-      
-      PRODUCTOS.filter(p => catAct === "Todos" || p.categoria === catAct).forEach(p => {
+      const lista = PRODUCTOS.filter(p => catAct === "Todos" || p.categoria === catAct);
+      titulo.textContent = (catAct === "Todos" ? "Todos los productos" : catAct) + ` (${lista.length})`;
+      lista.forEach(p => {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <img src="${p.imagenes[0]}" loading="lazy" onerror="this.src='${fallback(p.nombre)}'">
+          <img src="img/${p.id}.jpg" alt="${p.nombre}" loading="lazy">
           <h3>${p.nombre}</h3>
           ${p.desc ? `<div class="desc">${p.desc}</div>` : ""}
           <div class="precio">$${fmt(p.precio)}</div>
-          <button class="agregar">Añadir</button>
-        `;
+          <button class="agregar">Añadir</button>`;
+        const img = card.querySelector("img");
+        img.onerror = () => { img.onerror = null; img.src = fallback(p.nombre); };
+        img.onclick = () => { visor.querySelector("img").src = img.src; visor.style.display = "flex"; };
         card.querySelector(".agregar").onclick = () => {
           const ex = carrito.find(i => i.id === p.id);
-          if(ex) ex.c++;
-          else carrito.push({ id: p.id, n: p.nombre, p: p.precio, c: 1 });
-          localStorage.setItem("carrito", JSON.stringify(carrito));
-          updateCart();
+          if (ex) ex.c++; else carrito.push({ id: p.id, c: 1 });
+          guardar(); updateCart();
         };
         grid.appendChild(card);
       });
     }
 
-    // Actualizar carrito
     function updateCart() {
+      carrito = carrito.filter(i => PRODUCTOS.some(p => p.id === i.id));
       document.getElementById("contador").textContent = carrito.reduce((s, i) => s + i.c, 0);
       const lista = document.getElementById("lista");
       const totalEl = document.getElementById("total");
-      
-      if(carrito.length === 0) {
+      if (!carrito.length) {
         lista.innerHTML = "<p style='color:#94a3b8;text-align:center;margin-top:40px'>El carrito está vacío</p>";
         totalEl.textContent = "";
         return;
       }
-      
       lista.innerHTML = "";
       let tot = 0;
       carrito.forEach((it, i) => {
         const pr = PRODUCTOS.find(x => x.id === it.id);
-        if (!pr) return;
         tot += pr.precio * it.c;
         const d = document.createElement("div");
-        d.style.display = "flex";
-        d.style.justifyContent = "space-between";
-        d.style.alignItems = "center";
-        d.style.padding = "10px 0";
-        d.style.borderBottom = "1px solid #eee";
+        d.className = "item";
         d.innerHTML = `
-          <div><b>${pr.nombre.substring(0, 28)}</b> x${it.c}</div>
-          <button style="border:none;background:#fee2e2;color:#ef4444;border-radius:6px;padding:4px 8px;cursor:pointer">✕</button>
-        `;
-        d.querySelector("button").onclick = () => {
-          carrito.splice(i, 1);
-          localStorage.setItem("carrito", JSON.stringify(carrito));
-          updateCart();
-        };
+          <div class="nom">${pr.nombre}<br><span style="font-weight:400;color:#64748b">$${fmt(pr.precio * it.c)}</span></div>
+          <div class="qty"><button class="menos">−</button><b>${it.c}</b><button class="mas">+</button><button class="del">✕</button></div>`;
+        d.querySelector(".menos").onclick = () => { if (it.c > 1) it.c--; else carrito.splice(i, 1); guardar(); updateCart(); };
+        d.querySelector(".mas").onclick = () => { it.c++; guardar(); updateCart(); };
+        d.querySelector(".del").onclick = () => { carrito.splice(i, 1); guardar(); updateCart(); };
         lista.appendChild(d);
       });
       totalEl.textContent = `Total: $${fmt(tot)}`;
     }
 
-    // Abrir y cerrar panel del carrito
     const panel = document.getElementById("panel");
     const fondo = document.getElementById("fondo");
-    
+    const cerrarPanel = () => { panel.classList.remove("abierto"); fondo.classList.remove("activo"); };
     document.getElementById("btn-carrito").onclick = () => { panel.classList.add("abierto"); fondo.classList.add("activo"); };
-    document.getElementById("cerrar-panel").onclick = () => { panel.classList.remove("abierto"); fondo.classList.remove("activo"); };
-    fondo.onclick = () => { panel.classList.remove("abierto"); fondo.classList.remove("activo"); };
+    document.getElementById("cerrar-panel").onclick = cerrarPanel;
+    fondo.onclick = cerrarPanel;
 
-    // Modal de pago
     const modal = document.getElementById("modal");
     document.getElementById("btn-checkout").onclick = () => {
-      if(carrito.length === 0) return alert("Agregá productos al carrito primero.");
+      if (!carrito.length) return alert("Agregá productos al carrito primero.");
       modal.style.display = "flex";
     };
-    
     document.getElementById("btn-cerrar-modal").onclick = () => { modal.style.display = "none"; };
 
-    // Confirmar pedido y enviar a WhatsApp
     document.getElementById("btn-wa").onclick = () => {
-      let mensaje = "Hola! Quiero confirmar este pedido:%0A%0A";
-      let total = 0;
-      carrito.forEach(item => {
-        total += item.p * item.c;
-        mensaje += `• ${item.c}x ${item.n} — $${fmt(item.p * item.c)}%0A`;
+      let msg = "Hola! Quiero confirmar este pedido:\n\n", total = 0;
+      carrito.forEach(it => {
+        const p = PRODUCTOS.find(x => x.id === it.id);
+        total += p.precio * it.c;
+        msg += `• ${it.c}x ${p.nombre} — $${fmt(p.precio * it.c)}\n`;
       });
-      mensaje += `%0A*Total: $${fmt(total)}*%0A%0AYa realicé la transferencia al alias mundo95. *Adjunto el comprobante acá abajo* 👇`;
-      window.open(`https://wa.me/${WHATSAPP}?text=${mensaje}`, "_blank");
+      msg += `\n*Total: $${fmt(total)}*\n\nYa realicé la transferencia al alias mundo95. *Adjunto el comprobante acá abajo* 👇`;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
       modal.style.display = "none";
-      panel.classList.remove("abierto"); 
-      fondo.classList.remove("activo");
+      cerrarPanel();
     };
 
-    // Inicializar la página
-    renderCats();
-    render();
-    updateCart();
+    renderCats(); render(); updateCart();
   </script>
 </body>
 </html>
