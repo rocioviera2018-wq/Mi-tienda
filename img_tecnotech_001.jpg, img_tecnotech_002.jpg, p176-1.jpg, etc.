@@ -1,5 +1,6 @@
 const IMAGENES = {
-  cf01: "img/cf01.jpg",
-  cf02: "img/cf02.jpg",
+  "cf01": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBD...",
+  "cf02": "data:image/jpeg;base64,...",
   // ...
+  "cf37": "data:image/jpeg;base64,..."
 };
