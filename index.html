@@ -1,434 +1,823 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tecno Tech Oberá | Catálogo</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root { --primary:#0f172a; --accent:#25D366; --bg:#f8fafc; --card:#fff; --text:#334155; }
-  * { box-sizing:border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
-  body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecno Tech Oberá | Catálogo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #25D366;
+      --bg: #f8fafc;
+      --card: #fff;
+      --text: #334155;
+      --header-h: 58px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    body.bloqueado { overflow: hidden; }
 
-  header { background:var(--card); padding:14px 20px; display:flex; justify-content:space-between; align-items:center;
-           box-shadow:0 2px 10px rgba(0,0,0,.05); position:sticky; top:0; z-index:50; }
-  .logo { font-weight:800; font-size:18px; color:var(--primary); }
-  .logo span { color:var(--accent); }
-  #btn-carrito { background:var(--primary); color:#fff; border:none; padding:10px 16px; border-radius:20px;
-                 font-weight:600; cursor:pointer; transition:.2s; }
-  #btn-carrito:hover { background:#1e293b; }
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
 
-  .hero { background:linear-gradient(135deg,#1e293b,#0f172a); color:#fff; padding:28px 20px; text-align:center; }
-  .hero h2 { font-weight:800; margin-bottom:6px; font-size:1.3rem; }
-  .hero p { font-size:.9rem; opacity:.9; }
+    header { background: var(--card); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.05); position: sticky; top: 0; z-index: 50; gap: 12px; }
+    .logo { font-weight: 800; font-size: 18px; color: var(--primary); }
+    .logo span { color: var(--accent); }
+    #btn-carrito { background: var(--primary); color: #fff; border: none; padding: 10px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: .2s; white-space: nowrap; }
+    #btn-carrito:hover { background: #1e293b; }
 
-  .cat-wrap { background:var(--card); padding:12px 0; position:sticky; top:58px; z-index:40;
-              box-shadow:0 2px 8px rgba(0,0,0,.04); }
-  .cat-scroll { display:flex; gap:10px; overflow-x:auto; padding:0 20px; scrollbar-width:none; }
-  .cat-scroll::-webkit-scrollbar { display:none; }
-  .cat-btn { border:2px solid transparent; background:#f1f5f9; padding:10px 14px; border-radius:20px;
-             font-weight:600; font-size:13px; white-space:nowrap; cursor:pointer;
-             display:flex; gap:6px; align-items:center; color:var(--text); transition:.2s; }
-  .cat-btn.activo { background:#eff6ff; border-color:#3b82f6; color:#1d4ed8; }
-  .cat-btn .count { background:#cbd5e1; color:#0f172a; border-radius:10px; padding:1px 7px; font-size:11px; }
-  .cat-btn.activo .count { background:#3b82f6; color:#fff; }
+    .hero { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 28px 20px; text-align: center; }
+    .hero h2 { font-weight: 800; margin-bottom: 6px; font-size: 1.3rem; }
+    .hero p { font-size: .9rem; opacity: .9; }
 
-  .container { max-width:1200px; margin:auto; width:100%; padding:20px; flex:1; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:14px; }
-  .card { background:var(--card); border-radius:16px; padding:10px; box-shadow:0 4px 15px rgba(0,0,0,.04);
-          display:flex; flex-direction:column; transition:transform .2s; }
-  .card:hover { transform:translateY(-4px); }
-  .card img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px;
-              background:#f1f5f9; cursor:zoom-in; }
-  .card h3 { font-size:13px; font-weight:600; margin:8px 0 4px; color:var(--primary); line-height:1.2; }
-  .card .desc { font-size:11px; color:#64748b; margin-bottom:6px; }
-  .precio { color:#0a7d32; font-weight:800; font-size:15px; margin-bottom:10px; margin-top:auto; }
-  .card button.agregar { background:var(--primary); color:#fff; border:none; padding:8px;
-                         border-radius:8px; font-weight:600; cursor:pointer; transition:.2s; }
-  .card button.agregar:hover { background:#1e293b; }
+    .cat-wrap { background: var(--card); padding: 12px 0; position: sticky; top: var(--header-h, 58px); z-index: 40; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .cat-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 20px; scrollbar-width: none; }
+    .cat-scroll::-webkit-scrollbar { display: none; }
+    .cat-btn { border: 2px solid transparent; background: #f1f5f9; padding: 10px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; white-space: nowrap; cursor: pointer; display: flex; gap: 6px; align-items: center; color: var(--text); transition: .2s; }
+    .cat-btn.activo { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
 
-  footer { background:var(--primary); color:#fff; text-align:center; padding:24px; margin-top:30px; font-size:.9rem; }
+    .container { max-width: 1200px; margin: auto; width: 100%; padding: 20px; flex: 1; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+    .card { background: var(--card); border-radius: 16px; padding: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.04); display: flex; flex-direction: column; transition: transform .2s; }
+    .card:hover { transform: translateY(-4px); }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #f1f5f9; cursor: zoom-in; }
+    .card h3 { font-size: 13px; font-weight: 600; margin: 8px 0 4px; color: var(--primary); line-height: 1.2; }
+    .card .desc { font-size: 11px; color: #64748b; margin-bottom: 6px; }
+    .precio { color: #0a7d32; font-weight: 800; font-size: 15px; margin-bottom: 10px; margin-top: auto; }
+    .card button.agregar,
+    .card a.agregar { background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: .2s; text-align: center; text-decoration: none; display: block; font-size: 13px; }
+    .card button.agregar:hover,
+    .card a.agregar:hover { background: #1e293b; }
 
-  #panel { position:fixed; right:-100%; top:0; width:380px; max-width:100%; height:100%;
-           background:#fff; padding:20px; transition:.3s; z-index:100; display:flex; flex-direction:column;
-           box-shadow:-5px 0 20px rgba(0,0,0,.2); }
-  #panel.abierto { right:0; }
-  #fondo { position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; z-index:99; }
-  #fondo.activo { display:block; }
+    footer { background: var(--primary); color: #fff; text-align: center; padding: 24px; margin-top: 30px; font-size: .9rem; }
 
-  .item { display:flex; justify-content:space-between; align-items:center; padding:10px 0;
-          border-bottom:1px solid #eee; gap:8px; }
-  .item .nom { font-size:13px; font-weight:600; flex:1; }
-  .qty { display:flex; align-items:center; gap:6px; }
-  .qty button { border:none; background:#f1f5f9; width:26px; height:26px; border-radius:6px;
-                cursor:pointer; font-weight:700; }
-  .qty button.del { background:#fee2e2; color:#ef4444; }
+    #panel { position: fixed; right: -100%; top: 0; width: 380px; max-width: 100%; height: 100%; background: #fff; padding: 20px; transition: right .3s; z-index: 100; display: flex; flex-direction: column; box-shadow: -5px 0 20px rgba(0,0,0,.2); overflow: hidden; }
+    #panel.abierto { right: 0; }
+    #panel-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+    #panel-head h3 { color: var(--primary); font-size: 16px; }
+    #cerrar-panel { border: none; background: #f1f5f9; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; flex-shrink: 0; }
+    #lista { flex: 1; overflow: auto; min-height: 0; }
+    #total { font-weight: 800; text-align: right; margin: 12px 0; font-size: 18px; }
+    #btn-checkout { background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: .2s; }
+    #btn-checkout:disabled { background: #cbd5e1; cursor: not-allowed; }
+    #btn-vaciar { background: none; border: none; color: #94a3b8; font-size: 12px; text-decoration: underline; cursor: pointer; align-self: flex-end; margin-bottom: 8px; padding: 4px; }
+    #btn-vaciar[hidden] { display: none; }
 
-  #modal { position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center;
-           justify-content:center; z-index:200; padding:20px; }
-  .modal-box { background:#fff; padding:22px; border-radius:16px; max-width:400px; width:100%;
-               text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.2); }
+    #fondo { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: none; z-index: 99; }
+    #fondo.activo { display: block; }
 
-  #visor { position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center;
-           justify-content:center; z-index:300; padding:16px; cursor:zoom-out; }
-  #visor img { max-width:100%; max-height:100%; border-radius:10px; }
+    .item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; gap: 8px; }
+    .item .nom { font-size: 13px; font-weight: 600; flex: 1; }
+    .qty { display: flex; align-items: center; gap: 6px; }
+    .qty button { border: none; background: #f1f5f9; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-weight: 700; }
+    .qty button.del { background: #fee2e2; color: #ef4444; }
 
-  .wa-float { position:fixed; bottom:20px; right:20px; background:var(--accent); color:#fff;
-              width:56px; height:56px; border-radius:50%; display:flex; align-items:center;
-              justify-content:center; font-size:26px; z-index:90; text-decoration:none;
-              box-shadow:0 4px 12px rgba(0,0,0,.2); transition:.2s; }
-  .wa-float:hover { transform:scale(1.1); }
+    #modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
+    #modal.abierto { display: flex; }
+    .modal-box { background: #fff; padding: 22px; border-radius: 16px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    #btn-wa { background: var(--accent); color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; margin-top: 14px; font-weight: 700; cursor: pointer; }
+    #btn-cerrar-modal { background: none; border: none; color: #888; margin-top: 10px; text-decoration: underline; cursor: pointer; }
 
-  .empty { text-align:center; color:#94a3b8; padding:40px 0; font-size:14px; }
-</style>
+    #visor { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 300; padding: 16px; }
+    #visor.abierto { display: flex; }
+    #visor img { max-width: 100%; max-height: 100%; border-radius: 10px; }
+
+    .wa-float { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; z-index: 90; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.2); transition: .2s; }
+    .wa-float:hover { transform: scale(1.1); }
+    body.panel-abierto .wa-float { opacity: 0; pointer-events: none; }
+
+    #toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--primary); color: #fff; padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; opacity: 0; pointer-events: none; transition: .25s; z-index: 400; max-width: 90%; text-align: center; }
+    #toast.visible { opacity: 1; transform: translate(-50%, 0); }
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">Tecno Tech <span>Oberá</span></div>
-  <button id="btn-carrito"><i class="fa-solid fa-bag-shopping"></i> Carrito (<span id="contador">0</span>)</button>
-</header>
-
-<div class="hero">
-  <h2>Catálogo Tecno Tech Oberá</h2>
-  <p>Hacé tu pedido, transferí al alias <b>mundo95</b> y enviá comprobante por WhatsApp</p>
-</div>
-
-<div class="cat-wrap"><div class="cat-scroll" id="cats"></div></div>
-
-<main class="container">
-  <h2 id="titulo" style="font-size:16px;font-weight:800;margin-bottom:14px"></h2>
-  <div class="grid" id="grid"></div>
-</main>
-
-<footer><p>Av. Italia 1459, Oberá - 3755 223737 - Envíos en 72hs</p></footer>
-
-<div id="fondo"></div>
-<div id="panel">
-  <button id="cerrar-panel" style="align-self:flex-end;border:none;background:#f1f5f9;
-          width:32px;height:32px;border-radius:50%;cursor:pointer">✕</button>
-  <h3 style="margin:10px 0;color:var(--primary)">Tu pedido</h3>
-  <div id="lista" style="flex:1;overflow:auto"></div>
-  <div id="total" style="font-weight:800;text-align:right;margin:12px 0;font-size:18px"></div>
-  <button id="btn-checkout" style="background:#25D366;color:#fff;border:none;padding:14px;
-          border-radius:10px;font-weight:700;cursor:pointer">Confirmar pedido</button>
-</div>
-
-<div id="modal">
-  <div class="modal-box">
-    <h3 style="color:var(--primary)">¡Casi listo!</h3>
-    <p style="margin:10px 0;font-size:14px;color:#64748b">Transferí a los siguientes datos:</p>
-    <div style="background:#f8fafc;border:1px dashed #cbd5e1;padding:12px;border-radius:8px;text-align:left">
-      <div style="font-weight:800;font-size:16px;color:var(--primary)">Alias: mundo95</div>
-      <div style="font-size:14px;color:#334155">Matias Gonzalo Lepori</div>
-      <div style="font-size:12px;color:#64748b;margin-top:4px">Mercado Pago</div>
-    </div>
-    <p style="font-size:12px;color:#64748b;margin-top:12px">Luego abrí WhatsApp y adjuntá tu comprobante.</p>
-    <button id="btn-wa" style="background:#25D366;color:#fff;border:none;padding:12px;
-            border-radius:8px;width:100%;margin-top:14px;font-weight:700;cursor:pointer">
-      <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp
+  <header>
+    <div class="logo">Tecno Tech <span>Oberá</span></div>
+    <button id="btn-carrito" aria-label="Abrir carrito">
+      <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i> Carrito (<span id="contador">0</span>)
     </button>
-    <button id="btn-cerrar-modal" style="background:none;border:none;color:#888;
-            margin-top:10px;text-decoration:underline;cursor:pointer">Cancelar</button>
+  </header>
+
+  <div class="hero">
+    <h2>Catálogo Tecno Tech Oberá</h2>
+    <p>Hacé tu pedido, transferí a alias <b>mundo95</b> y enviá comprobante por WhatsApp</p>
   </div>
-</div>
 
-<div id="visor"><img alt="Vista previa"></div>
+  <div class="cat-wrap"><div class="cat-scroll" id="cats"></div></div>
 
-<a class="wa-float" href="https://wa.me/5493755223737" target="_blank" rel="noopener">
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
+  <main class="container">
+    <input id="buscar" type="search" placeholder="Buscar producto…" aria-label="Buscar producto"
+           style="width:100%;padding:12px 14px;border:1px solid #dce4ec;border-radius:10px;font-size:15px;margin-bottom:14px">
+    <h2 id="titulo" style="font-size:16px;font-weight:800;margin-bottom:14px"></h2>
+    <div class="grid" id="grid"></div>
+  </main>
 
-<script>
-/* ===================== PRODUCTOS ===================== */
+  <footer><p>Av. Italia 1459, Oberá - 3755 223737 - Envíos en 72hs</p></footer>
+
+  <div id="fondo"></div>
+
+  <div id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-titulo" aria-hidden="true">
+    <div id="panel-head">
+      <h3 id="panel-titulo">Tu pedido</h3>
+      <button id="cerrar-panel" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div id="lista"></div>
+    <button id="btn-vaciar" hidden>Vaciar carrito</button>
+    <div id="total"></div>
+    <button id="btn-checkout">Confirmar pedido</button>
+  </div>
+
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-hidden="true">
+    <div class="modal-box">
+      <h3 id="modal-titulo" style="color:var(--primary)">¡Casi listo!</h3>
+      <p style="margin:10px 0;font-size:14px;color:#64748b">Transferí a los siguientes datos:</p>
+      <div style="background:#f8fafc;border:1px dashed #cbd5e1;padding:12px;border-radius:8px;text-align:left">
+        <div style="font-weight:800;font-size:16px;color:var(--primary)">Alias: mundo95</div>
+        <div style="font-size:14px;color:#334155">Matias Gonzalo Lepori</div>
+        <div style="font-size:12px;color:#64748b;margin-top:4px">Mercado Pago</div>
+      </div>
+      <p style="font-size:12px;color:#64748b;margin-top:12px">Luego abrí WhatsApp y adjuntá tu comprobante.</p>
+      <button id="btn-wa"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Abrir WhatsApp</button>
+      <button id="btn-cerrar-modal">Cancelar</button>
+    </div>
+  </div>
+
+  <div id="visor" role="dialog" aria-modal="true" aria-label="Vista previa de imagen">
+    <img alt="">
+  </div>
+
+  <a class="wa-float" id="wa-float" href="https://wa.me/5493755223737" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+  </a>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script>
 const PRODUCTOS = [
-  { id:"cf01", nombre:"Autosebante 2 en 1 · 750 ml", desc:"Termo con bombilla y tapa metálica", precio:20700, categoria:"Termos y Botellas" },
-  { id:"cf02", nombre:"Termo Hoppy 600 ml", desc:"Acero inoxidable, con pico. Varios colores", precio:9720, categoria:"Termos y Botellas" },
-  { id:"cf03", nombre:"Termo Hoppy 800 ml", desc:"Acero inoxidable, con pico. Varios colores", precio:10800, categoria:"Termos y Botellas" },
-  { id:"cf04", nombre:"Termo Hoppy 1 litro", desc:"Acero inoxidable, con pico. Varios colores", precio:13500, categoria:"Termos y Botellas" },
-  { id:"cf05", nombre:"Termo Coffee 600 ml", desc:"Con tapa y pico vertedor. Varios colores", precio:14400, categoria:"Termos y Botellas" },
-  { id:"cf06", nombre:"Termo 650 ml con manija", desc:"Acero inoxidable. Varios colores", precio:17280, categoria:"Termos y Botellas" },
-  { id:"cf07", nombre:"Termo Hoppy 600 ml Premium", desc:"Mantiene frío y calor. Libre de BPA", precio:13500, categoria:"Termos y Botellas" },
-  { id:"cf08", nombre:"Termo Hoppy 800 ml Premium", desc:"Mantiene frío y calor. Libre de BPA", precio:15840, categoria:"Termos y Botellas" },
-  { id:"cf09", nombre:"Termo Hoppy doble pico · 1 litro", desc:"Tapa sellada con pico práctico", precio:20160, categoria:"Termos y Botellas" },
-  { id:"cf10", nombre:"Termo Hoppy a rosca · 1 litro", desc:"Botella térmica, frío hasta 24 hs", precio:13680, categoria:"Termos y Botellas" },
-  { id:"cf11", nombre:"Termo Hoppy 1 litro con manija", desc:"Tapa con pico, antiderrames", precio:17280, categoria:"Termos y Botellas" },
-  { id:"cf12", nombre:"Termo Hoppy con pico · 1 litro", desc:"Frío 11 hs · calor 7 hs", precio:21600, categoria:"Termos y Botellas" },
-  { id:"cf13", nombre:"Kit yerbero", desc:"Kit para mate, 4 en 1", precio:13140, categoria:"Mates y Yerberos" },
-  { id:"cf14", nombre:"Linterna con herramienta", desc:"Práctica y útil", precio:26100, categoria:"Linternas e Iluminación" },
-  { id:"cf15", nombre:"Linterna minera", desc:"Incluye 2 baterías, cargadores 12V y 220V; regulable y movible", precio:16200, categoria:"Linternas e Iluminación" },
-  { id:"cf16", nombre:"Linterna de 2 elementos", desc:"Material reforzado. No incluye pilas", precio:14400, categoria:"Linternas e Iluminación" },
-  { id:"cf17", nombre:"Linterna Cafini L701B", desc:"Recargable 220V", precio:6840, categoria:"Linternas e Iluminación" },
-  { id:"cf18", nombre:"Linterna PM 8108", desc:"Recargable 220V", precio:6120, categoria:"Linternas e Iluminación" },
-  { id:"cf19", nombre:"Linterna mini L3355B", desc:"Zoom, recargable USB, 3 funciones", precio:5760, categoria:"Linternas e Iluminación" },
-  { id:"cf20", nombre:"Cargador inteligente", precio:40500, categoria:"Ferretería y Accesorios" },
-  { id:"cf21", nombre:"Kit compresor VCP – 5 juegos", desc:"Pulverizadora, infladora con manómetro, soplado, boquilla aguja y manguera espiral 5 m", precio:69300, categoria:"Herramientas Eléctricas" },
-  { id:"cf22", nombre:"Pistola de calor VCP", desc:"2000 W; 50–600 °C; incluye boquillas y accesorios", precio:57600, categoria:"Herramientas Eléctricas" },
-  { id:"cf23", nombre:"Taladro eléctrico VCP", desc:"710 W; mandril 13 mm; velocidad variable", precio:91800, categoria:"Herramientas Eléctricas" },
-  { id:"cf24", nombre:"Rotomartillo VCP 20V", desc:"Brushless, SDS Plus, 4 funciones; batería y cargador incluidos", precio:279000, categoria:"Herramientas Eléctricas" },
-  { id:"cf25", nombre:"Hidrolavadora VCP", desc:"1200 W; 55 BAR; 4,5 L/min", precio:156600, categoria:"Herramientas Eléctricas" },
-  { id:"cf26", nombre:"Llave térmica VCP", desc:"Tamaños 20A y 32A", precio:5760, categoria:"Ferretería y Accesorios" },
-  { id:"cf27", nombre:"Lija 3M", desc:"Pack de 50 hojas; lija al agua", precio:45900, categoria:"Ferretería y Accesorios" },
-  { id:"cf28", nombre:"Balanza gramera digital", desc:"Incluye pila", precio:9900, categoria:"Balanzas" },
-  { id:"cf29", nombre:"Balanza digital portátil", desc:"Capacidad 0–50 kg; precisión de 5 g hasta 10 kg y 10 g de 10 a 50 kg", precio:9900, categoria:"Balanzas" },
-  { id:"cf30", nombre:"Balanza", desc:"Capacidad 200 kg; incluye 2 pilas AAA", precio:28800, categoria:"Balanzas" },
-  { id:"cf31", nombre:"Balanza", desc:"Capacidad 300 kg; incluye 3 pilas AA", precio:46800, categoria:"Balanzas" },
-  { id:"cf32", nombre:"Balanza digital recargable", desc:"Capacidad 1000 kg; incluye gancho, mosquetón y cargador", precio:115200, categoria:"Balanzas" },
-  { id:"cf33", nombre:"Amoladora Lusqtoff", desc:"720 W; disco 115 mm; 11.000 RPM; accesorios incluidos", precio:91800, categoria:"Herramientas Eléctricas" },
-  { id:"cf34", nombre:"Sierra caladora Lusqtoff", desc:"Herramienta completa", precio:109800, categoria:"Herramientas Eléctricas" },
-  { id:"cf35", nombre:"Foco de emergencia", desc:"40 W", precio:16200, categoria:"Linternas e Iluminación" },
-  { id:"cf36", nombre:"Balanza", desc:"Capacidad 10 kg", precio:9900, categoria:"Balanzas" },
-  { id:"cf37", nombre:"Atornillador inalámbrico", desc:"48V; mandril inox hasta 13 mm; guante de regalo", precio:118800, categoria:"Herramientas Eléctricas" }
+  {"id": "cf01", "nombre": "Autosebante 2 en 1 · 750 ml", "desc": "Termo con bombilla y tapa metálica", "precio": 20700, "categoria": "Termos y Botellas"},
+  {"id": "cf02", "nombre": "Termo Hoppy 600 ml", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 9720, "categoria": "Termos y Botellas"},
+  {"id": "cf03", "nombre": "Termo Hoppy 800 ml", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 10800, "categoria": "Termos y Botellas"},
+  {"id": "cf04", "nombre": "Termo Hoppy 1 litro", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 13500, "categoria": "Termos y Botellas"},
+  {"id": "cf05", "nombre": "Termo Coffee 600 ml", "desc": "Con tapa y pico vertedor. Varios colores", "precio": 14400, "categoria": "Termos y Botellas"},
+  {"id": "cf06", "nombre": "Termo 650 ml con manija", "desc": "Acero inoxidable. Varios colores", "precio": 17280, "categoria": "Termos y Botellas"},
+  {"id": "cf07", "nombre": "Termo Hoppy 600 ml Premium", "desc": "Mantiene frío y calor. Libre de BPA", "precio": 13500, "categoria": "Termos y Botellas"},
+  {"id": "cf08", "nombre": "Termo Hoppy 800 ml Premium", "desc": "Mantiene frío y calor. Libre de BPA", "precio": 15840, "categoria": "Termos y Botellas"},
+  {"id": "cf09", "nombre": "Termo Hoppy doble pico · 1 litro", "desc": "Tapa sellada con pico práctico", "precio": 20160, "categoria": "Termos y Botellas"},
+  {"id": "cf10", "nombre": "Termo Hoppy a rosca · 1 litro", "desc": "Botella térmica, frío hasta 24 hs", "precio": 13680, "categoria": "Termos y Botellas"},
+  {"id": "cf11", "nombre": "Termo Hoppy 1 litro con manija", "desc": "Tapa con pico, antiderrames", "precio": 17280, "categoria": "Termos y Botellas"},
+  {"id": "cf12", "nombre": "Termo Hoppy con pico · 1 litro", "desc": "Frío 11 hs · calor 7 hs", "precio": 21600, "categoria": "Termos y Botellas"},
+  {"id": "cf13", "nombre": "Kit yerbero", "desc": "Kit para mate, 4 en 1", "precio": 13140, "categoria": "Mates y Yerberos"},
+  {"id": "cf14", "nombre": "Linterna con herramienta", "desc": "Práctica y útil", "precio": 26100, "categoria": "Linternas e Iluminación"},
+  {"id": "cf15", "nombre": "Linterna minera", "desc": "Incluye 2 baterías, cargadores 12V y 220V; regulable y movible", "precio": 16200, "categoria": "Linternas e Iluminación"},
+  {"id": "cf16", "nombre": "Linterna de 2 elementos", "desc": "Material reforzado. No incluye pilas", "precio": 14400, "categoria": "Linternas e Iluminación"},
+  {"id": "cf17", "nombre": "Linterna Cafini L701B", "desc": "Recargable 220V", "precio": 6840, "categoria": "Linternas e Iluminación"},
+  {"id": "cf18", "nombre": "Linterna PM 8108", "desc": "Recargable 220V", "precio": 6120, "categoria": "Linternas e Iluminación"},
+  {"id": "cf19", "nombre": "Linterna mini L3355B", "desc": "Zoom, recargable USB, 3 funciones", "precio": 5760, "categoria": "Linternas e Iluminación"},
+  {"id": "cf20", "nombre": "Cargador inteligente", "precio": 40500, "categoria": "Herramientas"},
+  {"id": "cf21", "nombre": "Kit compresor VCP – 5 juegos", "desc": "Pulverizadora, infladora con manómetro, soplado, boquilla aguja y manguera espiral 5 m", "precio": 69300, "categoria": "Herramientas"},
+  {"id": "cf22", "nombre": "Pistola de calor VCP", "desc": "2000 W; 50–600 °C; incluye boquillas y accesorios", "precio": 57600, "categoria": "Herramientas"},
+  {"id": "cf23", "nombre": "Taladro eléctrico VCP", "desc": "710 W; mandril 13 mm; velocidad variable", "precio": 91800, "categoria": "Herramientas"},
+  {"id": "cf24", "nombre": "Rotomartillo VCP 20V", "desc": "Brushless, SDS Plus, 4 funciones; batería y cargador incluidos", "precio": 279000, "categoria": "Herramientas"},
+  {"id": "cf25", "nombre": "Hidrolavadora VCP", "desc": "1200 W; 55 BAR; 4,5 L/min", "precio": 156600, "categoria": "Herramientas"},
+  {"id": "cf26", "nombre": "Llave térmica VCP", "desc": "Tamaños 20A y 32A", "precio": 5760, "categoria": "Herramientas"},
+  {"id": "cf27", "nombre": "Lija 3M", "desc": "Pack de 50 hojas; lija al agua", "precio": 45900, "categoria": "Herramientas"},
+  {"id": "cf28", "nombre": "Balanza gramera digital", "desc": "Incluye pila", "precio": 9900, "categoria": "Balanzas"},
+  {"id": "cf29", "nombre": "Balanza digital portátil", "desc": "Capacidad 0–50 kg; precisión de 5 g hasta 10 kg y 10 g de 10 a 50 kg", "precio": 9900, "categoria": "Balanzas"},
+  {"id": "cf30", "nombre": "Balanza", "desc": "Capacidad 200 kg; incluye 2 pilas AAA", "precio": 28800, "categoria": "Balanzas"},
+  {"id": "cf31", "nombre": "Balanza", "desc": "Capacidad 300 kg; incluye 3 pilas AA", "precio": 46800, "categoria": "Balanzas"},
+  {"id": "cf32", "nombre": "Balanza digital recargable", "desc": "Capacidad 1000 kg; incluye gancho, mosquetón y cargador", "precio": 115200, "categoria": "Balanzas"},
+  {"id": "cf33", "nombre": "Amoladora Lusqtoff", "desc": "720 W; disco 115 mm; 11.000 RPM; accesorios incluidos", "precio": 91800, "categoria": "Herramientas"},
+  {"id": "cf34", "nombre": "Sierra caladora Lusqtoff", "desc": "Herramienta completa", "precio": 109800, "categoria": "Herramientas"},
+  {"id": "cf35", "nombre": "Foco de emergencia", "desc": "40 W", "precio": 16200, "categoria": "Linternas e Iluminación"},
+  {"id": "cf36", "nombre": "Balanza", "desc": "Capacidad 10 kg", "precio": 9900, "categoria": "Balanzas"},
+  {"id": "cf37", "nombre": "Atornillador inalámbrico", "desc": "48V; mandril inox hasta 13 mm; guante de regalo", "precio": 118800, "categoria": "Herramientas"},
+  {"id": "p001", "nombre": "Camping automático para 8 personas 2,5 × 2,5 m", "categoria": "Camping y Aire Libre", "desc": "Instalación Rápida Espacio para Todos Con unas generosas dimensiones de 2.5 metros x 2.5 metros, esta carpa…", "precio": 80640},
+  {"id": "p002", "nombre": "Camping automático para 6 personas", "categoria": "Camping y Aire Libre", "desc": "Características: A prueba de rocio Dimensiones: 210x250x150cm Portabilidad: Una vez desmontada, tiene un…", "precio": 74880},
+  {"id": "p003", "nombre": "Camping automático para 4 personas", "categoria": "Camping y Aire Libre", "desc": "20 dólar", "precio": 57600},
+  {"id": "p004", "nombre": "Nebulizador Euromax EM-4550", "categoria": "Belleza y Cuidado Personal", "desc": "Tratamiento eficaz para problemas respiratorios Silencioso, fácil de usar y para toda la familia Incluye…", "precio": 72000},
+  {"id": "p005", "nombre": "Pistola de Lavado a Presión Inalámbrica 24Vh Sin cables", "categoria": "Herramientas", "desc": "completa con todos los accesorios y maletín Ideal para limpiar autos, pisos,", "precio": 51840},
+  {"id": "p006", "nombre": "Linterna LED De Emergencia Recargable EUROMAX EM-3873 - 99", "categoria": "Linternas e Iluminación", "desc": "Iluminación intensa y amplia, con regulador de intensidad - Recargable y eficiente:", "precio": 17280},
+  {"id": "p007", "nombre": "Linterna LED De Emergencia Recargable EUROMAX EM-3872", "categoria": "Linternas e Iluminación", "desc": "72 LEDs de alto brillo: Iluminación potente y uniforme, ajustable con regulador de intensidad - Recargable:", "precio": 20160},
+  {"id": "p008", "nombre": "Luz de emergencia Euromax", "categoria": "Linternas e Iluminación", "desc": "Cod: EM - 3871 2 Velas y 13 led Dos posiciones de encendido Luz regulable Batería de larga duración (hasta…", "precio": 21600},
+  {"id": "p009", "nombre": "Grifo de Agua Caliente", "categoria": "Electrodomésticos y Cocina", "desc": "Características: Bajo consumo Fácil de instalar y operar Con protección eléctrica antifugas Interruptor de…", "precio": 40320},
+  {"id": "p010", "nombre": "Luces Navideñas", "categoria": "Navidad", "desc": "Características: Largo: 16mts Cantidad de led: 200 MULTICOLOR No tiene parlantes 3 dólar", "precio": 8640},
+  {"id": "p011", "nombre": "Manguera LED Multicolor / Blanco 10mts", "categoria": "Linternas e Iluminación", "desc": "Emite una luz multicolor de alto brillo, perfecta para iluminar jardines,", "precio": 17280},
+  {"id": "p012", "nombre": "CORTINA LED ESTRELLA Perfectas para darle un toque mágico a", "categoria": "Linternas e Iluminación", "desc": "Blanco 6 dólar", "precio": 17280},
+  {"id": "p013", "nombre": "Foquito LED Guirnalda 5mts / 20 Foquitos", "categoria": "Linternas e Iluminación", "desc": "2.5 dólar", "precio": 7200},
+  {"id": "p014", "nombre": "Luvia LED Multicolor 3mts", "categoria": "Linternas e Iluminación", "desc": "de luz; son conectables en serie. Disponibles en multicolor 2.5 dólar", "precio": 7200},
+  {"id": "p015", "nombre": "Manguera LED / Blanco 10mts", "categoria": "Linternas e Iluminación", "desc": "luz multicolor de alto brillo, perfecta para iluminar jardines, caminos,", "precio": 17280},
+  {"id": "p016", "nombre": "Máquina cortadora de pelo profesional SN - 078 inalámbrica y", "categoria": "Belleza y Cuidado Personal", "desc": "llamativo estilo retro o vintage. Contiene. Maquina cortadora de pelo", "precio": 34992},
+  {"id": "p017", "nombre": "SONAR SN-079 Cortadora de Cabello Profesional", "categoria": "Belleza y Cuidado Personal", "desc": "4 Peines guía de diferentes medidas Peine de barbero profesional Cable de carga USB Frasco de aceite…", "precio": 46656},
+  {"id": "p018", "nombre": "SONAR SN-076 - Cortadora de Cabello Profesional Recargable", "categoria": "Belleza y Cuidado Personal", "desc": "1 Cortadora SONAR Professional Hair Clipper 4 Peines guía de diferentes medidas Peine de barbero", "precio": 46656},
+  {"id": "p019", "nombre": "Maquina Recortadora Profesional de Cabello y Barba premium", "categoria": "Belleza y Cuidado Personal", "desc": "CONTENIDO DE LA CAJA - Professional Hair Clipper - 4 Peines guía de distintas", "precio": 17496},
+  {"id": "p020", "nombre": "Set WAER 2 en 1 — Modelo WA-0289 Cortadora profesional +", "categoria": "Belleza y Cuidado Personal", "desc": "exclusivo 35% más potencia, cuchillas de cerámica Pantalla digital, recargable, sin", "precio": 43740},
+  {"id": "p021", "nombre": "Set WAER 2 en 1 — Modelo WA-0286 Cortadora profesional +", "categoria": "Belleza y Cuidado Personal", "desc": "exclusivo 35% más potencia, cuchillas de cerámica Pantalla digital, recargable, sin", "precio": 58320},
+  {"id": "p022", "nombre": "Balanza c/ Brazo Brisa", "categoria": "Blanquería y Hogar", "desc": "Capacidad de 40 kgs Precisión 5 G Voltaje 90240V 50/60 Hz 110v > 220v"},
+  {"id": "p023", "nombre": "Colchon Infl. Intex (1 Plaza)", "categoria": "Camping y Aire Libre", "precio": 29160},
+  {"id": "p024", "nombre": "Colchon Infl. Intex 1½ Plaza", "categoria": "Camping y Aire Libre", "precio": 34992},
+  {"id": "p025", "nombre": "Colchon Inflable Intex 2 Plaza", "categoria": "Camping y Aire Libre", "precio": 43740},
+  {"id": "p026", "nombre": "Colchón Inflable Dura-beam Intex", "categoria": "Camping y Aire Libre", "desc": "Características: Medida: 1.83x2.03x25 cm Diseñado para 2 personas Soporta un peso máx. de 272 kg", "precio": 58320},
+  {"id": "p027", "nombre": "Estante de Esquina 4 Niveles", "categoria": "Blanquería y Hogar", "desc": "Características: Almacenamiento por niveles Estabilidad del Soporte Medida: 85x25x34cm", "precio": 20412},
+  {"id": "p028", "nombre": "TV Ld Marson 55\"", "categoria": "Tecnología y Audio", "desc": "Netflix, YouTube y Prime Video. Resolución: 4K Ultra HD (3840 x 2160p) en", "precio": 903600},
+  {"id": "p029", "nombre": "Tapete para entrada Bienvenido 40cmx60cm", "categoria": "Blanquería y Hogar", "precio": 10800},
+  {"id": "p030", "nombre": "Tapete para entrada Welcome 40cmx60cm", "categoria": "Blanquería y Hogar", "precio": 10800},
+  {"id": "p031", "nombre": "Juego de Baño 4pcs Casa Komoda", "categoria": "Blanquería y Hogar", "desc": "Incluye: - Cortina de ducha: 180x180cm - ⁠ Alfombrilla antideslizante: 75x45cm - ⁠ Alfombrilla de baño:…", "precio": 43200},
+  {"id": "p032", "nombre": "Cortinas Blackout 3 m", "categoria": "Blanquería y Hogar", "precio": 47700},
+  {"id": "p033", "nombre": "Mantel de Coco", "categoria": "Blanquería y Hogar", "precio": 23400},
+  {"id": "p034", "nombre": "Forros navideños para puerta 90×180 cm", "categoria": "Navidad", "desc": "Forros Navideños para puerta. Medida: 90×180cm. Sirve para puerta estándar Ideal para decorar tu… Por cantidad: $18.000", "precio": 19800},
+  {"id": "p035", "nombre": "Sabanas Americano Gold Sun Bolsita 2.500HILOS Nancy 2 Full /", "categoria": "Blanquería y Hogar", "precio": 30600},
+  {"id": "p036", "nombre": "Nuevas Sábanas Diseño Americano 2500HILOS Cod Nancy 3 100%", "categoria": "Blanquería y Hogar", "desc": "TAMAÑO:QUEEN[dos plazas y media] 1 Pieza de Sábanas 228x256cm 1 Pieza cubre", "precio": 32400},
+  {"id": "p037", "nombre": "Sabanas Ajustable con Fundas 5000 Hilos Goldsun Ud 3", "categoria": "Blanquería y Hogar", "desc": "Queen/160x200+40cm + 2 fundas (52x75cm) Liso = (Obs. Cada sábana ajustable incluye 2", "precio": 53100},
+  {"id": "p038", "nombre": "Set de Sábanas Ajustables con Fundas 5000 Hilos Marca Golsdun", "categoria": "Blanquería y Hogar", "desc": "200x205+40cm Son 4 rollos de sábanas , y cada rollo contiene 2 fundas para almohada", "precio": 56700},
+  {"id": "p039", "nombre": "Sabanas Ajustable con Fundas 5000 Hilos Goldsun Ud 1", "categoria": "Blanquería y Hogar", "desc": "104x200+40cm + 1 fundas (52×75cm)", "precio": 48600},
+  {"id": "p040", "nombre": "Modelo ajustable con fundas GOLD SUN SABANAS AJUSTABLE CON", "categoria": "Blanquería y Hogar", "desc": "en tamaño: Full / 140x200 +40cm +2 fundas( 52x75cm)", "precio": 51300},
+  {"id": "p041", "nombre": "Sabanas Ajustable CP13 Amricano 100% Algodón 3200 Hilos Ub", "categoria": "Blanquería y Hogar", "desc": "104x200+40cm", "precio": 39600},
+  {"id": "p042", "nombre": "Sabanas Ajustable Gold Sun X 4PCS Ub", "categoria": "Blanquería y Hogar", "precio": 37800},
+  {"id": "p043", "nombre": "Sabanas Ajustable Gold Sun x4", "categoria": "Blanquería y Hogar", "precio": 39600},
+  {"id": "p044", "nombre": "Sabanas Ajustable Gold Sun x4", "categoria": "Blanquería y Hogar", "precio": 40500},
+  {"id": "p045", "nombre": "Sabanas Ajustable Gold Sun x4", "categoria": "Blanquería y Hogar", "precio": 44100},
+  {"id": "p046", "nombre": "Sofá Cama Plegable Infantil", "categoria": "Blanquería y Hogar", "precio": 71100},
+  {"id": "p047", "nombre": "Tapete 3D Infantil 150x200 Cm", "categoria": "Blanquería y Hogar", "precio": 39600},
+  {"id": "p048", "nombre": "Sabanas Americano 1800HILOS. con Polleron", "categoria": "Blanquería y Hogar", "desc": "Incluye: 1 Pieza de sábana con faldón: 160x200+50cm 1 Pieza de cubre colchón: 160x 200+", "precio": 43200},
+  {"id": "p049", "nombre": "Mantel Navideños", "categoria": "Navidad", "precio": 18000},
+  {"id": "p050", "nombre": "Mantel Navideños", "categoria": "Navidad", "precio": 15300},
+  {"id": "p051", "nombre": "Alfombra Antigolpe tipo Rompecabezas 4 bloques encastrables", "categoria": "Blanquería y Hogar", "precio": 28800},
+  {"id": "p052", "nombre": "Repasador Toalla Algodón Liso", "categoria": "Blanquería y Hogar", "precio": 25200},
+  {"id": "p053", "nombre": "Repasador Toalla Algodón Liso con Fleco", "categoria": "Blanquería y Hogar", "precio": 24300},
+  {"id": "p054", "nombre": "Repasador Toalla Algodón con Fleco", "categoria": "Blanquería y Hogar", "precio": 24300},
+  {"id": "p055", "nombre": "Repasador", "categoria": "Blanquería y Hogar", "precio": 13500},
+  {"id": "p056", "nombre": "Mosquitero 2 plazas y Dos plazas y media Protección y", "categoria": "Blanquería y Hogar", "precio": 14400, "desc": "Por cantidad: $12.600"},
+  {"id": "p057", "nombre": "Toalla Goldsun America Plush Súper Soft Set de 3PCS (secado", "categoria": "Blanquería y Hogar", "desc": "Tamaño 70x1.40cm Por cantidad: $17.100", "precio": 18000},
+  {"id": "p058", "nombre": "Toalla Goldsun America Plush Súper Soft Set de 3PCS (secado", "categoria": "Blanquería y Hogar", "desc": "Tamaño 76x45cm - Tamaño 70x1.40cm", "precio": 17100},
+  {"id": "p059", "nombre": "TAPETE PARA COCINA 3pcs 2 Tapete 70x50cm 1 Tapete 140x50cm", "categoria": "Electrodomésticos y Cocina", "precio": 27000},
+  {"id": "p060", "nombre": "ALFOMBRAS PARA COCINA Diseños modernos y coloridos", "categoria": "Electrodomésticos y Cocina", "desc": "Ideales para darle un toque especial a tu cocina", "precio": 14400},
+  {"id": "p061", "nombre": "Juego de Mantel y Cubresilla para 6 Sillas 7 Piezas 1 Mantel", "categoria": "Blanquería y Hogar", "desc": "COBERTOR DE SILLA", "precio": 57600},
+  {"id": "p062", "nombre": "Juego de Mantel y Cubresilla para 8 Sillas 9 Piezas 1 Mantel", "categoria": "Blanquería y Hogar", "desc": "COBERTOR DE SILLA", "precio": 63000},
+  {"id": "p063", "nombre": "Juego de Mantel más 6 fundas para sillas 1 MANTEL PARA MESA", "categoria": "Blanquería y Hogar", "desc": "SILLA", "precio": 54000},
+  {"id": "p064", "nombre": "Toallita de Mano - Liso y rayado (X-9T)", "categoria": "Blanquería y Hogar", "desc": "Tamaño: Tamaño 35x70 Cm paquete de 6pcs", "precio": 25200},
+  {"id": "p065", "nombre": "Llegaron hermosas cortinas de lino", "categoria": "Blanquería y Hogar", "desc": "contiene correa con punta de perla magnetica", "precio": 61200},
+  {"id": "p066", "nombre": "Cortinas Blackout 3 m", "categoria": "Blanquería y Hogar", "precio": 41400},
+  {"id": "p067", "nombre": "Nuevas Cortinas Blackout Terko Corto 2026", "categoria": "Blanquería y Hogar", "desc": "elegancia", "precio": 43200},
+  {"id": "p068", "nombre": "Nuevas Cortinas Blackout Terko 2026 2.80 Metro", "categoria": "Blanquería y Hogar", "precio": 43200},
+  {"id": "p069", "nombre": "Nuevas Cortinas Torero de Boal 145x225cm/2pcs", "categoria": "Blanquería y Hogar", "precio": 41400},
+  {"id": "p070", "nombre": "Cortina de Boal Bordado Doble Paño", "categoria": "Blanquería y Hogar", "precio": 48600},
+  {"id": "p071", "nombre": "Repasador Navidadeño 12 Pcs", "categoria": "Navidad", "precio": 20700},
+  {"id": "p072", "nombre": "Repasador Económico 12 Pcs", "categoria": "Blanquería y Hogar", "precio": 14400},
+  {"id": "p073", "nombre": "Repasadores 65 x 40 cm Diseños coloridos y prácticos para tu", "categoria": "Electrodomésticos y Cocina", "precio": 25200},
+  {"id": "p074", "nombre": "Kemei KM-1102 Shaver Profesional", "categoria": "Belleza y Cuidado Personal", "desc": "Conseguí un afeitado al ras, rápido y prolijo con esta afeitadora compacta y potente Ideal para barba, cuello…"},
+  {"id": "p075", "nombre": "Kemei KM-1558 – Kit Profesional 2 en 1", "categoria": "Belleza y Cuidado Personal", "desc": "Conseguí un acabado impecable con este kit que incluye afeitadora y patillera de precisión. Compacto, potente…"},
+  {"id": "p076", "nombre": "Placa infrarroja doble hornalla BIONICA RL150978", "categoria": "Electrodomésticos y Cocina", "desc": "3500w 8 niveles de potencia Para todo tipo de ollas"},
+  {"id": "p077", "nombre": "Termómetro infrarrojo digital", "categoria": "Belleza y Cuidado Personal", "desc": "Ultra preciso Medición instantánea Con luz led (funciona con 2 pilas triple A, no incluidas)"},
+  {"id": "p078", "nombre": "Nebulizador Portátil HH-W302PLUS", "categoria": "Belleza y Cuidado Personal", "desc": "Diseño compacto, liviano y portátil Nebulización con partículas finas Funcionamiento silencioso Fácil de…"},
+  {"id": "p079", "nombre": "Speaker portátil G04 RGB", "categoria": "Tecnología y Audio", "desc": "Conexión Bluetooth 5.3 Iluminación RGB Hasta 7 horas de reproducción Resistencia al agua y al polvo IP67…"},
+  {"id": "p080", "nombre": "Parlante portátil ECOPOWER EP-2261", "categoria": "Tecnología y Audio", "desc": "Potencia de 60 W Bluetooth para conectar tu celular Batería de 8000 mAh Luces RGB multicolor Reproduce música…"},
+  {"id": "p081", "nombre": "Parlante portátil ECOPOWER EP-2225", "categoria": "Tecnología y Audio", "desc": "Potencia de 40 W Batería de 3600 mAh Luces LED RGB Conexión Bluetooth con función TWS Reproduce música por…"},
+  {"id": "p082", "nombre": "Parlante Bluetooth ECOPOWER EP-S112", "categoria": "Tecnología y Audio", "desc": "Potencia de 40 W RMS Batería de 3600 mAh Luces LED RGB Función TWS para emparejar con otro parlante…"},
+  {"id": "p083", "nombre": "Parlante portátil ECOPOWER EP-2280", "categoria": "Tecnología y Audio", "desc": "Potencia de salida de 100 W reales Batería de 6000 mAh Luces LED RGB Sonido Hi-Fi Reproduce música por…"},
+  {"id": "p084", "nombre": "Parlante portátil ECOPOWER EP-1982", "categoria": "Tecnología y Audio", "desc": "Potencia de 40 W RMS Bluetooth 5.3 Batería de 3600 mAh (7,4 V) Luces LED RGB Función TWS para emparejar con…"},
+  {"id": "p085", "nombre": "Parlante Ecopower EP-S308", "categoria": "Tecnología y Audio", "desc": "Potencia de 40 W RMS (800 W PMPO) Doble woofer de 6,5” + tweeter de 1” Batería recargable de 4500 mAh Luces…"},
+  {"id": "p086", "nombre": "Tira de Luces LED Tipo Farol", "categoria": "Linternas e Iluminación", "desc": "Dale un toque cálido y elegante a tus espacios, ideal para patios, gazebos, jardines, quinchos y reuniones…"},
+  {"id": "p087", "nombre": "Bolso magnético para gimnasio", "categoria": "Camping y Aire Libre", "desc": "Llego la época de entrenar y llegar de la mejor manera al verano Nuevo bolso magnetico Bolsa con varios…"},
+  {"id": "p088", "nombre": "Soporte para celular de 12.000 mAh con soporte para celular", "categoria": "Tecnología y Audio", "desc": "todos los modelos de dispositivos"},
+  {"id": "p089", "nombre": "Cargador portátil Ecopower EP-C872 Función de carga", "categoria": "Tecnología y Audio", "desc": "12.000 MAH"},
+  {"id": "p090", "nombre": "Power Bank Ecopower EP-C905 – 22.000 Mah", "categoria": "Tecnología y Audio", "desc": "Carga rápida de hasta 22,5W 4 cables integrados: Type-C, Lightning, Micro USB y USB Pantalla digital LED para…"},
+  {"id": "p091", "nombre": "Cargador portátil ecopower EP- C", "categoria": "Tecnología y Audio", "desc": "803 Gs. 50.000 // Disponible color blanco"},
+  {"id": "p092", "nombre": "Cargador Portátil EP-C817", "categoria": "Tecnología y Audio", "desc": "Gran capacidad de 22.000 mAh Compatible con Android y iPhone Carga rápida inteligente (Smart Charge) Pantalla…"},
+  {"id": "p093", "nombre": "Reloj Smartwatch LUO LU-X30 MINI", "categoria": "Tecnología y Audio", "desc": "HryFine"},
+  {"id": "p094", "nombre": "Reloj Smartwatch LUO LU-X33", "categoria": "Tecnología y Audio"},
+  {"id": "p095", "nombre": "Gafas inteligentes", "categoria": "Tecnología y Audio", "desc": "Cámara filmadora Auriculares incorporados Recargable Lamina de lente intercambiables"},
+  {"id": "p096", "nombre": "Celimax Retinal Shot (15 ml) (Cosmética Coreana) Reafirma tu", "categoria": "Belleza y Cuidado Personal", "desc": "minimiza poros. Fórmula potente con Retinal 0.1%, Matrixyl® 3000 y Pantenol para"},
+  {"id": "p097", "nombre": "Numbuzin No. 9 NAD+ Retinol Volumetox Eye Cream (10 ml) Crema", "categoria": "Belleza y Cuidado Personal", "desc": "Cada uno 3 unidades por . // Tipo: Tratamiento antiedad para el contorno de"},
+  {"id": "p098", "nombre": "Honor Play20A — 4/128 GB", "categoria": "Tecnología y Audio", "desc": "Pantalla de 6,9″ con tasa de refresco de 90 Hz Pantalla trasera de 2″ para previsualizar selfies Procesador…"},
+  {"id": "p099", "nombre": "Honor Play20C — 4 GB RAM + 64 GB", "categoria": "Tecnología y Audio", "desc": "Pantalla HD+ de 6,78″ con 90 Hz Pantalla trasera táctil de 2,01″ Cámara principal de 13 MP + frontal de 5 MP…"},
+  {"id": "p100", "nombre": "Lente Ray Ban primera linea", "categoria": "Tecnología y Audio", "desc": "Polarizado Delicado en cada detalle Incluye estuche Model P1302"},
+  {"id": "p101", "nombre": "Lente Ray Ban Ferrari primera linea", "categoria": "Tecnología y Audio", "desc": "Polarizado Delicado en cada detalle Incluye estuche Model 8341"},
+  {"id": "p102", "nombre": "Potente soplador portátil HENGDA YQ30056 (El modelo más", "categoria": "Herramientas", "desc": "con medidor de carga 3 velocidades Ahora con linterna . ()"},
+  {"id": "p103", "nombre": "Kit para Mover Muebles y Electrodomésticos", "categoria": "Herramientas", "desc": "Capacidad de carga de hasta 150 kg Incluye palanca elevadora y 4 bases deslizantes Rodillos giratorios para…"},
+  {"id": "p104", "nombre": "Nueva Aspiradora multifuncional", "categoria": "Electrodomésticos y Cocina", "desc": "Portátil Recargable Accesorios intercambiables Cómodo de usar"},
+  {"id": "p105", "nombre": "Nueva y potente Aspiradora Portatil 6 en 1", "categoria": "Electrodomésticos y Cocina", "desc": "Para autos Para el hogar u oficina Piso, alfombra, madera, etc. Filtro lavable 6 accesorios intercambiables…"},
+  {"id": "p106", "nombre": "Cepillo Giratorio para Lavado de Autos", "categoria": "Herramientas", "desc": "Cepillo con rotación de 360° Depósito para jabón integrado Mango extensible para alcanzar zonas difíciles…"},
+  {"id": "p107", "nombre": "Inflador portátil Ahora en su versión mas potente 150 PSI", "categoria": "Herramientas", "desc": "Multiusos (regulable para automóviles, motos, pelotas, globos, etc.) Tiene luz Led y"},
+  {"id": "p108", "nombre": "ASPIRADORA PORTÁTIL 2 EN 1 LUO LU-4981 Aspiradora + sopladora", "categoria": "Herramientas", "desc": "También cuenta con función para inflar globos Recargable por USB Incluye"},
+  {"id": "p109", "nombre": "Kit de Pulidora LUO LU-DG09", "categoria": "Herramientas", "desc": "Recargable 2 baterias de repuesto 150w de potencia"},
+  {"id": "p110", "nombre": "Taladro industrial portátil LUO LU-DG05", "categoria": "Herramientas", "desc": "Super potente 850W Recargable, incluye 2 baterías y cargador Mango para mejor agarre Maletín para transportar"},
+  {"id": "p111", "nombre": "Kit de Taladro LUO LU-DG08", "categoria": "Herramientas", "desc": "Recargable 2 baterias de repuesto 350w de potencia"},
+  {"id": "p112", "nombre": "Gato hidráulico de hasta 2 toneladas", "categoria": "Herramientas"},
+  {"id": "p113", "nombre": "Hidrolavadora Portátil Hengda 48V", "categoria": "Herramientas", "desc": "Ideal para quienes buscan practicidad y resultados rápidos Inalámbrica y portátil Alta presión para suciedad…"},
+  {"id": "p114", "nombre": "Cartel luminoso flexible", "categoria": "Linternas e Iluminación", "desc": "que se quiere mostrar o publicitar Conexión vía usb (para vehículos,"},
+  {"id": "p115", "nombre": "Kit profesional WMARK NG-2309", "categoria": "Belleza y Cuidado Personal", "desc": "Inalámbrica y recargable por USB Motor de alta velocidad: 7.500 / 9.000 RPM Batería de litio de 2.500 mAh…"},
+  {"id": "p116", "nombre": "Clipper Profesional MPRO MP-1949", "categoria": "Belleza y Cuidado Personal", "desc": "Diseño metálico plateado Batería recargable USB de 1400 mAh Hasta 180 minutos de autonomía Uso inalámbrico o…"},
+  {"id": "p117", "nombre": "Trimmer profesional WMARK NG-720D", "categoria": "Belleza y Cuidado Personal", "desc": "Motor de hasta 7.000 RPM con modo turbo Batería de 1.200 mAh Hasta 180 minutos de autonomía Carga USB Tipo C…"},
+  {"id": "p118", "nombre": "Cortapelo profesional WMARK NG-2043", "categoria": "Belleza y Cuidado Personal", "desc": "Motor de 8 W con 2 velocidades: 6.000 y 7.000 RPM Batería de 2.000 mAh Hasta 4 horas de autonomía Palanca…"},
+  {"id": "p119", "nombre": "Hoppie 550ML LU-43015", "categoria": "Termos y Botellas", "desc": "Pico de silicona Manija superior Base antideslizante Doble capa térmica de hasta 24hs. Diseño único y…"},
+  {"id": "p120", "nombre": "Hoppie luo de 550ml lu-43012", "categoria": "Termos y Botellas", "desc": "Acero inoxidable Para frío/calor Con manija"},
+  {"id": "p121", "nombre": "Hoppie Hoppie LUO LU-43007", "categoria": "Termos y Botellas", "desc": "Capacidad: 900ML Doble capa de acero inoxidable Térmico Fácil de limpiar Ligero e irrompible"},
+  {"id": "p122", "nombre": "Modelo mate listo 2en1 LU-43017 Este es un termo mate", "categoria": "Termos y Botellas", "desc": "que combina las funciones de termo, mate y bombilla en un solo"},
+  {"id": "p123", "nombre": "Hoppie Botellita LUO LU-43018", "categoria": "Termos y Botellas", "desc": "Capacidad: 750ML Doble capa de acero inoxidable Térmico Fácil de limpiar Ligero e irrompible"},
+  {"id": "p124", "nombre": "Hoppie 600ML térmico", "categoria": "Termos y Botellas"},
+  {"id": "p125", "nombre": "Hoppie 900ml doble pico", "categoria": "Termos y Botellas", "desc": "Acero inox Hasta 12h de bebidas frías/calientes Con manija"},
+  {"id": "p126", "nombre": "Reloj digital deportivo", "categoria": "Tecnología y Audio", "desc": "Pantalla led Cronómetro Resistente al agua"},
+  {"id": "p127", "nombre": "Vaso Chopera 709ML A tan sólo", "categoria": "Termos y Botellas"},
+  {"id": "p128", "nombre": "Vaso con Abridor 502ML Unidad", "categoria": "Termos y Botellas", "desc": "C/U 5 UNIDADES POR: . // Colores disponibles"},
+  {"id": "p129", "nombre": "Kit moldeador Quanta QTKM31", "categoria": "Belleza y Cuidado Personal", "desc": "Automático Profesional Cabezal intercambiable // . Características en el video"},
+  {"id": "p130", "nombre": "Samsung Galaxy A16 128GB Con funda de regalo", "categoria": "Tecnología y Audio"},
+  {"id": "p131", "nombre": "Secador 5 en 1 EUROMAX EM-6696 5 cepillos intercambiables con", "categoria": "Belleza y Cuidado Personal", "desc": "adapte a tus necesidades"},
+  {"id": "p132", "nombre": "Smartv VIZIO 32\"", "categoria": "Tecnología y Audio", "desc": "Wi-Fi Interfaz: HDMI y USB"},
+  {"id": "p133", "nombre": "Smartv QLED Audisat 50 pulgadas New model 2027 SLIM FRAMELESS", "categoria": "Tecnología y Audio"},
+  {"id": "p134", "nombre": "Smartv QLED Audisat 43 pulgadas New model 2027 SLIM FRAMELESS", "categoria": "Tecnología y Audio"},
+  {"id": "p135", "nombre": "Secador de pelo Maxon MX-8020", "categoria": "Belleza y Cuidado Personal", "desc": "3000w de potencia 2 velocidades 3 medida de temperatura"},
+  {"id": "p136", "nombre": "Pavas enlozadas que enamoran Hermosos diseños para darle un", "categoria": "Electrodomésticos y Cocina", "desc": "Capacidad de 2,5 litros Diseños variados y elegantes Prácticas y resistentes"},
+  {"id": "p137", "nombre": "Cocina biónica a gas de 3 hornallas RL150956", "categoria": "Electrodomésticos y Cocina", "desc": "caracteristicas en la imagen"},
+  {"id": "p138", "nombre": "Freidora de aire de BIONICA de 15L de", "categoria": "Electrodomésticos y Cocina", "desc": "CARACTERÍSTICAS EN LA IMAGEN"},
+  {"id": "p139", "nombre": "Horno eléctrico BIONICA de 22L de", "categoria": "Electrodomésticos y Cocina", "desc": "CARACTERÍSTICAS EN LA IMAGEN"},
+  {"id": "p140", "nombre": "Olla electrica Biónica RL150518", "categoria": "Electrodomésticos y Cocina", "desc": "caracteristicas en la imagen"},
+  {"id": "p141", "nombre": "Nueva olla eléctrica KRAB KBOEP15", "categoria": "Electrodomésticos y Cocina", "desc": "Medida: 30cm x 4cm profundidad Temperatura Regulable Superficie antiadherente"},
+  {"id": "p142", "nombre": "Nueva Parrilla eléctrica KRAB KBPE18", "categoria": "Electrodomésticos y Cocina", "desc": "Potente : 1800w Regulable: 90° hasta 240° Bandeja recolectora de aceite y grasas Fácil de limpiar Ideal si no…"},
+  {"id": "p143", "nombre": "Microondas Digital 20 Litros Quanta QTMDA20", "categoria": "Electrodomésticos y Cocina"},
+  {"id": "p144", "nombre": "Cocina infrarroja Brisa", "categoria": "Electrodomésticos y Cocina", "desc": "2000w potencia max Apto para todo tipo de ollas"},
+  {"id": "p145", "nombre": "Cocina infrarroja EUROMAX EM-7102 Panel totalmente táctil", "categoria": "Electrodomésticos y Cocina"},
+  {"id": "p146", "nombre": "Nueva Cocina infrarroja MAST", "categoria": "Electrodomésticos y Cocina", "desc": "2200w Apto para todo tipo de ollas 8 niveles de potencia"},
+  {"id": "p147", "nombre": "Cocina infrarroja Megastar ER68", "categoria": "Electrodomésticos y Cocina", "desc": "2000w de potencia"},
+  {"id": "p148", "nombre": "Nueva cocina infrarroja ASIA STAR", "categoria": "Electrodomésticos y Cocina"},
+  {"id": "p149", "nombre": "Cocina infrarroja Maxon MX-125", "categoria": "Electrodomésticos y Cocina", "desc": "2200W de potencia Sistema de seguridad contra sobrecalentamiento Temporizador"},
+  {"id": "p150", "nombre": "Nuevo ventilador Portátil doble", "categoria": "Ventilación y Climatización", "desc": "Llego el boom del momento Nuevo ventilador Portátil doble Cabeza doble regulable 3 velocidades en cada…"},
+  {"id": "p151", "nombre": "Ventilador PARANA 5 aletas metal", "categoria": "Ventilación y Climatización", "desc": "Ya disponible Ventilador PARANA 5 aletas metal Motor potente Características en la imagen . // C/U Caja de 4…"},
+  {"id": "p152", "nombre": "Ventilador UTILUX 3 aletas metal", "categoria": "Ventilación y Climatización", "desc": "Ya disponible Ventilador UTILUX 3 aletas metal Motor potente Características en la imagen . // C/U Caja de 4…"},
+  {"id": "p153", "nombre": "Ventilador LUO 5 aletas metal", "categoria": "Ventilación y Climatización", "desc": "Ya disponible Ventilador LUO 5 aletas metal Características en la imagen . // C/U Caja de 4 unidades"},
+  {"id": "p154", "nombre": "Ventilador MAST 5 aspas de plástico", "categoria": "Ventilación y Climatización", "desc": "Características en la imagen . // Caja de 4 unidades"},
+  {"id": "p155", "nombre": "Ventilador FS40", "categoria": "Ventilación y Climatización", "desc": "OFERTA Nuevo ventilador FS40 Potente y Silencioso Plastico de 18 pulgadas 3 velocidades Antes: . // Ahora"},
+  {"id": "p156", "nombre": "Mini ventilador Turbo Parana 10 pulgadas 75w de", "categoria": "Ventilación y Climatización", "desc": "potente pero silencioso"},
+  {"id": "p157", "nombre": "Ventilador grande Nobel Home 5 aletas plástico", "categoria": "Ventilación y Climatización", "desc": "Características en la imagen . // C/U Caja de 4 unidades"},
+  {"id": "p158", "nombre": "Ventilador de 5 aletas plásticas Ypasim Antes", "categoria": "Ventilación y Climatización", "desc": "OFERTA POR TEMPORADA Ventilador de 5 aletas plásticas Ypasim Antes: . () Ahora"},
+  {"id": "p159", "nombre": "Ventilador turbo Ventos 5 aspas, 16\" De mesa-piso", "categoria": "Ventilación y Climatización"},
+  {"id": "p160", "nombre": "Ventilador de techo 56\" de 3 aspas MAST 3 VELOCIDADES Por", "categoria": "Ventilación y Climatización", "desc": "YA DISPONIBLE Ventilador de techo 56\" de 3 aspas MAST 3 VELOCIDADES Por unidad . () Por caja cerrada de 3pcs.…"},
+  {"id": "p161", "nombre": "Ventilador de techo Bionica con luz", "categoria": "Ventilación y Climatización", "desc": "Cada uno Caja de de 3 unidades: o . La caja"},
+  {"id": "p162", "nombre": "Aire Acondicionado Split Vcp Silencioso y Potente", "categoria": "Ventilación y Climatización", "desc": "3000 frigorias"},
+  {"id": "p163", "nombre": "Foco con mini ventilador, mejorado con 16 pulgadas y con mas", "categoria": "Ventilación y Climatización", "desc": "lumenes HENGDA YQ10501 3 tonos de luces regulables 3 velocidades en su"},
+  {"id": "p164", "nombre": "Tira LED RGB de 5metros", "categoria": "Linternas e Iluminación", "desc": "REPOSICION Tira LED RGB de 5metros"},
+  {"id": "p165", "nombre": "Luz de emergencia Ecopower EP-E101 46 Led, ultra potente", "categoria": "Linternas e Iluminación"},
+  {"id": "p166", "nombre": "Linterna LED Recargable de doble iluminación EP-8518", "categoria": "Linternas e Iluminación", "desc": "Potencia frontal de 5W Batería de 3000 mAh Hasta 4 horas de uso continuo 3 LED traseros SMD Cuerpo metálico"},
+  {"id": "p167", "nombre": "Kit Garrafita LU-43023", "categoria": "Termos y Botellas", "desc": "Galón 1.9 litros doble manija Matero 140ML Bombilla Con Portamatero Doble capa térmica de hasta 24hs. Diseño…"},
+  {"id": "p168", "nombre": "Kit Jarra LU-43024", "categoria": "Termos y Botellas", "desc": "Jarra 2 litros Matero 140ML Bombilla Con Portamatero lateral Doble capa térmica de hasta 24hs. Diseño único y…"},
+  {"id": "p169", "nombre": "Kit Garrafita LU-43026", "categoria": "Termos y Botellas", "desc": "Galón 1.9 litros doble manija Matero 140ML Bombilla Con Portamatero Doble capa térmica de hasta 24hs. Diseño…"},
+  {"id": "p170", "nombre": "Hoppie 750ML LU-43014", "categoria": "Termos y Botellas", "desc": "Doble Pico Bloqueo Manija superior Doble capa térmica de hasta 24hs. Diseño único y exclusivo . // Colores y…"},
+  {"id": "p171", "nombre": "Piloto infantil con porta mochila", "categoria": "Paraguas y Pilotos", "precio": 7560},
+  {"id": "p172", "nombre": "Pendrive 16GB", "categoria": "Tecnología y Audio", "precio": 17820},
+  {"id": "p173", "nombre": "Pendrive 32GB", "categoria": "Tecnología y Audio", "precio": 20880},
+  {"id": "p174", "nombre": "Pendrive 64GB", "categoria": "Tecnología y Audio", "precio": 25200},
+  {"id": "p175", "nombre": "Mini láser Conexión 220V Luces de colores", "categoria": "Linternas e Iluminación", "precio": 14940},
+  {"id": "p176", "nombre": "Mini láser. Diseño de Navidad", "categoria": "Navidad", "precio": 20880},
+  {"id": "p177", "nombre": "Telescopio Grande Con tripo y estuche", "categoria": "Camping y Aire Libre", "precio": 92160},
+  {"id": "p178", "nombre": "Binocular Grande", "categoria": "Camping y Aire Libre", "precio": 44640},
+  {"id": "p179", "nombre": "Binocular Grande", "categoria": "Camping y Aire Libre", "precio": 41580},
+  {"id": "p180", "nombre": "Binocular Grande", "categoria": "Camping y Aire Libre", "precio": 35640},
+  {"id": "p181", "nombre": "Toma presión de muñeca SUNLIGHT 17602", "categoria": "Belleza y Cuidado Personal", "precio": 19440},
+  {"id": "p182", "nombre": "Toma presión de muñeca SUNLIGHT 17585", "categoria": "Belleza y Cuidado Personal", "precio": 17820},
+  {"id": "p183", "nombre": "Mini Pistola Masajeador. 3 Cabezales intercambiables", "categoria": "Belleza y Cuidado Personal", "precio": 20880},
+  {"id": "p184", "nombre": "Pila AA Maxday Paquete 60 PCS", "categoria": "Tecnología y Audio", "precio": 10800},
+  {"id": "p185", "nombre": "Pila AA Maxday Paquete de 60 pcs", "categoria": "Tecnología y Audio", "precio": 8100},
+  {"id": "p186", "nombre": "Pila Recargable en Blíster", "categoria": "Tecnología y Audio", "precio": 5040},
+  {"id": "p187", "nombre": "Pila Recargable en Blíster", "categoria": "Tecnología y Audio", "precio": 3960},
+  {"id": "p188", "nombre": "Pila Recargable en Blíster", "categoria": "Tecnología y Audio", "precio": 3960},
+  {"id": "p189", "nombre": "Bateria Recargable", "categoria": "Tecnología y Audio", "precio": 3600},
+  {"id": "p190", "nombre": "Control para Play 4 inalámbrico", "categoria": "Tecnología y Audio", "precio": 35640},
+  {"id": "p191", "nombre": "Cinta ancha transparente Tubo con 6 unidades", "categoria": "Herramientas", "precio": 17820},
+  {"id": "p192", "nombre": "LUZ DE Emergencia EUROMAX EM-3871 Recargable", "categoria": "Linternas e Iluminación", "precio": 22320},
+  {"id": "p193", "nombre": "LUZ DE Emergencia EUROMAX EM-3872 Recargable", "categoria": "Linternas e Iluminación", "precio": 20880},
+  {"id": "p194", "nombre": "Peine secador EUROMAX 5en1 EM-6696 cabezales intercambiables", "categoria": "Belleza y Cuidado Personal", "precio": 29700},
+  {"id": "p195", "nombre": "Set 3 en 1 Euromax EM-6671", "categoria": "Belleza y Cuidado Personal", "desc": "Planchita Ondulador Peine", "precio": 35640},
+  {"id": "p196", "nombre": "Planchita EUROMAX EM-6672", "categoria": "Belleza y Cuidado Personal", "precio": 22320},
+  {"id": "p197", "nombre": "LUZ DE Emergencia EUROMAX EM-3873 Recargable", "categoria": "Linternas e Iluminación", "precio": 17820},
+  {"id": "p198", "nombre": "Mini Máquina de Coser Euromax SM-202A Con mesita a pedal", "categoria": "Tecnología y Audio", "precio": 31320},
+  {"id": "p199", "nombre": "Nebulizador marca EUROMAX EM-4550", "categoria": "Belleza y Cuidado Personal", "precio": 71280},
+  {"id": "p200", "nombre": "Pava enlozada estampada EUROMAX EM-3401", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p201", "nombre": "Pava enlozada estampada EUROMAX EM-3403", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p202", "nombre": "Pava enlozada estampada EUROMAX EM-3404", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p203", "nombre": "Pava enlozada estampada MAXON MX-363", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p204", "nombre": "Pava enlozada estampada MAXON MX-355", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p205", "nombre": "Pava enlozada estampada MAXON MX-360", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p206", "nombre": "Pava enlozada estampada MAXON MX-357", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p207", "nombre": "Pava enlozada estampada MAXON MX-361", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p208", "nombre": "Pava enlozada estampada MAXON MX-362", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p209", "nombre": "Pava enlozada estampada MAXON MX-358", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p210", "nombre": "Pava enlozada estampada MAXON MX-356", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p211", "nombre": "Pava enlozada estampada MAXON MX-359", "categoria": "Electrodomésticos y Cocina", "precio": 23760},
+  {"id": "p212", "nombre": "Licuadora Raf R.295 con procesador 1000w 1.500litros base de", "categoria": "Electrodomésticos y Cocina", "desc": "velocidades", "precio": 59400},
+  {"id": "p213", "nombre": "Licuadora RAF R.2802 con 6 cuchilla de acero inoxidable", "categoria": "Electrodomésticos y Cocina", "precio": 59400},
+  {"id": "p214", "nombre": "Paragua Mango Curvo Reforzado 16 Varillas", "categoria": "Paraguas y Pilotos", "precio": 7560},
+  {"id": "p215", "nombre": "Juego de Herramientas Profesional – 85 Piezas", "categoria": "Herramientas", "desc": "Incluye: Llaves de carraca de 1/4\" y 1/2\". Juego de dados de diferentes medidas. Llaves combinadas. Pinzas y…", "precio": 178200},
+  {"id": "p216", "nombre": "Juego de Herramientas Boashi – 326 Piezas", "categoria": "Herramientas", "desc": "Llaves de carraca y extensiones. Juego de dados de diferentes medidas. Llaves combinadas. Pinzas y alicates.", "precio": 237600},
+  {"id": "p217", "nombre": "Termo EURO MAX media manija con pico Sebador", "categoria": "Termos y Botellas", "desc": "Capacidad 1 Litro De regalo una cuchara", "precio": 14400},
+  {"id": "p218", "nombre": "Termo Sifón EUROMAX EM-9026", "categoria": "Termos y Botellas", "desc": "Frio-Caliente Acero Inoxidable Capacidad 1.300ml", "precio": 28260},
+  {"id": "p219", "nombre": "Termo Sifón EUROMAX EM-9025", "categoria": "Termos y Botellas", "desc": "Frio-Caliente Acero Inoxidable 2.5 Litros", "precio": 34200},
+  {"id": "p220", "nombre": "Cortador de fiambres eléctrico EUROMAX EM-7051 200W 220V", "categoria": "Electrodomésticos y Cocina", "precio": 139680},
+  {"id": "p221", "nombre": "Hoppie Térmico EUROMAX EM-3413", "categoria": "Termos y Botellas", "desc": "350 ML Acero Inoxidable. Frio Caliente Base Engomado Antideslizante", "precio": 10440},
+  {"id": "p222", "nombre": "Hoppie Térmico EUROMAX EM-3408", "categoria": "Termos y Botellas", "desc": "500 ML Acero Inoxidable. Frio Caliente Base Engomado Antideslizante", "precio": 11880},
+  {"id": "p223", "nombre": "Hoppie Térmico EUROMAX EM-3409", "categoria": "Termos y Botellas", "desc": "750 ML Acero Inoxidable. Frio Caliente Base Engomado Antideslizante", "precio": 13500},
+  {"id": "p224", "nombre": "Escurridor de cubiertos", "categoria": "Termos y Botellas", "precio": 26820},
+  {"id": "p225", "nombre": "Paragua Reforzado 16 varillas, contra viento", "categoria": "Paraguas y Pilotos", "precio": 11340},
+  {"id": "p226", "nombre": "Paragua JC-103 Mango Recto", "categoria": "Paraguas y Pilotos", "precio": 11880},
+  {"id": "p227", "nombre": "Paragua JC mango curvo", "categoria": "Paraguas y Pilotos", "precio": 14400},
+  {"id": "p228", "nombre": "Paragua Mango Curvo de Colores", "categoria": "Paraguas y Pilotos", "precio": 9900},
+  {"id": "p229", "nombre": "Paragua Sombrilla Mediano de Razo colores estampados", "categoria": "Paraguas y Pilotos", "precio": 10440},
+  {"id": "p230", "nombre": "Sombrilla Estampado Reforzado. JC-106. Doble Tela 16 Varillas", "categoria": "Paraguas y Pilotos", "precio": 14580},
+  {"id": "p231", "nombre": "Paraguas Mango Curvo 8 Carillas", "categoria": "Paraguas y Pilotos", "precio": 9540},
+  {"id": "p232", "nombre": "Paragua JC mango recto JC-102", "categoria": "Paraguas y Pilotos", "precio": 11700},
+  {"id": "p233", "nombre": "Paragua con protector de agua", "categoria": "Paraguas y Pilotos", "precio": 10440},
+  {"id": "p234", "nombre": "Paraguas Estampado Reversible. 8 VARILLAS", "categoria": "Paraguas y Pilotos", "precio": 14940},
+  {"id": "p235", "nombre": "Paraguas Liso Invertido. 8 VARILLAS", "categoria": "Paraguas y Pilotos", "precio": 14940},
+  {"id": "p236", "nombre": "Paragua Kchiporra mango recto", "categoria": "Paraguas y Pilotos", "desc": "8 varillas", "precio": 10980},
+  {"id": "p237", "nombre": "Paraguas kachiporra reforzado JC-203", "categoria": "Paraguas y Pilotos", "precio": 16020},
+  {"id": "p238", "nombre": "Paragua reforzado Mango Curvo. Ref: JC- 201", "categoria": "Paraguas y Pilotos", "precio": 9900},
+  {"id": "p239", "nombre": "Paragua Aguilatex", "categoria": "Paraguas y Pilotos", "desc": "Paraguas Reforzado chico mango curvo 8 varillas", "precio": 7740},
+  {"id": "p240", "nombre": "Paragua Corto para Cartera AGUILATEX HMD", "categoria": "Paraguas y Pilotos", "precio": 7560},
+  {"id": "p241", "nombre": "JC-303 Paragua corto para cartera", "categoria": "Paraguas y Pilotos", "precio": 9000},
+  {"id": "p242", "nombre": "Sombrilla Estampado Corto para cartera", "categoria": "Paraguas y Pilotos", "precio": 8640},
+  {"id": "p243", "nombre": "Paragua Infantil", "categoria": "Paraguas y Pilotos", "precio": 5940},
+  {"id": "p244", "nombre": "Conjunto de Piloto PANTANERO", "categoria": "Paraguas y Pilotos", "desc": "TALLE M G GG", "precio": 53460},
+  {"id": "p245", "nombre": "Pilotin largo Rodax", "categoria": "Paraguas y Pilotos", "precio": 14940},
+  {"id": "p246", "nombre": "SCOOTER PLEGABLE NO ES ELÉCTRICO Práctico, moderno y cómodo", "categoria": "Camping y Aire Libre", "desc": "! Características: Manillar antideslizante para un mejor agarre.", "precio": 133740},
+  {"id": "p247", "nombre": "Monopatin Eléctrico Velocidad Máxima 25Km/H Luz LED delantera", "categoria": "Camping y Aire Libre", "desc": "resistentes Plataforma amplia antideslizante Timbre incorporado Sistema", "precio": 549540},
+  {"id": "p248", "nombre": "Monopatín Musical 3 Ruedas. Con Luces y Sonido A Pila", "categoria": "Camping y Aire Libre", "precio": 44640},
+  {"id": "p249", "nombre": "Mini Pimer Mixer Raf R.255 Cuerpo de plástico cuchilla de", "categoria": "Electrodomésticos y Cocina", "precio": 19440},
+  {"id": "p250", "nombre": "Juego de Mini Ollas 13 PCS Antiadherente", "categoria": "Electrodomésticos y Cocina", "precio": 44640},
+  {"id": "p251", "nombre": "Intercomunicador para Casco de Moto K06", "categoria": "Tecnología y Audio", "desc": "Características: Llamadas manos libres Música estéreo Asistente de voz Resistente al agua IPX6…", "precio": 19440},
+  {"id": "p252", "nombre": "Máquina para hacer pasta Raf R.6670", "categoria": "Electrodomésticos y Cocina", "precio": 49140},
+  {"id": "p253", "nombre": "Máquina para hacer Mini Donas Marca Raf R.2586Q 750Watts 8", "categoria": "Electrodomésticos y Cocina", "precio": 41580},
+  {"id": "p254", "nombre": "Máquina para hacer Mini Donas Marca Raf R.536Q 750Watts 8", "categoria": "Electrodomésticos y Cocina", "precio": 41580},
+  {"id": "p255", "nombre": "BOWL 4 en 1 Acero inoxidable Con tapa", "categoria": "Electrodomésticos y Cocina", "precio": 22320},
+  {"id": "p256", "nombre": "BOWL 5 en 1 Acero inoxidable Con tapa", "categoria": "Electrodomésticos y Cocina", "precio": 35640},
+  {"id": "p257", "nombre": "BOWL 5 en 1 Acero inoxidable", "categoria": "Electrodomésticos y Cocina", "precio": 25920},
+  {"id": "p258", "nombre": "BOWL 3 en 1 Acero inoxidable Con tapa", "categoria": "Electrodomésticos y Cocina", "precio": 17820},
+  {"id": "p259", "nombre": "Mini BOWL 3 en 1 Acero inoxidable", "categoria": "Electrodomésticos y Cocina"},
+  {"id": "p260", "nombre": "BOWL 5 en 1 Acero inoxidable Con tapa", "categoria": "Electrodomésticos y Cocina", "precio": 12780},
+  {"id": "p261", "nombre": "Lámpara de Escritorio", "categoria": "Linternas e Iluminación", "precio": 26820},
+  {"id": "p262", "nombre": "Pelota Asatex N° 5", "categoria": "Camping y Aire Libre", "precio": 14940},
+  {"id": "p263", "nombre": "Luces de Navidad 200 LED", "categoria": "Navidad", "precio": 14940},
+  {"id": "p264", "nombre": "Luces de Navidad 200 LED ROJO 18 Metros Aprox", "categoria": "Navidad", "precio": 14940},
+  {"id": "p265", "nombre": "Luces de Navidad 200 LED Azul 18 Metros Aprox", "categoria": "Navidad", "precio": 14940},
+  {"id": "p266", "nombre": "Luces de Navidad 200 LED", "categoria": "Navidad", "precio": 14940},
+  {"id": "p267", "nombre": "Luces de Navidad 100 LED", "categoria": "Navidad", "precio": 9000},
+  {"id": "p268", "nombre": "Luces de Navidad Ref: S9251 100 LED", "categoria": "Navidad", "precio": 9000},
+  {"id": "p269", "nombre": "Luces de Navidad Ref: S9253 100 LED", "categoria": "Navidad", "precio": 9000},
+  {"id": "p270", "nombre": "Luces de Navidad Ref: S9252 100 LED", "categoria": "Navidad", "precio": 9000},
+  {"id": "p271", "nombre": "Luces de Navidad Ref: 20705 100 LED", "categoria": "Navidad", "precio": 4860},
+  {"id": "p272", "nombre": "Luces de Navidad Ref: 20712 200 LED", "categoria": "Navidad", "precio": 8460},
+  {"id": "p273", "nombre": "Luces de Navidad Ref: 20713 200 LED", "categoria": "Navidad", "precio": 8460},
+  {"id": "p274", "nombre": "Luces de Navidad Ref: 20711 200 LED", "categoria": "Navidad", "precio": 8460},
+  {"id": "p275", "nombre": "Luces de Navidad Ref: 20709 200 LED", "categoria": "Navidad", "precio": 8460},
+  {"id": "p276", "nombre": "Luces de Navidad Ref: 20710 200 LED", "categoria": "Navidad", "precio": 8460},
+  {"id": "p277", "nombre": "Luces de Navidad Ref: S9011 200 LED", "categoria": "Navidad", "precio": 8460},
+  {"id": "p278", "nombre": "Luces de Navidad Ref: 20706 100 LED", "categoria": "Navidad", "precio": 4860},
+  {"id": "p279", "nombre": "Luces de Navidad Ref: 20701 100 LED", "categoria": "Navidad", "precio": 4860},
+  {"id": "p280", "nombre": "Luces de Navidad Ref:20703 100 LED", "categoria": "Navidad", "precio": 4860},
+  {"id": "p281", "nombre": "Luces de Navidad Ref: 20704 100 LED", "categoria": "Navidad", "precio": 4860},
+  {"id": "p282", "nombre": "Luces de Navidad Ref: S9254 100 LED", "categoria": "Navidad", "precio": 9000},
+  {"id": "p283", "nombre": "Tira de LED Cálido 150 led cable reforzado 30 metros", "categoria": "Linternas e Iluminación", "precio": 20880},
+  {"id": "p284", "nombre": "Tira de LED Multicolor 150 led cable reforzado 30 metros", "categoria": "Linternas e Iluminación", "precio": 20880},
+  {"id": "p285", "nombre": "Manguera LED", "categoria": "Linternas e Iluminación", "precio": 35640},
+  {"id": "p286", "nombre": "Manguera led AZUL de 20 metros", "categoria": "Linternas e Iluminación", "precio": 35640},
+  {"id": "p287", "nombre": "Manguera LED Multicolor 20 metros", "categoria": "Linternas e Iluminación", "precio": 35640},
+  {"id": "p288", "nombre": "Vela Navideño con luz LED blanco 40cm", "categoria": "Navidad", "precio": 5940},
+  {"id": "p289", "nombre": "Angel Navideño con luz LED blanco 42cm x 25cm", "categoria": "Navidad", "precio": 5940},
+  {"id": "p290", "nombre": "Candelabro LED con luz LED blanco 7 velas", "categoria": "Navidad", "precio": 9000},
+  {"id": "p291", "nombre": "Estrella LED con luz LED blanco 30cm", "categoria": "Navidad", "precio": 5940},
+  {"id": "p292", "nombre": "Arbolito Navideño con luz", "categoria": "Navidad", "precio": 7560},
+  {"id": "p293", "nombre": "Arbolito Navideño Acero inoxidable decorado con luz 26 x 10cm", "categoria": "Navidad", "precio": 11880},
+  {"id": "p294", "nombre": "Reno navideño", "categoria": "Navidad", "precio": 10440},
+  {"id": "p295", "nombre": "Árbol de navidad chico a pila", "categoria": "Navidad", "precio": 9000},
+  {"id": "p296", "nombre": "Árbol de navidad chico a pila", "categoria": "Navidad", "precio": 11880},
+  {"id": "p297", "nombre": "Capsula de navidad Pequeño", "categoria": "Navidad", "precio": 5940},
+  {"id": "p298", "nombre": "Capsula de navidad Mediano", "categoria": "Navidad", "precio": 9000},
+  {"id": "p299", "nombre": "Capsula de navidad", "categoria": "Navidad", "precio": 14940},
+  {"id": "p300", "nombre": "Luz LED Multicolor. Recargable 8 metros", "categoria": "Linternas e Iluminación", "precio": 17820},
+  {"id": "p301", "nombre": "Pack de 9 piezas Pino navideño", "categoria": "Navidad", "precio": 4860},
+  {"id": "p302", "nombre": "Pack de 9 piezas Pino navideño", "categoria": "Navidad", "precio": 4140},
+  {"id": "p303", "nombre": "Arbolito de navidad", "categoria": "Navidad", "precio": 4500},
+  {"id": "p304", "nombre": "Pack de 6 piezas Pino navideño", "categoria": "Navidad", "precio": 3060},
+  {"id": "p305", "nombre": "Caja para panetone 500 g a 1 kg", "categoria": "Navidad", "precio": 900, "desc": "Por cantidad: $630"},
+  {"id": "p306", "nombre": "Timbre Con Sensor de movimiento", "categoria": "Tecnología y Audio", "precio": 9540},
+  {"id": "p307", "nombre": "Piloto infantil Capybara y La BUBU", "categoria": "Paraguas y Pilotos", "precio": 13500},
+  {"id": "p308", "nombre": "Piloto infantil con porta mochila", "categoria": "Paraguas y Pilotos", "precio": 9540},
+  {"id": "p309", "nombre": "Piloto infantil con porta mochila", "categoria": "Paraguas y Pilotos", "precio": 10440},
+  {"id": "p310", "nombre": "Piloto infantil", "categoria": "Paraguas y Pilotos", "precio": 11880}
 ];
 
-/* ===================== IMÁGENES (rutas externas) ===================== */
-/* Carpeta img/ junto al index.html. Fallback automático a placeholder si falta. */
-const IMAGENES = {
-  cf01:"img/cf01.jpg", cf02:"img/cf02.jpg", cf03:"img/cf03.jpg", cf04:"img/cf04.jpg",
-  cf05:"img/cf05.jpg", cf06:"img/cf06.jpg", cf07:"img/cf07.jpg", cf08:"img/cf08.jpg",
-  cf09:"img/cf09.jpg", cf10:"img/cf10.jpg", cf11:"img/cf11.jpg", cf12:"img/cf12.jpg",
-  cf13:"img/cf13.jpg", cf14:"img/cf14.jpg", cf15:"img/cf15.jpg", cf16:"img/cf16.jpg",
-  cf17:"img/cf17.jpg", cf18:"img/cf18.jpg", cf19:"img/cf19.jpg", cf20:"img/cf20.jpg",
-  cf21:"img/cf21.jpg", cf22:"img/cf22.jpg", cf23:"img/cf23.jpg", cf24:"img/cf24.jpg",
-  cf25:"img/cf25.jpg", cf26:"img/cf26.jpg", cf27:"img/cf27.jpg", cf28:"img/cf28.jpg",
-  cf29:"img/cf29.jpg", cf30:"img/cf30.jpg", cf31:"img/cf31.jpg", cf32:"img/cf32.jpg",
-  cf33:"img/cf33.jpg", cf34:"img/cf34.jpg", cf35:"img/cf35.jpg", cf36:"img/cf36.jpg",
-  cf37:"img/cf37.jpg"
-};
+    /* ===================== CONFIG ===================== */
+    const WHATSAPP = "5493755223737";
+    const WA_URL = `https://wa.me/${WHATSAPP}`;
+    const STORAGE_KEY = "carrito_tt";
+    const fallback = t => `https://placehold.co/400x400/f1f5f9/0f172a?text=${encodeURIComponent(String(t).substring(0, 20))}`;
 
-const PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">' +
-  '<rect width="300" height="300" fill="#f1f5f9"/>' +
-  '<text x="150" y="150" fill="#94a3b8" font-family="Inter,Arial" font-size="16" ' +
-  'text-anchor="middle" dominant-baseline="middle">Sin imagen</text></svg>'
-);
+    const CATS = ["Todos", ...[
+      "Navidad", "Termos y Botellas", "Mates y Yerberos", "Camping y Aire Libre",
+      "Linternas e Iluminación", "Herramientas", "Herramientas Eléctricas",
+      "Ferretería y Accesorios", "Balanzas", "Electrodomésticos y Cocina",
+      "Ventilación y Climatización", "Belleza y Cuidado Personal",
+      "Tecnología y Audio", "Blanquería y Hogar", "Paraguas y Pilotos", "Otros"
+    ].filter(c => PRODUCTOS.some(p => p.categoria === c))];
 
-/* ===================== UTILIDADES ===================== */
-const $ = (sel) => document.querySelector(sel);
-const fmt = (n) => "$" + Number(n).toLocaleString("es-AR");
-const esc = (s) => String(s ?? "").replace(/[&<>"']/g, m => ({
-  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-}[m]));
+    const ICONOS = {
+      "Navidad": "fa-tree", "Termos y Botellas": "fa-mug-hot", "Mates y Yerberos": "fa-leaf",
+      "Camping y Aire Libre": "fa-campground", "Linternas e Iluminación": "fa-lightbulb",
+      "Herramientas": "fa-screwdriver-wrench", "Herramientas Eléctricas": "fa-bolt",
+      "Ferretería y Accesorios": "fa-toolbox", "Balanzas": "fa-weight-scale",
+      "Electrodomésticos y Cocina": "fa-blender", "Ventilación y Climatización": "fa-fan",
+      "Belleza y Cuidado Personal": "fa-spa", "Tecnología y Audio": "fa-headphones",
+      "Blanquería y Hogar": "fa-bed", "Paraguas y Pilotos": "fa-umbrella", "Otros": "fa-box"
+    };
 
-/* ===================== ESTADO ===================== */
-const STORAGE_KEY = "carrito_tecno_v1";
-let carrito = {};
-try { carrito = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {}; }
-catch(e){ carrito = {}; }
-let categoriaActual = "Todos";
+    /* ===================== ESTADO ===================== */
+    let carrito = [];
+    try { carrito = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch (e) { carrito = []; }
+    if (!Array.isArray(carrito)) carrito = [];
+    let catAct = "Todos";
 
-/* ===================== CATEGORÍAS ===================== */
-function categoriasUnicas() {
-  const set = new Set(PRODUCTOS.map(p => p.categoria));
-  return ["Todos", ...set];
-}
+    /* ===================== HELPERS ===================== */
+    const $ = id => document.getElementById(id);
+    const grid = $("grid"), catBar = $("cats"), titulo = $("titulo");
+    const lista = $("lista"), totalEl = $("total"), contador = $("contador");
+    const panel = $("panel"), fondo = $("fondo"), modal = $("modal"), visor = $("visor");
+    const buscar = $("buscar"), btnCheckout = $("btn-checkout"), btnVaciar = $("btn-vaciar");
+    const toastEl = $("toast");
 
-function conteoPorCategoria(cat) {
-  return cat === "Todos" ? PRODUCTOS.length
-       : PRODUCTOS.filter(p => p.categoria === cat).length;
-}
+    const nf = new Intl.NumberFormat("es-AR", { maximumFractionDigits: 0 });
+    const fmt = n => nf.format(n);
 
-function renderCategorias() {
-  const cont = $("#cats");
-  cont.innerHTML = categoriasUnicas().map(c => `
-    <button class="cat-btn ${c === categoriaActual ? "activo" : ""}" data-cat="${esc(c)}">
-      ${esc(c)}
-      <span class="count">${conteoPorCategoria(c)}</span>
-    </button>
-  `).join("");
+    const esc = s => String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
 
-  cont.querySelectorAll(".cat-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      categoriaActual = btn.dataset.cat;
-      renderCategorias();
-      renderProductos();
+    const guardar = () => {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(carrito)); } catch (e) {}
+    };
+
+    let toastTimer;
+    function toast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add("visible");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove("visible"), 2400);
+    }
+
+    /* ===================== HEADER DINÁMICO ===================== */
+    function medirHeader() {
+      const h = document.querySelector("header").offsetHeight;
+      document.documentElement.style.setProperty("--header-h", h + "px");
+    }
+    addEventListener("resize", medirHeader);
+    addEventListener("orientationchange", medirHeader);
+    medirHeader();
+
+    /* ===================== BLOQUEO DE SCROLL ===================== */
+    function syncBloqueo() {
+      const abierto =
+        panel.classList.contains("abierto") ||
+        modal.classList.contains("abierto") ||
+        visor.classList.contains("abierto");
+      document.body.classList.toggle("bloqueado", abierto);
+      document.body.classList.toggle("panel-abierto", panel.classList.contains("abierto"));
+    }
+
+    /* ===================== CATEGORÍAS ===================== */
+    function renderCats() {
+      const frag = document.createDocumentFragment();
+      CATS.forEach(c => {
+        if (c !== "Todos" && !PRODUCTOS.some(p => p.categoria === c)) return;
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "cat-btn" + (catAct === c ? " activo" : "");
+        b.setAttribute("aria-pressed", catAct === c ? "true" : "false");
+        b.innerHTML = `<i class="fa-solid ${ICONOS[c] || "fa-box"}" aria-hidden="true"></i> ${esc(c)}`;
+        b.onclick = () => { catAct = c; renderCats(); render(); };
+        frag.appendChild(b);
+      });
+      catBar.innerHTML = "";
+      catBar.appendChild(frag);
+    }
+
+    /* ===================== RENDER PRODUCTOS ===================== */
+    let tBuscar;
+    buscar.addEventListener("input", () => {
+      clearTimeout(tBuscar);
+      tBuscar = setTimeout(render, 120);
     });
-  });
-}
 
-/* ===================== PRODUCTOS ===================== */
-function renderProductos() {
-  const grid = $("#grid");
-  const titulo = $("#titulo");
+    function render() {
+      const q = buscar.value.toLowerCase().trim();
+      const listaProd = PRODUCTOS.filter(p =>
+        (catAct === "Todos" || p.categoria === catAct) &&
+        (!q || (p.nombre + " " + (p.desc || "")).toLowerCase().includes(q))
+      );
 
-  const filtrados = categoriaActual === "Todos"
-    ? PRODUCTOS
-    : PRODUCTOS.filter(p => p.categoria === categoriaActual);
+      titulo.textContent = (catAct === "Todos" ? "Todos los productos" : catAct) + ` (${listaProd.length})`;
 
-  titulo.textContent = categoriaActual === "Todos"
-    ? `Todos los productos (${filtrados.length})`
-    : `${categoriaActual} (${filtrados.length})`;
+      const frag = document.createDocumentFragment();
 
-  if (!filtrados.length) {
-    grid.innerHTML = '<p class="empty" style="grid-column:1/-1">No hay productos en esta categoría.</p>';
-    return;
-  }
+      listaProd.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-  grid.innerHTML = filtrados.map(p => `
-    <div class="card" data-id="${esc(p.id)}">
-      <img src="${esc(IMAGENES[p.id] || PLACEHOLDER)}"
-           alt="${esc(p.nombre)}" loading="lazy"
-           onerror="this.onerror=null;this.src='${PLACEHOLDER}'"
-           data-zoom="${esc(p.id)}">
-      <h3>${esc(p.nombre)}</h3>
-      ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ""}
-      <div class="precio">${fmt(p.precio)}</div>
-      <button class="agregar" data-add="${esc(p.id)}">Agregar al carrito</button>
-    </div>
-  `).join("");
+        const precioHTML = typeof p.precio === "number"
+          ? `<div class="precio">$${fmt(p.precio)}</div>
+             <button class="agregar" type="button" aria-label="Añadir ${esc(p.nombre)} al carrito">Añadir</button>`
+          : `<div class="precio" style="color:#64748b;font-size:13px">Consultar precio</div>
+             <a class="agregar" target="_blank" rel="noopener"
+                href="${WA_URL}?text=${encodeURIComponent("Hola! Quiero consultar el precio de: " + p.nombre)}"
+                aria-label="Consultar precio de ${esc(p.nombre)} por WhatsApp">Consultar</a>`;
 
-  grid.querySelectorAll("[data-add]").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      agregarAlCarrito(btn.dataset.add);
-    });
-  });
+        card.innerHTML = `
+          <img src="img/${esc(p.id)}.jpg" alt="${esc(p.nombre)}" loading="lazy" decoding="async">
+          <h3>${esc(p.nombre)}</h3>
+          ${p.desc ? `<div class="desc">${esc(p.desc)}</div>` : ""}
+          ${precioHTML}
+        `;
 
-  grid.querySelectorAll("[data-zoom]").forEach(img => {
-    img.addEventListener("click", () => abrirVisor(img.dataset.zoom));
-  });
-}
+        const img = card.querySelector("img");
+        img.onerror = () => { img.onerror = null; img.src = fallback(p.nombre); };
+        img.onclick = () => {
+          visor.querySelector("img").src = img.currentSrc || img.src;
+          visor.classList.add("abierto");
+          visor.setAttribute("aria-hidden", "false");
+          syncBloqueo();
+        };
 
-/* ===================== CARRITO ===================== */
-function guardarCarrito() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(carrito));
-  const total = Object.values(carrito).reduce((a,b) => a + b, 0);
-  $("#contador").textContent = total;
-}
+        const btnAg = card.querySelector("button.agregar");
+        if (btnAg) {
+          btnAg.onclick = () => {
+            const ex = carrito.find(i => i.id === p.id);
+            if (ex) ex.c++;
+            else carrito.push({ id: p.id, c: 1 });
+            guardar();
+            updateCart();
+            toast(`Añadido: ${p.nombre}`);
+          };
+        }
 
-function agregarAlCarrito(id) {
-  carrito[id] = (carrito[id] || 0) + 1;
-  guardarCarrito();
-  renderCarrito();
-  abrirPanel();
-}
+        frag.appendChild(card);
+      });
 
-function renderCarrito() {
-  const lista = $("#lista");
-  const totalDiv = $("#total");
-  const items = Object.entries(carrito).filter(([,q]) => q > 0);
+      grid.innerHTML = "";
+      grid.appendChild(frag);
+    }
 
-  if (!items.length) {
-    lista.innerHTML = '<p class="empty">Tu carrito está vacío</p>';
-    totalDiv.textContent = "";
-    return;
-  }
+    /* ===================== CARRITO ===================== */
+    function updateCart() {
+      const antes = carrito.length;
+      carrito = carrito.filter(i => i && PRODUCTOS.some(p => p.id === i.id));
+      if (carrito.length !== antes) guardar();
 
-  let total = 0;
-  lista.innerHTML = items.map(([id, qty]) => {
-    const p = PRODUCTOS.find(x => x.id === id);
-    if (!p) return "";
-    const sub = p.precio * qty;
-    total += sub;
-    return `
-      <div class="item">
-        <div class="nom">
-          ${esc(p.nombre)}
-          <div style="font-size:12px;color:#64748b;font-weight:400">
-            ${fmt(p.precio)} × ${qty} = ${fmt(sub)}
+      contador.textContent = carrito.reduce((s, i) => s + (Number(i.c) || 0), 0);
+
+      if (!carrito.length) {
+        lista.innerHTML = "<p style='color:#94a3b8;text-align:center;margin-top:40px'>El carrito está vacío</p>";
+        totalEl.textContent = "";
+        btnCheckout.disabled = true;
+        btnVaciar.hidden = true;
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+      let tot = 0;
+
+      carrito.forEach((it, i) => {
+        const pr = PRODUCTOS.find(x => x.id === it.id);
+        if (!pr || typeof pr.precio !== "number") return;
+
+        const subtotal = pr.precio * it.c;
+        tot += subtotal;
+
+        const d = document.createElement("div");
+        d.className = "item";
+        d.innerHTML = `
+          <div class="nom">
+            ${esc(pr.nombre)}<br>
+            <span style="font-weight:400;color:#64748b">$${fmt(subtotal)}</span>
           </div>
-        </div>
-        <div class="qty">
-          <button data-menos="${esc(id)}" aria-label="Restar">−</button>
-          <span>${qty}</span>
-          <button data-mas="${esc(id)}" aria-label="Sumar">+</button>
-          <button class="del" data-del="${esc(id)}" aria-label="Eliminar">✕</button>
-        </div>
-      </div>
-    `;
-  }).join("");
+          <div class="qty">
+            <button class="menos" type="button" aria-label="Quitar uno de ${esc(pr.nombre)}">−</button>
+            <b aria-live="polite">${it.c}</b>
+            <button class="mas" type="button" aria-label="Agregar uno de ${esc(pr.nombre)}">+</button>
+            <button class="del" type="button" aria-label="Eliminar ${esc(pr.nombre)} del carrito">✕</button>
+          </div>`;
 
-  totalDiv.textContent = "Total: " + fmt(total);
+        d.querySelector(".menos").onclick = () => {
+          if (it.c > 1) it.c--;
+          else carrito.splice(i, 1);
+          guardar(); updateCart();
+        };
+        d.querySelector(".mas").onclick = () => { it.c++; guardar(); updateCart(); };
+        d.querySelector(".del").onclick = () => { carrito.splice(i, 1); guardar(); updateCart(); };
 
-  lista.querySelectorAll("[data-mas]").forEach(b =>
-    b.addEventListener("click", () => { carrito[b.dataset.mas]++; guardarCarrito(); renderCarrito(); }));
-  lista.querySelectorAll("[data-menos]").forEach(b =>
-    b.addEventListener("click", () => {
-      carrito[b.dataset.menos]--;
-      if (carrito[b.dataset.menos] <= 0) delete carrito[b.dataset.menos];
-      guardarCarrito(); renderCarrito();
-    }));
-  lista.querySelectorAll("[data-del]").forEach(b =>
-    b.addEventListener("click", () => {
-      delete carrito[b.dataset.del];
-      guardarCarrito(); renderCarrito();
-    }));
-}
+        frag.appendChild(d);
+      });
 
-/* ===================== PANEL ===================== */
-function abrirPanel() {
-  $("#panel").classList.add("abierto");
-  $("#fondo").classList.add("activo");
-}
-function cerrarPanel() {
-  $("#panel").classList.remove("abierto");
-  $("#fondo").classList.remove("activo");
-}
+      lista.innerHTML = "";
+      lista.appendChild(frag);
 
-/* ===================== VISOR ===================== */
-function abrirVisor(id) {
-  const visor = $("#visor");
-  const img = visor.querySelector("img");
-  img.src = IMAGENES[id] || PLACEHOLDER;
-  img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER; };
-  visor.style.display = "flex";
-}
-function cerrarVisor() {
-  $("#visor").style.display = "none";
-}
+      totalEl.textContent = `Total: $${fmt(tot)}`;
+      btnCheckout.disabled = false;
+      btnVaciar.hidden = false;
+    }
 
-/* ===================== CHECKOUT / WHATSAPP ===================== */
-function enviarPedidoWhatsApp() {
-  const items = Object.entries(carrito).filter(([,q]) => q > 0);
-  if (!items.length) { alert("El carrito está vacío"); return; }
+    btnVaciar.onclick = () => {
+      if (!carrito.length) return;
+      if (!confirm("¿Vaciar el carrito?")) return;
+      carrito = [];
+      guardar(); updateCart();
+      toast("Carrito vaciado");
+    };
 
-  let msg = "¡Hola! Quiero confirmar este pedido:\n\n";
-  let total = 0;
-  items.forEach(([id, qty]) => {
-    const p = PRODUCTOS.find(x => x.id === id);
-    if (!p) return;
-    msg += `• ${p.nombre} × ${qty} = ${fmt(p.precio * qty)}\n`;
-    total += p.precio * qty;
-  });
-  msg += `\nTotal: ${fmt(total)}\n\n`;
-  msg += "Envío comprobante de transferencia al alias mundo95.";
+    /* ===================== PANEL ===================== */
+    function abrirPanel() {
+      panel.classList.add("abierto");
+      panel.setAttribute("aria-hidden", "false");
+      fondo.classList.add("activo");
+      syncBloqueo();
+      $("cerrar-panel").focus();
+    }
+    function cerrarPanel() {
+      panel.classList.remove("abierto");
+      panel.setAttribute("aria-hidden", "true");
+      fondo.classList.remove("activo");
+      syncBloqueo();
+      $("btn-carrito").focus();
+    }
+    $("btn-carrito").onclick = abrirPanel;
+    $("cerrar-panel").onclick = cerrarPanel;
+    fondo.onclick = cerrarPanel;
 
-  const url = "https://wa.me/5493755223737?text=" + encodeURIComponent(msg);
-  window.open(url, "_blank");
+    /* ===================== MODAL ===================== */
+    function abrirModal() {
+      modal.classList.add("abierto");
+      modal.setAttribute("aria-hidden", "false");
+      syncBloqueo();
+      $("btn-wa").focus();
+    }
+    function cerrarModal() {
+      modal.classList.remove("abierto");
+      modal.setAttribute("aria-hidden", "true");
+      syncBloqueo();
+    }
+    $("btn-cerrar-modal").onclick = cerrarModal;
 
-  carrito = {};
-  guardarCarrito();
-  renderCarrito();
-  cerrarPanel();
-  $("#modal").style.display = "none";
-}
+    btnCheckout.onclick = () => {
+      if (!carrito.length) return toast("Agregá productos al carrito primero.");
+      abrirModal();
+    };
 
-/* ===================== INIT ===================== */
-document.addEventListener("DOMContentLoaded", () => {
-  renderCategorias();
-  renderProductos();
-  renderCarrito();
+    /* ===================== WHATSAPP CHECKOUT ===================== */
+    $("btn-wa").onclick = () => {
+      let msg = "Hola! Quiero confirmar este pedido:\n\n";
+      let total = 0;
 
-  $("#btn-carrito").addEventListener("click", abrirPanel);
-  $("#cerrar-panel").addEventListener("click", cerrarPanel);
-  $("#fondo").addEventListener("click", cerrarPanel);
+      carrito.forEach(it => {
+        const p = PRODUCTOS.find(x => x.id === it.id);
+        if (!p || typeof p.precio !== "number") return;
+        total += p.precio * it.c;
+        msg += `• ${it.c}x ${p.nombre} — $${fmt(p.precio * it.c)}\n`;
+      });
 
-  $("#btn-checkout").addEventListener("click", () => {
-    const hayItems = Object.values(carrito).some(q => q > 0);
-    if (!hayItems) { alert("El carrito está vacío"); return; }
-    $("#modal").style.display = "flex";
-  });
-  $("#btn-cerrar-modal").addEventListener("click", () => {
-    $("#modal").style.display = "none";
-  });
-  $("#btn-wa").addEventListener("click", enviarPedidoWhatsApp);
+      msg += `\n*Total: $${fmt(total)}*\n\nYa realicé la transferencia al alias mundo95. *Adjunto el comprobante acá abajo* 👇`;
 
-  $("#visor").addEventListener("click", cerrarVisor);
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { cerrarVisor(); cerrarPanel(); $("#modal").style.display = "none"; }
-  });
-});
-</script>
+      const url = `${WA_URL}?text=${encodeURIComponent(msg)}`;
+      const w = window.open(url, "_blank");
+      if (!w) location.href = url;
+
+      cerrarModal();
+      cerrarPanel();
+    };
+
+    /* ===================== VISOR ===================== */
+    function cerrarVisor() {
+      visor.classList.remove("abierto");
+      visor.setAttribute("aria-hidden", "true");
+      syncBloqueo();
+    }
+    visor.onclick = cerrarVisor;
+    visor.setAttribute("aria-hidden", "true");
+
+    /* ===================== ESCAPE ===================== */
+    addEventListener("keydown", e => {
+      if (e.key !== "Escape") return;
+      if (visor.classList.contains("abierto")) return cerrarVisor();
+      if (modal.classList.contains("abierto")) return cerrarModal();
+      if (panel.classList.contains("abierto")) return cerrarPanel();
+    });
+
+    /* ===================== INIT ===================== */
+    renderCats();
+    render();
+    updateCart();
+    syncBloqueo();
+  </script>
 </body>
 </html>
