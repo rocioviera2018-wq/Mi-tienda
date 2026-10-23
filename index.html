@@ -1,334 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tecno Tech Oberá | Tienda Oficial</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #0f172a; 
-      --accent: #25D366; 
-      --bg: #f8fafc; 
-      --card-bg: #ffffff;
-      --text: #334155;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
-    
-    header { background: var(--card-bg); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 50; }
-    .logo-text { font-size: 1.15rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
-    .logo-text span { color: var(--accent); }
-    #btn-carrito { background: var(--primary); color: #fff; border: none; padding: 10px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
-
-    .hero { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 30px 20px; text-align: center; }
-    .hero h2 { font-size: 1.4rem; margin-bottom: 10px; font-weight: 800; }
-    .hero p { font-size: 0.95rem; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.5; }
-
-    .categorias-wrapper { background: var(--card-bg); box-shadow: 0 4px 10px rgba(0,0,0,0.03); padding: 15px 0; position: sticky; top: 65px; z-index: 40; }
-    .categorias-scroll { display: flex; overflow-x: auto; gap: 12px; padding: 0 20px; scrollbar-width: none; }
-    .categorias-scroll::-webkit-scrollbar { display: none; }
-    .cat-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 90px; padding: 12px 10px; border-radius: 12px; border: 2px solid transparent; background: #f1f5f9; color: var(--text); cursor: pointer; transition: all 0.2s; font-weight: 600; font-size: 0.75rem; text-align: center; gap: 8px; white-space: nowrap; }
-    .cat-btn:hover { background: #e2e8f0; }
-    .cat-btn.activo { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
-    .cat-icon { font-size: 1.4rem; color: #475569; }
-    .cat-btn.activo .cat-icon { color: #3b82f6; }
-
-    .catalogo-container { padding: 24px 20px; max-width: 1200px; margin: 0 auto; flex: 1; width: 100%; }
-    .catalogo-title { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; text-align: center; }
-    .seccion-cat { margin-bottom: 36px; scroll-margin-top: 150px; }
-    .seccion-titulo { font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
-    .seccion-titulo small { font-weight: 600; color: #94a3b8; font-size: 0.75rem; margin-left: auto; }
-    
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
-    .card { background: var(--card-bg); border-radius: 16px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; transition: transform 0.2s; }
-    .card:hover { transform: translateY(-4px); }
-    .galeria { position: relative; margin-bottom: 10px; }
-    .galeria img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #eee; display: block; }
-    .g-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; border: none; background: rgba(15,23,42,0.55); color: #fff; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
-    .g-prev { left: 6px; } .g-next { right: 6px; }
-    .g-count { position: absolute; bottom: 6px; right: 6px; background: rgba(15,23,42,0.6); color: #fff; font-size: 0.65rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
-    .card h3 { font-size: 0.95rem; font-weight: 600; color: var(--primary); margin-bottom: 4px; line-height: 1.2; }
-    .card .desc { font-size: 0.78rem; color: #64748b; margin-bottom: 6px; line-height: 1.3; }
-    .card details { font-size: 0.75rem; color: #475569; margin-bottom: 8px; }
-    .card details summary { cursor: pointer; color: #1d4ed8; font-weight: 600; }
-    .card details ul { margin: 6px 0 0 16px; line-height: 1.4; }
-    .card .precio { font-size: 1.05rem; font-weight: 800; color: #0a7d32; margin-bottom: 10px; }
-    .card select { width: 100%; padding: 6px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.8rem; }
-    .card button.agregar { margin-top: auto; background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
-
-    footer { background: var(--primary); color: white; padding: 30px 20px; text-align: center; margin-top: auto; }
-    footer h3 { font-size: 1.1rem; margin-bottom: 15px; font-weight: 800; }
-    footer p { font-size: 0.95rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0.9; }
-    footer i { color: var(--accent); }
-
-    #carrito-panel { position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100%; background: var(--card-bg); box-shadow: -4px 0 30px rgba(0,0,0,0.15); padding: 24px; transition: right 0.3s; display: flex; flex-direction: column; z-index: 100; }
-    #carrito-panel.abierto { right: 0; }
-    #carrito-panel h2 { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; }
-    #lista-carrito { flex: 1; overflow-y: auto; margin-bottom: 20px; }
-    .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
-    .item-carrito strong { color: var(--primary); }
-    .item-carrito button { background: #fee2e2; color: #ef4444; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; }
-    #total-carrito { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 16px; text-align: right; }
-    #btn-checkout { background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; }
-    #btn-cerrar { background: #f1f5f9; border: none; font-size: 1.2rem; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; align-self: flex-end; margin-bottom: 10px; color: #64748b; }
-    #carrito-vacio { color: #94a3b8; font-size: 1rem; text-align: center; margin-top: 40px; }
-
-    #modal-pago { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.7); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
-    .modal-content { background: #fff; border-radius: 16px; padding: 24px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .modal-content h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
-    .modal-content p { font-size: 0.95rem; color: #475569; margin-bottom: 15px; line-height: 1.4; }
-    .datos-pago { background: #f8fafc; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
-    .datos-pago .alias-box { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
-    .datos-pago .titular-box { font-size: 0.9rem; color: #64748b; font-weight: 600; }
-    .btn-modal { background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; margin-bottom: 10px; }
-    .btn-cancelar { background: transparent; color: #64748b; border: none; font-size: 0.9rem; cursor: pointer; text-decoration: underline; }
-
-    .fondo-oscuro { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); z-index: 99; }
-    .fondo-oscuro.activo { display: block; }
-    
-    .whatsapp-float { position: fixed; bottom: 24px; right: 24px; background-color: var(--accent); color: #fff; border-radius: 50px; padding: 16px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tecno Tech Oberá</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--primary:#0f172a;--accent:#25D366;--bg:#f8fafc}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial}
+body{background:var(--bg);display:flex;flex-direction:column;min-height:100vh}
+header{background:#fff;padding:16px 20px;display:flex;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.05);position:sticky;top:0;z-index:50}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+.card{background:#fff;border-radius:16px;padding:12px;box-shadow:0 4px 15px rgba(0,0,0,.03);display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#f1f5f9}
+.card .precio{font-weight:800;color:#0a7d32;margin:8px 0}
+.card button{background:var(--primary);color:#fff;border:none;padding:8px;border-radius:8px;cursor:pointer}
+</style>
 </head>
 <body>
+<header><div style="font-weight:800">Tecno Tech <span style="color:#25D366">Oberá</span></div><button id="btn-carrito">Carrito (<span id="contador">0</span>)</button></header>
+<main style="padding:20px;max-width:1200px;margin:auto;width:100%"><div id="grid" class="grid"></div></main>
+<script>
+// ESTA ES LA CLAVE: ahora tus fotos están en /img/
+const PRODUCTOS = [
+  {id:"p200",nombre:"Termo Stanley 1L Rosa System",precio:38900,imagenes:["img/final_prod_001.jpg"]},
+  {id:"p201",nombre:"Termo Stanley 1L Rojo",precio:38900,imagenes:["img/final_prod_002.jpg"]},
+  {id:"p202",nombre:"Termo Stanley 1L Blanco",precio:38900,imagenes:["img/final_prod_003.jpg"]},
+  {id:"p203",nombre:"Termo Stanley 1L Bordo",precio:38900,imagenes:["img/final_prod_004.jpg"]},
+  {id:"p204",nombre:"Termo Stanley 1L Lila",precio:38900,imagenes:["img/final_prod_005.jpg"]},
+  {id:"p205",nombre:"Vaso Quencher 1.2L Stanley Degradé",precio:43200,imagenes:["img/final_prod_010.jpg"]},
+  {id:"p206",nombre:"Vaso Quencher 1.2L Stanley Rosa/Lila",precio:43200,imagenes:["img/final_prod_011.jpg"]},
+  {id:"p207",nombre:"Kit GOAT 4x1 Stanley Rosa",precio:24500,imagenes:["img/final_prod_015.jpg"]},
+  {id:"p208",nombre:"Set Tramontina New Kolor 25 piezas",precio:28900,imagenes:["img/final_prod_020.jpg"]},
+  {id:"p176",nombre:"PC Gamer i3 + GTX 750 Ti Completa",precio:480000,imagenes:["img/p176-1.jpg"]},
+];
 
-  <header>
-    <div class="logo-text">Tecno Tech <span>Oberá</span></div>
-    <button id="btn-carrito">Carrito (<span id="contador">0</span>)</button>
-  </header>
-
-  <section class="hero">
-    <h2>Bienvenidos a Tecno Tech Oberá</h2>
-    <p>Hacé tu pedido por la web, transferí y envianos el comprobante por WhatsApp. Envíos en 72 horas.</p>
-  </section>
-
-  <div class="categorias-wrapper">
-    <div class="categorias-scroll" id="categorias-container"></div>
-  </div>
-
-  <main class="catalogo-container">
-    <h2 class="catalogo-title" id="titulo-categoria">Todos los productos</h2>
-    <div id="grid-productos"><p>Cargando productos...</p></div>
-  </main>
-
-  <footer>
-    <h3>¡Visitanos en nuestro local!</h3>
-    <p><i class="fa-solid fa-location-dot"></i> Av. Italia 1459, Oberá</p>
-    <p><i class="fa-brands fa-whatsapp"></i> 3755 223737</p>
-    <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.6;">Tecno Tech Oberá &copy; 2024</p>
-  </footer>
-
-  <div class="fondo-oscuro" id="fondo"></div>
-  <div id="carrito-panel">
-    <button id="btn-cerrar">✕</button>
-    <h2>Tu pedido</h2>
-    <div id="lista-carrito"></div>
-    <div id="total-carrito"></div>
-    <button id="btn-checkout"><i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Confirmar pedido</button>
-  </div>
-
-  <div id="modal-pago">
-    <div class="modal-content">
-      <h3>¡Casi listo!</h3>
-      <p>Para confirmar tu pedido, realizá una transferencia con estos datos:</p>
-      <div class="datos-pago">
-        <div class="alias-box">Alias: mundo95</div>
-        <div class="titular-box">Titular: Matias Gonzalo Lepori</div>
-      </div>
-      <p>Una vez transferido, tocá el botón de abajo. Se abrirá WhatsApp con tu pedido listo y solo tendrás que <strong>adjuntar la foto del comprobante</strong>.</p>
-      <button class="btn-modal" id="btn-confirmar-wa"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp y enviar</button>
-      <button class="btn-cancelar" id="btn-cerrar-modal">Cancelar</button>
-    </div>
-  </div>
-
-  <a href="https://wa.me/5493755223737?text=Hola!%20Estoy%20en%20la%20tienda%20y%20quiero%20hacer%20una%20consulta." target="_blank" class="whatsapp-float">
-    <i class="fa-brands fa-whatsapp" style="font-size: 1.8rem;"></i>
-  </a>
-
-  <script>
-    const WHATSAPP_NUMERO = "5493755223737";
-    
-    // FOTOS REALES DE TU GALERÍA
-    const PRODUCTOS = [
-      // CAPTURA 1 - Stanley 1 Litro
-      {id:"p300",nombre:"Termo Stanley 1L Rosa con Mate",descripcion:"4 Sellos - Acero inox",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_001.jpg"]},
-      {id:"p301",nombre:"Termo Stanley 1L Rojo con Mate",descripcion:"4 Sellos - Manija",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_002.jpg"]},
-      {id:"p302",nombre:"Termo Stanley 1L Blanco",descripcion:"4 Sellos",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_003.jpg"]},
-      {id:"p303",nombre:"Termo Stanley 1L Bordo",descripcion:"Con mate negro",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_004.jpg"]},
-      {id:"p304",nombre:"Termo Stanley 1L Lila",descripcion:"4 Sellos",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_005.jpg"]},
-      {id:"p305",nombre:"Combo Termo System 1L x4 colores",descripcion:"4 Sellos - Incluye mate",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_006.jpg"]},
-      
-      // CAPTURA 3 - LIMON ICE y HELLO KITTY
-      {id:"p330",nombre:"Kit Limon Ice 1L Flores Rosas",descripcion:"Termo + Mate + Bombilla + Tapa",precio:45600,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_037.jpg"]},
-      {id:"p331",nombre:"Kit Hello Kitty 1200ml Blanco",descripcion:"Termo + Mate + Bombilla + Yerbero + Azucarero",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_042.jpg"]},
-      {id:"p332",nombre:"Kit Hello Kitty 1200ml Rosa",descripcion:"Termo + Mate + Bombilla + Yerbero + Azucarero",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_043.jpg"]},
-      {id:"p333",nombre:"Kit Stitch Celeste 5 Piezas",descripcion:"Termo + Mate + Yerbero + Azucarero + Bombilla",precio:49500,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_050.jpg"]},
-
-      // CAPTURA 8 - Hoppys 650ml / 1 Litro
-      {id:"p340",nombre:"Hoppys 650ml Doble Pico Celeste",descripcion:"Acero inox - Con asa",precio:16200,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_130.jpg"]},
-      {id:"p341",nombre:"Hoppys 1 Litro Celeste con Flores",descripcion:"Estampado floral - Pico cebador",precio:18900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_145.jpg"]},
-      
-      // CAPTURA 5 - Picador Bionica, Touch 120pcs
-      {id:"p360",nombre:"Picador de Alimentos Bionica 300W",descripcion:"2 velocidades - Acero inox",precio:34600,categoria:"Electrodomésticos",imagenes:["img/img_tecnotech_080.jpg"]},
-      {id:"p361",nombre:"Marcadores Doble Punta Touch 120 Piezas",descripcion:"Estuche + Base",precio:23400,categoria:"Librería",imagenes:["img/img_tecnotech_082.jpg"]},
-
-      // PC GAMER
-      {id:"p176",nombre:"PC Gamer Completa i3 + GTX 750 Ti",descripcion:"8GB RAM + SSD 240GB + Monitor 17 + Kit",precio:480000,categoria:"Accesorios y Tecnología",imagenes:["img/p176-1.jpg"]}
-    ];
-
-    const categoriasList = [
-      { nombre: "Todos", icono: "fa-box-open" },
-      { nombre: "Termos, Mates y Vasos", icono: "fa-mug-hot" },
-      { nombre: "Accesorios y Tecnología", icono: "fa-headphones" },
-      { nombre: "Electrodomésticos", icono: "fa-plug" },
-      { nombre: "Bazar", icono: "fa-store" },
-      { nombre: "Belleza y Cuidado Personal", icono: "fa-spa" },
-      { nombre: "Librería", icono: "fa-pen" },
-      { nombre: "Blanquería", icono: "fa-bed" }
-    ];
-
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    let productosGlobal = PRODUCTOS.filter(p => p.stock !== false);
-    let categoriaActual = "Todos";
-
-    const grid = document.getElementById("grid-productos");
-    const categoriasContainer = document.getElementById("categorias-container");
-    const tituloCategoria = document.getElementById("titulo-categoria");
-    const modalPago = document.getElementById("modal-pago");
-    const fmt = n => n.toLocaleString("es-AR");
-
-    const renderCategorias = () => {
-      categoriasContainer.innerHTML = "";
-      categoriasList.forEach(cat => {
-        if (cat.nombre !== "Todos" && !productosGlobal.some(p => p.categoria === cat.nombre)) return;
-        const btn = document.createElement("button");
-        btn.className = `cat-btn ${categoriaActual === cat.nombre ? 'activo' : ''}`;
-        btn.innerHTML = `<i class="fa-solid ${cat.icono} cat-icon"></i> ${cat.nombre}`;
-        btn.onclick = () => { categoriaActual = cat.nombre; renderCategorias(); renderProductos(); window.scrollTo({ top: 0, behavior: "smooth" }); };
-        categoriasContainer.appendChild(btn);
-      });
-    };
-
-    const crearCard = (p) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      const imgs = (p.imagenes && p.imagenes.length) ? p.imagenes : ["https://placehold.co/400x400?text=?"];
-      let idx = 0;
-      const detalle = (p.detalle && p.detalle.length)
-        ? `<details><summary>Ver características</summary><ul>${p.detalle.map(d => `<li>${d}</li>`).join("")}</ul></details>` : "";
-
-      card.innerHTML = `
-        <div class="galeria">
-          <img src="${imgs[0]}" alt="${p.nombre}" loading="lazy">
-          ${imgs.length > 1 ? `<button class="g-btn g-prev" aria-label="Anterior">&#10094;</button><button class="g-btn g-next" aria-label="Siguiente">&#10095;</button><span class="g-count">1/${imgs.length}</span>` : ""}
-        </div>
-        <h3>${p.nombre}</h3>
-        ${p.descripcion ? `<div class="desc">${p.descripcion}</div>` : ""}
-        ${detalle}
-        <div class="precio">$${fmt(p.precio)}</div>
-        <button class="agregar">Añadir al carrito</button>
-      `;
-
-      if (imgs.length > 1) {
-        const img = card.querySelector(".galeria img");
-        const cont = card.querySelector(".g-count");
-        const mover = d => { idx = (idx + d + imgs.length) % imgs.length; img.src = imgs[idx]; cont.textContent = `${idx + 1}/${imgs.length}`; };
-        card.querySelector(".g-prev").addEventListener("click", () => mover(-1));
-        card.querySelector(".g-next").addEventListener("click", () => mover(1));
-      }
-
-      card.querySelector(".agregar").addEventListener("click", () => {
-        agregarAlCarrito({ id: p.id, nombre: p.nombre + (p.descripcion ? ` (${p.descripcion})` : ""), precio: p.precio, variante: null });
-      });
-      return card;
-    };
-
-    const renderProductos = () => {
-      grid.innerHTML = "";
-      tituloCategoria.textContent = categoriaActual === "Todos" ? "Todos los productos" : categoriaActual;
-      const cats = categoriasList.map(c => c.nombre).filter(n => n !== "Todos" && (categoriaActual === "Todos" || categoriaActual === n));
-      let hay = false;
-      cats.forEach(nombre => {
-        const lista = productosGlobal.filter(p => p.categoria === nombre);
-        if (!lista.length) return;
-        hay = true;
-        const sec = document.createElement("section");
-        sec.className = "seccion-cat";
-        const icono = categoriasList.find(c => c.nombre === nombre).icono;
-        sec.innerHTML = `<h3 class="seccion-titulo"><i class="fa-solid ${icono}"></i> ${nombre} <small>${lista.length} productos</small></h3><div class="grid"></div>`;
-        const g = sec.querySelector(".grid");
-        lista.forEach(p => g.appendChild(crearCard(p)));
-        grid.appendChild(sec);
-      });
-      if (!hay) grid.innerHTML = `<p style="text-align:center; color:#64748b;">No hay productos en esta categoría todavía.</p>`;
-    };
-
-    function agregarAlCarrito(prod) {
-      const existente = carrito.find(i => i.id === prod.id && i.variante === prod.variante);
-      if (existente) existente.cantidad += 1;
-      else carrito.push({ ...prod, cantidad: 1 });
-      guardarCarrito();
-    }
-
-    function guardarCarrito() {
-      localStorage.setItem("carrito", JSON.stringify(carrito));
-      renderCarrito();
-    }
-
-    function eliminarDelCarrito(index) {
-      carrito.splice(index, 1);
-      guardarCarrito();
-    }
-
-    function renderCarrito() {
-      const lista = document.getElementById("lista-carrito");
-      const totalEl = document.getElementById("total-carrito");
-      const contador = document.getElementById("contador");
-      contador.textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
-      if (carrito.length === 0) { lista.innerHTML = '<p id="carrito-vacio">El carrito está vacío.</p>'; totalEl.textContent = ""; return; }
-      lista.innerHTML = "";
-      let total = 0;
-      carrito.forEach((item, index) => {
-        total += item.precio * item.cantidad;
-        const div = document.createElement("div");
-        div.className = "item-carrito";
-        div.innerHTML = `<div class="info"><strong>${item.nombre}</strong> × ${item.cantidad}</div><button data-index="${index}">✕</button>`;
-        div.querySelector("button").addEventListener("click", () => eliminarDelCarrito(index));
-        lista.appendChild(div);
-      });
-      totalEl.textContent = `Total: $${fmt(total)}`;
-    }
-
-    document.getElementById("btn-checkout").addEventListener("click", () => {
-      if (carrito.length === 0) return alert("El carrito está vacío.");
-      modalPago.style.display = "flex";
-    });
-
-    document.getElementById("btn-cerrar-modal").addEventListener("click", () => { modalPago.style.display = "none"; });
-
-    document.getElementById("btn-confirmar-wa").addEventListener("click", () => {
-      let mensaje = "Hola! Quiero confirmar este pedido:%0A%0A";
-      let total = 0;
-      carrito.forEach(item => {
-        total += item.precio * item.cantidad;
-        mensaje += `• ${item.cantidad}x ${item.nombre} — $${fmt(item.precio * item.cantidad)}%0A`;
-      });
-      mensaje += `%0A*Total: $${fmt(total)}*%0A%0AYa realicé la transferencia al alias mundo95. *Adjunto el comprobante acá abajo* 👇`;
-      window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensaje}`, "_blank");
-      modalPago.style.display = "none";
-    });
-
-    const panel = document.getElementById("carrito-panel");
-    const fondo = document.getElementById("fondo");
-    const toggleCarrito = (abrir) => { panel.classList.toggle("abierto", abrir); fondo.classList.toggle("activo", abrir); };
-    document.getElementById("btn-carrito").addEventListener("click", () => toggleCarrito(true));
-    document.getElementById("btn-cerrar").addEventListener("click", () => toggleCarrito(false));
-    fondo.addEventListener("click", () => toggleCarrito(false));
-
-    renderCategorias();
-    renderProductos();
-    renderCarrito();
-  </script>
+const grid=document.getElementById("grid");
+const fmt=n=>n.toLocaleString("es-AR");
+PRODUCTOS.forEach(p=>{
+  const div=document.createElement("div");div.className="card";
+  div.innerHTML=`<img src="${p.imagenes[0]}" onerror="this.src='https://placehold.co/400?text=${encodeURIComponent(p.nombre)}'"><h3 style="font-size:.9rem;margin-top:8px">${p.nombre}</h3><div class="precio">$${fmt(p.precio)}</div><button onclick="alert('Agregado: ${p.nombre}')">Añadir</button>`;
+  grid.appendChild(div);
+});
+</script>
 </body>
 </html>
