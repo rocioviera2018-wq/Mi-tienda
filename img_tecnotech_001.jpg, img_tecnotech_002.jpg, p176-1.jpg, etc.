@@ -1,25 +1,10 @@
-<script>
 const PRODUCTOS = [
-  // TUS TERMOS STANLEY DE LA GALERÍA
-  {id:"p001", nombre:"Termo Stanley 1L Rosa", precio:38900, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_001.jpg"]},
-  {id:"p002", nombre:"Termo Stanley 1L Rojo", precio:38900, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_002.jpg"]},
-  {id:"p003", nombre:"Termo Stanley 1L Blanco", precio:38900, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_003.jpg"]},
-  {id:"p004", nombre:"Termo Stanley 1L Bordo", precio:38900, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_004.jpg"]},
-  {id:"p005", nombre:"Termo Stanley 1L Lila", precio:38900, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_005.jpg"]},
-  {id:"p006", nombre:"Termo Stanley 1L Combo x4", precio:38900, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_006.jpg"]},
-  {id:"p007", nombre:"Termo Stanley 1L Rosa Claro", precio:38900, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_007.jpg"]},
-  
-  // VASOS QUENCHER 1.2L
-  {id:"p010", nombre:"Vaso Quencher 1.2L Degradé Rosa", precio:43200, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_010.jpg"]},
-  {id:"p011", nombre:"Vaso Quencher 1.2L Lila", precio:43200, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_011.jpg"]},
-  {id:"p012", nombre:"Vaso Quencher 1.2L Fucsia", precio:43200, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_012.jpg"]},
-  {id:"p013", nombre:"Vaso Stanley Big Star 1.2L Negro", precio:52200, categoria:"Termos, Mates y Vasos", imagenes:["img/img_tecnotech_013.jpg"]},
-
-  // TRAMONTINA
-  {id:"p020", nombre:"Set Tramontina 25 Piezas New Kolor", precio:31700, categoria:"Bazar", imagenes:["img/img_tecnotech_020.jpg"]},
-  {id:"p021", nombre:"Batería Tramontina 7 Piezas Rosa", precio:86400, categoria:"Bazar", imagenes:["img/img_tecnotech_021.jpg"]},
-
-  // TU PC GAMER - la que ya tenías
-  {id:"p176", nombre:"PC Gamer Completa i3 + GTX 750 Ti", descripcion:"8GB RAM + SSD 240GB + Monitor 17 + Kit", precio:480000, categoria:"Accesorios y Tecnología", imagenes:["img/p176-1.jpg"]},
+{id:"p001",nombre:"Termo 1L Rosa",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_001.jpg"]},
+{id:"p002",nombre:"Termo 1L Rojo",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_002.jpg"]},
+{id:"p003",nombre:"Termo 1L Blanco",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_003.jpg"]},
+{id:"p004",nombre:"Termo 1L Bordo",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_004.jpg"]},
+{id:"p005",nombre:"Termo 1L Lila",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_005.jpg"]},
+{id:"p006",nombre:"Termo 1L Combo x4",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_006.jpg"]},
+{id:"p007",nombre:"Termo 1L Rosa Claro",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_007.jpg"]},
+{id:"p176",nombre:"PC Gamer Completa i3 GTX 750 Ti",precio:480000,categoria:"Accesorios y Tecnologia",imagenes:["img/p176-1.jpg"]},
 ];
-</script>
