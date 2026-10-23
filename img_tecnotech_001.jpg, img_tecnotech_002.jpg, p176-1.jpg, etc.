@@ -1,10 +1,79 @@
 const PRODUCTOS = [
-{id:"p001",nombre:"Termo 1L Rosa",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_001.jpg"]},
-{id:"p002",nombre:"Termo 1L Rojo",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_002.jpg"]},
-{id:"p003",nombre:"Termo 1L Blanco",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_003.jpg"]},
-{id:"p004",nombre:"Termo 1L Bordo",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_004.jpg"]},
-{id:"p005",nombre:"Termo 1L Lila",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_005.jpg"]},
-{id:"p006",nombre:"Termo 1L Combo x4",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_006.jpg"]},
-{id:"p007",nombre:"Termo 1L Rosa Claro",precio:38900,categoria:"Termos, Mates y Vasos",imagenes:["img/img_tecnotech_007.jpg"]},
-{id:"p176",nombre:"PC Gamer Completa i3 GTX 750 Ti",precio:480000,categoria:"Accesorios y Tecnologia",imagenes:["img/p176-1.jpg"]},
+{
+id:"p001",
+nombre:"Termo 1L Rosa",
+precio:38900,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_001.jpg"]
+},
+{
+id:"p002",
+nombre:"Termo 1L Rojo",
+precio:38900,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_002.jpg"]
+},
+{
+id:"p003",
+nombre:"Termo 1L Blanco",
+precio:38900,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_003.jpg"]
+},
+{
+id:"p004",
+nombre:"Termo 1L Bordo",
+precio:38900,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_004.jpg"]
+},
+{
+id:"p005",
+nombre:"Termo 1L Lila",
+precio:38900,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_005.jpg"]
+},
+{
+id:"p006",
+nombre:"Termo 1L Combo x4",
+precio:38900,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_006.jpg"]
+},
+{
+id:"p007",
+nombre:"Termo 1L Rosa Claro",
+precio:38900,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_007.jpg"]
+},
+{
+id:"p010",
+nombre:"Quencher 1.2L Rosa",
+precio:43200,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_010.jpg"]
+},
+{
+id:"p011",
+nombre:"Quencher 1.2L Lila",
+precio:43200,
+categoria:"Termos, Mates y Vasos",
+imagenes:["img/img_tecnotech_011.jpg"]
+},
+{
+id:"p020",
+nombre:"Tramontina 25 Piezas",
+precio:31700,
+categoria:"Bazar",
+imagenes:["img/img_tecnotech_020.jpg"]
+},
+{
+id:"p176",
+nombre:"PC Gamer i3 GTX 750 Ti",
+precio:480000,
+categoria:"Accesorios y Tecnologia",
+imagenes:["img/p176-1.jpg"]
+},
 ];
