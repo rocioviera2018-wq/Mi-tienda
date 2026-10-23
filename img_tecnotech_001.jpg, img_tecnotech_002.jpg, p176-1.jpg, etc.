@@ -1,4 +1,4 @@
-const IMAGENES = {
+IMAGENES = {
   "cf01":"img/cf01.jpg", "cf02":"img/cf02.jpg", "cf03":"img/cf03.jpg", "cf04":"img/cf04.jpg",
   "cf05":"img/cf05.jpg", "cf06":"img/cf06.jpg", "cf07":"img/cf07.jpg", "cf08":"img/cf08.jpg",
   "cf09":"img/cf09.jpg", "cf10":"img/cf10.jpg", "cf11":"img/cf11.jpg", "cf12":"img/cf12.jpg",
