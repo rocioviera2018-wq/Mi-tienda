@@ -19,12 +19,7 @@
     body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
     body.bloqueado { overflow: hidden; }
 
-    button:focus-visible,
-    a:focus-visible,
-    input:focus-visible {
-      outline: 2px solid #3b82f6;
-      outline-offset: 2px;
-    }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
 
     header { background: var(--card); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.05); position: sticky; top: 0; z-index: 50; gap: 12px; }
     .logo { font-weight: 800; font-size: 18px; color: var(--primary); }
@@ -46,14 +41,12 @@
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
     .card { background: var(--card); border-radius: 16px; padding: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.04); display: flex; flex-direction: column; transition: transform .2s; }
     .card:hover { transform: translateY(-4px); }
-    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #f1f5f9; cursor: zoom-in; }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 10px; background: #fff; cursor: zoom-in; } /* Cambiado a contain y fondo blanco para que no se corten las fotos */
     .card h3 { font-size: 13px; font-weight: 600; margin: 8px 0 4px; color: var(--primary); line-height: 1.2; }
     .card .desc { font-size: 11px; color: #64748b; margin-bottom: 6px; }
     .precio { color: #0a7d32; font-weight: 800; font-size: 15px; margin-bottom: 10px; margin-top: auto; }
-    .card button.agregar,
-    .card a.agregar { background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: .2s; text-align: center; text-decoration: none; display: block; font-size: 13px; }
-    .card button.agregar:hover,
-    .card a.agregar:hover { background: #1e293b; }
+    .card button.agregar, .card a.agregar { background: var(--primary); color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: .2s; text-align: center; text-decoration: none; display: block; font-size: 13px; }
+    .card button.agregar:hover, .card a.agregar:hover { background: #1e293b; }
 
     footer { background: var(--primary); color: #fff; text-align: center; padding: 24px; margin-top: 30px; font-size: .9rem; }
 
@@ -86,7 +79,7 @@
 
     #visor { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 300; padding: 16px; }
     #visor.abierto { display: flex; }
-    #visor img { max-width: 100%; max-height: 100%; border-radius: 10px; }
+    #visor img { max-width: 100%; max-height: 100%; border-radius: 10px; object-fit: contain; }
 
     .wa-float { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; z-index: 90; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.2); transition: .2s; }
     .wa-float:hover { transform: scale(1.1); }
@@ -159,6 +152,28 @@
   <div id="toast" role="status" aria-live="polite"></div>
 
   <script>
+// ==========================================
+// 1. DICCIONARIO DE IMÁGENES (Mapeo de fotos)
+// ==========================================
+// ACÁ VAS A PONER EL NOMBRE DE TUS ARCHIVOS.
+// Si tu foto se llama img_tecnotech_001.jpg, ponés:
+// "p001": "img/img_tecnotech_001.jpg",
+// Si ya las renombraste a p001.jpg, dejás "img/p001.jpg"
+const IMAGENES = {
+  "cf01": "img/img_tecnotech_001.jpg", 
+  "cf02": "img/img_tecnotech_002.jpg",
+  "cf03": "img/img_tecnotech_003.jpg",
+  "cf04": "img/img_tecnotech_004.jpg",
+  "cf05": "img/img_tecnotech_005.jpg",
+  "cf06": "img/img_tecnotech_006.jpg",
+  "cf07": "img/img_tecnotech_007.jpg",
+  "cf08": "img/img_tecnotech_008.jpg",
+  "cf09": "img/img_tecnotech_009.jpg",
+  "cf10": "img/img_tecnotech_010.jpg",
+  // ... (Podés seguir agregando hasta el p310 si querés, 
+  // o si no están acá, el sistema buscará por defecto en 'img/ID.jpg')
+};
+
 const PRODUCTOS = [
   {"id": "cf01", "nombre": "Autosebante 2 en 1 · 750 ml", "desc": "Termo con bombilla y tapa metálica", "precio": 20700, "categoria": "Termos y Botellas"},
   {"id": "cf02", "nombre": "Termo Hoppy 600 ml", "desc": "Acero inoxidable, con pico. Varios colores", "precio": 9720, "categoria": "Termos y Botellas"},
@@ -513,6 +528,11 @@ const PRODUCTOS = [
     const WHATSAPP = "5493755223737";
     const WA_URL = `https://wa.me/${WHATSAPP}`;
     const STORAGE_KEY = "carrito_tt";
+    
+    // Si el producto no está en el diccionario, usa el ID por defecto (img/p001.jpg)
+    const getImgUrl = (id) => IMAGENES[id] || `img/${id}.jpg`;
+    
+    // Fallback si la imagen no existe (Muestra un texto gris lindo)
     const fallback = t => `https://placehold.co/400x400/f1f5f9/0f172a?text=${encodeURIComponent(String(t).substring(0, 20))}`;
 
     const CATS = ["Todos", ...[
@@ -625,6 +645,9 @@ const PRODUCTOS = [
       listaProd.forEach(p => {
         const card = document.createElement("div");
         card.className = "card";
+        
+        // AQUI SE USA EL DICCIONARIO DE IMAGENES
+        const imgSrc = getImgUrl(p.id);
 
         const precioHTML = typeof p.precio === "number"
           ? `<div class="precio">$${fmt(p.precio)}</div>
@@ -635,7 +658,7 @@ const PRODUCTOS = [
                 aria-label="Consultar precio de ${esc(p.nombre)} por WhatsApp">Consultar</a>`;
 
         card.innerHTML = `
-          <img src="img/${esc(p.id)}.jpg" alt="${esc(p.nombre)}" loading="lazy" decoding="async">
+          <img src="${imgSrc}" alt="${esc(p.nombre)}" loading="lazy" decoding="async">
           <h3>${esc(p.nombre)}</h3>
           ${p.desc ? `<div class="desc">${esc(p.desc)}</div>` : ""}
           ${precioHTML}
