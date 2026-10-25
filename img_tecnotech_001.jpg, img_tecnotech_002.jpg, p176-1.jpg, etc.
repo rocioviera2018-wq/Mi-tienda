@@ -1,88 +1,3998 @@
-IMAGENES = {
-  "cf01":"img/cf01.jpg", "cf02":"img/cf02.jpg", "cf03":"img/cf03.jpg", "cf04":"img/cf04.jpg",
-  "cf05":"img/cf05.jpg", "cf06":"img/cf06.jpg", "cf07":"img/cf07.jpg", "cf08":"img/cf08.jpg",
-  "cf09":"img/cf09.jpg", "cf10":"img/cf10.jpg", "cf11":"img/cf11.jpg", "cf12":"img/cf12.jpg",
-  "cf13":"img/cf13.jpg", "cf14":"img/cf14.jpg", "cf15":"img/cf15.jpg", "cf16":"img/cf16.jpg",
-  "cf17":"img/cf17.jpg", "cf18":"img/cf18.jpg", "cf19":"img/cf19.jpg", "cf20":"img/cf20.jpg",
-  "cf21":"img/cf21.jpg", "cf22":"img/cf22.jpg", "cf23":"img/cf23.jpg", "cf24":"img/cf24.jpg",
-  "cf25":"img/cf25.jpg", "cf26":"img/cf26.jpg", "cf27":"img/cf27.jpg", "cf28":"img/cf28.jpg",
-  "cf29":"img/cf29.jpg", "cf30":"img/cf30.jpg", "cf31":"img/cf31.jpg", "cf32":"img/cf32.jpg",
-  "cf33":"img/cf33.jpg", "cf34":"img/cf34.jpg", "cf35":"img/cf35.jpg", "cf36":"img/cf36.jpg",
-  "cf37":"img/cf37.jpg", "p001":"img/p001.jpg", "p002":"img/p002.jpg", "p003":"img/p003.jpg",
-  "p005":"img/p005.jpg", "p006":"img/p006.jpg", "p007":"img/p007.jpg", "p008":"img/p008.jpg",
-  "p009":"img/p009.jpg", "p011":"img/p011.jpg", "p012":"img/p012.jpg", "p013":"img/p013.jpg",
-  "p014":"img/p014.jpg", "p015":"img/p015.jpg", "p017":"img/p017.jpg", "p018":"img/p018.jpg",
-  "p019":"img/p019.jpg", "p020":"img/p020.jpg", "p022":"img/p022.jpg", "p023":"img/p023.jpg",
-  "p024":"img/p024.jpg", "p025":"img/p025.jpg", "p026":"img/p026.jpg", "p027":"img/p027.jpg",
-  "p028":"img/p028.jpg", "p029":"img/p029.jpg", "p030":"img/p030.jpg", "p031":"img/p031.jpg",
-  "p032":"img/p032.jpg", "p033":"img/p033.jpg", "p034":"img/p034.jpg", "p035":"img/p035.jpg",
-  "p036":"img/p036.jpg", "p037":"img/p037.jpg", "p038":"img/p038.jpg", "p039":"img/p039.jpg",
-  "p040":"img/p040.jpg", "p041":"img/p041.jpg", "p042":"img/p042.jpg", "p043":"img/p043.jpg",
-  "p044":"img/p044.jpg", "p045":"img/p045.jpg", "p046":"img/p046.jpg", "p047":"img/p047.jpg",
-  "p048":"img/p048.jpg", "p049":"img/p049.jpg", "p050":"img/p050.jpg", "p051":"img/p051.jpg",
-  "p052":"img/p052.jpg", "p053":"img/p053.jpg", "p054":"img/p054.jpg", "p055":"img/p055.jpg",
-  "p056":"img/p056.jpg", "p057":"img/p057.jpg", "p058":"img/p058.jpg", "p059":"img/p059.jpg",
-  "p060":"img/p060.jpg", "p061":"img/p061.jpg", "p062":"img/p062.jpg", "p063":"img/p063.jpg",
-  "p064":"img/p064.jpg", "p065":"img/p065.jpg", "p066":"img/p066.jpg", "p067":"img/p067.jpg",
-  "p068":"img/p068.jpg", "p069":"img/p069.jpg", "p070":"img/p070.jpg", "p071":"img/p071.jpg",
-  "p072":"img/p072.jpg", "p073":"img/p073.jpg", "p074":"img/p074.jpg", "p075":"img/p075.jpg",
-  "p076":"img/p076.jpg", "p077":"img/p077.jpg", "p078":"img/p078.jpg", "p079":"img/p079.jpg",
-  "p080":"img/p080.jpg", "p081":"img/p081.jpg", "p082":"img/p082.jpg", "p083":"img/p083.jpg",
-  "p084":"img/p084.jpg", "p085":"img/p085.jpg", "p086":"img/p086.jpg", "p087":"img/p087.jpg",
-  "p088":"img/p088.jpg", "p089":"img/p089.jpg", "p090":"img/p090.jpg", "p091":"img/p091.jpg",
-  "p092":"img/p092.jpg", "p093":"img/p093.jpg", "p094":"img/p094.jpg", "p096":"img/p096.jpg",
-  "p098":"img/p098.jpg", "p099":"img/p099.jpg", "p100":"img/p100.jpg", "p101":"img/p101.jpg",
-  "p102":"img/p102.jpg", "p103":"img/p103.jpg", "p104":"img/p104.jpg", "p105":"img/p105.jpg",
-  "p106":"img/p106.jpg", "p107":"img/p107.jpg", "p108":"img/p108.jpg", "p109":"img/p109.jpg",
-  "p110":"img/p110.jpg", "p111":"img/p111.jpg", "p112":"img/p112.jpg", "p113":"img/p113.jpg",
-  "p114":"img/p114.jpg", "p115":"img/p115.jpg", "p116":"img/p116.jpg", "p117":"img/p117.jpg",
-  "p118":"img/p118.jpg", "p119":"img/p119.jpg", "p120":"img/p120.jpg", "p121":"img/p121.jpg",
-  "p122":"img/p122.jpg", "p123":"img/p123.jpg", "p124":"img/p124.jpg", "p125":"img/p125.jpg",
-  "p126":"img/p126.jpg", "p127":"img/p127.jpg", "p128":"img/p128.jpg", "p129":"img/p129.jpg",
-  "p130":"img/p130.jpg", "p131":"img/p131.jpg", "p132":"img/p132.jpg", "p133":"img/p133.jpg",
-  "p134":"img/p134.jpg", "p135":"img/p135.jpg", "p136":"img/p136.jpg", "p137":"img/p137.jpg",
-  "p138":"img/p138.jpg", "p139":"img/p139.jpg", "p140":"img/p140.jpg", "p141":"img/p141.jpg",
-  "p142":"img/p142.jpg", "p143":"img/p143.jpg", "p144":"img/p144.jpg", "p145":"img/p145.jpg",
-  "p146":"img/p146.jpg", "p147":"img/p147.jpg", "p148":"img/p148.jpg", "p149":"img/p149.jpg",
-  "p150":"img/p150.jpg", "p151":"img/p151.jpg", "p152":"img/p152.jpg", "p153":"img/p153.jpg",
-  "p154":"img/p154.jpg", "p155":"img/p155.jpg", "p156":"img/p156.jpg", "p157":"img/p157.jpg",
-  "p158":"img/p158.jpg", "p159":"img/p159.jpg", "p160":"img/p160.jpg", "p161":"img/p161.jpg",
-  "p162":"img/p162.jpg", "p163":"img/p163.jpg", "p164":"img/p164.jpg", "p165":"img/p165.jpg",
-  "p166":"img/p166.jpg", "p167":"img/p167.jpg", "p168":"img/p168.jpg", "p169":"img/p169.jpg",
-  "p170":"img/p170.jpg", "p171":"img/p171.jpg", "p172":"img/p172.jpg", "p173":"img/p173.jpg",
-  "p174":"img/p174.jpg", "p175":"img/p175.jpg", "p176":"img/p176.jpg", "p177":"img/p177.jpg",
-  "p178":"img/p178.jpg", "p179":"img/p179.jpg", "p180":"img/p180.jpg", "p181":"img/p181.jpg",
-  "p182":"img/p182.jpg", "p183":"img/p183.jpg", "p184":"img/p184.jpg", "p185":"img/p185.jpg",
-  "p186":"img/p186.jpg", "p187":"img/p187.jpg", "p188":"img/p188.jpg", "p189":"img/p189.jpg",
-  "p190":"img/p190.jpg", "p191":"img/p191.jpg", "p192":"img/p192.jpg", "p193":"img/p193.jpg",
-  "p194":"img/p194.jpg", "p195":"img/p195.jpg", "p196":"img/p196.jpg", "p197":"img/p197.jpg",
-  "p198":"img/p198.jpg", "p199":"img/p199.jpg", "p200":"img/p200.jpg", "p201":"img/p201.jpg",
-  "p202":"img/p202.jpg", "p203":"img/p203.jpg", "p204":"img/p204.jpg", "p205":"img/p205.jpg",
-  "p206":"img/p206.jpg", "p207":"img/p207.jpg", "p208":"img/p208.jpg", "p209":"img/p209.jpg",
-  "p210":"img/p210.jpg", "p211":"img/p211.jpg", "p212":"img/p212.jpg", "p213":"img/p213.jpg",
-  "p214":"img/p214.jpg", "p215":"img/p215.jpg", "p216":"img/p216.jpg", "p217":"img/p217.jpg",
-  "p218":"img/p218.jpg", "p219":"img/p219.jpg", "p220":"img/p220.jpg", "p221":"img/p221.jpg",
-  "p222":"img/p222.jpg", "p223":"img/p223.jpg", "p224":"img/p224.jpg", "p225":"img/p225.jpg",
-  "p226":"img/p226.jpg", "p227":"img/p227.jpg", "p228":"img/p228.jpg", "p229":"img/p229.jpg",
-  "p230":"img/p230.jpg", "p231":"img/p231.jpg", "p232":"img/p232.jpg", "p233":"img/p233.jpg",
-  "p234":"img/p234.jpg", "p235":"img/p235.jpg", "p236":"img/p236.jpg", "p237":"img/p237.jpg",
-  "p238":"img/p238.jpg", "p239":"img/p239.jpg", "p240":"img/p240.jpg", "p241":"img/p241.jpg",
-  "p242":"img/p242.jpg", "p243":"img/p243.jpg", "p244":"img/p244.jpg", "p245":"img/p245.jpg",
-  "p246":"img/p246.jpg", "p247":"img/p247.jpg", "p248":"img/p248.jpg", "p249":"img/p249.jpg",
-  "p250":"img/p250.jpg", "p251":"img/p251.jpg", "p252":"img/p252.jpg", "p253":"img/p253.jpg",
-  "p254":"img/p254.jpg", "p255":"img/p255.jpg", "p256":"img/p256.jpg", "p257":"img/p257.jpg",
-  "p258":"img/p258.jpg", "p259":"img/p259.jpg", "p260":"img/p260.jpg", "p261":"img/p261.jpg",
-  "p262":"img/p262.jpg", "p263":"img/p263.jpg", "p264":"img/p264.jpg", "p265":"img/p265.jpg",
-  "p266":"img/p266.jpg", "p267":"img/p267.jpg", "p268":"img/p268.jpg", "p269":"img/p269.jpg",
-  "p270":"img/p270.jpg", "p271":"img/p271.jpg", "p272":"img/p272.jpg", "p273":"img/p273.jpg",
-  "p274":"img/p274.jpg", "p275":"img/p275.jpg", "p276":"img/p276.jpg", "p277":"img/p277.jpg",
-  "p278":"img/p278.jpg", "p279":"img/p279.jpg", "p280":"img/p280.jpg", "p281":"img/p281.jpg",
-  "p282":"img/p282.jpg", "p283":"img/p283.jpg", "p284":"img/p284.jpg", "p285":"img/p285.jpg",
-  "p286":"img/p286.jpg", "p287":"img/p287.jpg", "p288":"img/p288.jpg", "p289":"img/p289.jpg",
-  "p290":"img/p290.jpg", "p291":"img/p291.jpg", "p292":"img/p292.jpg", "p293":"img/p293.jpg",
-  "p294":"img/p294.jpg", "p295":"img/p295.jpg", "p296":"img/p296.jpg", "p297":"img/p297.jpg",
-  "p298":"img/p298.jpg", "p299":"img/p299.jpg", "p300":"img/p300.jpg", "p301":"img/p301.jpg",
-  "p302":"img/p302.jpg", "p303":"img/p303.jpg", "p304":"img/p304.jpg", "p305":"img/p305.jpg",
-  "p306":"img/p306.jpg", "p307":"img/p307.jpg", "p308":"img/p308.jpg", "p309":"img/p309.jpg",
-  "p310":"img/p310.jpg"
-};
+[
+  {
+    "name": "CAMPING AUTOM. P/ 8 PERS(2.5m x 2.5m)",
+    "group": "COMERCIAL VEGA",
+    "description": "CAMPING AUTOM. P/ 8 PERS(2.5m x 2.5m) Instalación Rápida Espacio para Todos Con unas generosas dimensiones de 2.5 metros x 2.5 metros, esta carpa ofrece un espacio…",
+    "prices": [
+      "US$ 50,40",
+      "AR$ 80.640"
+    ],
+    "image": "assets/A5102A057EEB.jpg"
+  },
+  {
+    "name": "CÁMPING P/ 6 PERSONAS AUTOMÁTICO⛺ Cod.: 15054",
+    "group": "COMERCIAL VEGA",
+    "description": "CÁMPING P/ 6 PERSONAS AUTOMÁTICO⛺ Cod.: 15054 Características: A prueba de rocio Dimensiones: 210x250x150cm Portabilidad: Una vez desmontada, tiene un tamaño compacto…",
+    "prices": [
+      "AR$ 74.880"
+    ],
+    "image": "assets/A5F27ABD6847.jpg"
+  },
+  {
+    "name": "CAMPING AUTOMÁTICO⛺ P/ 4 personas Foto Referencial",
+    "group": "COMERCIAL VEGA",
+    "description": "CAMPING AUTOMÁTICO⛺ P/ 4 personas Foto Referencial 20 dólar",
+    "prices": [
+      "AR$ 57.600"
+    ],
+    "image": "assets/A522E2E15D91.jpg"
+  },
+  {
+    "name": "Nebulizador Euromax EM-4550",
+    "group": "COMERCIAL VEGA",
+    "description": "Nebulizador Euromax EM-4550 Tratamiento eficaz para problemas respiratorios Silencioso, fácil de usar y para toda la familia Incluye mascarilla y accesorios completos",
+    "prices": [
+      "AR$ 72.000"
+    ],
+    "image": null
+  },
+  {
+    "name": "Pistola de Lavado a Presión Inalámbrica 24Vh Sin cables, úsala en cualquier lugar Viene",
+    "group": "COMERCIAL VEGA",
+    "description": "Pistola de Lavado a Presión Inalámbrica 24Vh Sin cables, úsala en cualquier lugar Viene completa con todos los accesorios y maletín Ideal para limpiar autos, pisos,…",
+    "prices": [
+      "AR$ 51.840"
+    ],
+    "image": "assets/A5A22F5BD1A8.jpg"
+  },
+  {
+    "name": "Linterna LED De Emergencia Recargable EUROMAX EM-3873 - 99 LEDs de alto brillo:",
+    "group": "COMERCIAL VEGA",
+    "description": "Linterna LED De Emergencia Recargable EUROMAX EM-3873 - 99 LEDs de alto brillo: Iluminación intensa y amplia, con regulador de intensidad - Recargable y eficiente:…",
+    "prices": [
+      "AR$ 17.280"
+    ],
+    "image": "assets/A5A711503906.jpg"
+  },
+  {
+    "name": "Linterna LED De Emergencia Recargable EUROMAX EM-3872",
+    "group": "COMERCIAL VEGA",
+    "description": "Linterna LED De Emergencia Recargable EUROMAX EM-3872 - 72 LEDs de alto brillo: Iluminación potente y uniforme, ajustable con regulador de intensidad - Recargable:…",
+    "prices": [
+      "AR$ 20.160"
+    ],
+    "image": "assets/A51CF0160F02.jpg"
+  },
+  {
+    "name": "Luz de emergencia Euromax",
+    "group": "COMERCIAL VEGA",
+    "description": "Luz de emergencia Euromax Cod: EM - 3871 2 Velas y 13 led Dos posiciones de encendido Luz regulable Batería de larga duración (hasta 8hrs)",
+    "prices": [
+      "AR$ 21.600"
+    ],
+    "image": "assets/A5D072200858.jpg"
+  },
+  {
+    "name": "GRIFO DE AGUA CALIENTE",
+    "group": "COMERCIAL VEGA",
+    "description": "GRIFO DE AGUA CALIENTE Características: Bajo consumo Fácil de instalar y operar Con protección eléctrica antifugas Interruptor de flujo de agua, para asegurar que se…",
+    "prices": [
+      "AR$ 40.320"
+    ],
+    "image": "assets/A59E0CFD2B6D.jpg"
+  },
+  {
+    "name": "LUCES NAVIDEÑAS Cod.: 20707",
+    "group": "COMERCIAL VEGA",
+    "description": "LUCES NAVIDEÑAS Cod.: 20707 Características: Largo: 16mts Cantidad de led: 200 MULTICOLOR No tiene parlantes 3 dólar",
+    "prices": [
+      "AR$ 8.640"
+    ],
+    "image": null
+  },
+  {
+    "name": "MANGUERA LED MULTICOLOR / BLANCO 10mts Ideal para decoración en interiores y exteriores.",
+    "group": "COMERCIAL VEGA",
+    "description": "MANGUERA LED MULTICOLOR / BLANCO 10mts Ideal para decoración en interiores y exteriores. Emite una luz multicolor de alto brillo, perfecta para iluminar jardines,…",
+    "prices": [
+      "AR$ 17.280"
+    ],
+    "image": "assets/A58EAD2B7166.jpg"
+  },
+  {
+    "name": "CORTINA LED ESTRELLA ¡Perfectas para darle un toque mágico a cualquier espacio! Color:",
+    "group": "COMERCIAL VEGA",
+    "description": "CORTINA LED ESTRELLA ¡Perfectas para darle un toque mágico a cualquier espacio! Color: Blanco 6 dólar",
+    "prices": [
+      "AR$ 17.280"
+    ],
+    "image": "assets/A5CFCF96FC85.jpg"
+  },
+  {
+    "name": "FOQUITO LED GUIRNALDA 5mts / 20 FOQUITOS Color Blanco",
+    "group": "COMERCIAL VEGA",
+    "description": "FOQUITO LED GUIRNALDA 5mts / 20 FOQUITOS Color Blanco 2.5 dólar",
+    "prices": [
+      "AR$ 7.200"
+    ],
+    "image": "assets/A5BF85D8F9CF.jpg"
+  },
+  {
+    "name": "LUVIA LED MULTICOLOR 3mts Uso: Decoración interior/exterior. Función: Crean una cortina",
+    "group": "COMERCIAL VEGA",
+    "description": "LUVIA LED MULTICOLOR 3mts Uso: Decoración interior/exterior. Función: Crean una cortina de luz; son conectables en serie. Disponibles en multicolor 2.5 dólar",
+    "prices": [
+      "AR$ 7.200"
+    ],
+    "image": "assets/A5A01EF98967.jpg"
+  },
+  {
+    "name": "MANGUERA LED / BLANCO 10mts Ideal para decoración en interiores y exteriores. Emite una",
+    "group": "COMERCIAL VEGA",
+    "description": "MANGUERA LED / BLANCO 10mts Ideal para decoración en interiores y exteriores. Emite una luz multicolor de alto brillo, perfecta para iluminar jardines, caminos,…",
+    "prices": [
+      "AR$ 17.280"
+    ],
+    "image": "assets/A5347DDCEDEF.jpg"
+  },
+  {
+    "name": "máquina cortadora de pelo profesional SN - 078 inalámbrica y recargable, diseñada con un",
+    "group": "COMERCIAL VEGA",
+    "description": "máquina cortadora de pelo profesional SN - 078 inalámbrica y recargable, diseñada con un llamativo estilo retro o vintage. Contiene. Maquina cortadora de pelo…",
+    "prices": [
+      "AR$ 34.992"
+    ],
+    "image": null
+  },
+  {
+    "name": "SONAR SN-079 Cortadora de Cabello Profesional",
+    "group": "COMERCIAL VEGA",
+    "description": "SONAR SN-079 Cortadora de Cabello Profesional 4 Peines guía de diferentes medidas Peine de barbero profesional Cable de carga USB Frasco de aceite lubricante Cepillo…",
+    "prices": [
+      "AR$ 46.656"
+    ],
+    "image": "assets/A529B007CBDF.jpg"
+  },
+  {
+    "name": "SONAR SN-076 - Cortadora de Cabello Profesional Recargable",
+    "group": "COMERCIAL VEGA",
+    "description": "SONAR SN-076 - Cortadora de Cabello Profesional Recargable 1 Cortadora SONAR Professional Hair Clipper 4 Peines guía de diferentes medidas Peine de barbero…",
+    "prices": [
+      "AR$ 46.656"
+    ],
+    "image": "assets/A5B705FFBFBB.jpg"
+  },
+  {
+    "name": "✂ Maquina Recortadora Profesional de Cabello y Barba premium Exclusivo DL-1771. DALING,",
+    "group": "COMERCIAL VEGA",
+    "description": "✂ Maquina Recortadora Profesional de Cabello y Barba premium Exclusivo DL-1771. DALING, CONTENIDO DE LA CAJA - Professional Hair Clipper - 4 Peines guía de distintas…",
+    "prices": [
+      "AR$ 17.496"
+    ],
+    "image": "assets/A55C457F17A6.jpg"
+  },
+  {
+    "name": "Set WAER 2 en 1 — Modelo WA-0289 ✂ Cortadora profesional + Recortadora con diseño",
+    "group": "COMERCIAL VEGA",
+    "description": "Set WAER 2 en 1 — Modelo WA-0289 ✂ Cortadora profesional + Recortadora con diseño exclusivo 35% más potencia, cuchillas de cerámica Pantalla digital, recargable, sin…",
+    "prices": [
+      "AR$ 43.740"
+    ],
+    "image": "assets/A586A8C68DEC.jpg"
+  },
+  {
+    "name": "Set WAER 2 en 1 — Modelo WA-0286 ✂ Cortadora profesional + Recortadora con diseño",
+    "group": "COMERCIAL VEGA",
+    "description": "Set WAER 2 en 1 — Modelo WA-0286 ✂ Cortadora profesional + Recortadora con diseño exclusivo 35% más potencia, cuchillas de cerámica Pantalla digital, recargable, sin…",
+    "prices": [
+      "AR$ 58.320"
+    ],
+    "image": null
+  },
+  {
+    "name": "BALANZA C/ BRAZO BRISA",
+    "group": "COMERCIAL VEGA",
+    "description": "BALANZA C/ BRAZO BRISA Capacidad de 40 kgs Precisión 5 G Voltaje 90240V 50/60 Hz 110v > 220v",
+    "prices": [
+      "Gs. 270.000"
+    ],
+    "image": "assets/A51129BC7E52.jpg"
+  },
+  {
+    "name": "COLCHON INFL. INTEX (1 plaza) Medida: 76x191x22cm",
+    "group": "COMERCIAL VEGA",
+    "description": "COLCHON INFL. INTEX (1 plaza) Medida: 76x191x22cm",
+    "prices": [
+      "AR$ 29.160"
+    ],
+    "image": "assets/A5C3714AB2E3.jpg"
+  },
+  {
+    "name": "COLCHON INFL. INTEX 1½ PLAZA Medida: 99x 191x 25cm",
+    "group": "COMERCIAL VEGA",
+    "description": "COLCHON INFL. INTEX 1½ PLAZA Medida: 99x 191x 25cm",
+    "prices": [
+      "AR$ 34.992"
+    ],
+    "image": "assets/A531B4BA3F36.jpg"
+  },
+  {
+    "name": "COLCHON INFLABLE INTEX 2 PLAZA Cod: 64108 Medida :137 x 191 x 25",
+    "group": "COMERCIAL VEGA",
+    "description": "COLCHON INFLABLE INTEX 2 PLAZA Cod: 64108 Medida :137 x 191 x 25",
+    "prices": [
+      "AR$ 43.740"
+    ],
+    "image": "assets/A595EDDE6079.jpg"
+  },
+  {
+    "name": "COLCHÓN INFLABLE DURA-BEAM INTEX",
+    "group": "COMERCIAL VEGA",
+    "description": "COLCHÓN INFLABLE DURA-BEAM INTEX Características: Medida: 1.83x2.03x25 cm Diseñado para 2 personas Soporta un peso máx. de 272 kg",
+    "prices": [
+      "AR$ 58.320"
+    ],
+    "image": "assets/A56DF3097122.jpg"
+  },
+  {
+    "name": "ESTANTE DE ESQUINA 4 NIVELES",
+    "group": "COMERCIAL VEGA",
+    "description": "ESTANTE DE ESQUINA 4 NIVELES Características: Almacenamiento por niveles Estabilidad del Soporte Medida: 85x25x34cm",
+    "prices": [
+      "AR$ 20.412"
+    ],
+    "image": "assets/A54B2FAE0AEF.jpg"
+  },
+  {
+    "name": "TV LD MARSON 55\" • Sistema Operativo: webOS para acceso a aplicaciones de streaming como",
+    "group": "COMERCIAL VEGA",
+    "description": "TV LD MARSON 55\" • Sistema Operativo: webOS para acceso a aplicaciones de streaming como Netflix, YouTube y Prime Video. • Resolución: 4K Ultra HD (3840 x 2160p) en…",
+    "prices": [
+      "AR$ 903.600"
+    ],
+    "image": "assets/A5B3637DC5F5.jpg"
+  },
+  {
+    "name": "Tapete para entrada Bienvenido 40cmx60cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "Tapete para entrada Bienvenido 40cmx60cm",
+    "prices": [
+      "AR$ 10.800"
+    ],
+    "image": "assets/A58AA114DB69.jpg"
+  },
+  {
+    "name": "Tapete para entrada Welcome 40cmx60cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "Tapete para entrada Welcome 40cmx60cm",
+    "prices": [
+      "AR$ 10.800"
+    ],
+    "image": "assets/A5109748E2B3.jpg"
+  },
+  {
+    "name": "JUEGO DE BAÑO 4pcs CASA KOMODA",
+    "group": "VEGA BLANQUERÍA",
+    "description": "JUEGO DE BAÑO 4pcs CASA KOMODA Incluye: - Cortina de ducha: 180x180cm - ⁠ Alfombrilla antideslizante: 75x45cm - ⁠ Alfombrilla de baño: 45x36cm - ⁠ Tapa de inodoro:…",
+    "prices": [
+      "AR$ 43.200"
+    ],
+    "image": "assets/A5CD21DFDB0E.jpg"
+  },
+  {
+    "name": "NUEVAS CORTINAS LUJOSAS BLACKOUT 3M!!!! TORERO Incluye/ 2 paños de 150x230cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVAS CORTINAS LUJOSAS BLACKOUT 3M!!!! TORERO Incluye/ 2 paños de 150x230cm",
+    "prices": [
+      "AR$ 47.700"
+    ],
+    "image": "assets/A5156ABA3A62.jpg"
+  },
+  {
+    "name": "MANTEL DE COCO! Tamaño: 230cmx150cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "MANTEL DE COCO! Tamaño: 230cmx150cm",
+    "prices": [
+      "AR$ 23.400"
+    ],
+    "image": "assets/A52D6080145F.jpg"
+  },
+  {
+    "name": "S INGRESOS Forros Navideños para puerta. Medida: 90×180cm. Sirve para puerta estándar",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVOS INGRESOS Forros Navideños para puerta. Medida: 90×180cm. Sirve para puerta estándar Ideal para decorar tu negocio,casa,entrada de tienda",
+    "prices": [
+      "AR$ 19.800",
+      "AR$ 18.000"
+    ],
+    "image": "assets/A59FFD043D01.jpg"
+  },
+  {
+    "name": "SABANAS AMERICANO GOLD SUN BOLSITA 2.500HILOS Nancy 2 FULL / DOS PLAZAS",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AMERICANO GOLD SUN BOLSITA 2.500HILOS Nancy 2 FULL / DOS PLAZAS",
+    "prices": [
+      "AR$ 30.600"
+    ],
+    "image": "assets/A556D73550E5.jpg"
+  },
+  {
+    "name": "NUEVAS SÁBANAS DISEÑO AMERICANO 2500HILOS cod Nancy 3 100% algodón MARCA GOLD-SUN",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVAS SÁBANAS DISEÑO AMERICANO 2500HILOS cod Nancy 3 100% algodón MARCA GOLD-SUN TAMAÑO:QUEEN[dos plazas y media] ☑ 1 Pieza de Sábanas 228x256cm ☑ 1 Pieza cubre…",
+    "prices": [
+      "AR$ 32.400"
+    ],
+    "image": "assets/A5ABEA938F38.jpg"
+  },
+  {
+    "name": "SABANAS AJUSTABLE CON FUNDAS 5000 hilos GOLDSUN UD 3 Disponibles en tamaño:",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AJUSTABLE CON FUNDAS 5000 hilos GOLDSUN UD 3 Disponibles en tamaño: Queen/160x200+40cm + 2 fundas (52x75cm) Liso = (Obs. Cada sábana ajustable incluye 2…",
+    "prices": [
+      "AR$ 53.100"
+    ],
+    "image": "assets/A5550D014ED3.jpg"
+  },
+  {
+    "name": "SET DE SÁBANAS AJUSTABLES CON FUNDAS 5000 hilos MARCA GOLSDUN UDE 6 TAMAÑO KING",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SET DE SÁBANAS AJUSTABLES CON FUNDAS 5000 hilos MARCA GOLSDUN UDE 6 TAMAÑO KING 200x205+40cm Son 4 rollos de sábanas , y cada rollo contiene 2 fundas para almohada",
+    "prices": [
+      "AR$ 56.700"
+    ],
+    "image": "assets/A5DAFF863BE4.jpg"
+  },
+  {
+    "name": "SABANAS AJUSTABLE CON FUNDAS 5000 hilos GOLDSUN UD 1 Disponible en tamaño: Twin",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AJUSTABLE CON FUNDAS 5000 hilos GOLDSUN UD 1 Disponible en tamaño: Twin /104x200+40cm + 1 fundas (52×75cm)",
+    "prices": [
+      "AR$ 48.600"
+    ],
+    "image": "assets/A5DABF6E224E.jpg"
+  },
+  {
+    "name": "modelo ajustable con fundas GOLD SUN SABANAS AJUSTABLE CON FUNDAS GOLD SUN UD2 Disponible",
+    "group": "VEGA BLANQUERÍA",
+    "description": "Nuevo modelo ajustable con fundas GOLD SUN SABANAS AJUSTABLE CON FUNDAS GOLD SUN UD2 Disponible en tamaño: Full / 140x200 +40cm +2 fundas( 52x75cm)",
+    "prices": [
+      "AR$ 51.300"
+    ],
+    "image": "assets/A52E1D4985F8.jpg"
+  },
+  {
+    "name": "SABANAS AJUSTABLE CP13 AMRICANO 100% ALGODÓN 3200 HILOS UB Disponible en tamaño: Twin",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AJUSTABLE CP13 AMRICANO 100% ALGODÓN 3200 HILOS UB Disponible en tamaño: Twin /104x200+40cm",
+    "prices": [
+      "AR$ 39.600"
+    ],
+    "image": "assets/A50A85BC6FE2.jpg"
+  },
+  {
+    "name": "SABANAS AJUSTABLE GOLD SUN x 4PCS UB Disponibles en tamaño: Twin =104×200+40cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AJUSTABLE GOLD SUN x 4PCS UB Disponibles en tamaño: Twin =104×200+40cm",
+    "prices": [
+      "AR$ 37.800"
+    ],
+    "image": "assets/A51F253D72B6.jpg"
+  },
+  {
+    "name": "SABANAS AJUSTABLE GOLD SUN x4 Disponibles en tamaño: Full/140x200+40cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AJUSTABLE GOLD SUN x4 Disponibles en tamaño: Full/140x200+40cm",
+    "prices": [
+      "AR$ 39.600"
+    ],
+    "image": "assets/A52BE0153D55.jpg"
+  },
+  {
+    "name": "SABANAS AJUSTABLE GOLD SUN x4 Disponibles en tamaño: Queen/160x200+40cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AJUSTABLE GOLD SUN x4 Disponibles en tamaño: Queen/160x200+40cm",
+    "prices": [
+      "AR$ 40.500"
+    ],
+    "image": "assets/A57EE8DB73BE.jpg"
+  },
+  {
+    "name": "SABANAS AJUSTABLE GOLD SUN x4 Disponibles en tamaño: king/200x205+40cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AJUSTABLE GOLD SUN x4 Disponibles en tamaño: king/200x205+40cm",
+    "prices": [
+      "AR$ 44.100"
+    ],
+    "image": "assets/A583EB1DD3E2.jpg"
+  },
+  {
+    "name": "SOFÁ CAMA PLEGABLE INFANTIL Tamaño: altura x ancho 40x50cm / en cama 120cm de largo",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SOFÁ CAMA PLEGABLE INFANTIL Tamaño: altura x ancho 40x50cm / en cama 120cm de largo",
+    "prices": [
+      "AR$ 71.100"
+    ],
+    "image": "assets/A5BDF4B980B4.jpg"
+  },
+  {
+    "name": "TAPETE 3D INFANTIL 150x200 cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "TAPETE 3D INFANTIL 150x200 cm",
+    "prices": [
+      "AR$ 39.600"
+    ],
+    "image": "assets/A537EA98EEB2.jpg"
+  },
+  {
+    "name": "SABANAS AMERICANO 1800HILOS. CON POLLERON!!! Tamaño QUEEN /2 y media plazas",
+    "group": "VEGA BLANQUERÍA",
+    "description": "SABANAS AMERICANO 1800HILOS. CON POLLERON!!! Tamaño QUEEN /2 y media plazas. Incluye: 1 Pieza de sábana con faldón: 160x200+50cm 1 Pieza de cubre colchón: 160x 200+…",
+    "prices": [
+      "AR$ 43.200"
+    ],
+    "image": "assets/A59AE78F320A.jpg"
+  },
+  {
+    "name": "MANTEL NAVIDEÑOS ! Tamaño: 240X150CM",
+    "group": "VEGA BLANQUERÍA",
+    "description": "MANTEL NAVIDEÑOS ! Tamaño: 240X150CM",
+    "prices": [
+      "AR$ 18.000"
+    ],
+    "image": "assets/A588B16D1DAC.jpg"
+  },
+  {
+    "name": "MANTEL NAVIDEÑOS ! Tamaño: 200X150CM",
+    "group": "VEGA BLANQUERÍA",
+    "description": "MANTEL NAVIDEÑOS ! Tamaño: 200X150CM",
+    "prices": [
+      "AR$ 15.300"
+    ],
+    "image": "assets/A5E6B39A12F7.jpg"
+  },
+  {
+    "name": "Alfombra Antigolpe tipo Rompecabezas 4 bloques encastrables",
+    "group": "VEGA BLANQUERÍA",
+    "description": "Alfombra Antigolpe tipo Rompecabezas 4 bloques encastrables",
+    "prices": [
+      "AR$ 28.800"
+    ],
+    "image": "assets/A524535AD4AC.jpg"
+  },
+  {
+    "name": "REPASADOR TOALLA ALGODÓN LISO ❤ MEDIDA GRANDE 64cm x 36cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "REPASADOR TOALLA ALGODÓN LISO ❤ MEDIDA GRANDE 64cm x 36cm",
+    "prices": [
+      "AR$ 25.200"
+    ],
+    "image": "assets/A5FA2B49CBC0.jpg"
+  },
+  {
+    "name": "REPASADOR TOALLA ALGODÓN LISO CON FLECO ❤ MEDIDA GRANDE 6acm x 40cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "REPASADOR TOALLA ALGODÓN LISO CON FLECO ❤ MEDIDA GRANDE 6acm x 40cm",
+    "prices": [
+      "AR$ 24.300"
+    ],
+    "image": "assets/A5FA2B49CBC0.jpg"
+  },
+  {
+    "name": "REPASADOR TOALLA ALGODÓN CON FLECO ❤ MEDIDA GRANDE 60cm x 35cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "REPASADOR TOALLA ALGODÓN CON FLECO ❤ MEDIDA GRANDE 60cm x 35cm",
+    "prices": [
+      "AR$ 24.300"
+    ],
+    "image": "assets/A5FA2B49CBC0.jpg"
+  },
+  {
+    "name": "REPASADOR ❤ MEDIDA 55cm x 30cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "REPASADOR ❤ MEDIDA 55cm x 30cm",
+    "prices": [
+      "AR$ 13.500"
+    ],
+    "image": "assets/A5FA2B49CBC0.jpg"
+  },
+  {
+    "name": "Mosquitero 2 plazas y Dos plazas y media Protección y comodidad para un descanso tranquilo",
+    "group": "VEGA BLANQUERÍA",
+    "description": "Mosquitero 2 plazas y Dos plazas y media Protección y comodidad para un descanso tranquilo",
+    "prices": [
+      "AR$ 14.400",
+      "AR$ 12.600"
+    ],
+    "image": "assets/A5FA2B49CBC0.jpg"
+  },
+  {
+    "name": "TOALLA GOLDSUN AMERICA PLUSH SÚPER SOFT SET DE 3PCS (SECADO RÁPIDO) - 2 Tamaño 76x46cm 1",
+    "group": "VEGA BLANQUERÍA",
+    "description": "TOALLA GOLDSUN AMERICA PLUSH SÚPER SOFT SET DE 3PCS (SECADO RÁPIDO) - 2 Tamaño 76x46cm 1 Tamaño 70x1.40cm",
+    "prices": [
+      "AR$ 18.000",
+      "AR$ 17.100"
+    ],
+    "image": "assets/A5FA2B49CBC0.jpg"
+  },
+  {
+    "name": "TOALLA GOLDSUN AMERICA PLUSH SÚPER SOFT SET DE 3PCS (SECADO RÁPIDO) - Tamaño 43x36cm -",
+    "group": "VEGA BLANQUERÍA",
+    "description": "TOALLA GOLDSUN AMERICA PLUSH SÚPER SOFT SET DE 3PCS (SECADO RÁPIDO) - Tamaño 43x36cm - Tamaño 76x45cm - Tamaño 70x1.40cm",
+    "prices": [
+      "AR$ 17.100"
+    ],
+    "image": "assets/A5FA2B49CBC0.jpg"
+  },
+  {
+    "name": "TAPETE PARA COCINA 3pcs ‍ 2 Tapete 70x50cm 1 Tapete 140x50cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "TAPETE PARA COCINA 3pcs ‍ 2 Tapete 70x50cm 1 Tapete 140x50cm",
+    "prices": [
+      "AR$ 27.000"
+    ],
+    "image": "assets/A50DCF95B13A.jpg"
+  },
+  {
+    "name": "ALFOMBRAS PARA COCINA Diseños modernos y coloridos Medida: 130 × 50 cm Fáciles de limpiar",
+    "group": "VEGA BLANQUERÍA",
+    "description": "ALFOMBRAS PARA COCINA Diseños modernos y coloridos Medida: 130 × 50 cm Fáciles de limpiar Ideales para darle un toque especial a tu cocina",
+    "prices": [
+      "AR$ 14.400"
+    ],
+    "image": "assets/A586A3F28A29.jpg"
+  },
+  {
+    "name": "JUEGO DE MANTEL Y CUBRESILLA PARA 6 SILLAS 7 piezas 1 MANTEL PARA MESA PARA 6 SILLAS 6",
+    "group": "VEGA BLANQUERÍA",
+    "description": "JUEGO DE MANTEL Y CUBRESILLA PARA 6 SILLAS 7 piezas 1 MANTEL PARA MESA PARA 6 SILLAS 6 COBERTOR DE SILLA",
+    "prices": [
+      "AR$ 57.600"
+    ],
+    "image": "assets/A5C19DAA7E51.jpg"
+  },
+  {
+    "name": "JUEGO DE MANTEL Y CUBRESILLA PARA 8 SILLAS 9 piezas 1 MANTEL PARA MESA PARA 8 SILLAS 8",
+    "group": "VEGA BLANQUERÍA",
+    "description": "JUEGO DE MANTEL Y CUBRESILLA PARA 8 SILLAS 9 piezas 1 MANTEL PARA MESA PARA 8 SILLAS 8 COBERTOR DE SILLA",
+    "prices": [
+      "AR$ 63.000"
+    ],
+    "image": "assets/A58A934AA771.jpg"
+  },
+  {
+    "name": "Juego de Mantel más 6 fundas para sillas 1 MANTEL PARA MESA 228CMX152CM 6 COBERTOR DE",
+    "group": "VEGA BLANQUERÍA",
+    "description": "Juego de Mantel más 6 fundas para sillas 1 MANTEL PARA MESA 228CMX152CM 6 COBERTOR DE SILLA",
+    "prices": [
+      "AR$ 54.000"
+    ],
+    "image": "assets/A513AFAC79B7.jpg"
+  },
+  {
+    "name": "☀ Toallita de Mano - Liso y rayado (X-9T)",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVO INGRESO ☀ Toallita de Mano - Liso y rayado (X-9T) Tamaño: Tamaño 35x70 Cm paquete de 6pcs",
+    "prices": [
+      "AR$ 25.200"
+    ],
+    "image": "assets/A5B0527FF227.jpg"
+  },
+  {
+    "name": "♦ Llegaron hermosas cortinas de lino ♦ medida total 6 metros de ancho x 2.50 altura",
+    "group": "VEGA BLANQUERÍA",
+    "description": "♦ Llegaron hermosas cortinas de lino ♦ medida total 6 metros de ancho x 2.50 altura ♦ contiene correa con punta de perla magnetica ♦",
+    "prices": [
+      "AR$ 61.200"
+    ],
+    "image": "assets/A5109229A8C2.jpg"
+  },
+  {
+    "name": "NUEVAS CORTINAS LUJOSAS BLACKOUT 3M!!!! TORERO 3 Mtrs Incluye/ 2 paños de 150x230cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVAS CORTINAS LUJOSAS BLACKOUT 3M!!!! TORERO 3 Mtrs Incluye/ 2 paños de 150x230cm",
+    "prices": [
+      "AR$ 41.400"
+    ],
+    "image": "assets/A5C8DD5AE1A8.jpg"
+  },
+  {
+    "name": "NUEVAS CORTINAS BLACKOUT TERKO CORTO 2026 Incluye/ 2 paños cortos de 135x180cm Calidad y",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVAS CORTINAS BLACKOUT TERKO CORTO 2026 Incluye/ 2 paños cortos de 135x180cm Calidad y elegancia",
+    "prices": [
+      "AR$ 43.200"
+    ],
+    "image": "assets/A5B88C896EFF.jpg"
+  },
+  {
+    "name": "NUEVAS CORTINAS BLACKOUT TERKO 2026 2.80 metro Incluye/ 2 paños de 140x220cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVAS CORTINAS BLACKOUT TERKO 2026 2.80 metro Incluye/ 2 paños de 140x220cm",
+    "prices": [
+      "AR$ 43.200"
+    ],
+    "image": "assets/A561CC2BD81E.jpg"
+  },
+  {
+    "name": "NUEVAS CORTINAS TORERO DE BOAL 145x225cm/2pcs",
+    "group": "VEGA BLANQUERÍA",
+    "description": "NUEVAS CORTINAS TORERO DE BOAL 145x225cm/2pcs",
+    "prices": [
+      "AR$ 41.400"
+    ],
+    "image": "assets/A58E541C1E2A.jpg"
+  },
+  {
+    "name": "CORTINA DE BOAL BORDADO DOBLE PAÑO Incluye/ 2 paños de 150x230cm",
+    "group": "VEGA BLANQUERÍA",
+    "description": "CORTINA DE BOAL BORDADO DOBLE PAÑO Incluye/ 2 paños de 150x230cm",
+    "prices": [
+      "AR$ 48.600"
+    ],
+    "image": "assets/A51D869AF029.jpg"
+  },
+  {
+    "name": "REPASADOR NAVIDADEÑO 12 PCS Contiene: 12 unidades surtidas",
+    "group": "VEGA BLANQUERÍA",
+    "description": "REPASADOR NAVIDADEÑO 12 PCS Contiene: 12 unidades surtidas",
+    "prices": [
+      "AR$ 20.700"
+    ],
+    "image": "assets/A5EDBB1C4917.jpg"
+  },
+  {
+    "name": "REPASADOR ECONÓMICO 12 PCS Contiene: 12 unidades surtidas",
+    "group": "VEGA BLANQUERÍA",
+    "description": "REPASADOR ECONÓMICO 12 PCS Contiene: 12 unidades surtidas",
+    "prices": [
+      "AR$ 14.400"
+    ],
+    "image": "assets/A5A638FB4D30.jpg"
+  },
+  {
+    "name": "¡Repasadores 65 x 40 cm! Diseños coloridos y prácticos para tu cocina �",
+    "group": "VEGA BLANQUERÍA",
+    "description": "¡Repasadores 65 x 40 cm! Diseños coloridos y prácticos para tu cocina �",
+    "prices": [
+      "AR$ 25.200"
+    ],
+    "image": "assets/A5AA891F6F41.jpg"
+  },
+  {
+    "name": "Kemei KM-1102 Shaver Profesional",
+    "group": "CASA HUGO",
+    "description": "Kemei KM-1102 Shaver Profesional // Conseguí un afeitado al ras, rápido y prolijo con esta afeitadora compacta y potente Ideal para barba, cuello y cabeza rapada.…",
+    "prices": [
+      "US$ 36,00",
+      "Gs. 216.000"
+    ],
+    "image": "assets/AC7D6425C303.jpg"
+  },
+  {
+    "name": "✂ Kemei KM-1558 – Kit Profesional 2 en 1",
+    "group": "CASA HUGO",
+    "description": "✂ Kemei KM-1558 – Kit Profesional 2 en 1 // Conseguí un acabado impecable con este kit que incluye afeitadora y patillera de precisión. Compacto, potente y perfecto…",
+    "prices": [
+      "US$ 90,00",
+      "Gs. 558.000"
+    ],
+    "image": "assets/ACB15C146465.jpg"
+  },
+  {
+    "name": "Placa infrarroja doble hornalla BIONICA RL150978",
+    "group": "CASA HUGO",
+    "description": "Placa infrarroja doble hornalla BIONICA RL150978 // 3500w 8 niveles de potencia Para todo tipo de ollas",
+    "prices": [
+      "Gs. 558.000",
+      "US$ 93,60"
+    ],
+    "image": "assets/AC30155E6250.jpg"
+  },
+  {
+    "name": "Termómetro infrarrojo digital",
+    "group": "CASA HUGO",
+    "description": "Termómetro infrarrojo digital // Ultra preciso Medición instantánea Con luz led (funciona con 2 pilas triple A, no incluidas)",
+    "prices": [
+      "Gs. 54.000",
+      "US$ 9,00"
+    ],
+    "image": "assets/ACC8D0A20E2E.jpg"
+  },
+  {
+    "name": "Nebulizador Portátil HH-W302PLUS",
+    "group": "CASA HUGO",
+    "description": "Nebulizador Portátil HH-W302PLUS // Diseño compacto, liviano y portátil Nebulización con partículas finas Funcionamiento silencioso Fácil de usar, ideal para niños y…",
+    "prices": [
+      "Gs. 59.500",
+      "US$ 99,00"
+    ],
+    "image": "assets/AC97AB81DC71.jpg"
+  },
+  {
+    "name": "Speaker portátil G04 RGB A tan solo ↙",
+    "group": "CASA HUGO",
+    "description": "Speaker portátil G04 RGB A tan solo ↙ // Conexión Bluetooth 5.3 Iluminación RGB Hasta 7 horas de reproducción Resistencia al agua y al polvo IP67 Diseño compacto con…",
+    "prices": [
+      "Gs. 90.000",
+      "US$ 153,00"
+    ],
+    "image": "assets/ACA70D654107.jpg"
+  },
+  {
+    "name": "Parlante portátil ECOPOWER EP-2261",
+    "group": "CASA HUGO",
+    "description": "Parlante portátil ECOPOWER EP-2261 // Potencia de 60 W Bluetooth para conectar tu celular Batería de 8000 mAh Luces RGB multicolor Reproduce música por USB, tarjeta…",
+    "prices": [
+      "Gs. 605.000",
+      "US$ 100,80"
+    ],
+    "image": "assets/AC3D2CBF6CBD.jpg"
+  },
+  {
+    "name": "Parlante portátil ECOPOWER EP-2225",
+    "group": "CASA HUGO",
+    "description": "Parlante portátil ECOPOWER EP-2225 // Potencia de 40 W Batería de 3600 mAh Luces LED RGB Conexión Bluetooth con función TWS Reproduce música por USB, tarjeta TF, AUX…",
+    "prices": [
+      "Gs. 605.000",
+      "US$ 100,80"
+    ],
+    "image": "assets/AC1AEB4F99B1.jpg"
+  },
+  {
+    "name": "Parlante Bluetooth ECOPOWER EP-S112",
+    "group": "CASA HUGO",
+    "description": "Parlante Bluetooth ECOPOWER EP-S112 // Potencia de 40 W RMS Batería de 3600 mAh Luces LED RGB Función TWS para emparejar con otro parlante compatible Reproduce música…",
+    "prices": [
+      "Gs. 702.000",
+      "US$ 117,00"
+    ],
+    "image": "assets/ACAE20A73F59.jpg"
+  },
+  {
+    "name": "Parlante portátil ECOPOWER EP-2280",
+    "group": "CASA HUGO",
+    "description": "Parlante portátil ECOPOWER EP-2280 // Potencia de salida de 100 W reales Batería de 6000 mAh Luces LED RGB Sonido Hi-Fi Reproduce música por Bluetooth, USB, tarjeta…",
+    "prices": [
+      "Gs. 896.500",
+      "US$ 149,40"
+    ],
+    "image": "assets/AC956EA9ACC7.jpg"
+  },
+  {
+    "name": "Parlante portátil ECOPOWER EP-1982",
+    "group": "CASA HUGO",
+    "description": "Parlante portátil ECOPOWER EP-1982 // Potencia de 40 W RMS Bluetooth 5.3 Batería de 3600 mAh (7,4 V) Luces LED RGB Función TWS para emparejar con otro parlante…",
+    "prices": [
+      "Gs. 605.000",
+      "US$ 100,80"
+    ],
+    "image": "assets/ACFA9640D665.jpg"
+  },
+  {
+    "name": "Parlante ECOPOWER EP-S308",
+    "group": "CASA HUGO",
+    "description": "Parlante ECOPOWER EP-S308 // Potencia de 40 W RMS (800 W PMPO) Doble woofer de 6,5” + tweeter de 1” Batería recargable de 4500 mAh Luces LED RGB Conectividad…",
+    "prices": [
+      "Gs. 777.500",
+      "US$ 129,60"
+    ],
+    "image": "assets/AC3B9793EDDC.jpg"
+  },
+  {
+    "name": "TIRA DE LUCES LED TIPO FAROL",
+    "group": "CASA HUGO",
+    "description": "TIRA DE LUCES LED TIPO FAROL // Dale un toque cálido y elegante a tus espacios, ideal para patios, gazebos, jardines, quinchos y reuniones nocturnas. Diseño…",
+    "prices": [
+      "Gs. 216.000",
+      "US$ 36,00"
+    ],
+    "image": "assets/AC9BE5472934.jpg"
+  },
+  {
+    "name": "la época de entrenar y llegar de la mejor manera al verano Nuevo bolso magnetico Bolsa",
+    "group": "CASA HUGO",
+    "description": "REPOSICIÓN Llego la época de entrenar y llegar de la mejor manera al verano Nuevo bolso magnetico Bolsa con varios compartimientos para gimnasio magnético con bolsas…",
+    "prices": [
+      "Gs. 117.000",
+      "US$ 189,00"
+    ],
+    "image": "assets/AC455FAB618F.jpg"
+  },
+  {
+    "name": "Soporte para celular de 12.000 mAh con soporte para celular Multicables incorporados para",
+    "group": "CASA HUGO",
+    "description": "New Soporte para celular de 12.000 mAh con soporte para celular Multicables incorporados para todos los modelos de dispositivos . //",
+    "prices": [
+      "Gs. 72.000",
+      "US$ 117,00"
+    ],
+    "image": "assets/AC09ED444F95.jpg"
+  },
+  {
+    "name": "Cargador portátil Ecopower EP-C872 Función de carga inalámbrica y solar Cargador rápida",
+    "group": "CASA HUGO",
+    "description": "Cargador portátil Ecopower EP-C872 Función de carga inalámbrica y solar Cargador rápida 12.000 MAH . //",
+    "prices": [
+      "Gs. 90.000",
+      "US$ 14,40"
+    ],
+    "image": "assets/AC517C5A3171.jpg"
+  },
+  {
+    "name": "POWER BANK ECOPOWER EP-C905 – 22.000 mAh",
+    "group": "CASA HUGO",
+    "description": "POWER BANK ECOPOWER EP-C905 – 22.000 mAh // Carga rápida de hasta 22,5W 4 cables integrados: Type-C, Lightning, Micro USB y USB Pantalla digital LED para visualizar…",
+    "prices": [
+      "Gs. 126.000",
+      "US$ 203,40"
+    ],
+    "image": "assets/AC04CCC6DC04.jpg"
+  },
+  {
+    "name": "Cargador portátil ecopower EP- C",
+    "group": "CASA HUGO",
+    "description": "Cargador portátil ecopower EP- C803 Gs. 50.000 // Disponible color blanco",
+    "prices": [
+      "Gs. 1.500",
+      "US$ 14,40"
+    ],
+    "image": "assets/AC4E2CBC68E8.jpg"
+  },
+  {
+    "name": "CARGADOR PORTÁTIL EP-C817",
+    "group": "CASA HUGO",
+    "description": "CARGADOR PORTÁTIL EP-C817 // Gran capacidad de 22.000 mAh Compatible con Android y iPhone Carga rápida inteligente (Smart Charge) Pantalla digital con indicador de…",
+    "prices": [
+      "Gs. 117.000",
+      "US$ 189,00"
+    ],
+    "image": "assets/AC22E2C5B09C.jpg"
+  },
+  {
+    "name": "Reloj Smartwatch LUO LU-X30 MINI Con múltiples funciones inteligentes disponibles App:",
+    "group": "CASA HUGO",
+    "description": "Nuevo Reloj Smartwatch LUO LU-X30 MINI Con múltiples funciones inteligentes disponibles App: HryFine . //",
+    "prices": [
+      "Gs. 108.000",
+      "US$ 18,00"
+    ],
+    "image": "assets/AC817EE7E07E.jpg"
+  },
+  {
+    "name": "Reloj Smartwatch LUO LU-X33 Con múltiples funciones inteligentes disponibles App: HryFine",
+    "group": "CASA HUGO",
+    "description": "Nuevo Reloj Smartwatch LUO LU-X33 Con múltiples funciones inteligentes disponibles App: HryFine . //",
+    "prices": [
+      "Gs. 117.000",
+      "US$ 19,80"
+    ],
+    "image": "assets/ACFFA3A3A406.jpg"
+  },
+  {
+    "name": "Nuevas gafas inteligentes El mejor modelo del mercado Modelo: AiMB-S1",
+    "group": "CASA HUGO",
+    "description": "Nuevas gafas inteligentes El mejor modelo del mercado Modelo: AiMB-S1 Cámara filmadora Auriculares incorporados Recargable Lamina de lente intercambiables…",
+    "prices": [
+      "US$ 72,00",
+      "Gs. 432.000"
+    ],
+    "image": null
+  },
+  {
+    "name": "Celimax Retinal Shot (15 ml) (Cosmética Coreana) Reafirma tu piel, reduce arrugas y",
+    "group": "CASA HUGO",
+    "description": "Celimax Retinal Shot (15 ml) (Cosmética Coreana) Reafirma tu piel, reduce arrugas y minimiza poros. Fórmula potente con Retinal 0.1%, Matrixyl® 3000 y Pantenol para…",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 300,60",
+      "Gs. 450.000",
+      "US$ 750,60"
+    ],
+    "image": "assets/ACCECD53EF73.jpg"
+  },
+  {
+    "name": "Numbuzin No. 9 NAD+ Retinol Volumetox Eye Cream (10 ml) Crema coreana antiarrugas",
+    "group": "CASA HUGO",
+    "description": "Numbuzin No. 9 NAD+ Retinol Volumetox Eye Cream (10 ml) Crema coreana antiarrugas // . Cada uno 3 unidades por . // • Tipo: Tratamiento antiedad para el contorno de…",
+    "prices": [
+      "US$ 36,00",
+      "Gs. 216.000",
+      "Gs. 540.000",
+      "US$ 90,00"
+    ],
+    "image": null
+  },
+  {
+    "name": "HONOR Play20A — 4/128 GB",
+    "group": "CASA HUGO",
+    "description": "HONOR Play20A — 4/128 GB // Pantalla de 6,9″ con tasa de refresco de 90 Hz Pantalla trasera de 2″ para previsualizar selfies Procesador MediaTek Helio G81 de ocho…",
+    "prices": [
+      "US$ 237,60",
+      "Gs. 1.422.000"
+    ],
+    "image": "assets/ACDFD5DD06CC.jpg"
+  },
+  {
+    "name": "HONOR Play20C — 4 GB RAM + 64 GB",
+    "group": "CASA HUGO",
+    "description": "HONOR Play20C — 4 GB RAM + 64 GB // Pantalla HD+ de 6,78″ con 90 Hz Pantalla trasera táctil de 2,01″ Cámara principal de 13 MP + frontal de 5 MP Batería de 6.000 mAh…",
+    "prices": [
+      "US$ 198,00",
+      "Gs. 1.188.000"
+    ],
+    "image": "assets/AC0F3A4B3BAA.jpg"
+  },
+  {
+    "name": "Lente Ray•Ban primera linea",
+    "group": "CASA HUGO",
+    "description": "New Lente Ray•Ban primera linea Polarizado Delicado en cada detalle Incluye estuche Model P1302 . //",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 297,00"
+    ],
+    "image": "assets/AC9DA383BEDF.jpg"
+  },
+  {
+    "name": "Lente Ray•Ban Ferrari primera linea",
+    "group": "CASA HUGO",
+    "description": "New Lente Ray•Ban Ferrari primera linea Polarizado Delicado en cada detalle Incluye estuche Model 8341 . //",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 297,00"
+    ],
+    "image": "assets/ACAA36ECE90A.jpg"
+  },
+  {
+    "name": "Potente soplador portátil HENGDA YQ30056 (El modelo más potente del mercado) Recargable",
+    "group": "CASA HUGO",
+    "description": "Potente soplador portátil HENGDA YQ30056 (El modelo más potente del mercado) Recargable con medidor de carga 3 velocidades Ahora con linterna . ()",
+    "prices": [
+      "Gs. 117.000",
+      "US$ 192,60"
+    ],
+    "image": "assets/AC265948294B.jpg"
+  },
+  {
+    "name": "KIT PARA MOVER MUEBLES Y ELECTRODOMÉSTICOS",
+    "group": "CASA HUGO",
+    "description": "KIT PARA MOVER MUEBLES Y ELECTRODOMÉSTICOS // Capacidad de carga de hasta 150 kg Incluye palanca elevadora y 4 bases deslizantes Rodillos giratorios para facilitar el…",
+    "prices": [
+      "Gs. 99.000",
+      "US$ 16,20"
+    ],
+    "image": "assets/AC0D8E8BCB5E.jpg"
+  },
+  {
+    "name": "Nueva Aspiradora multifuncional",
+    "group": "CASA HUGO",
+    "description": "Nueva Aspiradora multifuncional Portátil Recargable Accesorios intercambiables Cómodo de usar . //",
+    "prices": [
+      "Gs. 144.000",
+      "US$ 23,40"
+    ],
+    "image": "assets/AC392A9AD53D.jpg"
+  },
+  {
+    "name": "Nueva y potente Aspiradora Portatil 6 en 1",
+    "group": "CASA HUGO",
+    "description": "Nueva y potente Aspiradora Portatil 6 en 1 Para autos Para el hogar u oficina Piso, alfombra, madera, etc. Filtro lavable 6 accesorios intercambiables para cada…",
+    "prices": [
+      "Gs. 216.000",
+      "US$ 36,00"
+    ],
+    "image": "assets/AC7A296BC147.jpg"
+  },
+  {
+    "name": "CEPILLO GIRATORIO PARA LAVADO DE AUTOS",
+    "group": "CASA HUGO",
+    "description": "CEPILLO GIRATORIO PARA LAVADO DE AUTOS // Cepillo con rotación de 360° Depósito para jabón integrado Mango extensible para alcanzar zonas difíciles Incluye…",
+    "prices": [
+      "Gs. 270.000",
+      "US$ 45,00"
+    ],
+    "image": "assets/AC6E8713EAE5.jpg"
+  },
+  {
+    "name": "inflador portátil Ahora en su versión mas potente 150 PSI HENGDA YQ30012",
+    "group": "CASA HUGO",
+    "description": "Nuevo inflador portátil Ahora en su versión mas potente 150 PSI HENGDA YQ30012 Multiusos (regulable para automóviles, motos, pelotas, globos, etc.) Tiene luz Led y…",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 28,80"
+    ],
+    "image": "assets/ACF980A3A405.jpg"
+  },
+  {
+    "name": "ASPIRADORA PORTÁTIL 2 EN 1 LUO LU-4981 Aspiradora + sopladora Ideal para auto y hogar",
+    "group": "CASA HUGO",
+    "description": "ASPIRADORA PORTÁTIL 2 EN 1 LUO LU-4981 Aspiradora + sopladora Ideal para auto y hogar También cuenta con función para inflar globos Recargable por USB Incluye…",
+    "prices": [
+      "Gs. 54.000",
+      "US$ 9,00"
+    ],
+    "image": "assets/AC17AD79DDD5.jpg"
+  },
+  {
+    "name": "y potente Kit de Pulidora LUO LU-DG09",
+    "group": "CASA HUGO",
+    "description": "Nuevo y potente Kit de Pulidora LUO LU-DG09 Recargable 2 baterias de repuesto 150w de potencia . //",
+    "prices": [
+      "Gs. 396.000",
+      "US$ 639,00"
+    ],
+    "image": "assets/AC67056115EB.jpg"
+  },
+  {
+    "name": "Taladro industrial portátil LUO LU-DG05",
+    "group": "CASA HUGO",
+    "description": "Nuevo Taladro industrial portátil LUO LU-DG05 Super potente 850W Recargable, incluye 2 baterías y cargador Mango para mejor agarre Maletín para transportar . //",
+    "prices": [
+      "Gs. 585.000",
+      "US$ 93,60"
+    ],
+    "image": "assets/AC6205FAC423.jpg"
+  },
+  {
+    "name": "y potente Kit de Taladro LUO LU-DG08",
+    "group": "CASA HUGO",
+    "description": "Nuevo y potente Kit de Taladro LUO LU-DG08 Recargable 2 baterias de repuesto 350w de potencia . //",
+    "prices": [
+      "Gs. 396.000",
+      "US$ 639,00"
+    ],
+    "image": "assets/AC172E5173C5.jpg"
+  },
+  {
+    "name": "gato hidráulico de hasta 2 toneladas",
+    "group": "CASA HUGO",
+    "description": "Nuevo gato hidráulico de hasta 2 toneladas .//",
+    "prices": [
+      "Gs. 135.000",
+      "US$ 21,60"
+    ],
+    "image": "assets/ACB986A23E50.jpg"
+  },
+  {
+    "name": "Hidrolavadora Portátil Hengda 48V A TAN SOLO",
+    "group": "CASA HUGO",
+    "description": "Hidrolavadora Portátil Hengda 48V A TAN SOLO // Ideal para quienes buscan practicidad y resultados rápidos Inalámbrica y portátil Alta presión para suciedad difícil…",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 28,80"
+    ],
+    "image": "assets/ACCAC457C056.jpg"
+  },
+  {
+    "name": "Promo Nuevo cartel luminoso ☑ Flexible y pegable ☑ Se puede editar mediante aplicación lo",
+    "group": "CASA HUGO",
+    "description": "Promo Nuevo cartel luminoso ☑ Flexible y pegable ☑ Se puede editar mediante aplicación lo que se quiere mostrar o publicitar ☑ Conexión vía usb (para vehículos,…",
+    "prices": [
+      "US$ 28,80",
+      "Gs. 180.000"
+    ],
+    "image": "assets/AC4C768C3281.jpg"
+  },
+  {
+    "name": "Kit profesional WMARK NG-2309",
+    "group": "CASA HUGO",
+    "description": "Nuevo ingreso Kit profesional WMARK NG-2309 // Inalámbrica y recargable por USB Motor de alta velocidad: 7.500 / 9.000 RPM Batería de litio de 2.500 mAh Autonomía de…",
+    "prices": [
+      "US$ 72,00",
+      "Gs. 432.000"
+    ],
+    "image": "assets/AC8557A6FCD7.jpg"
+  },
+  {
+    "name": "✂ Clipper Profesional MPRO MP-1949",
+    "group": "CASA HUGO",
+    "description": "✂ Clipper Profesional MPRO MP-1949 // Diseño metálico plateado Batería recargable USB de 1400 mAh Hasta 180 minutos de autonomía Uso inalámbrico o con cable Cuchilla…",
+    "prices": [
+      "US$ 63,00",
+      "Gs. 378.000"
+    ],
+    "image": "assets/AC1196005E88.jpg"
+  },
+  {
+    "name": "✂ Trimmer profesional WMARK NG-720D",
+    "group": "CASA HUGO",
+    "description": "✂ Trimmer profesional WMARK NG-720D // Motor de hasta 7.000 RPM con modo turbo Batería de 1.200 mAh Hasta 180 minutos de autonomía Carga USB Tipo C Pantalla digital…",
+    "prices": [
+      "US$ 63,00",
+      "Gs. 378.000"
+    ],
+    "image": "assets/AC738A61D10A.jpg"
+  },
+  {
+    "name": "✂ Cortapelo profesional WMARK NG-2043",
+    "group": "CASA HUGO",
+    "description": "✂ Cortapelo profesional WMARK NG-2043 // Motor de 8 W con 2 velocidades: 6.000 y 7.000 RPM Batería de 2.000 mAh Hasta 4 horas de autonomía Palanca ajustable para…",
+    "prices": [
+      "US$ 72,00",
+      "Gs. 432.000"
+    ],
+    "image": "assets/ACB6069330A7.jpg"
+  },
+  {
+    "name": "Hoppie 550ML LU-43015",
+    "group": "CASA HUGO",
+    "description": "NEW NEW NEW Nuevo Hoppie 550ML LU-43015 Pico de silicona Manija superior Base antideslizante Doble capa térmica de hasta 24hs. Diseño único y exclusivo . // Colores y…",
+    "prices": [
+      "Gs. 63.000",
+      "US$ 104,40"
+    ],
+    "image": "assets/ACB9815B8314.jpg"
+  },
+  {
+    "name": "Hoppie luo de 550ml lu-43012",
+    "group": "CASA HUGO",
+    "description": "Hoppie luo de 550ml lu-43012 // Acero inoxidable Para frío/calor Con manija",
+    "prices": [
+      "Gs. 57.500",
+      "US$ 93,60"
+    ],
+    "image": "assets/ACADCD6D2FE9.jpg"
+  },
+  {
+    "name": "hoppie Hoppie LUO LU-43007",
+    "group": "CASA HUGO",
+    "description": "New hoppie Hoppie LUO LU-43007 Capacidad: 900ML Doble capa de acero inoxidable Térmico Fácil de limpiar Ligero e irrompible . //",
+    "prices": [
+      "Gs. 72.000",
+      "US$ 117,00"
+    ],
+    "image": "assets/AC7D32CD8FB7.jpg"
+  },
+  {
+    "name": "modelo mate listo 2en1 LU-43017 Este es un termo mate autocebante, un producto innovador",
+    "group": "CASA HUGO",
+    "description": "New Nuevo modelo mate listo 2en1 LU-43017 Este es un termo mate autocebante, un producto innovador que combina las funciones de termo, mate y bombilla en un solo…",
+    "prices": [
+      "US$ 117,00"
+    ],
+    "image": "assets/AC80CAD22489.jpg"
+  },
+  {
+    "name": "hoppie Botellita LUO LU-43018",
+    "group": "CASA HUGO",
+    "description": "New hoppie Botellita LUO LU-43018 Capacidad: 750ML Doble capa de acero inoxidable Térmico Fácil de limpiar Ligero e irrompible . //",
+    "prices": [
+      "Gs. 54.000",
+      "US$ 9,00"
+    ],
+    "image": "assets/AC8F293E739B.jpg"
+  },
+  {
+    "name": "Hoppie 600ML térmico",
+    "group": "CASA HUGO",
+    "description": "Hoppie 600ML térmico . //",
+    "prices": [
+      "Gs. 45.000",
+      "US$ 7,20"
+    ],
+    "image": "assets/AC82609B358E.jpg"
+  },
+  {
+    "name": "Hoppie 900ml doble pico",
+    "group": "CASA HUGO",
+    "description": "Hoppie 900ml doble pico // Acero inox Hasta 12h de bebidas frías/calientes Con manija",
+    "prices": [
+      "Gs. 54.000",
+      "US$ 9,00"
+    ],
+    "image": "assets/ACB5133537BD.jpg"
+  },
+  {
+    "name": "Reloj digital deportivo",
+    "group": "CASA HUGO",
+    "description": "Reloj digital deportivo // Pantalla led Cronómetro Resistente al agua",
+    "prices": [
+      "Gs. 36.000",
+      "US$ 59,40"
+    ],
+    "image": "assets/ACD0F5BBABE9.jpg"
+  },
+  {
+    "name": "Promo de temporada Vaso Chopera 709ML A tan sólo",
+    "group": "CASA HUGO",
+    "description": "Promo de temporada Vaso Chopera 709ML A tan sólo: . //",
+    "prices": [
+      "Gs. 54.000",
+      "US$ 9,00"
+    ],
+    "image": "assets/AC3B99BA2AB1.jpg"
+  },
+  {
+    "name": "VASO CON ABRIDOR 502ML UNIDAD",
+    "group": "CASA HUGO",
+    "description": "REPOSICIÓN VASO CON ABRIDOR 502ML UNIDAD . // C/U 5 UNIDADES POR: . // Colores disponibles",
+    "prices": [
+      "Gs. 45.000",
+      "US$ 7,20",
+      "Gs. 180.000",
+      "US$ 28,80"
+    ],
+    "image": "assets/AC6223E3289B.jpg"
+  },
+  {
+    "name": "kit moldeador Quanta QTKM31",
+    "group": "CASA HUGO",
+    "description": "Nuevo kit moldeador Quanta QTKM31 Automático Profesional Cabezal intercambiable // . Características en el video",
+    "prices": [
+      "US$ 63,00",
+      "Gs. 378.000"
+    ],
+    "image": "assets/ACB770B00ECB.jpg"
+  },
+  {
+    "name": "Promo Samsung Galaxy A16 128GB Con funda de regalo",
+    "group": "CASA HUGO",
+    "description": "Promo Samsung Galaxy A16 128GB Con funda de regalo //",
+    "prices": [
+      "US$ 282,60",
+      "Gs. 1.701.000"
+    ],
+    "image": "assets/ACD37579622D.jpg"
+  },
+  {
+    "name": "Secador 5 en 1 EUROMAX EM-6696 5 cepillos intercambiables con el beneficio que mas se",
+    "group": "CASA HUGO",
+    "description": "REPOSICIÓN Nuevo Secador 5 en 1 EUROMAX EM-6696 5 cepillos intercambiables con el beneficio que mas se adapte a tus necesidades ‍♀ .//",
+    "prices": [
+      "Gs. 126.000",
+      "US$ 203,40"
+    ],
+    "image": "assets/ACB7CF433BB3.jpg"
+  },
+  {
+    "name": "Smartv VIZIO 32\" Tamaño de pantalla: LED de 32\" Resolución: HD 1366 x 768p Conectividad:",
+    "group": "CASA HUGO",
+    "description": "Nuevo Smartv VIZIO 32\" Tamaño de pantalla: LED de 32\" Resolución: HD 1366 x 768p Conectividad: Wi-Fi Interfaz: HDMI y USB . //",
+    "prices": [
+      "Gs. 1.134.000",
+      "US$ 189,00"
+    ],
+    "image": "assets/AC12542FC7B7.jpg"
+  },
+  {
+    "name": "Smartv QLED Audisat 50 pulgadas New model 2027 SLIM FRAMELESS",
+    "group": "CASA HUGO",
+    "description": "Nuevo Smartv QLED Audisat 50 pulgadas New model 2027 SLIM FRAMELESS //",
+    "prices": [
+      "US$ 405,00",
+      "Gs. 2.430.000"
+    ],
+    "image": "assets/ACF5312D37CF.jpg"
+  },
+  {
+    "name": "Smartv QLED Audisat 43 pulgadas New model 2027 SLIM FRAMELESS",
+    "group": "CASA HUGO",
+    "description": "Nuevo Smartv QLED Audisat 43 pulgadas New model 2027 SLIM FRAMELESS //",
+    "prices": [
+      "US$ 324,00",
+      "Gs. 1.944.000"
+    ],
+    "image": "assets/ACF567B3022D.jpg"
+  },
+  {
+    "name": "Secador de pelo Maxon MX-8020",
+    "group": "CASA HUGO",
+    "description": "Nuevo Secador de pelo Maxon MX-8020 3000w de potencia 2 velocidades 3 medida de temperatura . //",
+    "prices": [
+      "Gs. 99.000",
+      "US$ 16,20"
+    ],
+    "image": "assets/AC28254F90D3.jpg"
+  },
+  {
+    "name": "¡Pavas enlozadas que enamoran! Hermosos diseños para darle un toque especial a tu cocina",
+    "group": "CASA HUGO",
+    "description": "¡Pavas enlozadas que enamoran! Hermosos diseños para darle un toque especial a tu cocina. Capacidad de 2,5 litros Diseños variados y elegantes Prácticas y resistentes",
+    "prices": [
+      "Gs. 99.000",
+      "US$ 16,20"
+    ],
+    "image": "assets/AC5373E4B486.jpg"
+  },
+  {
+    "name": "Cocina biónica a gas de 3 hornallas RL150956",
+    "group": "CASA HUGO",
+    "description": "Cocina biónica a gas de 3 hornallas RL150956 // caracteristicas en la imagen",
+    "prices": [
+      "Gs. 306.000",
+      "US$ 50,40"
+    ],
+    "image": "assets/AC0BA3C3101F.jpg"
+  },
+  {
+    "name": "Freidora de aire de BIONICA de 15L de capacidad COD: RL150916",
+    "group": "CASA HUGO",
+    "description": "Nuevo Freidora de aire de BIONICA de 15L de capacidad COD: RL150916 // CARACTERÍSTICAS EN LA IMAGEN",
+    "prices": [
+      "US$ 113,40",
+      "Gs. 684.000"
+    ],
+    "image": "assets/AC14EBED24D0.jpg"
+  },
+  {
+    "name": "Horno eléctrico BIONICA de 22L de capacidad COD: RL150802",
+    "group": "CASA HUGO",
+    "description": "Nuevo Horno eléctrico BIONICA de 22L de capacidad COD: RL150802 // CARACTERÍSTICAS EN LA IMAGEN",
+    "prices": [
+      "US$ 90,00",
+      "Gs. 540.000"
+    ],
+    "image": "assets/AC303F6A0A7D.jpg"
+  },
+  {
+    "name": "Olla electrica Biónica RL150518",
+    "group": "CASA HUGO",
+    "description": "Olla electrica Biónica RL150518 // caracteristicas en la imagen",
+    "prices": [
+      "Gs. 360.000",
+      "US$ 59,40"
+    ],
+    "image": "assets/AC60FE33CE6E.jpg"
+  },
+  {
+    "name": "Nueva olla eléctrica KRAB KBOEP15",
+    "group": "CASA HUGO",
+    "description": "Nueva olla eléctrica KRAB KBOEP15 Medida: 30cm x 4cm profundidad Temperatura Regulable Superficie antiadherente . //",
+    "prices": [
+      "Gs. 216.000",
+      "US$ 36,00"
+    ],
+    "image": "assets/ACAD58DDF2CD.jpg"
+  },
+  {
+    "name": "Nueva Parrilla eléctrica KRAB KBPE18",
+    "group": "CASA HUGO",
+    "description": "New Nueva Parrilla eléctrica KRAB KBPE18 Potente : 1800w Regulable: 90° hasta 240° Bandeja recolectora de aceite y grasas Fácil de limpiar Ideal si no quieres hacer…",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 297,00"
+    ],
+    "image": "assets/ACE35D1A0037.jpg"
+  },
+  {
+    "name": "MICROONDAS DIGITAL 20 LITROS QUANTA QTMDA20",
+    "group": "CASA HUGO",
+    "description": "NUEVO MICROONDAS DIGITAL 20 LITROS QUANTA QTMDA20 //",
+    "prices": [
+      "US$ 126,00",
+      "Gs. 756.000"
+    ],
+    "image": "assets/AC589A59F79E.jpg"
+  },
+  {
+    "name": "Cocina infrarroja Brisa",
+    "group": "CASA HUGO",
+    "description": "Cocina infrarroja Brisa // 2000w potencia max Apto para todo tipo de ollas",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 300,60"
+    ],
+    "image": "assets/ACB4FED8FE32.jpg"
+  },
+  {
+    "name": "Cocina infrarroja EUROMAX EM-7102 Panel totalmente táctil Temperatura de 80° a 600°",
+    "group": "CASA HUGO",
+    "description": "Cocina infrarroja EUROMAX EM-7102 Panel totalmente táctil Temperatura de 80° a 600° . //",
+    "prices": [
+      "Gs. 261.000",
+      "US$ 43,20"
+    ],
+    "image": "assets/AC468843BF94.jpg"
+  },
+  {
+    "name": "Nueva Cocina infrarroja MAST",
+    "group": "CASA HUGO",
+    "description": "Nueva Cocina infrarroja MAST 2200w Apto para todo tipo de ollas 8 niveles de potencia //",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 300,60"
+    ],
+    "image": "assets/AC19F231802C.jpg"
+  },
+  {
+    "name": "Cocina infrarroja Megastar ER68",
+    "group": "CASA HUGO",
+    "description": "Cocina infrarroja Megastar ER68 2000w de potencia //",
+    "prices": [
+      "Gs. 225.000",
+      "US$ 37,80"
+    ],
+    "image": "assets/ACC5D5389287.jpg"
+  },
+  {
+    "name": "Nueva cocina infrarroja ASIA STAR",
+    "group": "CASA HUGO",
+    "description": "Nueva cocina infrarroja ASIA STAR",
+    "prices": [
+      "Gs. 198.000",
+      "US$ 318,60",
+      "Gs. 180.000",
+      "US$ 300,60"
+    ],
+    "image": "assets/AC02F9CCF108.jpg"
+  },
+  {
+    "name": "Cocina infrarroja Maxon MX-125",
+    "group": "CASA HUGO",
+    "description": "Cocina infrarroja Maxon MX-125 2200W de potencia Sistema de seguridad contra sobrecalentamiento Temporizador . //",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 297,00"
+    ],
+    "image": "assets/AC7247CD7505.jpg"
+  },
+  {
+    "name": "el boom del momento Nuevo ventilador Portátil doble",
+    "group": "CASA HUGO",
+    "description": "Llego el boom del momento Nuevo ventilador Portátil doble Cabeza doble regulable 3 velocidades en cada ventilador Recargable Silencioso y potente (Especial para…",
+    "prices": [
+      "Gs. 129.500",
+      "US$ 21,60"
+    ],
+    "image": "assets/AC8147E80482.jpg"
+  },
+  {
+    "name": "Ventilador PARANA 5 aletas metal Motor potente",
+    "group": "CASA HUGO",
+    "description": "Ya disponible Ventilador PARANA 5 aletas metal Motor potente Características en la imagen . // C/U Caja de 4 unidades: . //",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 297,00",
+      "Gs. 675.000",
+      "US$ 111,60"
+    ],
+    "image": "assets/ACF01F7A84D4.jpg"
+  },
+  {
+    "name": "Ventilador UTILUX 3 aletas metal Motor potente",
+    "group": "CASA HUGO",
+    "description": "Ya disponible Ventilador UTILUX 3 aletas metal Motor potente Características en la imagen . // C/U Caja de 4 unidades: . //",
+    "prices": [
+      "Gs. 171.000",
+      "US$ 28,80",
+      "Gs. 648.000",
+      "US$ 108,00"
+    ],
+    "image": "assets/ACD6D1DE5A6C.jpg"
+  },
+  {
+    "name": "Ventilador LUO 5 aletas metal",
+    "group": "CASA HUGO",
+    "description": "Ya disponible Ventilador LUO 5 aletas metal Características en la imagen . // C/U Caja de 4 unidades: . //",
+    "prices": [
+      "Gs. 180.000",
+      "US$ 297,00",
+      "Gs. 675.000",
+      "US$ 111,60"
+    ],
+    "image": "assets/ACFC63821BA0.jpg"
+  },
+  {
+    "name": "Ventilador MAST 5 aspas de plástico",
+    "group": "CASA HUGO",
+    "description": "Nuevo Ventilador MAST 5 aspas de plástico Características en la imagen . // Caja de 4 unidades . //",
+    "prices": [
+      "Gs. 162.000",
+      "US$ 261,00",
+      "Gs. 612.000",
+      "US$ 99,00"
+    ],
+    "image": "assets/AC5A690E0EAC.jpg"
+  },
+  {
+    "name": "ventilador FS40",
+    "group": "CASA HUGO",
+    "description": "OFERTA Nuevo ventilador FS40 Potente y Silencioso Plastico de 18 pulgadas 3 velocidades Antes: . // Ahora",
+    "prices": [
+      "Gs. 216.000",
+      "US$ 315,00",
+      "Gs. 162.000",
+      "US$ 261,00"
+    ],
+    "image": "assets/AC62524B61C0.jpg"
+  },
+  {
+    "name": "Mini ventilador Turbo Parana 10 pulgadas 75w de potencia Potencia y portabilidad Motor",
+    "group": "CASA HUGO",
+    "description": "Mini ventilador Turbo Parana 10 pulgadas 75w de potencia Potencia y portabilidad Motor potente pero silencioso .//",
+    "prices": [
+      "Gs. 198.000",
+      "US$ 32,40"
+    ],
+    "image": "assets/ACD001145924.jpg"
+  },
+  {
+    "name": "Ventilador grande Nobel Home 5 aletas plástico",
+    "group": "CASA HUGO",
+    "description": "Ventilador grande Nobel Home 5 aletas plástico Características en la imagen . // C/U Caja de 4 unidades: . //",
+    "prices": [
+      "Gs. 171.000",
+      "US$ 279,00",
+      "Gs. 630.000",
+      "US$ 100,80"
+    ],
+    "image": "assets/ACBE266C53AF.jpg"
+  },
+  {
+    "name": "POR TEMPORADA Ventilador de 5 aletas plásticas Ypasim Antes",
+    "group": "CASA HUGO",
+    "description": "OFERTA POR TEMPORADA Ventilador de 5 aletas plásticas Ypasim Antes: . () Ahora: . //",
+    "prices": [
+      "Gs. 207.000",
+      "US$ 309,60",
+      "Gs. 162.000",
+      "US$ 261,00"
+    ],
+    "image": "assets/ACE912BE2D89.jpg"
+  },
+  {
+    "name": "•Ventilador turbo Ventos •5 aspas, 16\" •De mesa-piso •Motor pesado",
+    "group": "CASA HUGO",
+    "description": "REPOSICIÓN •Ventilador turbo Ventos •5 aspas, 16\" •De mesa-piso •Motor pesado . //",
+    "prices": [
+      "Gs. 306.000",
+      "US$ 495,00"
+    ],
+    "image": "assets/AC19F3C81A66.jpg"
+  },
+  {
+    "name": "❗ Ventilador de techo 56\" de 3 aspas MAST 3 VELOCIDADES •Por unidad",
+    "group": "CASA HUGO",
+    "description": "YA DISPONIBLE ❗ Ventilador de techo 56\" de 3 aspas MAST 3 VELOCIDADES •Por unidad . () •Por caja cerrada de 3pcs. . () OFERTA DE TEMPORADA HASTA AGOTAR STOCK",
+    "prices": [
+      "Gs. 189.000",
+      "US$ 315,00",
+      "Gs. 540.000",
+      "US$ 90,00"
+    ],
+    "image": "assets/ACBB0A6E13E9.jpg"
+  },
+  {
+    "name": "ventilador de techo Bionica con luz Motor pesado Por unidad",
+    "group": "CASA HUGO",
+    "description": "Nuevo ventilador de techo Bionica con luz Motor pesado Por unidad: // . Cada uno Caja de de 3 unidades: o . La caja",
+    "prices": [
+      "US$ 513,00",
+      "Gs. 315.000",
+      "US$ 144,00",
+      "Gs. 891.000"
+    ],
+    "image": "assets/AC655C1FD3AB.jpg"
+  },
+  {
+    "name": "AIRE ACONDICIONADO SPLIT VCP SILENCIOSO Y POTENTE ❄ INCLUYE KIT DE INSTALACIÓN 12.000BTU",
+    "group": "CASA HUGO",
+    "description": "AIRE ACONDICIONADO SPLIT VCP SILENCIOSO Y POTENTE ❄ INCLUYE KIT DE INSTALACIÓN 12.000BTU // 3000 frigorias //",
+    "prices": [
+      "Gs. 3.132.000",
+      "US$ 504,00"
+    ],
+    "image": "assets/AC0A6CA3C137.jpg"
+  },
+  {
+    "name": "y potente Foco con mini ventilador, mejorado con 16 pulgadas y con mas potencia, 1000",
+    "group": "CASA HUGO",
+    "description": "Nuevo y potente Foco con mini ventilador, mejorado con 16 pulgadas y con mas potencia, 1000 lumenes HENGDA YQ10501 3 tonos de luces regulables 3 velocidades en su…",
+    "prices": [
+      "Gs. 144.000",
+      "US$ 23,40"
+    ],
+    "image": "assets/ACFDBE42EAA3.jpg"
+  },
+  {
+    "name": "Tira LED RGB de 5metros",
+    "group": "CASA HUGO",
+    "description": "REPOSICION Tira LED RGB de 5metros //",
+    "prices": [
+      "Gs. 72.000",
+      "US$ 120,60"
+    ],
+    "image": "assets/ACA5A697BA42.jpg"
+  },
+  {
+    "name": "Luz de emergencia Ecopower EP-E101 46 Led, ultra potente Doble tubo",
+    "group": "CASA HUGO",
+    "description": "Luz de emergencia Ecopower EP-E101 46 Led, ultra potente Doble tubo . //",
+    "prices": [
+      "Gs. 59.500",
+      "US$ 99,00"
+    ],
+    "image": "assets/ACC820BCDE1D.jpg"
+  },
+  {
+    "name": "Linterna LED Recargable de doble iluminación EP-8518",
+    "group": "CASA HUGO",
+    "description": "Linterna LED Recargable de doble iluminación EP-8518 // Potencia frontal de 5W Batería de 3000 mAh Hasta 4 horas de uso continuo 3 LED traseros SMD Cuerpo metálico…",
+    "prices": [
+      "Gs. 54.000",
+      "US$ 9,00"
+    ],
+    "image": "assets/ACCEB465EDFB.jpg"
+  },
+  {
+    "name": "Kit Garrafita LU-43023",
+    "group": "CASA HUGO",
+    "description": "NEW NEW NEW Kit Garrafita LU-43023 Galón 1.9 litros doble manija Matero 140ML Bombilla Con Portamatero Doble capa térmica de hasta 24hs. Diseño único y exclusivo . //",
+    "prices": [
+      "Gs. 126.000",
+      "US$ 207,00"
+    ],
+    "image": "assets/ACC366AF7255.jpg"
+  },
+  {
+    "name": "Kit Jarra LU-43024",
+    "group": "CASA HUGO",
+    "description": "NEW NEW NEW Kit Jarra LU-43024 Jarra 2 litros Matero 140ML Bombilla Con Portamatero lateral Doble capa térmica de hasta 24hs. Diseño único y exclusivo . //",
+    "prices": [
+      "Gs. 117.000",
+      "US$ 19,80"
+    ],
+    "image": "assets/AC764BF1C953.jpg"
+  },
+  {
+    "name": "Kit Garrafita LU-43026",
+    "group": "CASA HUGO",
+    "description": "NEW NEW NEW Kit Garrafita LU-43026 Galón 1.9 litros doble manija Matero 140ML Bombilla Con Portamatero Doble capa térmica de hasta 24hs. Diseño único y exclusivo . //",
+    "prices": [
+      "Gs. 126.000",
+      "US$ 207,00"
+    ],
+    "image": "assets/AC83A32ED88E.jpg"
+  },
+  {
+    "name": "Hoppie 750ML LU-43014",
+    "group": "CASA HUGO",
+    "description": "NEW NEW NEW Nuevo Hoppie 750ML LU-43014 Doble Pico Bloqueo Manija superior Doble capa térmica de hasta 24hs. Diseño único y exclusivo . // Colores y diseños disponibles",
+    "prices": [
+      "Gs. 68.500",
+      "US$ 113,40"
+    ],
+    "image": "assets/ACCC143F02F0.jpg"
+  },
+  {
+    "name": "Piloto infantil con porta mochila Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Piloto infantil con porta mochila Medidas en la imagen",
+    "prices": [
+      "AR$ 7.560"
+    ],
+    "image": "assets/ACFC261B0D58.jpg"
+  },
+  {
+    "name": "Pendrive 16GB",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pendrive 16GB",
+    "prices": [
+      "AR$ 17.820"
+    ],
+    "image": "assets/ACB46570A9E1.jpg"
+  },
+  {
+    "name": "Pendrive 32GB",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pendrive 32GB",
+    "prices": [
+      "AR$ 20.880"
+    ],
+    "image": "assets/AC47D49B2B85.jpg"
+  },
+  {
+    "name": "Pendrive 64GB",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pendrive 64GB",
+    "prices": [
+      "AR$ 25.200"
+    ],
+    "image": "assets/AC690ECA7823.jpg"
+  },
+  {
+    "name": "Mini láser Conexión 220V Luces de colores",
+    "group": "CASA SIMPSONS",
+    "description": "Mini láser Conexión 220V Luces de colores",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/AC09EE06A2A3.jpg"
+  },
+  {
+    "name": "Mini láser. Diseño de Navidad",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Mini láser. Diseño de Navidad",
+    "prices": [
+      "AR$ 20.880"
+    ],
+    "image": "assets/AC85DB0E5EEE.jpg"
+  },
+  {
+    "name": "Telescopio Grande Con tripo y estuche",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo ingreso Telescopio Grande Con tripo y estuche",
+    "prices": [
+      "AR$ 92.160"
+    ],
+    "image": "assets/AC477309AD5B.jpg"
+  },
+  {
+    "name": "Binocular Grande",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Binocular Grande",
+    "prices": [
+      "AR$ 44.640"
+    ],
+    "image": "assets/ACB963CB19B9.jpg"
+  },
+  {
+    "name": "Binocular Grande",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Binocular Grande",
+    "prices": [
+      "AR$ 41.580"
+    ],
+    "image": "assets/AC16531E6264.jpg"
+  },
+  {
+    "name": "Binocular Grande",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Binocular Grande",
+    "prices": [
+      "AR$ 35.640"
+    ],
+    "image": "assets/AC614E182D92.jpg"
+  },
+  {
+    "name": "Toma presión de muñeca SUNLIGHT 17602",
+    "group": "CASA SIMPSONS",
+    "description": "Toma presión de muñeca SUNLIGHT 17602",
+    "prices": [
+      "AR$ 19.440"
+    ],
+    "image": "assets/AC8B45AC4F38.jpg"
+  },
+  {
+    "name": "Toma presión de muñeca SUNLIGHT 17585",
+    "group": "CASA SIMPSONS",
+    "description": "Toma presión de muñeca SUNLIGHT 17585",
+    "prices": [
+      "AR$ 17.820"
+    ],
+    "image": "assets/AC14599714E1.jpg"
+  },
+  {
+    "name": "Mini Pistola Masajeador. 3 Cabezales intercambiables",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo ingreso Mini Pistola Masajeador. 3 Cabezales intercambiables",
+    "prices": [
+      "AR$ 20.880"
+    ],
+    "image": "assets/ACD31119A2A8.jpg"
+  },
+  {
+    "name": "Pila AA Maxday Paquete 60 PCS. ✳",
+    "group": "CASA SIMPSONS",
+    "description": "Pila AA Maxday Paquete 60 PCS. ✳",
+    "prices": [
+      "AR$ 10.800"
+    ],
+    "image": "assets/ACEC928F8F79.jpg"
+  },
+  {
+    "name": "Pila AA Maxday Paquete de 60 pcs ✳",
+    "group": "CASA SIMPSONS",
+    "description": "Pila AA Maxday Paquete de 60 pcs ✳",
+    "prices": [
+      "AR$ 8.100"
+    ],
+    "image": "assets/AC0EC3C58529.jpg"
+  },
+  {
+    "name": "Pila Recargable en Blíster. Incluye 8 AA y 4 AAA",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Pila Recargable en Blíster. Incluye 8 AA y 4 AAA",
+    "prices": [
+      "AR$ 5.040"
+    ],
+    "image": "assets/AC64BD3D3FE1.jpg"
+  },
+  {
+    "name": "Pila Recargable en Blíster. Incluye 4 AA",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Pila Recargable en Blíster. Incluye 4 AA",
+    "prices": [
+      "AR$ 3.960"
+    ],
+    "image": "assets/AC4D6DCCA800.jpg"
+  },
+  {
+    "name": "Pila Recargable en Blíster. Incluye 4 AAA",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Pila Recargable en Blíster. Incluye 4 AAA",
+    "prices": [
+      "AR$ 3.960"
+    ],
+    "image": "assets/ACC47A39047D.jpg"
+  },
+  {
+    "name": "Bateria Recargable",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Bateria Recargable",
+    "prices": [
+      "AR$ 3.600"
+    ],
+    "image": "assets/ACBB2D96C21D.jpg"
+  },
+  {
+    "name": "Control para Play 4 inalámbrico ✳",
+    "group": "CASA SIMPSONS",
+    "description": "Control para Play 4 inalámbrico ✳",
+    "prices": [
+      "AR$ 35.640"
+    ],
+    "image": "assets/ACE96F968FB1.jpg"
+  },
+  {
+    "name": "Cinta ancha transparente Tubo con 6 unidades",
+    "group": "CASA SIMPSONS",
+    "description": "Cinta ancha transparente Tubo con 6 unidades",
+    "prices": [
+      "AR$ 17.820"
+    ],
+    "image": "assets/ACFD42A858CC.jpg"
+  },
+  {
+    "name": "LUZ DE Emergencia EUROMAX EM-3871 Recargable",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN LUZ DE Emergencia EUROMAX EM-3871 Recargable",
+    "prices": [
+      "AR$ 22.320"
+    ],
+    "image": "assets/ACC9ABF8EAB5.jpg"
+  },
+  {
+    "name": "LUZ DE Emergencia EUROMAX EM-3872 Recargable",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN LUZ DE Emergencia EUROMAX EM-3872 Recargable",
+    "prices": [
+      "AR$ 20.880"
+    ],
+    "image": "assets/AC1C77734615.jpg"
+  },
+  {
+    "name": "Peine secador EUROMAX 5en1 EM-6696 cabezales intercambiables",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Peine secador EUROMAX 5en1 EM-6696 cabezales intercambiables",
+    "prices": [
+      "AR$ 29.700"
+    ],
+    "image": "assets/AC3EDEA8351B.jpg"
+  },
+  {
+    "name": "Set 3 en 1 EUROMAX EM-6671",
+    "group": "CASA SIMPSONS",
+    "description": "Set 3 en 1 EUROMAX EM-6671 Planchita Ondulador Peine",
+    "prices": [
+      "AR$ 35.640"
+    ],
+    "image": "assets/AC82AB57A5A7.jpg"
+  },
+  {
+    "name": "Planchita EUROMAX EM-6672 Potencia 450°",
+    "group": "CASA SIMPSONS",
+    "description": "Planchita EUROMAX EM-6672 Potencia 450°",
+    "prices": [
+      "AR$ 22.320"
+    ],
+    "image": "assets/AC549496AECC.jpg"
+  },
+  {
+    "name": "LUZ DE Emergencia EUROMAX EM-3873 Recargable",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN LUZ DE Emergencia EUROMAX EM-3873 Recargable",
+    "prices": [
+      "AR$ 17.820"
+    ],
+    "image": "assets/AC6854548A99.jpg"
+  },
+  {
+    "name": "Mini Máquina de Coser Euromax SM-202A Con mesita a pedal",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Mini Máquina de Coser Euromax SM-202A Con mesita a pedal",
+    "prices": [
+      "AR$ 31.320"
+    ],
+    "image": "assets/ACA47326CC9D.jpg"
+  },
+  {
+    "name": "Nebulizador marca EUROMAX EM-4550 Para adultos y niños",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Nebulizador marca EUROMAX EM-4550 Para adultos y niños",
+    "prices": [
+      "AR$ 71.280"
+    ],
+    "image": "assets/AC8DEA57988E.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada EUROMAX EM-3401 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada EUROMAX EM-3401 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/ACD3D7E2A226.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada EUROMAX EM-3403 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada EUROMAX EM-3403 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/ACC6455001DE.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada EUROMAX EM-3404 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada EUROMAX EM-3404 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/ACF8B6CE2DBE.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-363 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-363 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/ACFDEB416ED7.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-355 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-355 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/ACBD0DCADD2A.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-360 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-360 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/AC5DBDE15980.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-357 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-357 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/AC85F040CDD8.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-361 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-361 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/AC2618C49CD0.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-362 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-362 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/ACDCFBA3BE7E.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-358 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-358 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/AC51A90D040A.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-356 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-356 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/AC24CEF5EA9F.jpg"
+  },
+  {
+    "name": "Pava enlozada estampada MAXON MX-359 Capacidad 2.5Litros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pava enlozada estampada MAXON MX-359 Capacidad 2.5Litros",
+    "prices": [
+      "AR$ 23.760"
+    ],
+    "image": "assets/AC2A82C4C32A.jpg"
+  },
+  {
+    "name": "Licuadora Raf R.295 con procesador 1000w 1.500litros base de Acero inoxidable 5",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Licuadora Raf R.295 con procesador 1000w 1.500litros base de Acero inoxidable 5 velocidades",
+    "prices": [
+      "AR$ 59.400"
+    ],
+    "image": "assets/AC7A29C27C24.jpg"
+  },
+  {
+    "name": "Licuadora RAF R.2802 con 6 cuchilla de acero inoxidable capacidad de 2.5litros, 2.400watts",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo ingreso Licuadora RAF R.2802 con 6 cuchilla de acero inoxidable capacidad de 2.5litros, 2.400watts",
+    "prices": [
+      "AR$ 59.400"
+    ],
+    "image": "assets/AC091E36B0EC.jpg"
+  },
+  {
+    "name": "Paragua Mango Curvo Reforzado 16 Varillas",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Paragua Mango Curvo Reforzado 16 Varillas",
+    "prices": [
+      "AR$ 7.560"
+    ],
+    "image": "assets/AC90F5AA3630.jpg"
+  },
+  {
+    "name": "JUEGO DE HERRAMIENTAS PROFESIONAL – 85 PIEZAS",
+    "group": "CASA SIMPSONS",
+    "description": "JUEGO DE HERRAMIENTAS PROFESIONAL – 85 PIEZAS Incluye: Llaves de carraca de 1/4\" y 1/2\". Juego de dados de diferentes medidas. Llaves combinadas. Pinzas y alicates.…",
+    "prices": [
+      "AR$ 178.200"
+    ],
+    "image": "assets/AC1779BFD22A.jpg"
+  },
+  {
+    "name": "JUEGO DE HERRAMIENTAS BOASHI – 326 PIEZAS Incluye",
+    "group": "CASA SIMPSONS",
+    "description": "JUEGO DE HERRAMIENTAS BOASHI – 326 PIEZAS Incluye: Llaves de carraca y extensiones. Juego de dados de diferentes medidas. Llaves combinadas. Pinzas y alicates.…",
+    "prices": [
+      "AR$ 237.600"
+    ],
+    "image": "assets/ACBECD583EEE.jpg"
+  },
+  {
+    "name": "Termo EURO MAX media manija con pico Sebador",
+    "group": "CASA SIMPSONS",
+    "description": "Termo EURO MAX media manija con pico Sebador Capacidad 1 Litro De regalo una cuchara",
+    "prices": [
+      "AR$ 14.400"
+    ],
+    "image": "assets/AC0E353EB48D.jpg"
+  },
+  {
+    "name": "Termo Sifón EUROMAX EM-9026",
+    "group": "CASA SIMPSONS",
+    "description": "Termo Sifón EUROMAX EM-9026 Frio-Caliente Acero Inoxidable Capacidad 1.300ml",
+    "prices": [
+      "AR$ 28.260"
+    ],
+    "image": "assets/AC217473D2B5.jpg"
+  },
+  {
+    "name": "Termo Sifón EUROMAX EM-9025",
+    "group": "CASA SIMPSONS",
+    "description": "Termo Sifón EUROMAX EM-9025 Frio-Caliente Acero Inoxidable 2.5 Litros",
+    "prices": [
+      "AR$ 34.200"
+    ],
+    "image": "assets/ACD4214802FE.jpg"
+  },
+  {
+    "name": "Cortador de fiambres eléctrico EUROMAX EM-7051 200W 220V Marca EUROMAX",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Cortador de fiambres eléctrico EUROMAX EM-7051 200W 220V Marca EUROMAX",
+    "prices": [
+      "AR$ 139.680"
+    ],
+    "image": "assets/AC04783D9C70.jpg"
+  },
+  {
+    "name": "Hoppie Térmico EUROMAX EM-3413",
+    "group": "CASA SIMPSONS",
+    "description": "Hoppie Térmico EUROMAX EM-3413 350 ML Acero Inoxidable. Frio ❄ Caliente Base Engomado Antideslizante",
+    "prices": [
+      "AR$ 10.440"
+    ],
+    "image": "assets/AC9ED2F6F8A6.jpg"
+  },
+  {
+    "name": "Hoppie Térmico EUROMAX EM-3408",
+    "group": "CASA SIMPSONS",
+    "description": "Hoppie Térmico EUROMAX EM-3408 500 ML Acero Inoxidable. Frio ❄ Caliente Base Engomado Antideslizante",
+    "prices": [
+      "AR$ 11.880"
+    ],
+    "image": "assets/AC469EBA1130.jpg"
+  },
+  {
+    "name": "Hoppie Térmico EUROMAX EM-3409",
+    "group": "CASA SIMPSONS",
+    "description": "Hoppie Térmico EUROMAX EM-3409 750 ML Acero Inoxidable. Frio ❄ Caliente Base Engomado Antideslizante",
+    "prices": [
+      "AR$ 13.500"
+    ],
+    "image": "assets/AC3EF2AF195B.jpg"
+  },
+  {
+    "name": "Escurridor de cubiertos material de metal c/bandeja de plástico",
+    "group": "CASA SIMPSONS",
+    "description": "Reposición Escurridor de cubiertos material de metal c/bandeja de plástico",
+    "prices": [
+      "AR$ 26.820"
+    ],
+    "image": "assets/AC394FD465D6.jpg"
+  },
+  {
+    "name": "Paragua Reforzado 16 varillas, contra viento",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua Reforzado 16 varillas, contra viento",
+    "prices": [
+      "AR$ 11.340"
+    ],
+    "image": "assets/ACE49CC116F7.jpg"
+  },
+  {
+    "name": "Paragua JC-103 Mango Recto",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua JC-103 Mango Recto",
+    "prices": [
+      "AR$ 11.880"
+    ],
+    "image": "assets/ACBCE0389548.jpg"
+  },
+  {
+    "name": "Paragua JC mango curvo",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua JC mango curvo",
+    "prices": [
+      "AR$ 14.400"
+    ],
+    "image": "assets/ACD133DA77EE.jpg"
+  },
+  {
+    "name": "Paragua Mango Curvo de Colores☔ Mide: 72cm 8 VARILLA",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua Mango Curvo de Colores☔ Mide: 72cm 8 VARILLA",
+    "prices": [
+      "AR$ 9.900"
+    ],
+    "image": "assets/ACF805CB970E.jpg"
+  },
+  {
+    "name": "Paragua Sombrilla Mediano de Razo colores estampados",
+    "group": "CASA SIMPSONS",
+    "description": "Paragua Sombrilla Mediano de Razo colores estampados",
+    "prices": [
+      "AR$ 10.440"
+    ],
+    "image": "assets/AC8F97469D7D.jpg"
+  },
+  {
+    "name": "Sombrilla Estampado Reforzado. JC-106. Doble Tela 16 Varillas Mango Curvo",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Sombrilla Estampado Reforzado. JC-106. Doble Tela 16 Varillas Mango Curvo",
+    "prices": [
+      "AR$ 14.580"
+    ],
+    "image": "assets/AC43867DA86D.jpg"
+  },
+  {
+    "name": "Paraguas Mango Curvo ☔ 8 Carillas Mide: 67cm Resistente y Práctico",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paraguas Mango Curvo ☔ 8 Carillas Mide: 67cm Resistente y Práctico",
+    "prices": [
+      "AR$ 9.540"
+    ],
+    "image": "assets/ACBFA270E245.jpg"
+  },
+  {
+    "name": "Paragua JC mango recto JC-102",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua JC mango recto JC-102",
+    "prices": [
+      "AR$ 11.700"
+    ],
+    "image": "assets/AC71957EB3B4.jpg"
+  },
+  {
+    "name": "Paragua con protector de agua",
+    "group": "CASA SIMPSONS",
+    "description": "Paragua con protector de agua",
+    "prices": [
+      "AR$ 10.440"
+    ],
+    "image": "assets/AC22305EBAB5.jpg"
+  },
+  {
+    "name": "Paraguas Estampado Reversible. 8 VARILLAS",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO Paraguas Estampado Reversible. 8 VARILLAS",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/AC0BE80462A1.jpg"
+  },
+  {
+    "name": "Paraguas Liso Invertido. 8 VARILLAS",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO Paraguas Liso Invertido. 8 VARILLAS",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/ACAF8B479516.jpg"
+  },
+  {
+    "name": "Paragua Kchiporra mango recto",
+    "group": "CASA SIMPSONS",
+    "description": "Paragua Kchiporra mango recto 8 varillas",
+    "prices": [
+      "AR$ 10.980"
+    ],
+    "image": "assets/AC39F35B806B.jpg"
+  },
+  {
+    "name": "Paraguas kachiporra reforzado JC-203",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paraguas kachiporra reforzado JC-203",
+    "prices": [
+      "AR$ 16.020"
+    ],
+    "image": "assets/AC5B79D12EF7.jpg"
+  },
+  {
+    "name": "Paragua reforzado Mango Curvo. Ref: JC- 201",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua reforzado Mango Curvo. Ref: JC- 201",
+    "prices": [
+      "AR$ 9.900"
+    ],
+    "image": "assets/ACAFF47D2F2A.jpg"
+  },
+  {
+    "name": "AGUILATEX (ASAHI005)",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo ingreso AGUILATEX (ASAHI005) Paraguas Reforzado chico mango curvo 8 varillas ☂",
+    "prices": [
+      "AR$ 7.740"
+    ],
+    "image": "assets/AC8058BB22A0.jpg"
+  },
+  {
+    "name": "Paragua Corto para Cartera AGUILATEX HMD Mide: 53cm 8 VARILLA",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua Corto para Cartera AGUILATEX HMD Mide: 53cm 8 VARILLA",
+    "prices": [
+      "AR$ 7.560"
+    ],
+    "image": "assets/AC2A89035DF7.jpg"
+  },
+  {
+    "name": "JC-303 Paragua corto para cartera☂",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN JC-303 Paragua corto para cartera☂",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/AC5FE870C89B.jpg"
+  },
+  {
+    "name": "Sombrilla Estampado Corto para cartera",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Sombrilla Estampado Corto para cartera",
+    "prices": [
+      "AR$ 8.640"
+    ],
+    "image": "assets/ACFC03660EC7.jpg"
+  },
+  {
+    "name": "Paragua Infantil",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Paragua Infantil",
+    "prices": [
+      "AR$ 5.940"
+    ],
+    "image": "assets/AC89ED60BEAB.jpg"
+  },
+  {
+    "name": "Conjunto de Piloto PANTANERO",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Conjunto de Piloto PANTANERO TALLE M G GG",
+    "prices": [
+      "AR$ 53.460"
+    ],
+    "image": "assets/ACE22913BEC7.jpg"
+  },
+  {
+    "name": "Pilotin largo Rodax. Color Camuflado",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Pilotin largo Rodax. Color Camuflado",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/AC12873F71E0.jpg"
+  },
+  {
+    "name": "SCOOTER PLEGABLE ✖ ❌NO ES ELÉCTRICO✖ ❌ ¡Práctico, moderno y cómodo para tus recorridos",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN SCOOTER PLEGABLE ✖ ❌NO ES ELÉCTRICO✖ ❌ ¡Práctico, moderno y cómodo para tus recorridos! Características: Manillar antideslizante para un mejor agarre.…",
+    "prices": [
+      "AR$ 133.740"
+    ],
+    "image": "assets/ACA9C224E01A.jpg"
+  },
+  {
+    "name": "Monopatin Eléctrico Velocidad Máxima 25Km/H Luz LED delantera Luz trasera Ruedas",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Ingreso Monopatin Eléctrico Velocidad Máxima 25Km/H Luz LED delantera Luz trasera Ruedas resistentes Plataforma amplia antideslizante Timbre incorporado Sistema…",
+    "prices": [
+      "AR$ 549.540"
+    ],
+    "image": "assets/AC1DDB6EE13C.jpg"
+  },
+  {
+    "name": "Monopatín Musical 3 Ruedas. Con Luces y Sonido A Pila",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Nuevo Monopatín Musical 3 Ruedas. Con Luces y Sonido A Pila",
+    "prices": [
+      "AR$ 44.640"
+    ],
+    "image": "assets/AC069E4C7487.jpg"
+  },
+  {
+    "name": "Mini Pimer Mixer Raf R.255 Cuerpo de plástico cuchilla de metal",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Mini Pimer Mixer Raf R.255 Cuerpo de plástico cuchilla de metal",
+    "prices": [
+      "AR$ 19.440"
+    ],
+    "image": "assets/AC7B723D58FE.jpg"
+  },
+  {
+    "name": "Juego de Mini Ollas 13 PCS Antiadherente Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO NUEVO Juego de Mini Ollas 13 PCS Antiadherente Medidas en la imagen",
+    "prices": [
+      "AR$ 44.640"
+    ],
+    "image": "assets/ACA527957598.jpg"
+  },
+  {
+    "name": "INTERCOMUNICADOR PARA CASCO DE MOTO K06",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN INTERCOMUNICADOR PARA CASCO DE MOTO K06 Características: Llamadas manos libres Música estéreo Asistente de voz Resistente al agua IPX6 Intercomunicador…",
+    "prices": [
+      "AR$ 19.440"
+    ],
+    "image": "assets/AC6CDA190A6D.jpg"
+  },
+  {
+    "name": "Máquina para hacer pasta Raf R.6670",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Máquina para hacer pasta Raf R.6670",
+    "prices": [
+      "AR$ 49.140"
+    ],
+    "image": "assets/AC310B1BB314.jpg"
+  },
+  {
+    "name": "Máquina para hacer Mini Donas Marca Raf R.2586Q 750Watts 8 orificios",
+    "group": "CASA SIMPSONS",
+    "description": "Máquina para hacer Mini Donas Marca Raf R.2586Q 750Watts 8 orificios",
+    "prices": [
+      "AR$ 41.580"
+    ],
+    "image": "assets/AC73202EF1A9.jpg"
+  },
+  {
+    "name": "Máquina para hacer Mini Donas Marca Raf R.536Q 750Watts 8 orificios",
+    "group": "CASA SIMPSONS",
+    "description": "Máquina para hacer Mini Donas Marca Raf R.536Q 750Watts 8 orificios",
+    "prices": [
+      "AR$ 41.580"
+    ],
+    "image": "assets/AC39D73EBAED.jpg"
+  },
+  {
+    "name": "BOWL 4 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO BOWL 4 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "prices": [
+      "AR$ 22.320"
+    ],
+    "image": "assets/AC7D3FAC04D7.jpg"
+  },
+  {
+    "name": "BOWL 5 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO BOWL 5 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "prices": [
+      "AR$ 35.640"
+    ],
+    "image": "assets/ACD047976A4C.jpg"
+  },
+  {
+    "name": "BOWL 5 en 1 Acero inoxidable Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO BOWL 5 en 1 Acero inoxidable Medidas en la imagen",
+    "prices": [
+      "AR$ 25.920"
+    ],
+    "image": "assets/AC8C2E4C6F33.jpg"
+  },
+  {
+    "name": "BOWL 3 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO BOWL 3 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "prices": [
+      "AR$ 17.820"
+    ],
+    "image": "assets/AC94F1A0A7B3.jpg"
+  },
+  {
+    "name": "Mini BOWL 3 en 1 Acero inoxidable Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO Mini BOWL 3 en 1 Acero inoxidable Medidas en la imagen",
+    "prices": [
+      "Gs. 10.500"
+    ],
+    "image": "assets/ACD6503C3A7D.jpg"
+  },
+  {
+    "name": "BOWL 5 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO BOWL 5 en 1 Acero inoxidable Con tapa Medidas en la imagen",
+    "prices": [
+      "AR$ 12.780"
+    ],
+    "image": "assets/ACA3A66DC10F.jpg"
+  },
+  {
+    "name": "Lámpara de Escritorio. Disponible en blanco y Negro",
+    "group": "CASA SIMPSONS",
+    "description": "NUEVO INGRESO Lámpara de Escritorio. Disponible en blanco y Negro",
+    "prices": [
+      "AR$ 26.820"
+    ],
+    "image": "assets/AC411132325E.jpg"
+  },
+  {
+    "name": "Pelota Asatex N° 5",
+    "group": "CASA SIMPSONS",
+    "description": "Reposición Pelota Asatex N° 5",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/ACBD4F30A31B.jpg"
+  },
+  {
+    "name": "Luces de Navidad 200 LED COLOR CÁLIDO. 18 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad 200 LED COLOR CÁLIDO. 18 Metros Aprox",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/AC04A6542715.jpg"
+  },
+  {
+    "name": "Luces de Navidad 200 LED ROJO ❤ 18 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad 200 LED ROJO ❤ 18 Metros Aprox",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/ACB007E190F1.jpg"
+  },
+  {
+    "name": "Luces de Navidad 200 LED Azul 18 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad 200 LED Azul 18 Metros Aprox",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/AC84ECD626DF.jpg"
+  },
+  {
+    "name": "Luces de Navidad 200 LED COLOR Verde . 18 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad 200 LED COLOR Verde . 18 Metros Aprox",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/AC87601A7D13.jpg"
+  },
+  {
+    "name": "Luces de Navidad 100 LED COLOR ROJO ❤ . 9 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad 100 LED COLOR ROJO ❤ . 9 Metros Aprox",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/ACA2F7253E2D.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: S9251 100 LED COLOR ROJO ❤ . 9 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: S9251 100 LED COLOR ROJO ❤ . 9 Metros Aprox",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/AC5A58C281F2.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: S9253 100 LED COLOR Calido . 9 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: S9253 100 LED COLOR Calido . 9 Metros Aprox",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/ACC543AA71CD.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: S9252 100 LED COLOR Blanco. 9 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: S9252 100 LED COLOR Blanco. 9 Metros Aprox",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/AC3670FF65BD.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20705 100 LED COLOR Verde . 8 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20705 100 LED COLOR Verde . 8 Metros Aprox",
+    "prices": [
+      "AR$ 4.860"
+    ],
+    "image": "assets/AC1D348BCDF0.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20712 200 LED COLOR Verde . 16 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20712 200 LED COLOR Verde . 16 Metros Aprox",
+    "prices": [
+      "AR$ 8.460"
+    ],
+    "image": "assets/ACF8B147C83C.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20713 200 LED COLOR ROSA . 16 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20713 200 LED COLOR ROSA . 16 Metros Aprox",
+    "prices": [
+      "AR$ 8.460"
+    ],
+    "image": "assets/ACB857BB6082.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20711 200 LED COLOR ROJO ❤ . 16 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20711 200 LED COLOR ROJO ❤ . 16 Metros Aprox",
+    "prices": [
+      "AR$ 8.460"
+    ],
+    "image": "assets/AC914A09AA2E.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20709 200 LED COLOR Blanco . 16 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20709 200 LED COLOR Blanco . 16 Metros Aprox",
+    "prices": [
+      "AR$ 8.460"
+    ],
+    "image": "assets/ACCB8C4B3850.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20710 200 LED COLOR Calido . 16 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20710 200 LED COLOR Calido . 16 Metros Aprox",
+    "prices": [
+      "AR$ 8.460"
+    ],
+    "image": "assets/AC2D330A0B3B.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: S9011 200 LED COLOR ROJO ❤ . 16 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: S9011 200 LED COLOR ROJO ❤ . 16 Metros Aprox",
+    "prices": [
+      "AR$ 8.460"
+    ],
+    "image": "assets/AC0A2282BB85.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20706 100 LED COLOR ROSA . 8 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20706 100 LED COLOR ROSA . 8 Metros Aprox",
+    "prices": [
+      "AR$ 4.860"
+    ],
+    "image": "assets/ACEF1B4F7E4F.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20701 100 LED COLOR Azul. 8 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20701 100 LED COLOR Azul. 8 Metros Aprox",
+    "prices": [
+      "AR$ 4.860"
+    ],
+    "image": "assets/AC4C8A998B2F.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref:20703 100 LED COLOR CALIDO . 8 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref:20703 100 LED COLOR CALIDO . 8 Metros Aprox",
+    "prices": [
+      "AR$ 4.860"
+    ],
+    "image": "assets/ACA7B77A0FDF.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: 20704 100 LED COLOR ROJO ❤ . 8 Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: 20704 100 LED COLOR ROJO ❤ . 8 Metros Aprox",
+    "prices": [
+      "AR$ 4.860"
+    ],
+    "image": "assets/AC42143118D6.jpg"
+  },
+  {
+    "name": "Luces de Navidad Ref: S9254 100 LED COLOR Verde . 9. Metros Aprox",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luces de Navidad Ref: S9254 100 LED COLOR Verde . 9. Metros Aprox",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/AC9FCCEDF251.jpg"
+  },
+  {
+    "name": "Tira de LED Cálido 150 led cable reforzado 30 metros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Tira de LED Cálido 150 led cable reforzado 30 metros",
+    "prices": [
+      "AR$ 20.880"
+    ],
+    "image": "assets/AC8000C1AB91.jpg"
+  },
+  {
+    "name": "Tira de LED Multicolor 150 led cable reforzado 30 metros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Tira de LED Multicolor 150 led cable reforzado 30 metros",
+    "prices": [
+      "AR$ 20.880"
+    ],
+    "image": "assets/AC7706905D63.jpg"
+  },
+  {
+    "name": "Manguera LED. Color Cálido. 20 metros",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Manguera LED. Color Cálido. 20 metros",
+    "prices": [
+      "AR$ 35.640"
+    ],
+    "image": "assets/AC1096CAFBA2.jpg"
+  },
+  {
+    "name": "Manguera led AZUL de 20 metros",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Manguera led AZUL de 20 metros",
+    "prices": [
+      "AR$ 35.640"
+    ],
+    "image": "assets/ACBAA6BA33DA.jpg"
+  },
+  {
+    "name": "Manguera LED Multicolor 20 metros",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Manguera LED Multicolor 20 metros",
+    "prices": [
+      "AR$ 35.640"
+    ],
+    "image": "assets/ACC076321EB0.jpg"
+  },
+  {
+    "name": "Vela Navideño con luz LED blanco 40cm",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Vela Navideño con luz LED blanco 40cm",
+    "prices": [
+      "AR$ 5.940"
+    ],
+    "image": "assets/ACAF733F6F2C.jpg"
+  },
+  {
+    "name": "Angel Navideño con luz LED blanco 42cm x 25cm",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Angel Navideño con luz LED blanco 42cm x 25cm",
+    "prices": [
+      "AR$ 5.940"
+    ],
+    "image": "assets/ACEB56C4C00C.jpg"
+  },
+  {
+    "name": "Candelabro LED con luz LED blanco 7 velas",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Candelabro LED con luz LED blanco 7 velas",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/AC8B51C866ED.jpg"
+  },
+  {
+    "name": "Estrella LED con luz LED blanco 30cm",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Estrella LED con luz LED blanco 30cm",
+    "prices": [
+      "AR$ 5.940"
+    ],
+    "image": "assets/AC9637ABE490.jpg"
+  },
+  {
+    "name": "Arbolito Navideño con luz Material acrílico",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Arbolito Navideño con luz Material acrílico",
+    "prices": [
+      "AR$ 7.560"
+    ],
+    "image": "assets/ACD687D0DB1D.jpg"
+  },
+  {
+    "name": "Arbolito Navideño Acero inoxidable decorado con luz 26 x 10cm",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Arbolito Navideño Acero inoxidable decorado con luz 26 x 10cm",
+    "prices": [
+      "AR$ 11.880"
+    ],
+    "image": "assets/ACB084043132.jpg"
+  },
+  {
+    "name": "Reno navideño Material acrílico Con sonido",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Reno navideño Material acrílico Con sonido",
+    "prices": [
+      "AR$ 10.440"
+    ],
+    "image": "assets/AC049693CBDB.jpg"
+  },
+  {
+    "name": "Árbol de navidad chico a pila Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Árbol de navidad chico a pila Medidas en la imagen",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/ACF0122917D3.jpg"
+  },
+  {
+    "name": "Árbol de navidad chico a pila Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Árbol de navidad chico a pila Medidas en la imagen",
+    "prices": [
+      "AR$ 11.880"
+    ],
+    "image": "assets/ACBDBBB64F19.jpg"
+  },
+  {
+    "name": "Capsula de navidad Pequeño",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Capsula de navidad Pequeño",
+    "prices": [
+      "AR$ 5.940"
+    ],
+    "image": "assets/ACB6442482AD.jpg"
+  },
+  {
+    "name": "Capsula de navidad Mediano",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Capsula de navidad Mediano",
+    "prices": [
+      "AR$ 9.000"
+    ],
+    "image": "assets/ACA71145EB87.jpg"
+  },
+  {
+    "name": "Capsula de navidad Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Capsula de navidad Medidas en la imagen",
+    "prices": [
+      "AR$ 14.940"
+    ],
+    "image": "assets/AC7A05F0A548.jpg"
+  },
+  {
+    "name": "Luz LED Multicolor. Recargable 8 metros",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Luz LED Multicolor. Recargable 8 metros",
+    "prices": [
+      "AR$ 17.820"
+    ],
+    "image": "assets/AC37FF76C916.jpg"
+  },
+  {
+    "name": "Pack de 9 piezas Pino navideño",
+    "group": "CASA SIMPSONS",
+    "description": "Pack de 9 piezas Pino navideño",
+    "prices": [
+      "AR$ 4.860"
+    ],
+    "image": "assets/AC144CA9550C.jpg"
+  },
+  {
+    "name": "Pack de 9 piezas Pino navideño",
+    "group": "CASA SIMPSONS",
+    "description": "Pack de 9 piezas Pino navideño",
+    "prices": [
+      "AR$ 4.140"
+    ],
+    "image": "assets/AC4D2C087658.jpg"
+  },
+  {
+    "name": "Arbolito de navidad Especial para escritorio o mesa. 35 cm",
+    "group": "CASA SIMPSONS",
+    "description": "Arbolito de navidad Especial para escritorio o mesa. 35 cm",
+    "prices": [
+      "AR$ 4.500"
+    ],
+    "image": "assets/AC5C27C4485C.jpg"
+  },
+  {
+    "name": "Pack de 6 piezas Pino navideño",
+    "group": "CASA SIMPSONS",
+    "description": "Pack de 6 piezas Pino navideño",
+    "prices": [
+      "AR$ 3.060"
+    ],
+    "image": "assets/ACB356DF9CE8.jpg"
+  },
+  {
+    "name": "Caja para Panetone Para 500gr a 1k aprox",
+    "group": "CASA SIMPSONS",
+    "description": "Nuevo Nuevo Caja para Panetone Para 500gr a 1k aprox",
+    "prices": [
+      "AR$ 900",
+      "AR$ 630"
+    ],
+    "image": "assets/AC32B9A2D194.jpg"
+  },
+  {
+    "name": "Timbre Con Sensor de movimiento",
+    "group": "CASA SIMPSONS",
+    "description": "Reposición Timbre Con Sensor de movimiento",
+    "prices": [
+      "AR$ 9.540"
+    ],
+    "image": "assets/ACFF20550A94.jpg"
+  },
+  {
+    "name": "Piloto infantil Capybara y La BUBU Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Piloto infantil Capybara y La BUBU Medidas en la imagen",
+    "prices": [
+      "AR$ 13.500"
+    ],
+    "image": "assets/ACA4422ACBC1.jpg"
+  },
+  {
+    "name": "Piloto infantil con porta mochila",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Piloto infantil con porta mochila",
+    "prices": [
+      "AR$ 9.540"
+    ],
+    "image": "assets/AC99EF6A25A9.jpg"
+  },
+  {
+    "name": "Piloto infantil con porta mochila",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Piloto infantil con porta mochila",
+    "prices": [
+      "AR$ 10.440"
+    ],
+    "image": "assets/ACB11D73F210.jpg"
+  },
+  {
+    "name": "Piloto infantil Medidas en la imagen",
+    "group": "CASA SIMPSONS",
+    "description": "REPOSICIÓN Piloto infantil Medidas en la imagen",
+    "prices": [
+      "AR$ 11.880"
+    ],
+    "image": "assets/ACFCA15AC5C7.jpg"
+  },
+  {
+    "name": "Lámpara velador acrílico decorativo, recargable con cable USB tipo c, sensor táctil, base",
+    "group": "CASA BVL",
+    "description": "Reposición Lámpara velador acrílico decorativo, recargable con cable USB tipo c, sensor táctil, base antideslizante",
+    "prices": [
+      "US$ 7,38",
+      "Gs. 44.500"
+    ],
+    "image": "assets/A5033B657AA3.jpg"
+  },
+  {
+    "name": "Lámpara velador decorativa de mesa táctil recargable, 3 tonos de luz ajustable(cálida",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Lámpara velador decorativa de mesa táctil recargable, 3 tonos de luz ajustable(cálida, fría, neutra) Encendido y cambio de tono mediante botón o sistema…",
+    "prices": [
+      "US$ 11,70",
+      "Gs. 70.000"
+    ],
+    "image": "assets/A55D3E60C957.jpg"
+  },
+  {
+    "name": "Lámpara led de escritorio plegable c/porta lápices Luo, 3 tonos de luces",
+    "group": "CASA BVL",
+    "description": "Lámpara led de escritorio plegable c/porta lápices Luo, 3 tonos de luces",
+    "prices": [
+      "US$ 18,54",
+      "Gs. 111.500"
+    ],
+    "image": "assets/A56A030ACCF9.jpg"
+  },
+  {
+    "name": "Lámpara led de escritorio recargable Luo, 3 tonos de luces, c/Porta lápices y porta",
+    "group": "CASA BVL",
+    "description": "Lámpara led de escritorio recargable Luo, 3 tonos de luces, c/Porta lápices y porta celular",
+    "prices": [
+      "US$ 10,80",
+      "Gs. 65.000"
+    ],
+    "image": "assets/A5C31C90ACCA.jpg"
+  },
+  {
+    "name": "Lámpara led de escritorio plegable Luo, 2 tonos de luces",
+    "group": "CASA BVL",
+    "description": "Lámpara led de escritorio plegable Luo, 2 tonos de luces",
+    "prices": [
+      "US$ 8,91",
+      "Gs. 54.000"
+    ],
+    "image": "assets/A5014C7E5EBA.jpg"
+  },
+  {
+    "name": "Lámpara led plegable, recargable Luo",
+    "group": "CASA BVL",
+    "description": "Lámpara led plegable, recargable Luo",
+    "prices": [
+      "US$ 7,74",
+      "Gs. 47.000"
+    ],
+    "image": "assets/A5D97A22BA58.jpg"
+  },
+  {
+    "name": "Lámpara led de escritorio Luo con pinza, recargable",
+    "group": "CASA BVL",
+    "description": "Lámpara led de escritorio Luo con pinza, recargable",
+    "prices": [
+      "US$ 9,36",
+      "Gs. 56.000"
+    ],
+    "image": "assets/A54DCBAC9525.jpg"
+  },
+  {
+    "name": "Lámpara led de escritorio c/pinza Luo, recargable",
+    "group": "CASA BVL",
+    "description": "Lámpara led de escritorio c/pinza Luo, recargable",
+    "prices": [
+      "US$ 9,36",
+      "Gs. 56.000"
+    ],
+    "image": "assets/A5BD8E69FEA5.jpg"
+  },
+  {
+    "name": "Lámpara led de escritorio plegable Luo, recargable",
+    "group": "CASA BVL",
+    "description": "Lámpara led de escritorio plegable Luo, recargable",
+    "prices": [
+      "US$ 9,36",
+      "Gs. 56.000"
+    ],
+    "image": "assets/A55B658A9F9C.jpg"
+  },
+  {
+    "name": "Lámpara led recargable c/porta lápices Luo",
+    "group": "CASA BVL",
+    "description": "Lámpara led recargable c/porta lápices Luo",
+    "prices": [
+      "US$ 9,54",
+      "Gs. 57.500"
+    ],
+    "image": "assets/A5112187FB01.jpg"
+  },
+  {
+    "name": "Lámpara led recargable magnético, tubo 30cm",
+    "group": "CASA BVL",
+    "description": "Lámpara led recargable magnético, tubo 30cm",
+    "prices": [
+      "US$ 7,02",
+      "Gs. 42.000"
+    ],
+    "image": "assets/A5F021435D73.jpg"
+  },
+  {
+    "name": "Lámpara led recargable magnético, tubo 45cm",
+    "group": "CASA BVL",
+    "description": "Lámpara led recargable magnético, tubo 45cm",
+    "prices": [
+      "US$ 9,36",
+      "Gs. 56.000"
+    ],
+    "image": "assets/A5B9115969CB.jpg"
+  },
+  {
+    "name": "Tijera tramontina para cabello",
+    "group": "CASA BVL",
+    "description": "Reposición Tijera tramontina para cabello",
+    "prices": [
+      "US$ 7,74",
+      "Gs. 47.000"
+    ],
+    "image": "assets/A5C0DB06C5FB.jpg"
+  },
+  {
+    "name": "Tijera tramontina para cabello",
+    "group": "CASA BVL",
+    "description": "Reposición Tijera tramontina para cabello",
+    "prices": [
+      "US$ 7,56",
+      "Gs. 45.500"
+    ],
+    "image": "assets/A598B68CA366.jpg"
+  },
+  {
+    "name": "Tijera tramontina para cabello, ideal para realizar cortes con reducción de volumen y",
+    "group": "CASA BVL",
+    "description": "Reposición Tijera tramontina para cabello, ideal para realizar cortes con reducción de volumen y acabados en el pelo sin disminuir el largo",
+    "prices": [
+      "US$ 15,39",
+      "Gs. 92.500"
+    ],
+    "image": "assets/A5B363343191.jpg"
+  },
+  {
+    "name": "Tijera tramontina para costura, lamina de Acero inoxidable, corte fácil",
+    "group": "CASA BVL",
+    "description": "Reposición Tijera tramontina para costura, lamina de Acero inoxidable, corte fácil",
+    "prices": [
+      "US$ 9,00",
+      "Gs. 54.000"
+    ],
+    "image": "assets/A52B0EC7B439.jpg"
+  },
+  {
+    "name": "Tijera tramontina para costura, lamina de Acero inoxidable, corte fácil",
+    "group": "CASA BVL",
+    "description": "Tijera tramontina para costura, lamina de Acero inoxidable, corte fácil",
+    "prices": [
+      "US$ 9,54",
+      "Gs. 57.500"
+    ],
+    "image": "assets/A52EA59FE633.jpg"
+  },
+  {
+    "name": "Tijera N7\" Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Tijera N7\" Tramontina",
+    "prices": [
+      "US$ 4,68",
+      "Gs. 29.000"
+    ],
+    "image": "assets/A51F916EEB08.jpg"
+  },
+  {
+    "name": "Tijera tramontina para costura, lamina de Acero inoxidable, corte fácil N10\"",
+    "group": "CASA BVL",
+    "description": "Reposición Tijera tramontina para costura, lamina de Acero inoxidable, corte fácil N10\"",
+    "prices": [
+      "US$ 11,70",
+      "Gs. 70.000"
+    ],
+    "image": "assets/A5C32103846A.jpg"
+  },
+  {
+    "name": "Kit Churrasco Tramontina 2pcs",
+    "group": "CASA BVL",
+    "description": "Reposición Kit Churrasco Tramontina 2pcs",
+    "prices": [
+      "US$ 12,06",
+      "Gs. 72.500"
+    ],
+    "image": "assets/A54F0740A36C.jpg"
+  },
+  {
+    "name": "Kit p/Churrasco 4pcs Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Kit p/Churrasco 4pcs Tramontina",
+    "prices": [
+      "US$ 19,98",
+      "Gs. 120.500"
+    ],
+    "image": "assets/A5887FD81A3C.jpg"
+  },
+  {
+    "name": "Kit p/Asado 3pcs Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Kit p/Asado 3pcs Tramontina",
+    "prices": [
+      "US$ 18,36",
+      "Gs. 110.000"
+    ],
+    "image": "assets/A5444E3C6C85.jpg"
+  },
+  {
+    "name": "Kit p/Asado 2pcs Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Kit p/Asado 2pcs Tramontina",
+    "prices": [
+      "US$ 6,66",
+      "Gs. 40.000"
+    ],
+    "image": "assets/A5859779B526.jpg"
+  },
+  {
+    "name": "Kit p/Asado 3pcs Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Kit p/Asado 3pcs Tramontina",
+    "prices": [
+      "US$ 18,54",
+      "Gs. 111.500"
+    ],
+    "image": "assets/A56F454A85CF.jpg"
+  },
+  {
+    "name": "Juego de cuchillos Plenus 10pcs Tramontina",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Juego de cuchillos Plenus 10pcs Tramontina",
+    "prices": [
+      "US$ 29,34",
+      "Gs. 176.500"
+    ],
+    "image": "assets/A51F44F13CD5.jpg"
+  },
+  {
+    "name": "Cuchillo p/Carne Nomade, Mango de madera Tramontina",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Cuchillo p/Carne Nomade, Mango de madera Tramontina",
+    "prices": [
+      "US$ 23,40",
+      "Gs. 140.500"
+    ],
+    "image": "assets/A5AA5AC67326.jpg"
+  },
+  {
+    "name": "Sartén hondo Paris c/Tapa de vidrio 26cm Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Sartén hondo Paris c/Tapa de vidrio 26cm Tramontina",
+    "prices": [
+      "US$ 42,12",
+      "Gs. 252.500"
+    ],
+    "image": "assets/A5084D29AC7A.jpg"
+  },
+  {
+    "name": "Sartén hondo c/Tapa de vidrio, 3.6L, 26cm Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Sartén hondo c/Tapa de vidrio, 3.6L, 26cm Tramontina",
+    "prices": [
+      "US$ 42,12",
+      "Gs. 252.500"
+    ],
+    "image": "assets/A5BBC67C7E3D.jpg"
+  },
+  {
+    "name": "Sartén hondo c/Tapa de vidrio, 2.8L, 24cm Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Sartén hondo c/Tapa de vidrio, 2.8L, 24cm Tramontina",
+    "prices": [
+      "US$ 36,90",
+      "Gs. 221.500"
+    ],
+    "image": "assets/A5E32148BB0C.jpg"
+  },
+  {
+    "name": "Sartén teflonado Loreto Tramontina, 30cm",
+    "group": "CASA BVL",
+    "description": "Reposición Sartén teflonado Loreto Tramontina, 30cm",
+    "prices": [
+      "US$ 17,64",
+      "Gs. 106.000"
+    ],
+    "image": "assets/A577686BFA33.jpg"
+  },
+  {
+    "name": "Sartén teflonado Turim 22cm Tramontina",
+    "group": "CASA BVL",
+    "description": "Reposición Sartén teflonado Turim 22cm Tramontina",
+    "prices": [
+      "US$ 9,36",
+      "Gs. 56.000"
+    ],
+    "image": "assets/A586F6ACA22B.jpg"
+  },
+  {
+    "name": "Ambientador de suspensión con diseño de planeta Funciona con energía solar☀ Se utiliza",
+    "group": "CASA BVL",
+    "description": "Reposición Ambientador de suspensión con diseño de planeta Funciona con energía solar☀ Se utiliza para eliminar olores y proporcionar una fragancia duradera en el coche",
+    "prices": [
+      "US$ 10,80",
+      "Gs. 65.000"
+    ],
+    "image": "assets/A5DAC7E25A4E.jpg"
+  },
+  {
+    "name": "Aromatizante p/Auto, diseño de avión, panel solar y con esencia",
+    "group": "CASA BVL",
+    "description": "Reposición Aromatizante p/Auto, diseño de avión, panel solar y con esencia",
+    "prices": [
+      "US$ 8,64",
+      "Gs. 52.000"
+    ],
+    "image": "assets/A5934F9F947A.jpg"
+  },
+  {
+    "name": "Aromatizante p/Auto giratorio con panel solar",
+    "group": "CASA BVL",
+    "description": "Reposición Aromatizante p/Auto giratorio con panel solar",
+    "prices": [
+      "US$ 15,30",
+      "Gs. 92.000"
+    ],
+    "image": "assets/A51413DA2074.jpg"
+  },
+  {
+    "name": "Aromatizante p/Auto Helicóptero con Esencia",
+    "group": "CASA BVL",
+    "description": "Reposición Aromatizante p/Auto Helicóptero con Esencia",
+    "prices": [
+      "US$ 8,64",
+      "Gs. 52.000"
+    ],
+    "image": "assets/A58D811D3546.jpg"
+  },
+  {
+    "name": "Cargador p/Auto con aromatizante Luo 5 en 1",
+    "group": "CASA BVL",
+    "description": "Cargador p/Auto con aromatizante Luo 5 en 1",
+    "prices": [
+      "US$ 24,57",
+      "Gs. 147.500"
+    ],
+    "image": "assets/A59068B4B650.jpg"
+  },
+  {
+    "name": "Camara p/Auto Luo con 3 canales, vista frontal, cabina y trasera",
+    "group": "CASA BVL",
+    "description": "Camara p/Auto Luo con 3 canales, vista frontal, cabina y trasera",
+    "prices": [
+      "US$ 25,38",
+      "Gs. 153.000"
+    ],
+    "image": "assets/A5AE297F2BBC.jpg"
+  },
+  {
+    "name": "Camara p/Auto Luo, con 3 canales full HD, vista frontal, cabina y trasera",
+    "group": "CASA BVL",
+    "description": "Camara p/Auto Luo, con 3 canales full HD, vista frontal, cabina y trasera",
+    "prices": [
+      "US$ 37,26",
+      "Gs. 223.500"
+    ],
+    "image": "assets/A5050F14EF01.jpg"
+  },
+  {
+    "name": "Camara p/Auto Luo con 3 canales full HD, vista frontal, cabina y trasera",
+    "group": "CASA BVL",
+    "description": "Camara p/Auto Luo con 3 canales full HD, vista frontal, cabina y trasera",
+    "prices": [
+      "US$ 40,32",
+      "Gs. 242.000"
+    ],
+    "image": "assets/A5CEE561C95E.jpg"
+  },
+  {
+    "name": "Camara p/Auto con 4 canales HD, vista frontal, cabina, lateral y trasera Luo",
+    "group": "CASA BVL",
+    "description": "Camara p/Auto con 4 canales HD, vista frontal, cabina, lateral y trasera Luo",
+    "prices": [
+      "US$ 43,20",
+      "Gs. 259.000"
+    ],
+    "image": "assets/A5056795974E.jpg"
+  },
+  {
+    "name": "Camara Grabadora c/ pantalla y camara de retroceso 2pcs Ecopower Cuenta con grabación de",
+    "group": "CASA BVL",
+    "description": "Camara Grabadora c/ pantalla y camara de retroceso 2pcs Ecopower Cuenta con grabación de video en calidad HD 4K y un gran angular de 170° que captura una amplia…",
+    "prices": [
+      "US$ 40,14",
+      "Gs. 241.000"
+    ],
+    "image": "assets/A50101BC4EF7.jpg"
+  },
+  {
+    "name": "Mini cámara de seguridad",
+    "group": "CASA BVL",
+    "description": "Mini cámara de seguridad Características: - Resolución Full HD 1080P. - Seguimiento automático. - Uso diurno y nocturno. - Audio bidireccional, con micrófono y…",
+    "prices": [
+      "US$ 28,80",
+      "Gs. 0"
+    ],
+    "image": "assets/A5A5EEB1C306.jpg"
+  },
+  {
+    "name": "Pila recargable 2600MAH, AA Mox 4pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 2600MAH, AA Mox 4pcs",
+    "prices": [
+      "US$ 6,48",
+      "Gs. 39.500"
+    ],
+    "image": "assets/A52A81D139D3.jpg"
+  },
+  {
+    "name": "Pila recargable 3000MAH, AA Mox 4pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 3000MAH, AA Mox 4pcs",
+    "prices": [
+      "US$ 7,20",
+      "Gs. 43.000"
+    ],
+    "image": "assets/A5C648AFED46.jpg"
+  },
+  {
+    "name": "Pila recargable 4300MAH, AA Mox 4pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 4300MAH, AA Mox 4pcs",
+    "prices": [
+      "US$ 8,10",
+      "Gs. 48.500"
+    ],
+    "image": "assets/A56412F2702D.jpg"
+  },
+  {
+    "name": "Pila recargable 4600MAH, AA Mox 4pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 4600MAH, AA Mox 4pcs",
+    "prices": [
+      "US$ 8,64",
+      "Gs. 52.000"
+    ],
+    "image": "assets/A5B1FC5C5807.jpg"
+  },
+  {
+    "name": "Pila recargable 5000MAH, AA Mox 4pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 5000MAH, AA Mox 4pcs",
+    "prices": [
+      "US$ 9,90",
+      "Gs. 59.500"
+    ],
+    "image": "assets/A53B31BBB336.jpg"
+  },
+  {
+    "name": "Pila recargable 3000MAH, AA Mox 8pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 3000MAH, AA Mox 8pcs",
+    "prices": [
+      "US$ 11,16",
+      "Gs. 67.000"
+    ],
+    "image": "assets/A58407D339E1.jpg"
+  },
+  {
+    "name": "Pila recargable 4300MAH, AA Mox 8pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 4300MAH, AA Mox 8pcs",
+    "prices": [
+      "US$ 11,70",
+      "Gs. 70.000"
+    ],
+    "image": "assets/A55C7CC89DDD.jpg"
+  },
+  {
+    "name": "Pila recargable 5000MAH, AA Mox 8pcs",
+    "group": "CASA BVL",
+    "description": "Pila recargable 5000MAH, AA Mox 8pcs",
+    "prices": [
+      "US$ 12,06",
+      "Gs. 72.500"
+    ],
+    "image": "assets/A59BFAA0352A.jpg"
+  },
+  {
+    "name": "Soporte fijo para tv LCD LED Luo de 26\" a 65\" soporta hasta 50kg",
+    "group": "CASA BVL",
+    "description": "Reposición Soporte fijo para tv LCD LED Luo de 26\" a 65\" soporta hasta 50kg",
+    "prices": [
+      "Gs. 56.000"
+    ],
+    "image": "assets/A5A8E844EF62.jpg"
+  },
+  {
+    "name": "Soporte para tv 14 A 55 pulgadas LUO",
+    "group": "CASA BVL",
+    "description": "Reposición Soporte para tv 14 A 55 pulgadas LUO",
+    "prices": [
+      "US$ 14,04",
+      "Gs. 84.500"
+    ],
+    "image": "assets/A54810A2A4C6.jpg"
+  },
+  {
+    "name": "Soporte p/TV reforzado movible, 32\"/85\" capacidad max 45kg",
+    "group": "CASA BVL",
+    "description": "Soporte p/TV reforzado movible, 32\"/85\" capacidad max 45kg",
+    "prices": [
+      "US$ 44,46",
+      "Gs. 267.000"
+    ],
+    "image": "assets/A5FD3EC7F099.jpg"
+  },
+  {
+    "name": "Soporte para TV 26'' 60\"",
+    "group": "CASA BVL",
+    "description": "Soporte para TV 26'' 60\"",
+    "prices": [
+      "US$ 13,50",
+      "Gs. 81.000"
+    ],
+    "image": "assets/A57F76E781B1.jpg"
+  },
+  {
+    "name": "Soporte para TV fijo 14\" 43\"",
+    "group": "CASA BVL",
+    "description": "Soporte para TV fijo 14\" 43\"",
+    "prices": [
+      "US$ 9,36",
+      "Gs. 56.000"
+    ],
+    "image": "assets/A5E671265170.jpg"
+  },
+  {
+    "name": "Soporte para TV fijo 55\" 120\"",
+    "group": "CASA BVL",
+    "description": "Soporte para TV fijo 55\" 120\"",
+    "prices": [
+      "US$ 44,46",
+      "Gs. 267.000"
+    ],
+    "image": "assets/A5CBC0E1E571.jpg"
+  },
+  {
+    "name": "Soporte para TV fijo 12\" 80\"",
+    "group": "CASA BVL",
+    "description": "Soporte para TV fijo 12\" 80\"",
+    "prices": [
+      "US$ 4,68",
+      "Gs. 29.000"
+    ],
+    "image": "assets/A5E2FC738FB7.jpg"
+  },
+  {
+    "name": "Soporte LUO de pared para TV desde 10\" a 55\"",
+    "group": "CASA BVL",
+    "description": "Reposición Soporte LUO de pared para TV desde 10\" a 55\"",
+    "prices": [
+      "US$ 15,21",
+      "Gs. 92.000"
+    ],
+    "image": "assets/A524E830744B.jpg"
+  },
+  {
+    "name": "Mini compresor recargable Luo",
+    "group": "CASA BVL",
+    "description": "Reposición Mini compresor recargable Luo",
+    "prices": [
+      "US$ 56,16",
+      "Gs. 337.000"
+    ],
+    "image": "assets/A541E229940D.jpg"
+  },
+  {
+    "name": "Mini compresor Luo recargable con Linterna incorporada",
+    "group": "CASA BVL",
+    "description": "Reposición Mini compresor Luo recargable con Linterna incorporada",
+    "prices": [
+      "US$ 24,57",
+      "Gs. 147.500"
+    ],
+    "image": "assets/A52CE1650289.jpg"
+  },
+  {
+    "name": "Mini compresor recargable Luo, potencia de 100w 14 8v, con pantalla digital para medir la",
+    "group": "CASA BVL",
+    "description": "Reposición Mini compresor recargable Luo, potencia de 100w 14 8v, con pantalla digital para medir la presión de inflado",
+    "prices": [
+      "US$ 59,67",
+      "Gs. 358.000"
+    ],
+    "image": "assets/A52B1583657C.jpg"
+  },
+  {
+    "name": "Mini compresor Luo recargable, capacidad de batería 1800mah",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Mini compresor Luo recargable, capacidad de batería 1800mah",
+    "prices": [
+      "US$ 23,40",
+      "Gs. 140.500"
+    ],
+    "image": "assets/A57FA1848B5D.jpg"
+  },
+  {
+    "name": "Compresor/Inflador recargable Ecopower, 2000mAh, pantalla HD y Luz led",
+    "group": "CASA BVL",
+    "description": "Reposición Compresor/Inflador recargable Ecopower, 2000mAh, pantalla HD y Luz led",
+    "prices": [
+      "US$ 32,58",
+      "Gs. 195.500"
+    ],
+    "image": "assets/A551F51A90AD.jpg"
+  },
+  {
+    "name": "Compresor de aire portátil con batería de 4000mAh Es una solución práctica y eficiente",
+    "group": "CASA BVL",
+    "description": "Compresor de aire portátil con batería de 4000mAh Es una solución práctica y eficiente para inflar neumáticos, pelotas y otros objetos inflables. Con un diseño…",
+    "prices": [
+      "US$ 53,82",
+      "Gs. 323.000"
+    ],
+    "image": "assets/A5F34E2D0681.jpg"
+  },
+  {
+    "name": "Compresor e Arrancador SATE, Tiene una capacidad de 8000 mAh y una corriente de arranque",
+    "group": "CASA BVL",
+    "description": "Compresor e Arrancador SATE, Tiene una capacidad de 8000 mAh y una corriente de arranque de 250 A, con una corriente máxima de 500 A. Ideal para arrancar vehículos de…",
+    "prices": [
+      "US$ 70,20",
+      "Gs. 421.000"
+    ],
+    "image": "assets/A593DBA33A99.jpg"
+  },
+  {
+    "name": "Masajeador portátil c/Manitos Luo, ideal para aliviar contracturas, estrés y tensiones",
+    "group": "CASA BVL",
+    "description": "Reposición Masajeador portátil c/Manitos Luo, ideal para aliviar contracturas, estrés y tensiones musculares en cuello, espalda, hombros y piernas, potencia 2000mAh,…",
+    "prices": [
+      "US$ 33,30",
+      "Gs. 200.000"
+    ],
+    "image": "assets/A58CBD938293.jpg"
+  },
+  {
+    "name": "Cepillo secador y modelador avocado 3D eléctrico Luo Potencia de 2000w, apto para cabello",
+    "group": "CASA BVL",
+    "description": "Reposición Cepillo secador y modelador avocado 3D eléctrico Luo Potencia de 2000w, apto para cabello seco o ligeramente humedo, cuenta con control de temperatura,…",
+    "prices": [
+      "US$ 15,30",
+      "Gs. 92.000"
+    ],
+    "image": "assets/A50123242AB7.jpg"
+  },
+  {
+    "name": "Reflector Redondo eléctrico led Ovni, luz blanca, potencia de 100w",
+    "group": "CASA BVL",
+    "description": "Reflector Redondo eléctrico led Ovni, luz blanca, potencia de 100w",
+    "prices": [
+      "US$ 68,40",
+      "Gs. 410.500"
+    ],
+    "image": "assets/A59F95C6172C.jpg"
+  },
+  {
+    "name": "Reflector Redondo eléctrico led Ovni, luz blanca, potencia de 200w",
+    "group": "CASA BVL",
+    "description": "Reflector Redondo eléctrico led Ovni, luz blanca, potencia de 200w",
+    "prices": [
+      "US$ 104,40",
+      "Gs. 626.500"
+    ],
+    "image": "assets/A532798DD9C8.jpg"
+  },
+  {
+    "name": "Adaptador p/Canilla giratorio 3 en 1 para fregadero",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Adaptador p/Canilla giratorio 3 en 1 para fregadero",
+    "prices": [
+      "US$ 3,60",
+      "Gs. 21.500"
+    ],
+    "image": null
+  },
+  {
+    "name": "Canilla p/mesada flexible 1/2 c/goma colorido, permite moverlo fácilmente en varias",
+    "group": "CASA BVL",
+    "description": "Canilla p/mesada flexible 1/2 c/goma colorido, permite moverlo fácilmente en varias direcciones, incluye boquilla con interruptor para diferente chorro de agua…",
+    "prices": [
+      "US$ 13,50",
+      "Gs. 81.000"
+    ],
+    "image": "assets/A5DCD6E035EE.jpg"
+  },
+  {
+    "name": "Canilla p/mesada 1/2 flexible cromado, caño móvil con ducha ajustable de doble chorro,",
+    "group": "CASA BVL",
+    "description": "Canilla p/mesada 1/2 flexible cromado, caño móvil con ducha ajustable de doble chorro, adecuado para agua Frio/Caliente",
+    "prices": [
+      "US$ 10,62",
+      "Gs. 64.000"
+    ],
+    "image": "assets/A5EE109C059E.jpg"
+  },
+  {
+    "name": "Canilla p/mesada 1/2 flexible cromado, caño móvil con ducha ajustable de doble chorro,",
+    "group": "CASA BVL",
+    "description": "Canilla p/mesada 1/2 flexible cromado, caño móvil con ducha ajustable de doble chorro, adecuado para agua Frio/Caliente",
+    "prices": [
+      "US$ 10,62",
+      "Gs. 63.500"
+    ],
+    "image": "assets/A53295305FB0.jpg"
+  },
+  {
+    "name": "Canilla Eléctrica Caliente digital p/ pared",
+    "group": "CASA BVL",
+    "description": "Canilla Eléctrica Caliente digital p/ pared",
+    "prices": [
+      "US$ 39,78",
+      "Gs. 238.500"
+    ],
+    "image": "assets/A59B3F9DA2A0.jpg"
+  },
+  {
+    "name": "Canilla Eléctrica Caliente digital p/ pared",
+    "group": "CASA BVL",
+    "description": "Canilla Eléctrica Caliente digital p/ pared",
+    "prices": [
+      "Gs. 238.500"
+    ],
+    "image": "assets/A5D9F42DBFF6.jpg"
+  },
+  {
+    "name": "Canilla eléctrica p/ agua caliente Digital para mesada Proporciona agua caliente en",
+    "group": "CASA BVL",
+    "description": "Canilla eléctrica p/ agua caliente Digital para mesada Proporciona agua caliente en segundos. No necesita conexión a un sistema de calefacción central, incluye una…",
+    "prices": [
+      "US$ 39,78",
+      "Gs. 238.500"
+    ],
+    "image": "assets/A5AD77A4E34F.jpg"
+  },
+  {
+    "name": "Canilla p/Pared plateado Prolar",
+    "group": "CASA BVL",
+    "description": "Canilla p/Pared plateado Prolar",
+    "prices": [
+      "US$ 25,74",
+      "Gs. 155.000"
+    ],
+    "image": "assets/A550856F129A.jpg"
+  },
+  {
+    "name": "Canilla para cocina inoxidable monocomando c/Pico móvil Frio/Caliente",
+    "group": "CASA BVL",
+    "description": "Canilla para cocina inoxidable monocomando c/Pico móvil Frio/Caliente",
+    "prices": [
+      "US$ 85,86",
+      "Gs. 515.000"
+    ],
+    "image": "assets/A5728AF78C25.jpg"
+  },
+  {
+    "name": "Canilla cromado corto",
+    "group": "CASA BVL",
+    "description": "Canilla cromado corto",
+    "prices": [
+      "US$ 5,40",
+      "Gs. 32.500"
+    ],
+    "image": "assets/A529997BB452.jpg"
+  },
+  {
+    "name": "Canilla p/Pared cromado Yeso",
+    "group": "CASA BVL",
+    "description": "Canilla p/Pared cromado Yeso",
+    "prices": [
+      "US$ 7,20",
+      "Gs. 43.000"
+    ],
+    "image": "assets/A5DB334EAA86.jpg"
+  },
+  {
+    "name": "Canilla moderna monocomando para baño, c/2 mangueras flexible",
+    "group": "CASA BVL",
+    "description": "Canilla moderna monocomando para baño, c/2 mangueras flexible",
+    "prices": [
+      "US$ 42,84",
+      "Gs. 257.500"
+    ],
+    "image": "assets/A569C901FF8F.jpg"
+  },
+  {
+    "name": "Canilla bronce 1/2 c/pico",
+    "group": "CASA BVL",
+    "description": "Canilla bronce 1/2 c/pico",
+    "prices": [
+      "US$ 8,46",
+      "Gs. 51.000"
+    ],
+    "image": "assets/A52A9578B11C.jpg"
+  },
+  {
+    "name": "Canilla Cromado Italy 1/2 s/pico",
+    "group": "CASA BVL",
+    "description": "Canilla Cromado Italy 1/2 s/pico",
+    "prices": [
+      "US$ 6,30",
+      "Gs. 38.000"
+    ],
+    "image": "assets/A52DC1D4F6C1.jpg"
+  },
+  {
+    "name": "Canilla 1/2 cromo cruz sin pico 13mm",
+    "group": "CASA BVL",
+    "description": "Canilla 1/2 cromo cruz sin pico 13mm",
+    "prices": [
+      "US$ 33,48",
+      "Gs. 201.000"
+    ],
+    "image": "assets/A58B55AD1577.jpg"
+  },
+  {
+    "name": "Canilla Bronce c/Pico 1/213mm",
+    "group": "CASA BVL",
+    "description": "Canilla Bronce c/Pico 1/213mm",
+    "prices": [
+      "US$ 25,38",
+      "Gs. 152.500"
+    ],
+    "image": "assets/A5048FEF4ECD.jpg"
+  },
+  {
+    "name": "Canilla DI media vuelta 1/2, manija azul",
+    "group": "CASA BVL",
+    "description": "Canilla DI media vuelta 1/2, manija azul",
+    "prices": [
+      "US$ 5,40",
+      "Gs. 32.500"
+    ],
+    "image": "assets/A5101CE2D724.jpg"
+  },
+  {
+    "name": "Reflector eléctrico led Ecopower, potencia 150w, con fotocelula integrada que activa la",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Reflector eléctrico led Ecopower, potencia 150w, con fotocelula integrada que activa la luz al anochecer y la apaga al amanecer Panel LED de amplio…",
+    "prices": [
+      "US$ 133,38",
+      "Gs. 800.500"
+    ],
+    "image": "assets/A50A4D2FD236.jpg"
+  },
+  {
+    "name": "Mortero Acero inoxidable c/tapa, diseñado para moler y triturar especias, hiervas",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Mortero Acero inoxidable c/tapa, diseñado para moler y triturar especias, hiervas, semillas o pastillas",
+    "prices": [
+      "US$ 15,30",
+      "Gs. 92.000"
+    ],
+    "image": "assets/A518AD95AB19.jpg"
+  },
+  {
+    "name": "Mortero de plástico, diseño madera 12cm",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Mortero de plástico, diseño madera 12cm",
+    "prices": [
+      "US$ 5,76",
+      "Gs. 34.500"
+    ],
+    "image": "assets/A5286F20FBF6.jpg"
+  },
+  {
+    "name": "Camara Smart inteligente, doble visor LUO INTERIOR/ EXTERIOR",
+    "group": "CASA BVL",
+    "description": "Reposición Camara Smart inteligente, doble visor LUO INTERIOR/ EXTERIOR",
+    "prices": [
+      "US$ 42,48",
+      "Gs. 255.000"
+    ],
+    "image": "assets/A5039F7A6F45.jpg"
+  },
+  {
+    "name": "Camara wifi de seguridad Smart Luo, interior y exterior",
+    "group": "CASA BVL",
+    "description": "Reposición Camara wifi de seguridad Smart Luo, interior y exterior",
+    "prices": [
+      "US$ 30,78",
+      "Gs. 184.500"
+    ],
+    "image": "assets/A56A156F9283.jpg"
+  },
+  {
+    "name": "Cámara WiFi para exterior/interior Luo",
+    "group": "CASA BVL",
+    "description": "Reposición Cámara WiFi para exterior/interior Luo",
+    "prices": [
+      "US$ 31,86",
+      "Gs. 191.000"
+    ],
+    "image": "assets/A55163A698AC.jpg"
+  },
+  {
+    "name": "Camara de seguridad Smart Luo, interior y exterior, doble visor c/sistema alarma modo",
+    "group": "CASA BVL",
+    "description": "Reposición Camara de seguridad Smart Luo, interior y exterior, doble visor c/sistema alarma modo sirena",
+    "prices": [
+      "US$ 47,70",
+      "Gs. 286.000"
+    ],
+    "image": "assets/A548FF010EA6.jpg"
+  },
+  {
+    "name": "Camara Smart doble visor, exterior/interior",
+    "group": "CASA BVL",
+    "description": "Reposición Camara Smart doble visor, exterior/interior",
+    "prices": [
+      "US$ 39,78",
+      "Gs. 238.500"
+    ],
+    "image": "assets/A5DD611E8741.jpg"
+  },
+  {
+    "name": "Foco cámara movible LUO con manual en español para su fácil instalación ❣",
+    "group": "CASA BVL",
+    "description": "Reposición Foco cámara movible LUO con manual en español para su fácil instalación ❣",
+    "prices": [
+      "Gs. 120.500"
+    ],
+    "image": "assets/A5DF0681B355.jpg"
+  },
+  {
+    "name": "Mini sartén con diseños varios , 15cm",
+    "group": "CASA BVL",
+    "description": "Reposición Mini sartén con diseños varios , 15cm",
+    "prices": [
+      "US$ 3,60",
+      "Gs. 21.500"
+    ],
+    "image": "assets/A55CD9923939.jpg"
+  },
+  {
+    "name": "Dispensasor de aceite de vidrio transparente, capacidad 300ml",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Dispensasor de aceite de vidrio transparente, capacidad 300ml",
+    "prices": [
+      "US$ 3,06",
+      "Gs. 18.500"
+    ],
+    "image": "assets/A543B13B3E88.jpg"
+  },
+  {
+    "name": "Dispensador de aceite de vidrio transparente, capacidad 300ml",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Dispensador de aceite de vidrio transparente, capacidad 300ml",
+    "prices": [
+      "US$ 3,06",
+      "Gs. 18.500"
+    ],
+    "image": "assets/A5DD046B4966.jpg"
+  },
+  {
+    "name": "Foco camara wifi movible, 3.0mp, incluye porta foco",
+    "group": "CASA BVL",
+    "description": "Reposición Foco camara wifi movible, 3.0mp, incluye porta foco",
+    "prices": [
+      "US$ 19,98",
+      "Gs. 120.000"
+    ],
+    "image": "assets/A593630808A2.jpg"
+  },
+  {
+    "name": "Soporte para Notebook 360° c/Ventilacion Luo, más",
+    "group": "CASA BVL",
+    "description": "Reposición Soporte para Notebook 360° c/Ventilacion Luo, más características en la imagen",
+    "prices": [
+      "US$ 21,60",
+      "Gs. 129.500"
+    ],
+    "image": "assets/A5E529B204C0.jpg"
+  },
+  {
+    "name": "Proyector de cielo estrellado, diseño osito astronauta con cabezal orientable. ‍ Luz LED",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Proyector de cielo estrellado, diseño osito astronauta con cabezal orientable. ‍ Luz LED y láser para generar efectos de estrellas y nebulosas. • Uso…",
+    "prices": [
+      "US$ 14,04",
+      "Gs. 84.500"
+    ],
+    "image": "assets/A5B815AA07B0.jpg"
+  },
+  {
+    "name": "Proyector luz de estrellas, efecto gotas de agua Luo, proyecta un cielo estrellado",
+    "group": "CASA BVL",
+    "description": "Nuevo ingreso Proyector luz de estrellas, efecto gotas de agua Luo, proyecta un cielo estrellado combinado con efectos de nebulosa u olas de agua en múltiples…",
+    "prices": [
+      "US$ 20,16",
+      "Gs. 121.000"
+    ],
+    "image": "assets/A5071F33FD5D.jpg"
+  },
+  {
+    "name": "Speaker Astronauta c/Led colorido LUO Además de ser un parlante Bluetooth, incluye radio",
+    "group": "CASA BVL",
+    "description": "Reposición Speaker Astronauta c/Led colorido LUO Además de ser un parlante Bluetooth, incluye radio FM, ranura para tarjeta TF y puerto USB. Crear un ambiente…",
+    "prices": [
+      "US$ 15,21",
+      "Gs. 92.000"
+    ],
+    "image": "assets/A51D102B2A13.jpg"
+  },
+  {
+    "name": "Speaker Proyector de luz nocturna c/Velador Robot Proyecta galaxias, a menudo con",
+    "group": "CASA BVL",
+    "description": "Speaker Proyector de luz nocturna c/Velador Robot Proyecta galaxias, a menudo con múltiples colores y efectos de iluminación, incluyen altavoz Bluetooth para música o…",
+    "prices": [
+      "US$ 29,25",
+      "Gs. 175.500"
+    ],
+    "image": null
+  },
+  {
+    "name": "Mini proyector astronauta con luz RGB, función eléctrica incluye accesorios",
+    "group": "CASA BVL",
+    "description": "Mini proyector astronauta con luz RGB, función eléctrica incluye accesorios",
+    "prices": [
+      "US$ 14,04",
+      "Gs. 84.500"
+    ],
+    "image": "assets/A57863BBD93A.jpg"
+  },
+  {
+    "name": "Proyector led diseño Alienígena, crea efectos de cielo estrellado y auroras de colores,",
+    "group": "CASA BVL",
+    "description": "Proyector led diseño Alienígena, crea efectos de cielo estrellado y auroras de colores, incluye control remoto, función de temporizador y rotación 360°, cuenta con…",
+    "prices": [
+      "US$ 18,90",
+      "Gs. 113.500"
+    ],
+    "image": "assets/A57FE7D7DA01.jpg"
+  },
+  {
+    "name": "Proyector led astronauta Ligt, luces RGB con efectos de proyección ideales para ambientes",
+    "group": "CASA BVL",
+    "description": "Proyector led astronauta Ligt, luces RGB con efectos de proyección ideales para ambientes oscuros Recomendado para interiores del hogar en entornos con poca luz",
+    "prices": [
+      "US$ 24,66",
+      "Gs. 148.000"
+    ],
+    "image": "assets/A55D919109F5.jpg"
+  },
+  {
+    "name": "Foco de emergencia recargable Luo, potencia 40w",
+    "group": "CASA BVL",
+    "description": "Reposición Foco de emergencia recargable Luo, potencia 40w",
+    "prices": [
+      "US$ 11,52",
+      "Gs. 69.500"
+    ],
+    "image": "assets/A5722E10F875.jpg"
+  },
+  {
+    "name": "Foco de emergencia recargable Luo, potencia 30w",
+    "
